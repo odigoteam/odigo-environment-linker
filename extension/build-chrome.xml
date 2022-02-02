@@ -1,0 +1,34 @@
+<project default="main">
+
+    <target name="main">
+        <echo message="BUILD CHROME EXTENSION"/>
+        <echo message="Copy resources"/>
+        <copy todir="${project.build.directory}/chrome" encoding="UTF-8" outputencoding="UTF-8">
+            <fileset dir="src/main/resources/common"/>
+        </copy>
+        <copy todir="${project.build.directory}/chrome" encoding="UTF-8" outputencoding="UTF-8" overwrite="true">
+            <fileset dir="src/main/resources/common">
+                <include name="**/configuration.js"/>
+                <include name="**/renderer.js"/>
+                <include name="**/utils.js"/>
+                <include name="**/popup.html"/>
+            </fileset>
+            <filterset>
+                <filter token="project.version" value="${project.version}"/>
+            </filterset>
+        </copy>
+
+        <echo message="Copy manifest"/>
+        <copy tofile="${project.build.directory}/chrome/manifest.json" encoding="UTF-8" outputencoding="UTF-8">
+            <fileset file="src/main/resources/chrome/manifest.json"/>
+            <filterset>
+                <filter token="project.version" value="${project.version}"/>
+            </filterset>
+        </copy>
+
+        <echo message="Zip files"/>
+        <zip destfile="${project.build.directory}/chrome.zip"
+             basedir="${project.build.directory}/chrome"/>
+    </target>
+
+</project>

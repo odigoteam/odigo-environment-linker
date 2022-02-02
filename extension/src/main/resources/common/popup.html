@@ -1,0 +1,799 @@
+<html lang="en">
+<head>
+    <title>Odigo environment linker</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/overrides.css">
+</head>
+<body class="theme-light">
+<div class="container-flex mb-3">
+    <div class="row">
+        <div class="col">
+            <div class="float-start" id="logo">environments</div>
+            <button type="button" class="btn btn-link btn-outline-primary configOpenBtn float-end"
+                    aria-label="Configure">
+                <i class="bi bi-toggles"></i>
+            </button>
+            <button type="button" id="configCloseBtn" class="btn btn-link btn-outline-primary float-end"
+                    aria-label="Close">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="container-flex" id="no-config-section">
+    <div class="row">
+        <div class="col-12 text-center">
+            To use this extension, you have to set the configuration URL.
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-center">
+            <button type="button" class="btn btn-link configOpenBtn" aria-label="Configure">
+                Configure now
+            </button>
+        </div>
+    </div>
+</div>
+<div class="container-flex" id="release-note">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-img-top" id="update-top-img"></div>
+                <div class="card-body scrollbar">
+                    <h5 class="card-title">That's so cool... <i class="bi bi-emoji-sunglasses"></i></h5>
+                    <div class="card-text">
+                        <b>v@project.version@</b>
+                        <br/>
+                        <i class="bi bi-star"></i> New features :
+                        <ul>
+                            <li>
+                                Extension logo updated<br/>
+                                <p>
+                                    New logo in your browser bar to be more visible even if you have a dark theme set in your browser.
+                                </p>
+                            </li>
+                        </ul>
+                        <i class="bi bi-bug"></i> Bug fix :
+                        <ul>
+                            <li>SSH slave link: fixed issue on configuration file generation side</li>
+                            <li>CSS : switch button colors in configuration screen for dark theme to be more visible</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer text-center">
+                    <a href="#" id="close-release-note" class="btn btn-primary">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-flex" id="config-section">
+    <form>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <h4><label for="configURL" class="form-label">Configuration URL</label></h4>
+                    <input type="text" class="form-control" id="configURL" aria-describedby="configURL"
+                           placeholder="Enter the configuration URL">
+                    <small id="configURLError" class="form-text text-danger">&nbsp;</small>
+                </div>
+            </div>
+        </div>
+        <div class="scrollbar config-subpart">
+            <div class="row">
+                <div class="col">
+                    <h4>Behaviour</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-11 offset-1">
+                    <h5>Search</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-10 offset-2">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="useExtendedSearch">
+                        <label class="form-check-label" for="useExtendedSearch" data-toggle="tooltip"
+                               title="Extended search will match all environments by matching the nearest results with input sequence by keeping characters order.<br/><br/>For example:<br/>input : ABC<br/>match : LBP01 (l<u>a</u> <u>b</u>anque postale finan<u>c</u>ement)">
+                            Extended search
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-10 offset-2">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="showExternalLinks">
+                        <label class="form-check-label" for="showExternalLinks" data-toggle-second="tooltip"
+                               data-toggle="tooltip" title="If disabled, only internal links are displayed.">
+                            External links
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3 offset-2">
+                    <label class="form-check-label"
+                           style="padding-left: 40px; line-height: 38px; vertical-align: middle;" for="cmdbFileType"
+                           data-toggle="tooltip"
+                           title="Select the file type to open with configuration links (CMDB).">
+                        CMDB file type :
+                    </label>
+                </div>
+                <div class="col-5">
+                    <select class="form-select" aria-label="Type file type" id="cmdbFileType">
+                        <option value=".env" selected>.env</option>
+                        <option value=".properties">.properties</option>
+                        <option value=".sh">.sh</option>
+                        <option value=".yml">.yml</option>
+                        <option value=".xml">.xml</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-11 offset-1">
+                    <h5>AWS</h5>
+                </div>
+                <div class="col-3 offset-2">
+                    <label class="form-check-label"
+                           style="padding-left: 40px; line-height: 38px; vertical-align: middle;" for="awsRole"
+                           data-toggle="tooltip"
+                           title="Enter the role which will be used to open the AWS Console.">
+                        Role :
+                    </label>
+                </div>
+                <div class="col-5">
+                    <input class="form-control" id="awsRole" type="text">
+                    <small id="awsRoleError" class="form-text text-danger">&nbsp;</small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-11 offset-1">
+                    <h5>Show/hide</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-10 offset-2">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="displayAWSConsole" data-toggle="tooltip"
+                               title="You  have to be logged in your AWS account to use this feature. Else, the AWS button will be disabled.">
+                        <label class="form-check-label" for="displayAWSConsole">AWS Console</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="displayConfiguration">
+                        <label class="form-check-label" for="displayConfiguration">Configuration (CMDB)</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="displayConsole">
+                        <label class="form-check-label" for="displayConsole">Console</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="displayHealthCheck">
+                        <label class="form-check-label" for="displayHealthCheck">Health check</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="displayPortal">
+                        <label class="form-check-label" for="displayPortal">Portal</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="displayPIF">
+                        <label class="form-check-label" for="displayPIF">Private PaaS (PIF)</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="displayPEF">
+                        <label class="form-check-label" for="displayPEF">Public PaaS (PEF)</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="displayRouting">
+                        <label class="form-check-label" for="displayRouting">Routing</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="displaySsh">
+                        <label class="form-check-label" for="displaySsh">SSH</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h4>Appearance</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-11 offset-1">
+                    <h5>Theme</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-10 offset-2">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="themeSelector">
+                        <label class="form-check-label" for="themeSelector" data-toggle="tooltip"
+                               title="Switch between light theme and dark theme.">
+                            Light / Dark
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-11 offset-1">
+                    <h5>Environments</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-10 offset-2">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="displayLogo">
+                        <label class="form-check-label" for="displayLogo">Logo</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="displayClientName">
+                        <label class="form-check-label" for="displayClientName">(Name)</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="displayClientDomain">
+                        <label class="form-check-label" for="displayClientDomain">
+                            <span class="badge badge-pill badge-light">Domain</span>
+                        </label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="displayVersion">
+                        <label class="form-check-label" for="displayVersion">
+                            <cite class="small-info">Odigo version</cite>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-11 offset-1">
+                    <h5>Links</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-10 offset-2">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="showOnlyLinksIcons">
+                        <label class="form-check-label" for="showOnlyLinksIcons" data-toggle="tooltip"
+                               title="If enabled, only icons are displayed.">
+                            Only icons
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="float-end small-info">
+            v@project.version@
+        </div>
+    </form>
+</div>
+<div class="container-flex alert alert-danger" role="alert" id="error-section">
+    <div class="row">
+        <div class="col text-center">
+            <h3>
+                <i class="bi bi-emoji-frown"></i>
+                <span id="error-icon">Error</span>
+            </h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            <span id="error-message"></span>
+        </div>
+    </div>
+</div>
+<div class="container-flex alert alert-info" role="alert" id="info-section">
+    <div class="row">
+        <div class="col text-center">
+            <h3>
+                <i class="bi bi-info-square"></i>
+                <span id="info-icon">Info</span>
+            </h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            <span id="info-message"></span>
+        </div>
+    </div>
+</div>
+<div class="container-flex" id="loading-section">
+    <div class="row">
+        <div class="col">
+            <div class="wrapper">
+                <div class="o-black">
+                    <div class="o-black-line"></div>
+                    <div class="o-black-center"></div>
+                    <div class="o-black-corner"></div>
+                </div>
+                <div class="o-part">
+                    <div class="o-part-h"></div>
+                    <div class="o-part-v"></div>
+                </div>
+                <span>Loading...</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-flex" id="search-section">
+    <div class="row">
+        <div class="col">
+            <a href="#" id="clear-search" class="odigo-pink-color" aria-label="Clear search">
+                <i class="bi bi-x-lg"></i>
+            </a>
+            <div class="form-group">
+                <label for="search"></label>
+                <input tabindex="1" type="text" class="form-control" id="search" aria-describedby="search"
+                       placeholder="Enter the client ID or name">
+            </div>
+        </div>
+    </div>
+    <div id="envs-section">
+        <div class="row" id="filter-section">
+            <div class="col-12">
+                <span class="badge bg-dark">
+                    <input class="form-check-input" type="checkbox" value="" id="filterDEV">
+                    <label class="form-check-label" for="filterDEV">DEV</label>
+                </span>
+                <span class="badge bg-success">
+                    <input class="form-check-input" type="checkbox" value="" id="filterINT">
+                    <label class="form-check-label" for="filterINT">INT</label>
+                </span>
+                <span class="badge bg-info">
+                    <input class="form-check-input" type="checkbox" value="" id="filterQUA">
+                    <label class="form-check-label" for="filterQUA">QA</label>
+                </span>
+                <span class="badge bg-warning text-dark">
+                    <input class="form-check-input" type="checkbox" value="" id="filterPREPROD">
+                    <label class="form-check-label" for="filterPREPROD">PREPROD</label>
+                </span>
+                <span class="badge bg-danger">
+                    <input class="form-check-input" type="checkbox" value="" id="filterPROD">
+                    <label class="form-check-label" for="filterPROD">PROD</label>
+                </span>
+                <span class="badge bg-aws text-dark">
+                    <input class="form-check-input" type="checkbox" value="" id="filterAWS">
+                    <label class="form-check-label" for="filterAWS">AWS</label>
+                </span>
+                <span class="badge bg-secondary text-dark">
+                    <input class="form-check-input" type="checkbox" value="" id="filterOthers">
+                    <label class="form-check-label" for="filterOthers">Others</label>
+                </span>
+                <div class="btn-group">
+                    <button class="badge bg-secondary text-dark btn btn-sm dropdown-toggle form-select-oel" type="button" id="versionFilterDropdown" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
+                        Versions
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <div class="dropdown-item">
+                                <input class="form-check-input versionFilterCheck" type="checkbox" value="" id="checkVersionAll" data-version-filter-value="all">
+                                <label class="form-check-label" for="checkVersionAll">
+                                    All
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="dropdown-item">
+                                <input class="form-check-input versionFilterCheck" type="checkbox" value="" id="checkVersion510" data-version-filter-value="5.10">
+                                <label class="form-check-label" for="checkVersion510">
+                                    5.10
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="dropdown-item">
+                                <input class="form-check-input versionFilterCheck" type="checkbox" value="" id="checkVersion59" data-version-filter-value="5.9">
+                                <label class="form-check-label" for="checkVersion59">
+                                    5.9
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="dropdown-item">
+                                <input class="form-check-input versionFilterCheck" type="checkbox" value="" id="checkVersion58" data-version-filter-value="5.8">
+                                <label class="form-check-label" for="checkVersion58">
+                                    5.8
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="dropdown-item">
+                                <input class="form-check-input versionFilterCheck" type="checkbox" value="" id="checkVersion57" data-version-filter-value="5.7">
+                                <label class="form-check-label" for="checkVersion57">
+                                    5.7
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="dropdown-item">
+                                <input class="form-check-input versionFilterCheck" type="checkbox" value="" id="checkVersion56" data-version-filter-value="5.6">
+                                <label class="form-check-label" for="checkVersion56">
+                                    5.6
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="dropdown-item">
+                                <input class="form-check-input versionFilterCheck" type="checkbox" value="" id="checkVersion54" data-version-filter-value="5.4">
+                                <label class="form-check-label" for="checkVersion54">
+                                    5.4
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="dropdown-item">
+                                <input class="form-check-input versionFilterCheck" type="checkbox" value="" id="checkVersion53" data-version-filter-value="5.3">
+                                <label class="form-check-label" for="checkVersion53">
+                                    5.3
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="dropdown-item">
+                                <input class="form-check-input versionFilterCheck" type="checkbox" value="" id="checkVersion51" data-version-filter-value="5.1">
+                                <label class="form-check-label" for="checkVersion51">
+                                    5.1
+                                </label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p class='small-info' style="margin-bottom: 0"><small><span id="nbResults">0</span> results of <span id="totalEnvs">0</span></small></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="scrollbar" id="env-list">
+                    <div id="no-result">
+                        No results
+                    </div>
+                    <div class="accordion" id="accordion"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="envItemTemplate" type="x-tmpl-mustache">
+    <div env="{{env}}{{type}}">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="heading{{env}}{{type}}">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapse{{env}}{{type}}" aria-expanded="false"
+                        aria-controls="collapse{{env}}{{type}}">
+                    <div class="accordion-header-text">
+                        <div class="container-flex">
+                            <div class="row">
+                                {{#userOptions.display.logo}}
+                                <div class="col-1 item-logo" style="background-image: url({{logo}})"></div>
+                                <div class="col-8 text-truncate">
+                                {{/userOptions.display.logo}}
+                                {{^userOptions.display.logo}}
+                                <div class="col-9 text-truncate">
+                                {{/userOptions.display.logo}}
+                                    {{env}}{{#userOptions.display.clientName}} ({{name}}){{/userOptions.display.clientName}}
+                                {{#userOptions.display.clientDomain}}
+                                    <span class="badge badge-pill badge-light">{{domain}}</span>
+                                {{/userOptions.display.clientDomain}}
+                                </div>
+                                <div class="col-3">
+                                    <span class="badge bg-{{badgeType}} float-end">{{type}}</span>
+                                    {{#isAWSEnv}}
+                                    <span class="badge bg-aws badge-pill text-dark float-end" style="margin-right: 5px">AWS</span>
+                                    {{/isAWSEnv}}
+                                </div>
+                            </div>
+                        </div>
+                </button>
+            </h2>
+            <div id="collapse{{env}}{{type}}" class="accordion-collapse collapse"
+                 aria-labelledby="heading{{env}}{{type}}"
+                 data-bs-parent="#accordion">
+                <div class="accordion-body">
+                    {{#userOptions.display.version}}
+                        <p class='small-info' style='width: 100%'><cite>Version : {{occVersion}}</cite></p>
+                    {{/userOptions.display.version}}
+                    <div style="text-align: center">
+                        <div class="btn-group{{^userOptions.onlyIcons}}-vertical{{/userOptions.onlyIcons}}" role="group"
+                             aria-label="{{env}}">
+                            {{#userOptions.display.console}}
+                                {{#urls.console.hasUrls}}
+                                    {{^urls.console.hasExternalUrl}}
+                                        <button type="button" class="btn btn-outline-primary"
+                                                id="{{env}}{{type}}-console-internal"
+                                                title="Console">
+                                            <i class="bi bi-display"></i>{{^userOptions.onlyIcons}}
+                                            &nbsp;Console{{/userOptions.onlyIcons}}
+                                        </button>
+                                    {{/urls.console.hasExternalUrl}}
+                                    {{#urls.console.hasExternalUrl}}
+                                        <div class="btn-group" role="group">
+                                            <button id="btnConsole{{env}}{{type}}"
+                                                    type="button"
+                                                    class="btn btn-outline-primary dropdown-toggle"
+                                                    data-bs-toggle="dropdown"
+                                                    aria-expanded="false"
+                                                    title="Console">
+                                                <i class="bi bi-display"></i>{{^userOptions.onlyIcons}}
+                                                &nbsp;Console{{/userOptions.onlyIcons}}
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="btnPIF{{env}}{{type}}">
+                                                <li>
+                                                    <a class="dropdown-item" href="#"
+                                                       id="{{env}}{{type}}-console-internal">Internal</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#"
+                                                       id="{{env}}{{type}}-console-external">External</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    {{/urls.console.hasExternalUrl}}
+                                {{/urls.console.hasUrls}}
+                            {{/userOptions.display.console}}
+
+                            {{#userOptions.display.healthCheck}}
+                                {{#urls.healthCheck.hasUrls}}
+                                    {{^urls.healthCheck.hasExternalUrl}}
+                                        <button type="button" class="btn btn-outline-primary"
+                                                id="{{env}}{{type}}-healthcheck-internal"
+                                                title="Health check">
+                                            <i class="bi bi-activity"></i>{{^userOptions.onlyIcons}}
+                                            &nbsp;Health Check{{/userOptions.onlyIcons}}
+                                        </button>
+                                    {{/urls.healthCheck.hasExternalUrl}}
+                                    {{#urls.healthCheck.hasExternalUrl}}
+                                        <div class="btn-group" role="group">
+                                            <button id="btnHealthCheck{{env}}{{type}}" type="button"
+                                                    class="btn btn-outline-primary dropdown-toggle"
+                                                    data-bs-toggle="dropdown" aria-expanded="false"
+                                                    title="Health check">
+                                                <i class="bi bi-activity"></i>{{^userOptions.onlyIcons}}
+                                                &nbsp;Health Check{{/userOptions.onlyIcons}}
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="btnHealthCheck{{env}}{{type}}">
+                                                <li>
+                                                    <a class="dropdown-item" href="#"
+                                                       id="{{env}}{{type}}-healthcheck-internal">Internal</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#"
+                                                       id="{{env}}{{type}}-healthcheck-external">External</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    {{/urls.healthCheck.hasExternalUrl}}
+                                {{/urls.healthCheck.hasUrls}}
+                            {{/userOptions.display.healthCheck}}
+
+                            {{#userOptions.display.portal}}
+                                {{#urls.portal.hasUrls}}
+                                    {{^urls.portal.hasExternalUrl}}
+                                        <button type="button" class="btn btn-outline-primary"
+                                                id="{{env}}{{type}}-portal-internal"
+                                                title="Portal">
+                                            <i class="bi bi-house-fill"></i>{{^userOptions.onlyIcons}}
+                                            &nbsp;Portal{{/userOptions.onlyIcons}}
+                                        </button>
+                                    {{/urls.portal.hasExternalUrl}}
+                                    {{#urls.portal.hasExternalUrl}}
+                                        <div class="btn-group" role="group">
+                                            <button id="btnPortal{{env}}{{type}}" type="button"
+                                                    class="btn btn-outline-primary dropdown-toggle"
+                                                    data-bs-toggle="dropdown" aria-expanded="false"
+                                                    title="Portal">
+                                                <i class="bi bi-house-fill"></i>{{^userOptions.onlyIcons}}
+                                                &nbsp;Portal{{/userOptions.onlyIcons}}
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="btnPortal{{env}}{{type}}">
+                                                <li>
+                                                    <a class="dropdown-item" href="#"
+                                                       id="{{env}}{{type}}-portal-internal">Internal</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#"
+                                                       id="{{env}}{{type}}-portal-external">External</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    {{/urls.portal.hasExternalUrl}}
+                                {{/urls.portal.hasUrls}}
+                            {{/userOptions.display.portal}}
+
+                            {{#userOptions.display.pif}}
+                                {{#urls.pif.hasUrls}}
+                                    <div class="btn-group" role="group">
+                                        <button id="btnPIF{{env}}{{type}}" type="button"
+                                                class="btn btn-outline-primary dropdown-toggle"
+                                                data-bs-toggle="dropdown" aria-expanded="false"
+                                                title="Private PaaS (PIF)">
+                                            <i class="bi bi-code-square"></i>{{^userOptions.onlyIcons}}
+                                            &nbsp;Private PaaS (PIF){{/userOptions.onlyIcons}}
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="btnPIF{{env}}{{type}}">
+                                            {{#urls.pif.publisher.internal}}
+                                                <li>
+                                                    <a class="dropdown-item" href="#"
+                                                       id="{{env}}{{type}}-pif-pub-internal">Publisher</a>
+                                                </li>
+                                            {{/urls.pif.publisher.internal}}
+                                            {{#urls.pif.store.internal}}
+                                                <li>
+                                                    <a class="dropdown-item" href="#"
+                                                       id="{{env}}{{type}}-pif-store-internal">Store</a>
+                                                </li>
+                                            {{/urls.pif.store.internal}}
+                                        </ul>
+                                    </div>
+                                {{/urls.pif.hasUrls}}
+                            {{/userOptions.display.pif}}
+
+                            {{#userOptions.display.pef}}
+                                {{#urls.pef.hasUrls}}
+                                    <div class="btn-group" role="group">
+                                        <button id="btnPIF{{env}}{{type}}" type="button"
+                                                class="btn btn-outline-primary dropdown-toggle"
+                                                data-bs-toggle="dropdown" aria-expanded="false"
+                                                title="Public PaaS (PEF)">
+                                            <i class="bi bi-code"></i>{{^userOptions.onlyIcons}}
+                                            &nbsp;Public PaaS (PEF){{/userOptions.onlyIcons}}
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="btnPIF{{env}}{{type}}">
+                                            {{#urls.pef.publisher.internal}}
+                                                <li>
+                                                    <a class="dropdown-item" href="#"
+                                                       id="{{env}}{{type}}-pef-pub-internal">Publisher</a>
+                                                </li>
+                                            {{/urls.pef.publisher.internal}}
+                                            {{^urls.pef.store.hasStoreExternalUrl}}
+                                                <li>
+                                                    <a class="dropdown-item" href="#"
+                                                       id="{{env}}{{type}}-pef-store-internal">Store</a>
+                                                </li>
+                                            {{/urls.pef.store.hasStoreExternalUrl}}
+                                            {{#urls.pef.store.hasStoreExternalUrl}}
+                                                <li class="dropdown-submenu">
+                                                    <a tabindex="-1" href="#">Store</a>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a class="dropdown-item" href="#"
+                                                               id="{{env}}{{type}}-pef-store-internal">Internal</a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="dropdown-item" href="#"
+                                                               id="{{env}}{{type}}-pef-store-external">External</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            {{/urls.pef.store.hasStoreExternalUrl}}
+                                        </ul>
+                                    </div>
+                                {{/urls.pef.hasUrls}}
+                            {{/userOptions.display.pef}}
+
+                            {{#userOptions.display.routing}}
+                                {{^urls.routing.hasExternalUrl}}
+                                    <button type="button" class="btn btn-outline-primary"
+                                            id="{{env}}{{type}}-routing-internal"
+                                            title="Routing">
+                                        <i class="bi bi-arrow-left-right"></i>{{^userOptions.onlyIcons}}
+                                        &nbsp;Routing{{/userOptions.onlyIcons}}
+                                    </button>
+                                {{/urls.routing.hasExternalUrl}}
+                                {{#urls.routing.hasExternalUrl}}
+                                    <div class="btn-group" role="group">
+                                        <button id="btnRouting{{env}}{{type}}" type="button"
+                                                class="btn btn-outline-primary dropdown-toggle"
+                                                data-bs-toggle="dropdown" aria-expanded="false"
+                                                title="Routing">
+                                            <i class="bi bi-arrow-left-right"></i>{{^userOptions.onlyIcons}}
+                                            &nbsp;Routing{{/userOptions.onlyIcons}}
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="btnRouting{{env}}{{type}}">
+                                            <li>
+                                                <a class="dropdown-item" href="#"
+                                                   id="{{env}}{{type}}-routing-internal">Internal</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="#"
+                                                   id="{{env}}{{type}}-routing-external">External</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                {{/urls.routing.hasExternalUrl}}
+                            {{/userOptions.display.routing}}
+                        </div>
+                        <div class="btn-group{{^userOptions.onlyIcons}}-vertical group-technical{{/userOptions.onlyIcons}}"
+                             role="group" aria-label="{{env}}{{type}}">
+                            {{#userOptions.display.cmdb}}
+                                {{#urls.cmdb.hasUrls}}
+                                    <div class="btn-group" role="group">
+                                        <button id="btnCMDB{{env}}{{type}}" type="button"
+                                                class="btn btn-outline-primary dropdown-toggle"
+                                                data-bs-toggle="dropdown" aria-expanded="false"
+                                                title="Configuration (CMDB)">
+                                            <i class="bi bi-gear-fill"></i>{{^userOptions.onlyIcons}}
+                                            &nbsp;Configuration (CMDB){{/userOptions.onlyIcons}}
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="btn-cmdb-{{env}}{{type}}">
+                                            {{#urls.cmdb.master}}
+                                                <li>
+                                                    <a class="dropdown-item" href="#"
+                                                       id="{{env}}{{type}}-cmdb-master">Master</a>
+                                                </li>
+                                            {{/urls.cmdb.master}}
+                                            {{#urls.cmdb.slave}}
+                                                <li>
+                                                    <a class="dropdown-item" href="#" id="{{env}}{{type}}-cmdb-slave">Slave</a>
+                                                </li>
+                                            {{/urls.cmdb.slave}}
+                                        </ul>
+                                    </div>
+                                {{/urls.cmdb.hasUrls}}
+                            {{/userOptions.display.cmdb}}
+                            {{#userOptions.display.ssh}}
+                                {{#urls.ssh.hasUrls}}
+                                    <div class="btn-group" role="group">
+                                        <button id="btnSSH{{env}}{{type}}" type="button"
+                                                class="btn btn-outline-primary dropdown-toggle"
+                                                data-bs-toggle="dropdown" aria-expanded="false"
+                                                title="SSH">
+                                            <i class="bi bi-terminal-fill"></i>{{^userOptions.onlyIcons}}
+                                            &nbsp;SSH{{/userOptions.onlyIcons}}
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="btn-ssh-{{env}}{{type}}">
+                                            {{#urls.ssh.master}}
+                                                <li>
+                                                    <a class="dropdown-item" href="#" id="{{env}}{{type}}-ssh-master">Master</a>
+                                                </li>
+                                            {{/urls.ssh.master}}
+                                            {{#urls.ssh.slave}}
+                                                <li>
+                                                    <a class="dropdown-item" href="#" id="{{env}}{{type}}-ssh-slave">Slave</a>
+                                                </li>
+                                            {{/urls.ssh.slave}}
+                                        </ul>
+                                    </div>
+                                {{/urls.ssh.hasUrls}}
+                            {{/userOptions.display.ssh}}
+                            {{#displayAWSConsoleLink}}
+                                <button type="button" class="btn btn-outline-primary"
+                                        id="{{env}}{{type}}-aws-console"
+                                        title="AWS Console"{{^isAWSConsoleLinkEnabled}}
+                                        disabled="disabled"{{/isAWSConsoleLinkEnabled}}>
+                                    <img src="images/logo-aws-{{^userOptions.darkTheme}}black{{/userOptions.darkTheme}}{{#userOptions.darkTheme}}white{{/userOptions.darkTheme}}.png"
+                                         alt="AWS" class="aws-logo"/>{{^userOptions.onlyIcons}}
+                                    &nbsp;AWS Console{{/userOptions.onlyIcons}}
+                                </button>
+                            {{/displayAWSConsoleLink}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<!-- External -->
+<script type="text/javascript" src="js/libs/bootstrap/bootstrap.bundle.js"></script>
+<script type="text/javascript" src="js/libs/jquery.min.js"></script>
+<script type="text/javascript" src="js/libs/mustache.min.js"></script>
+<script type="text/javascript" src="js/libs/lodash.min.js"></script>
+<!-- Internal -->
+<script type="text/javascript" src="js/modules/browser-runtime.js"></script>
+<script type="text/javascript" src="js/modules/browser-storage.js"></script>
+<script type="text/javascript" src="js/modules/browser-tabs.js"></script>
+<script type="text/javascript" src="js/modules/utils.js"></script>
+<script type="text/javascript" src="js/modules/configuration.js"></script>
+<script type="text/javascript" src="js/modules/aws-role-switcher/aws-role-switcher.js"></script>
+<script type="text/javascript" src="js/modules/renderer.js"></script>
+<script type="text/javascript" src="js/modules/searcher.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+</body>
+</html>
