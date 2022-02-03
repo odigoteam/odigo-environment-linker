@@ -1,0 +1,21 @@
+<project default="main">
+    <target name="main">
+        <echo message="BUILD FIREFOX EXTENSION"/>
+        <echo message="Copy resources"/>
+        <copy todir="${project.build.directory}/firefox" encoding="UTF-8" outputencoding="UTF-8">
+            <fileset dir="src/main/resources/common/dist/odigo-environment-linker"/>
+        </copy>
+
+        <echo message="Copy manifest"/>
+        <copy tofile="${project.build.directory}/firefox/manifest.json" encoding="UTF-8" outputencoding="UTF-8">
+            <fileset file="src/main/resources/firefox/manifest.json"/>
+            <filterset>
+                <filter token="project.version" value="${project.version}"/>
+            </filterset>
+        </copy>
+
+        <echo message="Zip files"/>
+        <zip destfile="${project.build.directory}/firefox.zip"
+             basedir="${project.build.directory}/firefox"/>
+    </target>
+</project>

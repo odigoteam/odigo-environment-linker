@@ -1,0 +1,199 @@
+<div class="container-flex" id="config-section">
+  <form>
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <h4><label for="configURL" class="form-label">Configuration URL</label></h4>
+          <input type="text" class="form-control" id="configURL" aria-describedby="configURL"
+                 placeholder="Enter the configuration URL">
+          <small id="configURLError" class="form-text text-danger">&nbsp;</small>
+        </div>
+      </div>
+    </div>
+    <div class="scrollbar config-subpart">
+      <div class="row">
+        <div class="col">
+          <h4>Behaviour</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-11 offset-1">
+          <h5>Search</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-10 offset-2">
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="useExtendedSearch">
+            <label class="form-check-label" for="useExtendedSearch" data-toggle="tooltip"
+                   title="Extended search will match all environments by matching the nearest results with input sequence by keeping characters order.<br/><br/>For example:<br/>input : ABC<br/>match : LBP01 (l<u>a</u> <u>b</u>anque postale finan<u>c</u>ement)">
+              Extended search
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-10 offset-2">
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="showExternalLinks">
+            <label class="form-check-label" for="showExternalLinks" data-toggle-second="tooltip"
+                   data-toggle="tooltip" title="If disabled, only internal links are displayed.">
+              External links
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-3 offset-2">
+          <label class="form-check-label"
+                 style="padding-left: 40px; line-height: 38px; vertical-align: middle;" for="cmdbFileType"
+                 data-toggle="tooltip"
+                 title="Select the file type to open with configuration links (CMDB).">
+            CMDB file type :
+          </label>
+        </div>
+        <div class="col-5">
+          <select class="form-select" aria-label="Type file type" id="cmdbFileType">
+            <option value=".env" selected>.env</option>
+            <option value=".properties">.properties</option>
+            <option value=".sh">.sh</option>
+            <option value=".yml">.yml</option>
+            <option value=".xml">.xml</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-11 offset-1">
+          <h5>AWS</h5>
+        </div>
+        <div class="col-3 offset-2">
+          <label class="form-check-label"
+                 style="padding-left: 40px; line-height: 38px; vertical-align: middle;" for="awsRole"
+                 data-toggle="tooltip"
+                 title="Enter the role which will be used to open the AWS Console.">
+            Role :
+          </label>
+        </div>
+        <div class="col-5">
+          <input class="form-control" id="awsRole" type="text">
+          <small id="awsRoleError" class="form-text text-danger">&nbsp;</small>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-11 offset-1">
+          <h5>Show/hide</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-10 offset-2">
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="displayAWSConsole" data-toggle="tooltip"
+                   title="You  have to be logged in your AWS account to use this feature. Else, the AWS button will be disabled.">
+            <label class="form-check-label" for="displayAWSConsole">AWS Console</label>
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="displayConfiguration">
+            <label class="form-check-label" for="displayConfiguration">Configuration (CMDB)</label>
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="displayConsole">
+            <label class="form-check-label" for="displayConsole">Console</label>
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="displayHealthCheck">
+            <label class="form-check-label" for="displayHealthCheck">Health check</label>
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="displayPortal">
+            <label class="form-check-label" for="displayPortal">Portal</label>
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="displayPIF">
+            <label class="form-check-label" for="displayPIF">Private PaaS (PIF)</label>
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="displayPEF">
+            <label class="form-check-label" for="displayPEF">Public PaaS (PEF)</label>
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="displayRouting">
+            <label class="form-check-label" for="displayRouting">Routing</label>
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="displaySsh">
+            <label class="form-check-label" for="displaySsh">SSH</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <h4>Appearance</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-11 offset-1">
+          <h5>Theme</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-10 offset-2">
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="themeSelector">
+            <label class="form-check-label" for="themeSelector" data-toggle="tooltip"
+                   title="Switch between light theme and dark theme.">
+              Light / Dark
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-11 offset-1">
+          <h5>Environments</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-10 offset-2">
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="displayLogo">
+            <label class="form-check-label" for="displayLogo">Logo</label>
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="displayClientName">
+            <label class="form-check-label" for="displayClientName">(Name)</label>
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="displayClientDomain">
+            <label class="form-check-label" for="displayClientDomain">
+              <span class="badge badge-pill badge-light">Domain</span>
+            </label>
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="displayVersion">
+            <label class="form-check-label" for="displayVersion">
+              <cite class="small-info">Odigo version</cite>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-11 offset-1">
+          <h5>Links</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-10 offset-2">
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="showOnlyLinksIcons">
+            <label class="form-check-label" for="showOnlyLinksIcons" data-toggle="tooltip"
+                   title="If enabled, only icons are displayed.">
+              Only icons
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="float-end small-info">
+      v{{appVersion}}
+    </div>
+  </form>
+</div>

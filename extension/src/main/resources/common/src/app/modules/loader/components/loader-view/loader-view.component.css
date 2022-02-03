@@ -1,0 +1,78 @@
+.wrapper {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.wrapper span {
+  position: absolute;
+  top: 80px;
+  font-size: 16px;
+  color: var(--font-color);
+}
+
+.o-black-line {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  border-radius: 50%;
+  background-color: var(--font-color);
+}
+.o-black-corner {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  background-color: var(--backgroud-color);
+  top: -5px;
+  left: 25px;
+}
+.o-black-center {
+  width: 26px;
+  height: 26px;
+  position: absolute;
+  border-radius: 50%;
+  background-color: var(--backgroud-color);
+  left: 12px;
+  top: 12px;
+}
+
+.o-part-h {
+  width: 22px;
+  height: 12px;
+  position: absolute;
+  background-color: var(--color-accent);
+  left: 27px;
+  top: -3px;
+}
+
+.o-part-v {
+  width: 12px;
+  height: 25px;
+  position: absolute;
+  background-color: var(--color-accent);
+  left: 40px;
+  top: -3px;
+}
+
+.o-part {
+  height: 50px;
+  transform-origin: 15px 35px;
+  animation: o-part 2.5s infinite ease;
+}
+@keyframes o-part {
+  20% {
+    transform: translate(10px, -10px) rotate(0deg);
+  }
+  70% {
+    transform: translate(10px, -10px) rotateZ(-360deg);
+    animation-timing-function: ease-out;
+  }
+  90% {
+    transform: translate(0, 0) rotateZ(-360deg);
+  }
+  100% {
+    transform: rotateZ(-360deg);
+  }
+}

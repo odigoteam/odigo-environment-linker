@@ -1,0 +1,152 @@
+<div class="container-flex">
+  <div class="row">
+    <div class="col">
+      <a href="#" id="clear-search" class="odigo-pink-color" aria-label="Clear search">
+        <i class="bi bi-x-lg"></i>
+      </a>
+      <div class="form-group">
+        <input tabindex="1" type="text" class="form-control" id="search" aria-describedby="search"
+               placeholder="Enter the client ID or name">
+      </div>
+    </div>
+  </div>
+  <div id="envs-section">
+    <div class="row" id="filter-section">
+      <div class="col-12">
+        <span class="badge bg-dark">
+          <input class="form-check-input" type="checkbox" value="" id="filterDEV">
+          <label class="form-check-label" for="filterDEV">DEV</label>
+        </span>
+        <span class="badge bg-success">
+          <input class="form-check-input" type="checkbox" value="" id="filterINT">
+          <label class="form-check-label" for="filterINT">INT</label>
+        </span>
+        <span class="badge bg-info">
+          <input class="form-check-input" type="checkbox" value="" id="filterQUA">
+          <label class="form-check-label" for="filterQUA">QA</label>
+        </span>
+        <span class="badge bg-warning text-dark">
+          <input class="form-check-input" type="checkbox" value="" id="filterPREPROD">
+          <label class="form-check-label" for="filterPREPROD">PREPROD</label>
+        </span>
+        <span class="badge bg-danger">
+          <input class="form-check-input" type="checkbox" value="" id="filterPROD">
+          <label class="form-check-label" for="filterPROD">PROD</label>
+        </span>
+        <span class="badge bg-aws text-dark">
+          <input class="form-check-input" type="checkbox" value="" id="filterAWS">
+          <label class="form-check-label" for="filterAWS">AWS</label>
+        </span>
+        <span class="badge bg-secondary text-dark">
+          <input class="form-check-input" type="checkbox" value="" id="filterOthers">
+          <label class="form-check-label" for="filterOthers">Others</label>
+        </span>
+        <div class="btn-group">
+          <button class="badge bg-secondary text-dark btn btn-sm dropdown-toggle form-select-oel" type="button"
+                  id="versionFilterDropdown" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
+            Versions
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <div class="dropdown-item">
+                <input class="form-check-input versionFilterCheck" type="checkbox" value="" id="checkVersionAll"
+                       data-version-filter-value="all">
+                <label class="form-check-label" for="checkVersionAll">
+                  All
+                </label>
+              </div>
+            </li>
+            <li>
+              <div class="dropdown-item">
+                <input class="form-check-input versionFilterCheck" type="checkbox" value="" id="checkVersion510"
+                       data-version-filter-value="5.10">
+                <label class="form-check-label" for="checkVersion510">
+                  5.10
+                </label>
+              </div>
+            </li>
+            <li>
+              <div class="dropdown-item">
+                <input class="form-check-input versionFilterCheck" type="checkbox" value="" id="checkVersion59"
+                       data-version-filter-value="5.9">
+                <label class="form-check-label" for="checkVersion59">
+                  5.9
+                </label>
+              </div>
+            </li>
+            <li>
+              <div class="dropdown-item">
+                <input class="form-check-input versionFilterCheck" type="checkbox" value="" id="checkVersion58"
+                       data-version-filter-value="5.8">
+                <label class="form-check-label" for="checkVersion58">
+                  5.8
+                </label>
+              </div>
+            </li>
+            <li>
+              <div class="dropdown-item">
+                <input class="form-check-input versionFilterCheck" type="checkbox" value="" id="checkVersion57"
+                       data-version-filter-value="5.7">
+                <label class="form-check-label" for="checkVersion57">
+                  5.7
+                </label>
+              </div>
+            </li>
+            <li>
+              <div class="dropdown-item">
+                <input class="form-check-input versionFilterCheck" type="checkbox" value="" id="checkVersion56"
+                       data-version-filter-value="5.6">
+                <label class="form-check-label" for="checkVersion56">
+                  5.6
+                </label>
+              </div>
+            </li>
+            <li>
+              <div class="dropdown-item">
+                <input class="form-check-input versionFilterCheck" type="checkbox" value="" id="checkVersion54"
+                       data-version-filter-value="5.4">
+                <label class="form-check-label" for="checkVersion54">
+                  5.4
+                </label>
+              </div>
+            </li>
+            <li>
+              <div class="dropdown-item">
+                <input class="form-check-input versionFilterCheck" type="checkbox" value="" id="checkVersion53"
+                       data-version-filter-value="5.3">
+                <label class="form-check-label" for="checkVersion53">
+                  5.3
+                </label>
+              </div>
+            </li>
+            <li>
+              <div class="dropdown-item">
+                <input class="form-check-input versionFilterCheck" type="checkbox" value="" id="checkVersion51"
+                       data-version-filter-value="5.1">
+                <label class="form-check-label" for="checkVersion51">
+                  5.1
+                </label>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <p class='small-info' style="margin-bottom: 0"><small><span id="nbResults">0</span> results of <span
+          id="totalEnvs">0</span></small></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="scrollbar" id="env-list">
+          <div id="no-result">
+            No results
+          </div>
+          <div class="accordion" id="accordion"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

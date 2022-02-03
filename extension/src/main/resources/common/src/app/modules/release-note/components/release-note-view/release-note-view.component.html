@@ -1,0 +1,33 @@
+<div class="container-flex">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-img-top" id="update-top-img"></div>
+        <div class="card-body scrollbar">
+          <h5 class="card-title">That's so cool... <i class="bi bi-emoji-sunglasses"></i></h5>
+          <div class="card-text">
+            <b>v{{appVersion}}</b>
+            <br/>
+            <i class="bi bi-star"></i> New features :
+            <ul>
+              <li>
+                Extension logo updated<br/>
+                <p>
+                  New logo in your browser bar to be more visible even if a dark theme is set on your browser.
+                </p>
+              </li>
+            </ul>
+            <i class="bi bi-bug"></i> Bug fix :
+            <ul>
+              <li>SSH slave link: fixed issue on configuration file generation side</li>
+              <li>CSS : switch button colors in configuration screen for dark theme to be more visible</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-footer text-center">
+          <button class="btn btn-primary" (click)="close()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

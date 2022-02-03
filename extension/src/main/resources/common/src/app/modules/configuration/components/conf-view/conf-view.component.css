@@ -1,0 +1,38 @@
+.config-subpart {
+  height: 390px;
+  overflow-x: hidden;
+  border: 1px solid var(--color-primary);
+  background-color: var(--card-bg-color);
+  border-radius: 0.25rem;
+  padding: 10px;
+}
+
+.config-subpart select {
+  background-color: var(--input-bg-color-focus) !important;
+  color: var(--font-color) !important;
+}
+.config-subpart .form-check-label {
+  line-height: 24px;
+  vertical-align: middle;
+}
+.config-subpart select {
+  background-image: var(--select-arrow) !important;
+}
+
+.form-switch .form-check-input {
+  background-image: var(--form-switch-background-image);
+}
+.form-switch .form-check-input:focus {
+  background-image: var(--form-switch-background-image-focus);
+}
+.form-switch .form-check-input:checked {
+  background-image: var(--form-switch-background-image-checked);
+}
+.form-check-input:checked {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+.form-check-input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 5px 2px var(--color-secondary);
+ }

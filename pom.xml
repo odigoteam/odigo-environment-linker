@@ -3,7 +3,7 @@
 
 	<groupId>com.odigo</groupId>
 	<artifactId>odigo-environment-linker</artifactId>
-	<version>3.12</version>
+	<version>3.12.0</version>
 	<packaging>pom</packaging>
 
 	<properties>
@@ -60,6 +60,14 @@
 					<version>3.2.0</version>
 				</plugin>
 				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>exec-maven-plugin</artifactId>
+					<version>3.0.0</version>
+					<configuration>
+						<workingDirectory>src/main/resources/common</workingDirectory>
+					</configuration>
+				</plugin>
+				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>${maven.compiler.version}</version>
@@ -73,6 +81,11 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-shade-plugin</artifactId>
 					<version>${maven.shade.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<version>3.0.0</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>

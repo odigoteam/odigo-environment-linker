@@ -1,0 +1,24 @@
+#update-top-img {
+  background: url("../../../../../assets/images/update.png") center no-repeat;
+  background-size: cover;
+  height: 200px;
+}
+
+/*------------------- Overrides ---------------------*/
+.card {
+  height: 490px;
+}
+
+.card-body {
+  background-color: var(--input-bg-color-focus);
+}
+
+.card-body p {
+  padding-left: 20px;
+  text-align: justify;
+  font-size: 0.8em;
+}
+
+.card-footer {
+  background-color: var(--input-bg-color-focus);
+}

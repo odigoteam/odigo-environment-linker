@@ -1,0 +1,13 @@
+<div class="container-flex mb-3">
+  <div class="row">
+    <div class="col">
+      <div class="float-start" id="logo">environments</div>
+      <button type="button" class="btn btn-link btn-outline-primary configOpenBtn float-end" aria-label="Configure" (click)="displayConfiguration()">
+        <i class="bi bi-{{icon}}"></i>
+      </button>
+    </div>
+  </div>
+</div>
+<div>
+  <router-outlet></router-outlet>
+</div>

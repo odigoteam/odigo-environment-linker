@@ -18,14 +18,14 @@
     "activeTab"
   ],
   "icons": {
-    "16": "images/logo16.png",
-    "48": "images/logo48.png",
-    "128": "images/logo128.png"
+    "16": "assets/images/logo16.png",
+    "48": "assets/images/logo48.png",
+    "128": "assets/images/logo128.png"
   },
   "browser_action": {
     "default_title": "Odigo environments linker",
-    "default_icon": "images/logo.png",
-    "default_popup": "popup.html"
+    "default_icon": "assets/images/logo.png",
+    "default_popup": "index.html"
   },
   "content_scripts": [
     {
@@ -37,17 +37,17 @@
       ],
       "all_frames": true,
       "js": [
-        "js/modules/aws-role-switcher/content-script.js"
+        "content/content-script.js"
       ],
       "run_at": "document_idle"
     }
   ],
   "web_accessible_resources": [
-    "js/modules/aws-role-switcher/attach-target.js"
+    "content/attach-target.js"
   ],
   "background": {
     "scripts": [
-      "js/modules/aws-role-switcher/background.js"
+      "content/background.js"
     ]
   }
 }

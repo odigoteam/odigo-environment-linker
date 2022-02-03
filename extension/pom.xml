@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.odigo</groupId>
 		<artifactId>odigo-environment-linker</artifactId>
-		<version>3.12</version>
+		<version>3.12.0</version>
 	</parent>
 
 	<artifactId>extension</artifactId>
@@ -13,31 +13,133 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>npm version</id>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<phase>initialize</phase>
+						<configuration>
+							<executable>npm</executable>
+							<arguments>
+								<argument>version</argument>
+								<argument>${project.version}</argument>
+								<argument>--allow-same-version</argument>
+							</arguments>
+						</configuration>
+					</execution>
+					<execution>
+						<id>npm install (initialize)</id>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<phase>initialize</phase>
+						<configuration>
+							<executable>npm</executable>
+							<arguments>
+								<argument>install</argument>
+							</arguments>
+						</configuration>
+					</execution>
+					<!-- Required: The following will ensure `npm install` is called
+						 before anything else during the 'Clean Lifecycle' -->
+					<execution>
+						<id>npm install (clean)</id>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<phase>pre-clean</phase>
+						<configuration>
+							<executable>npm</executable>
+							<arguments>
+								<argument>install</argument>
+							</arguments>
+						</configuration>
+					</execution>
+
+					<!-- Required: This following calls `npm run build` where 'build' is
+						 the script name I used in my project, change this if yours is
+							 different -->
+					<execution>
+						<id>npm run build (compile)</id>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<phase>compile</phase>
+						<configuration>
+							<executable>npm</executable>
+							<arguments>
+								<argument>run</argument>
+								<argument>build-prod</argument>
+							</arguments>
+						</configuration>
+					</execution>
+
+					<!-- Required: The following will run unit tests.  My test scripts
+						 in npm look for the property 'skipTests', so I map it to
+							 'maven.test.skip'
+							 Note: the double '-' syntax used below only works with npm >= 2. -->
+<!--					<execution>-->
+<!--						<id>npm run test (test)</id>-->
+<!--						<goals>-->
+<!--							<goal>exec</goal>-->
+<!--						</goals>-->
+<!--						<phase>test</phase>-->
+<!--						<configuration>-->
+<!--							<executable>npm</executable>-->
+<!--							<arguments>-->
+<!--								<argument>run</argument>-->
+<!--								<argument>test</argument>-->
+<!--							</arguments>-->
+<!--							<skip>${maven.test.skip}</skip>-->
+<!--						</configuration>-->
+<!--					</execution>-->
+					<!-- Required: The following calls the npm script that cleans
+						 up the build. -->
+					<execution>
+						<id>npm run clean (dist)</id>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<phase>package</phase>
+						<configuration>
+							<executable>npm</executable>
+							<arguments>
+								<argument>run</argument>
+								<argument>clean</argument>
+							</arguments>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
-				<version>3.0.0</version>
 				<executions>
 					<execution>
 						<id>build-chrome</id>
-						<phase>package</phase>
+						<phase>prepare-package</phase>
 						<goals>
 							<goal>run</goal>
 						</goals>
 						<configuration>
 							<target>
-								<ant antfile="build-chrome.xml" />
+								<ant antfile="bundle-chrome.xml" />
 							</target>
 						</configuration>
 					</execution>
 					<execution>
 						<id>build-firefox</id>
-						<phase>package</phase>
+						<phase>prepare-package</phase>
 						<goals>
 							<goal>run</goal>
 						</goals>
 						<configuration>
 							<target>
-								<ant antfile="build-firefox.xml" />
+								<ant antfile="bundle-firefox.xml" />
 							</target>
 						</configuration>
 					</execution>
