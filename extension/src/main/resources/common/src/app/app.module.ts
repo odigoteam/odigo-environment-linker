@@ -4,18 +4,27 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import {RouterModule} from "@angular/router";
 import {appRoutes} from "./app.routes";
-import {LoaderViewComponent} from "./modules/loader/components/loader-view/loader-view.component";
+import {BrowserService} from "./services/browser/browser.service";
+import {ConfigurationModule} from "./modules/configuration/configuration.module";
+import {HttpClientModule} from "@angular/common/http";
+import {EnvListModule} from "./modules/env-list/env-list.module";
+import {LoaderModule} from "./modules/loader/loader.module";
+import {ReleaseNoteModule} from "./modules/release-note/release-note.module";
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoaderViewComponent
+    AppComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
-    BrowserModule
+    BrowserModule,
+    ConfigurationModule,
+    EnvListModule,
+    LoaderModule,
+    ReleaseNoteModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [BrowserService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

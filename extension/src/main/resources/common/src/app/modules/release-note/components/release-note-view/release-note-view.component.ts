@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
-import {ENV_LIST_VIEW} from "../../../../app.routes";
+import {ENV_VIEW} from "../../../../app.routes";
 import packageJson from "../../../../../../package.json";
 
 @Component({
@@ -17,7 +17,7 @@ export class ReleaseNoteViewComponent implements OnInit {
   }
 
   close(): void {
-    this._router.navigate([ENV_LIST_VIEW]);
+    this._router.navigate([ENV_VIEW]);
   }
 
 }

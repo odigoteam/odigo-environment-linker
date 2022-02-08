@@ -1,24 +1,3 @@
-#envs-section {
-  margin: 10px 0;
-}
-
-#filter-section {
-  text-align: center;
-}
-
-#clear-search {
-  color: var(--color-secondary);
-}
-
-#clear-search:hover {
-  color: var(--color-accent);
-}
-
-#clear-search {
-  position: absolute;
-  right: 35px;
-  margin-top: 7px;
-}
 
 #env-list {
   height: 400px;
@@ -35,6 +14,12 @@
   color: var(--color-secondary);
 }
 
+.item-logo {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size:contain;
+}
+
 .group-technical {
   margin-top: 10px;
 }
@@ -45,11 +30,6 @@
   margin: 10px 0;
 }
 
-.bg-aws {
-  background-color: #ff7300;
-  color: #2a3045;
-}
-
 .aws-logo {
   height: 21px;
   width: 35px;
@@ -58,15 +38,6 @@
 /* ------------------ Overrides ---------------*/
 .dropdown-item input {
   margin-right: 10px;
-}
-
-.badge {
-  margin-right: 5px;
-}
-
-.badge .form-check-input {
-  margin-top: 0;
-  margin-right: 5px;
 }
 
 .accordion-button {

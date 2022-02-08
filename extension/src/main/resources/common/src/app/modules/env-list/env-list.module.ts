@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EnvListViewComponent } from './components/env-list-view/env-list-view.component';
-
-
+import {FormsModule} from "@angular/forms";
+import {EnvViewComponent} from "./components/env-view/env-view.component";
+import { EnvListComponent } from './components/env-list/env-list.component';
 
 @NgModule({
   declarations: [
-    EnvListViewComponent
+    EnvViewComponent,
+    EnvListComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ]
 })
 export class EnvListModule { }

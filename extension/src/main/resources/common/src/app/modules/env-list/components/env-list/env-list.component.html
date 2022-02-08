@@ -1,0 +1,318 @@
+<div class="row">
+  <div class="col">
+    <p class='small-info' style="margin-bottom: 0"><small>{{nbResults}} results of {{totalEnvs}}</small></p>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <div class="scrollbar" id="env-list">
+      <div id="no-result" *ngIf="nbResults === 0">
+        No results
+      </div>
+      <div class="accordion" id="accordion" *ngIf="nbResults > 0">
+        <div class="accordion-item" *ngFor="let env of environments">
+          <h2 class="accordion-header" id="heading{{env.env}}{{env.type}}">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    [attr.data-bs-target]="'#collapse' + env.env + env.type" aria-expanded="false"
+                    [attr.aria-controls]="'collapse' + env.env + env.type">
+              <div class="accordion-header-text">
+                <div class="container-flex">
+                  <div class="row">
+                    <div class="col-1 item-logo" [attr.style]="'background-image: url(' + env.logo + ')'" *ngIf="userOptions.display.logo"></div>
+                    <div class="text-truncate" [ngClass]="userOptions.display.logo ? 'col-8':'col-9'">
+                      {{env.env}}<span *ngIf="userOptions.display.clientName">&nbsp;({{env.name}})</span>&nbsp;
+                      <span class="badge badge-pill badge-light" *ngIf="userOptions.display.clientDomain">{{env.domain}}</span>
+                    </div>
+                    <div class="col-3">
+                      <span class="badge float-end {{env.displayOptions?.badgeType}}">{{env.type}}</span>
+                      <span class="badge bg-aws badge-pill text-dark float-end" style="margin-right: 5px" *ngIf="env.provider === 'AWS'">AWS</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </button>
+          </h2>
+          <div id="collapse{{env.env}}{{env.type}}" class="accordion-collapse collapse"
+               [attr.aria-labelledby]="'heading' + env.env + env.type"
+               data-bs-parent="#accordion">
+            <div class="accordion-body">
+              <p class='small-info' style='width: 100%' *ngIf="userOptions.display.version"><cite>Version : {{env.occVersion}}</cite></p>
+<!--                <div class="text-center">-->
+<!--                  <div [ngClass]="userOptions.onlyIcons ? 'btn-group-vertical' : 'btn-group'" role="group" aria-label="{{env}}">-->
+<!--                    {{#userOptions.display.console}}-->
+<!--                    {{#urls.console.hasUrls}}-->
+<!--                    {{^urls.console.hasExternalUrl}}-->
+<!--                    <button type="button" class="btn btn-outline-primary"-->
+<!--                            id="{{env.env}}{{env.type}}-console-internal"-->
+<!--                            title="Console">-->
+<!--                      <i class="bi bi-display"></i>{{^userOptions.onlyIcons}}-->
+<!--                      &nbsp;Console{{/userOptions.onlyIcons}}-->
+<!--                    </button>-->
+<!--                    {{/urls.console.hasExternalUrl}}-->
+<!--                    {{#urls.console.hasExternalUrl}}-->
+<!--                    <div class="btn-group" role="group">-->
+<!--                      <button id="btnConsole{{env.env}}{{env.type}}"-->
+<!--                              type="button"-->
+<!--                              class="btn btn-outline-primary dropdown-toggle"-->
+<!--                              data-bs-toggle="dropdown"-->
+<!--                              aria-expanded="false"-->
+<!--                              title="Console">-->
+<!--                        <i class="bi bi-display"></i>{{^userOptions.onlyIcons}}-->
+<!--                        &nbsp;Console{{/userOptions.onlyIcons}}-->
+<!--                      </button>-->
+<!--                      <ul class="dropdown-menu" aria-labelledby="btnPIF{{env.env}}{{env.type}}">-->
+<!--                        <li>-->
+<!--                          <a class="dropdown-item" href="#"-->
+<!--                             id="{{env.env}}{{env.type}}-console-internal">Internal</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                          <a class="dropdown-item" href="#"-->
+<!--                             id="{{env.env}}{{env.type}}-console-external">External</a>-->
+<!--                        </li>-->
+<!--                      </ul>-->
+<!--                    </div>-->
+<!--                    {{/urls.console.hasExternalUrl}}-->
+<!--                    {{/urls.console.hasUrls}}-->
+<!--                    {{/userOptions.display.console}}-->
+
+<!--                    {{#userOptions.display.healthCheck}}-->
+<!--                    {{#urls.healthCheck.hasUrls}}-->
+<!--                    {{^urls.healthCheck.hasExternalUrl}}-->
+<!--                    <button type="button" class="btn btn-outline-primary"-->
+<!--                            id="{{env.env}}{{env.type}}-healthcheck-internal"-->
+<!--                            title="Health check">-->
+<!--                      <i class="bi bi-activity"></i>{{^userOptions.onlyIcons}}-->
+<!--                      &nbsp;Health Check{{/userOptions.onlyIcons}}-->
+<!--                    </button>-->
+<!--                    {{/urls.healthCheck.hasExternalUrl}}-->
+<!--                    {{#urls.healthCheck.hasExternalUrl}}-->
+<!--                    <div class="btn-group" role="group">-->
+<!--                      <button id="btnHealthCheck{{env.env}}{{env.type}}" type="button"-->
+<!--                              class="btn btn-outline-primary dropdown-toggle"-->
+<!--                              data-bs-toggle="dropdown" aria-expanded="false"-->
+<!--                              title="Health check">-->
+<!--                        <i class="bi bi-activity"></i>{{^userOptions.onlyIcons}}-->
+<!--                        &nbsp;Health Check{{/userOptions.onlyIcons}}-->
+<!--                      </button>-->
+<!--                      <ul class="dropdown-menu" aria-labelledby="btnHealthCheck{{env.env}}{{env.type}}">-->
+<!--                        <li>-->
+<!--                          <a class="dropdown-item" href="#"-->
+<!--                             id="{{env.env}}{{env.type}}-healthcheck-internal">Internal</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                          <a class="dropdown-item" href="#"-->
+<!--                             id="{{env.env}}{{env.type}}-healthcheck-external">External</a>-->
+<!--                        </li>-->
+<!--                      </ul>-->
+<!--                    </div>-->
+<!--                    {{/urls.healthCheck.hasExternalUrl}}-->
+<!--                    {{/urls.healthCheck.hasUrls}}-->
+<!--                    {{/userOptions.display.healthCheck}}-->
+
+<!--                    {{#userOptions.display.portal}}-->
+<!--                    {{#urls.portal.hasUrls}}-->
+<!--                    {{^urls.portal.hasExternalUrl}}-->
+<!--                    <button type="button" class="btn btn-outline-primary"-->
+<!--                            id="{{env.env}}{{env.type}}-portal-internal"-->
+<!--                            title="Portal">-->
+<!--                      <i class="bi bi-house-fill"></i>{{^userOptions.onlyIcons}}-->
+<!--                      &nbsp;Portal{{/userOptions.onlyIcons}}-->
+<!--                    </button>-->
+<!--                    {{/urls.portal.hasExternalUrl}}-->
+<!--                    {{#urls.portal.hasExternalUrl}}-->
+<!--                    <div class="btn-group" role="group">-->
+<!--                      <button id="btnPortal{{env.env}}{{env.type}}" type="button"-->
+<!--                              class="btn btn-outline-primary dropdown-toggle"-->
+<!--                              data-bs-toggle="dropdown" aria-expanded="false"-->
+<!--                              title="Portal">-->
+<!--                        <i class="bi bi-house-fill"></i>{{^userOptions.onlyIcons}}-->
+<!--                        &nbsp;Portal{{/userOptions.onlyIcons}}-->
+<!--                      </button>-->
+<!--                      <ul class="dropdown-menu" aria-labelledby="btnPortal{{env.env}}{{env.type}}">-->
+<!--                        <li>-->
+<!--                          <a class="dropdown-item" href="#"-->
+<!--                             id="{{env.env}}{{env.type}}-portal-internal">Internal</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                          <a class="dropdown-item" href="#"-->
+<!--                             id="{{env.env}}{{env.type}}-portal-external">External</a>-->
+<!--                        </li>-->
+<!--                      </ul>-->
+<!--                    </div>-->
+<!--                    {{/urls.portal.hasExternalUrl}}-->
+<!--                    {{/urls.portal.hasUrls}}-->
+<!--                    {{/userOptions.display.portal}}-->
+
+<!--                    {{#userOptions.display.pif}}-->
+<!--                    {{#urls.pif.hasUrls}}-->
+<!--                    <div class="btn-group" role="group">-->
+<!--                      <button id="btnPIF{{env.env}}{{env.type}}" type="button"-->
+<!--                              class="btn btn-outline-primary dropdown-toggle"-->
+<!--                              data-bs-toggle="dropdown" aria-expanded="false"-->
+<!--                              title="Private PaaS (PIF)">-->
+<!--                        <i class="bi bi-code-square"></i>{{^userOptions.onlyIcons}}-->
+<!--                        &nbsp;Private PaaS (PIF){{/userOptions.onlyIcons}}-->
+<!--                      </button>-->
+<!--                      <ul class="dropdown-menu" aria-labelledby="btnPIF{{env.env}}{{env.type}}">-->
+<!--                        {{#urls.pif.publisher.internal}}-->
+<!--                        <li>-->
+<!--                          <a class="dropdown-item" href="#"-->
+<!--                             id="{{env.env}}{{env.type}}-pif-pub-internal">Publisher</a>-->
+<!--                        </li>-->
+<!--                        {{/urls.pif.publisher.internal}}-->
+<!--                        {{#urls.pif.store.internal}}-->
+<!--                        <li>-->
+<!--                          <a class="dropdown-item" href="#"-->
+<!--                             id="{{env.env}}{{env.type}}-pif-store-internal">Store</a>-->
+<!--                        </li>-->
+<!--                        {{/urls.pif.store.internal}}-->
+<!--                      </ul>-->
+<!--                    </div>-->
+<!--                    {{/urls.pif.hasUrls}}-->
+<!--                    {{/userOptions.display.pif}}-->
+
+<!--                    {{#userOptions.display.pef}}-->
+<!--                    {{#urls.pef.hasUrls}}-->
+<!--                    <div class="btn-group" role="group">-->
+<!--                      <button id="btnPIF{{env.env}}{{env.type}}" type="button"-->
+<!--                              class="btn btn-outline-primary dropdown-toggle"-->
+<!--                              data-bs-toggle="dropdown" aria-expanded="false"-->
+<!--                              title="Public PaaS (PEF)">-->
+<!--                        <i class="bi bi-code"></i>{{^userOptions.onlyIcons}}-->
+<!--                        &nbsp;Public PaaS (PEF){{/userOptions.onlyIcons}}-->
+<!--                      </button>-->
+<!--                      <ul class="dropdown-menu" aria-labelledby="btnPIF{{env.env}}{{env.type}}">-->
+<!--                        {{#urls.pef.publisher.internal}}-->
+<!--                        <li>-->
+<!--                          <a class="dropdown-item" href="#"-->
+<!--                             id="{{env.env}}{{env.type}}-pef-pub-internal">Publisher</a>-->
+<!--                        </li>-->
+<!--                        {{/urls.pef.publisher.internal}}-->
+<!--                        {{^urls.pef.store.hasStoreExternalUrl}}-->
+<!--                        <li>-->
+<!--                          <a class="dropdown-item" href="#"-->
+<!--                             id="{{env.env}}{{env.type}}-pef-store-internal">Store</a>-->
+<!--                        </li>-->
+<!--                        {{/urls.pef.store.hasStoreExternalUrl}}-->
+<!--                        {{#urls.pef.store.hasStoreExternalUrl}}-->
+<!--                        <li class="dropdown-submenu">-->
+<!--                          <a tabindex="-1" href="#">Store</a>-->
+<!--                          <ul class="dropdown-menu">-->
+<!--                            <li>-->
+<!--                              <a class="dropdown-item" href="#"-->
+<!--                                 id="{{env.env}}{{env.type}}-pef-store-internal">Internal</a>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                              <a class="dropdown-item" href="#"-->
+<!--                                 id="{{env.env}}{{env.type}}-pef-store-external">External</a>-->
+<!--                            </li>-->
+<!--                          </ul>-->
+<!--                        </li>-->
+<!--                        {{/urls.pef.store.hasStoreExternalUrl}}-->
+<!--                      </ul>-->
+<!--                    </div>-->
+<!--                    {{/urls.pef.hasUrls}}-->
+<!--                    {{/userOptions.display.pef}}-->
+
+<!--                    {{#userOptions.display.routing}}-->
+<!--                    {{^urls.routing.hasExternalUrl}}-->
+<!--                    <button type="button" class="btn btn-outline-primary"-->
+<!--                            id="{{env.env}}{{env.type}}-routing-internal"-->
+<!--                            title="Routing">-->
+<!--                      <i class="bi bi-arrow-left-right"></i>{{^userOptions.onlyIcons}}-->
+<!--                      &nbsp;Routing{{/userOptions.onlyIcons}}-->
+<!--                    </button>-->
+<!--                    {{/urls.routing.hasExternalUrl}}-->
+<!--                    {{#urls.routing.hasExternalUrl}}-->
+<!--                    <div class="btn-group" role="group">-->
+<!--                      <button id="btnRouting{{env.env}}{{env.type}}" type="button"-->
+<!--                              class="btn btn-outline-primary dropdown-toggle"-->
+<!--                              data-bs-toggle="dropdown" aria-expanded="false"-->
+<!--                              title="Routing">-->
+<!--                        <i class="bi bi-arrow-left-right"></i>{{^userOptions.onlyIcons}}-->
+<!--                        &nbsp;Routing{{/userOptions.onlyIcons}}-->
+<!--                      </button>-->
+<!--                      <ul class="dropdown-menu" aria-labelledby="btnRouting{{env.env}}{{env.type}}">-->
+<!--                        <li>-->
+<!--                          <a class="dropdown-item" href="#"-->
+<!--                             id="{{env.env}}{{env.type}}-routing-internal">Internal</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                          <a class="dropdown-item" href="#"-->
+<!--                             id="{{env.env}}{{env.type}}-routing-external">External</a>-->
+<!--                        </li>-->
+<!--                      </ul>-->
+<!--                    </div>-->
+<!--                    {{/urls.routing.hasExternalUrl}}-->
+<!--                    {{/userOptions.display.routing}}-->
+<!--                  </div>-->
+<!--                  <div class="btn-group{{^userOptions.onlyIcons}}-vertical group-technical{{/userOptions.onlyIcons}}"-->
+<!--                       role="group" aria-label="{{env.env}}{{env.type}}">-->
+<!--                    {{#userOptions.display.cmdb}}-->
+<!--                    {{#urls.cmdb.hasUrls}}-->
+<!--                    <div class="btn-group" role="group">-->
+<!--                      <button id="btnCMDB{{env.env}}{{env.type}}" type="button"-->
+<!--                              class="btn btn-outline-primary dropdown-toggle"-->
+<!--                              data-bs-toggle="dropdown" aria-expanded="false"-->
+<!--                              title="Configuration (CMDB)">-->
+<!--                        <i class="bi bi-gear-fill"></i>{{^userOptions.onlyIcons}}-->
+<!--                        &nbsp;Configuration (CMDB){{/userOptions.onlyIcons}}-->
+<!--                      </button>-->
+<!--                      <ul class="dropdown-menu" aria-labelledby="btn-cmdb-{{env.env}}{{env.type}}">-->
+<!--                        {{#urls.cmdb.master}}-->
+<!--                        <li>-->
+<!--                          <a class="dropdown-item" href="#"-->
+<!--                             id="{{env.env}}{{env.type}}-cmdb-master">Master</a>-->
+<!--                        </li>-->
+<!--                        {{/urls.cmdb.master}}-->
+<!--                        {{#urls.cmdb.slave}}-->
+<!--                        <li>-->
+<!--                          <a class="dropdown-item" href="#" id="{{env.env}}{{env.type}}-cmdb-slave">Slave</a>-->
+<!--                        </li>-->
+<!--                        {{/urls.cmdb.slave}}-->
+<!--                      </ul>-->
+<!--                    </div>-->
+<!--                    {{/urls.cmdb.hasUrls}}-->
+<!--                    {{/userOptions.display.cmdb}}-->
+<!--                    {{#userOptions.display.ssh}}-->
+<!--                    {{#urls.ssh.hasUrls}}-->
+<!--                    <div class="btn-group" role="group">-->
+<!--                      <button id="btnSSH{{env.env}}{{env.type}}" type="button"-->
+<!--                              class="btn btn-outline-primary dropdown-toggle"-->
+<!--                              data-bs-toggle="dropdown" aria-expanded="false"-->
+<!--                              title="SSH">-->
+<!--                        <i class="bi bi-terminal-fill"></i>{{^userOptions.onlyIcons}}-->
+<!--                        &nbsp;SSH{{/userOptions.onlyIcons}}-->
+<!--                      </button>-->
+<!--                      <ul class="dropdown-menu" aria-labelledby="btn-ssh-{{env.env}}{{env.type}}">-->
+<!--                        {{#urls.ssh.master}}-->
+<!--                        <li>-->
+<!--                          <a class="dropdown-item" href="#" id="{{env.env}}{{env.type}}-ssh-master">Master</a>-->
+<!--                        </li>-->
+<!--                        {{/urls.ssh.master}}-->
+<!--                        {{#urls.ssh.slave}}-->
+<!--                        <li>-->
+<!--                          <a class="dropdown-item" href="#" id="{{env.env}}{{env.type}}-ssh-slave">Slave</a>-->
+<!--                        </li>-->
+<!--                        {{/urls.ssh.slave}}-->
+<!--                      </ul>-->
+<!--                    </div>-->
+<!--                    {{/urls.ssh.hasUrls}}-->
+<!--                    {{/userOptions.display.ssh}}-->
+<!--                    <button type="button" class="btn btn-outline-primary"-->
+<!--                            id="{{env.env}}{{env.type}}-aws-console"-->
+<!--                            title="AWS Console" [attr.disabled]="!isCurrentTabAws ? 'disabled' : ''"-->
+<!--                            *ngIf="(env.provider === 'AWS') && userOptions.aws">-->
+<!--                    <img src="{{awsLogoImageUrl}}" alt="AWS" class="aws-logo"/>-->
+<!--                      <span *ngIf="!userOptions.onlyIcons">&nbsp;AWS Console</span>-->
+<!--                    </button>-->
+<!--                  </div>-->
+<!--                </div>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

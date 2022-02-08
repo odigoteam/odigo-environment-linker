@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EnvListViewComponent } from './env-list-view.component';
+import { EnvViewComponent } from './env-view.component';
 
 describe('EnvListViewComponent', () => {
-  let component: EnvListViewComponent;
-  let fixture: ComponentFixture<EnvListViewComponent>;
+  let component: EnvViewComponent;
+  let fixture: ComponentFixture<EnvViewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EnvListViewComponent ]
+      declarations: [ EnvViewComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EnvListViewComponent);
+    fixture = TestBed.createComponent(EnvViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

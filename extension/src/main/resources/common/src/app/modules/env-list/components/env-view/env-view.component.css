@@ -1,0 +1,28 @@
+#envs-section {
+  margin: 10px 0;
+}
+
+#filter-section {
+  text-align: center;
+}
+
+#clear-search:hover {
+  color: var(--color-accent);
+  cursor: pointer;
+}
+
+#clear-search {
+  color: var(--color-secondary);
+  position: absolute;
+  right: 35px;
+  margin-top: 7px;
+}
+
+.badge .form-check-input {
+  margin-top: 0;
+  margin-right: 5px;
+}
+
+.form-check-input[type=checkbox] {
+  margin-right: 0.8em;
+}

@@ -2,7 +2,7 @@
     --backgroud-color: #ffffff;
     --top-logo-url: url(../images/odigo-dark.png);
     --top-logo-font-color: #2a3045;
-    --background-logo-url: url(../images/rocket-dark.png);
+    --background-logo-url: url(../images/body-bg-light.png);
     --background-logo-pos-x: 20px;
     --background-logo-pos-y: 20px;
     --card-bg-color: rgba(230, 231, 232, 0.5);
@@ -32,10 +32,10 @@
     --backgroud-color: #2a3045;
     --top-logo-url: url(../images/odigo-white.png);
     --top-logo-font-color: #fffff;
-    --background-logo-url: url(../images/rocket.png);
+    --background-logo-url: url(../images/body-bg-dark.png);
     --background-logo-pos-x: 20px;
     --background-logo-pos-y: 20px;
-    --card-bg-color: rgb(46, 66, 82, 5);
+    --card-bg-color: rgb(46, 66, 82, 0.5);
     --color-primary: #ffffff;
     --color-secondary: #e6e7e8;
     --color-accent: #ff3466;
