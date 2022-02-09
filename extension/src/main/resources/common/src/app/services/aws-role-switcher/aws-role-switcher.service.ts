@@ -15,19 +15,24 @@ export class AwsRoleSwitcherService {
       active: true,
       lastFocusedWindow: true
     }, (tabs: any) => {
-      this._configurationService.configuration.currentTab.id = tabs[0].id;
       let url: URL = new URL(tabs[0].url);
-      console.log(url)
+      this._configurationService.configuration.currentTab.url = url;
+      this._configurationService.configuration.currentTab.id = tabs[0].id;
       if (url.host.endsWith('.aws.amazon.com') || url.host.endsWith('.amazonaws-us-gov.com') || url.host.endsWith('.amazonaws.cn')) {
         this._configurationService.configuration.isCurrentTabAws = true;
         this.executeAction(this._configurationService.configuration.currentTab.id, 'loadInfo', {});
       }
-      console.log("is AWS tab : "  + this._configurationService.configuration.isCurrentTabAws);
     });
   }
 
-  executeAction(tabId: number, action: string, data: any) {
-    return this._browserService.tabs.sendMessage(tabId, {action, data}, {});
+  private executeAction(tabId: number, action: string, data: any) {
+    if (this._browserService.isChrome) {
+      return new Promise((callback) => {
+        return this._browserService.tabs.sendMessage(tabId, {action, data}, {}, callback);
+      });
+    } else {
+      return this._browserService.tabs.sendMessage(tabId, {action, data}, {});
+    }
   }
 
   sendSwitchRole(tabId: number, data: any) {
@@ -43,5 +48,13 @@ export class AwsRoleSwitcherService {
     if (md) region = md[1];
     const notGlobal = /^[a-z]{2}\-[a-z]+\-[1-9]\.console\.aws/.test(aURL.host);
     return {url, region, notGlobal};
+  }
+
+  createRedirectUri(currentUrl: string, curRegion: string, destRegion: string) {
+    let redirectUri = currentUrl;
+    if (curRegion && destRegion && curRegion !== destRegion) {
+      redirectUri = redirectUri.replace('region=' + curRegion, 'region=' + destRegion);
+    }
+    return encodeURIComponent(redirectUri);
   }
 }

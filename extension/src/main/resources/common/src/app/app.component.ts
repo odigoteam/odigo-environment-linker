@@ -39,7 +39,6 @@ export class AppComponent implements OnInit {
       if(this._configurationService.configuration.config.confURL) {
         this._configurationService.loadEnvironments().subscribe((envs: Environments)=> {
           this._environmentsService.environments = envs;
-          console.log("envs loaded")
           this._router.navigate([ENV_VIEW]);
         });
       } else {

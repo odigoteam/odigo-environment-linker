@@ -1,8 +1,8 @@
 export class Module {
-  internal: string | undefined;
-  external: string | undefined;
-  master: string | undefined;
-  slave: string | undefined;
+  internal: string = "";
+  external: string = "";
+  master: string = "";
+  slave: string = "";
   display: boolean = false;
   showExternal: boolean = false;
 }
@@ -30,14 +30,14 @@ export class AwsEnv {
 }
 
 export class Environment {
-  env: string | undefined;
-  type: string | undefined;
-  name: string | undefined;
+  env: string = "";
+  type: string = "";
+  name: string = "";
   logo: string = "odigo-dark.png";
-  provider: string | undefined;
+  provider: string = "";
   aws: AwsEnv = new AwsEnv();
-  occVersion: string | undefined;
-  domain: string | undefined;
+  occVersion: string = "";
+  domain: string = "";
   urls: EnvUrls = new EnvUrls();
   badgeType: string = "";
 }

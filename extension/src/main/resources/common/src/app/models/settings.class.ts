@@ -1,5 +1,6 @@
 export class BrowserTab {
   id: number = -1;
+  url: URL = new URL("https://google.com");
 }
 
 export class AWSOptions {

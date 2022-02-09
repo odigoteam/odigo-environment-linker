@@ -20,8 +20,12 @@
   background-size:contain;
 }
 
-.group-technical {
+.group-technical-vertical {
   margin-top: 10px;
+}
+
+.group-technical {
+  margin-left: 10px;
 }
 
 .separator {

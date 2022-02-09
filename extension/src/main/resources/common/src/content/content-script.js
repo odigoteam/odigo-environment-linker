@@ -54,7 +54,7 @@ if (document.body) {
     if (action === 'loadInfo') {
         if (!window.AESR_script) {
             window.AESR_script = document.createElement('script');
-            AESR_script.src = (chrome || browser).runtime.getURL('/js/modules/aws-role-switcher/attach-target.js');
+            AESR_script.src = (chrome || browser).runtime.getURL('/content/attach-target.js');
             AESR_script.onload = () => {
                 const infoJson = document.getElementById('AESR_info').dataset.content;
                 sendResponse(JSON.parse(infoJson));

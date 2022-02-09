@@ -3,6 +3,8 @@ import {EnvironmentsService} from "../../../../services/environment/environments
 import {ConfigurationService} from "../../../../services/configuration/configuration.service";
 import {UserOptions} from "../../../../models/settings.class";
 import {AwsEnv, Environment, EnvUrls, Module, PaaSUrls} from '../../../../models/environments.class';
+import {BrowserService} from "../../../../services/browser/browser.service";
+import {AwsRoleSwitcherService} from "../../../../services/aws-role-switcher/aws-role-switcher.service";
 
 @Component({
   selector: 'env-list',
@@ -19,7 +21,9 @@ export class EnvListComponent implements OnInit {
 
 
   constructor(private _environmentsService: EnvironmentsService,
-              private _configurationService: ConfigurationService) {
+              private _configurationService: ConfigurationService,
+              private _browser: BrowserService,
+              private _awsRoleSwitcherService: AwsRoleSwitcherService) {
     if(this._configurationService.configuration.config && this._configurationService.configuration.config?.options)
       this.userOptions = this._configurationService.configuration.config.options;
     this.isCurrentTabAws = this._configurationService.configuration.isCurrentTabAws;
@@ -123,5 +127,27 @@ export class EnvListComponent implements OnInit {
     env.aws.enabled = this._configurationService.configuration.isCurrentTabAws;
 
     return env;
+  }
+
+  openLink(url: string | undefined ) {
+    this._browser.tabs.create({url});
+  }
+
+  switchAWSRole(env: Environment) {
+    const {url, region, notGlobal} = this._awsRoleSwitcherService.getCurrentUrlAndRegion(this._configurationService.configuration.currentTab.url);
+    let data = {
+      profile: env.env,
+      account: env.aws.accountId,
+      color: "ff3466",
+      roleName: this._configurationService.configuration.config.options.aws.role,
+      displayName: env.env + " (" + env.name + ")",
+      redirectUri: this._awsRoleSwitcherService.createRedirectUri(url, region, this._configurationService.configuration.config.options.aws.region),
+      search: env.env.toLowerCase() + ' ' + env.aws.accountId,
+      actionSubdomain: ""
+    };
+    if (notGlobal) {
+      data.actionSubdomain = region;
+    }
+    this._awsRoleSwitcherService.sendSwitchRole(this._configurationService.configuration.currentTab.id,  data);
   }
 }
