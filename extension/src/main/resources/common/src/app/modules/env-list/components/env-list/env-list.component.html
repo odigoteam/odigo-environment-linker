@@ -24,7 +24,7 @@
                       <span class="badge badge-pill badge-light" *ngIf="userOptions.display.clientDomain">{{env.domain}}</span>
                     </div>
                     <div class="col-3">
-                      <span class="badge float-end {{env.displayOptions?.badgeType}}">{{env.type}}</span>
+                      <span class="badge float-end {{env.badgeType}}">{{env.type}}</span>
                       <span class="badge bg-aws badge-pill text-dark float-end" style="margin-right: 5px" *ngIf="env.provider === 'AWS'">AWS</span>
                     </div>
                   </div>
@@ -36,278 +36,230 @@
                [attr.aria-labelledby]="'heading' + env.env + env.type"
                data-bs-parent="#accordion">
             <div class="accordion-body">
-              <p class='small-info' style='width: 100%' *ngIf="userOptions.display.version"><cite>Version : {{env.occVersion}}</cite></p>
-<!--                <div class="text-center">-->
-<!--                  <div [ngClass]="userOptions.onlyIcons ? 'btn-group-vertical' : 'btn-group'" role="group" aria-label="{{env}}">-->
-<!--                    {{#userOptions.display.console}}-->
-<!--                    {{#urls.console.hasUrls}}-->
-<!--                    {{^urls.console.hasExternalUrl}}-->
-<!--                    <button type="button" class="btn btn-outline-primary"-->
-<!--                            id="{{env.env}}{{env.type}}-console-internal"-->
-<!--                            title="Console">-->
-<!--                      <i class="bi bi-display"></i>{{^userOptions.onlyIcons}}-->
-<!--                      &nbsp;Console{{/userOptions.onlyIcons}}-->
-<!--                    </button>-->
-<!--                    {{/urls.console.hasExternalUrl}}-->
-<!--                    {{#urls.console.hasExternalUrl}}-->
-<!--                    <div class="btn-group" role="group">-->
-<!--                      <button id="btnConsole{{env.env}}{{env.type}}"-->
-<!--                              type="button"-->
-<!--                              class="btn btn-outline-primary dropdown-toggle"-->
-<!--                              data-bs-toggle="dropdown"-->
-<!--                              aria-expanded="false"-->
-<!--                              title="Console">-->
-<!--                        <i class="bi bi-display"></i>{{^userOptions.onlyIcons}}-->
-<!--                        &nbsp;Console{{/userOptions.onlyIcons}}-->
-<!--                      </button>-->
-<!--                      <ul class="dropdown-menu" aria-labelledby="btnPIF{{env.env}}{{env.type}}">-->
-<!--                        <li>-->
-<!--                          <a class="dropdown-item" href="#"-->
-<!--                             id="{{env.env}}{{env.type}}-console-internal">Internal</a>-->
-<!--                        </li>-->
-<!--                        <li>-->
-<!--                          <a class="dropdown-item" href="#"-->
-<!--                             id="{{env.env}}{{env.type}}-console-external">External</a>-->
-<!--                        </li>-->
-<!--                      </ul>-->
-<!--                    </div>-->
-<!--                    {{/urls.console.hasExternalUrl}}-->
-<!--                    {{/urls.console.hasUrls}}-->
-<!--                    {{/userOptions.display.console}}-->
+              <div class="row">
+                <div class="col-12">
+                  <p class='small-info' *ngIf="userOptions.display.version"><cite>Version : {{env.occVersion}}</cite></p>
+                </div>
+                <div class="col-12 text-center">
+                  <!-- MODULES -->
+                  <div [ngClass]="userOptions.onlyIcons ? 'btn-group' : 'btn-group-vertical'" class="m-auto" role="group" [attr.aria-label]="env.env">
+                    <!-- CONSOLE -->
+                    <button type="button" class="btn btn-outline-primary"
+                            title="Console" *ngIf="env.urls.console.display && !env.urls.console.showExternal">
+                      <i class="bi bi-display"></i><span *ngIf="!userOptions.onlyIcons">&nbsp;Console</span>
+                    </button>
+                    <div class="btn-group" role="group" *ngIf="env.urls.console.display && env.urls.console.showExternal">
+                      <button type="button"
+                              class="btn btn-outline-primary dropdown-toggle"
+                              data-bs-toggle="dropdown"
+                              aria-expanded="false"
+                              title="Console">
+                        <i class="bi bi-display"></i><span *ngIf="!userOptions.onlyIcons">&nbsp;Console</span>
+                      </button>
+                      <ul class="dropdown-menu" [attr.aria-labelledby]="'btnConsole' + env.env + env.type">
+                        <li *ngIf="env.urls.console.internal">
+                          <a class="dropdown-item">Internal</a>
+                        </li>
+                        <li *ngIf="env.urls.console.external">
+                          <a class="dropdown-item">External</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <!-- / CONSOLE -->
 
-<!--                    {{#userOptions.display.healthCheck}}-->
-<!--                    {{#urls.healthCheck.hasUrls}}-->
-<!--                    {{^urls.healthCheck.hasExternalUrl}}-->
-<!--                    <button type="button" class="btn btn-outline-primary"-->
-<!--                            id="{{env.env}}{{env.type}}-healthcheck-internal"-->
-<!--                            title="Health check">-->
-<!--                      <i class="bi bi-activity"></i>{{^userOptions.onlyIcons}}-->
-<!--                      &nbsp;Health Check{{/userOptions.onlyIcons}}-->
-<!--                    </button>-->
-<!--                    {{/urls.healthCheck.hasExternalUrl}}-->
-<!--                    {{#urls.healthCheck.hasExternalUrl}}-->
-<!--                    <div class="btn-group" role="group">-->
-<!--                      <button id="btnHealthCheck{{env.env}}{{env.type}}" type="button"-->
-<!--                              class="btn btn-outline-primary dropdown-toggle"-->
-<!--                              data-bs-toggle="dropdown" aria-expanded="false"-->
-<!--                              title="Health check">-->
-<!--                        <i class="bi bi-activity"></i>{{^userOptions.onlyIcons}}-->
-<!--                        &nbsp;Health Check{{/userOptions.onlyIcons}}-->
-<!--                      </button>-->
-<!--                      <ul class="dropdown-menu" aria-labelledby="btnHealthCheck{{env.env}}{{env.type}}">-->
-<!--                        <li>-->
-<!--                          <a class="dropdown-item" href="#"-->
-<!--                             id="{{env.env}}{{env.type}}-healthcheck-internal">Internal</a>-->
-<!--                        </li>-->
-<!--                        <li>-->
-<!--                          <a class="dropdown-item" href="#"-->
-<!--                             id="{{env.env}}{{env.type}}-healthcheck-external">External</a>-->
-<!--                        </li>-->
-<!--                      </ul>-->
-<!--                    </div>-->
-<!--                    {{/urls.healthCheck.hasExternalUrl}}-->
-<!--                    {{/urls.healthCheck.hasUrls}}-->
-<!--                    {{/userOptions.display.healthCheck}}-->
+                    <!-- HEALTH CHECK -->
+                    <button type="button" class="btn btn-outline-primary"
+                            title="Health check" *ngIf="env.urls.healthCheck && env.urls.healthCheck.display && !env.urls.healthCheck.showExternal">
+                      <i class="bi bi-activity"></i><span *ngIf="!userOptions.onlyIcons">&nbsp;Health Check</span>
+                    </button>
+                    <div class="btn-group" role="group" *ngIf="env.urls.healthCheck && env.urls.healthCheck.display && env.urls.healthCheck.showExternal">
+                      <button type="button"
+                              class="btn btn-outline-primary dropdown-toggle"
+                              data-bs-toggle="dropdown"
+                              aria-expanded="false"
+                              title="Health check">
+                        <i class="bi bi-activity"></i><span *ngIf="!userOptions.onlyIcons">&nbsp;Health Check</span>
+                      </button>
+                      <ul class="dropdown-menu" [attr.aria-labelledby]="'btnHealthCheck' + env.env + env.type">
+                        <li *ngIf="env.urls.healthCheck.internal">
+                          <a class="dropdown-item">Internal</a>
+                        </li>
+                        <li *ngIf="env.urls.healthCheck.external">
+                          <a class="dropdown-item">External</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <!-- / HEALTH CHECK -->
 
-<!--                    {{#userOptions.display.portal}}-->
-<!--                    {{#urls.portal.hasUrls}}-->
-<!--                    {{^urls.portal.hasExternalUrl}}-->
-<!--                    <button type="button" class="btn btn-outline-primary"-->
-<!--                            id="{{env.env}}{{env.type}}-portal-internal"-->
-<!--                            title="Portal">-->
-<!--                      <i class="bi bi-house-fill"></i>{{^userOptions.onlyIcons}}-->
-<!--                      &nbsp;Portal{{/userOptions.onlyIcons}}-->
-<!--                    </button>-->
-<!--                    {{/urls.portal.hasExternalUrl}}-->
-<!--                    {{#urls.portal.hasExternalUrl}}-->
-<!--                    <div class="btn-group" role="group">-->
-<!--                      <button id="btnPortal{{env.env}}{{env.type}}" type="button"-->
-<!--                              class="btn btn-outline-primary dropdown-toggle"-->
-<!--                              data-bs-toggle="dropdown" aria-expanded="false"-->
-<!--                              title="Portal">-->
-<!--                        <i class="bi bi-house-fill"></i>{{^userOptions.onlyIcons}}-->
-<!--                        &nbsp;Portal{{/userOptions.onlyIcons}}-->
-<!--                      </button>-->
-<!--                      <ul class="dropdown-menu" aria-labelledby="btnPortal{{env.env}}{{env.type}}">-->
-<!--                        <li>-->
-<!--                          <a class="dropdown-item" href="#"-->
-<!--                             id="{{env.env}}{{env.type}}-portal-internal">Internal</a>-->
-<!--                        </li>-->
-<!--                        <li>-->
-<!--                          <a class="dropdown-item" href="#"-->
-<!--                             id="{{env.env}}{{env.type}}-portal-external">External</a>-->
-<!--                        </li>-->
-<!--                      </ul>-->
-<!--                    </div>-->
-<!--                    {{/urls.portal.hasExternalUrl}}-->
-<!--                    {{/urls.portal.hasUrls}}-->
-<!--                    {{/userOptions.display.portal}}-->
+                    <!-- PORTAL -->
+                    <button type="button" class="btn btn-outline-primary"
+                            title="Portal" *ngIf="env.urls.portal.display && !env.urls.portal.showExternal">
+                      <i class="bi bi-house-fill"></i><span *ngIf="!userOptions.onlyIcons">&nbsp;Portal</span>
+                    </button>
+                    <div class="btn-group" role="group" *ngIf="env.urls.portal.display && env.urls.portal.showExternal">
+                      <button type="button"
+                              class="btn btn-outline-primary dropdown-toggle"
+                              data-bs-toggle="dropdown"
+                              aria-expanded="false"
+                              title="Portal">
+                        <i class="bi bi-house-fill"></i><span *ngIf="!userOptions.onlyIcons">&nbsp;Portal</span>
+                      </button>
+                      <ul class="dropdown-menu" [attr.aria-labelledby]="'btnPortal' + env.env + env.type">
+                        <li *ngIf="env.urls.portal.internal">
+                          <a class="dropdown-item">Internal</a>
+                        </li>
+                        <li *ngIf="env.urls.portal.external">
+                          <a class="dropdown-item">External</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <!-- / PORTAL -->
 
-<!--                    {{#userOptions.display.pif}}-->
-<!--                    {{#urls.pif.hasUrls}}-->
-<!--                    <div class="btn-group" role="group">-->
-<!--                      <button id="btnPIF{{env.env}}{{env.type}}" type="button"-->
-<!--                              class="btn btn-outline-primary dropdown-toggle"-->
-<!--                              data-bs-toggle="dropdown" aria-expanded="false"-->
-<!--                              title="Private PaaS (PIF)">-->
-<!--                        <i class="bi bi-code-square"></i>{{^userOptions.onlyIcons}}-->
-<!--                        &nbsp;Private PaaS (PIF){{/userOptions.onlyIcons}}-->
-<!--                      </button>-->
-<!--                      <ul class="dropdown-menu" aria-labelledby="btnPIF{{env.env}}{{env.type}}">-->
-<!--                        {{#urls.pif.publisher.internal}}-->
-<!--                        <li>-->
-<!--                          <a class="dropdown-item" href="#"-->
-<!--                             id="{{env.env}}{{env.type}}-pif-pub-internal">Publisher</a>-->
-<!--                        </li>-->
-<!--                        {{/urls.pif.publisher.internal}}-->
-<!--                        {{#urls.pif.store.internal}}-->
-<!--                        <li>-->
-<!--                          <a class="dropdown-item" href="#"-->
-<!--                             id="{{env.env}}{{env.type}}-pif-store-internal">Store</a>-->
-<!--                        </li>-->
-<!--                        {{/urls.pif.store.internal}}-->
-<!--                      </ul>-->
-<!--                    </div>-->
-<!--                    {{/urls.pif.hasUrls}}-->
-<!--                    {{/userOptions.display.pif}}-->
+                    <!-- PIF -->
+                    <div class="btn-group" role="group" *ngIf="env.urls.pif">
+                      <button type="button"
+                              class="btn btn-outline-primary dropdown-toggle"
+                              data-bs-toggle="dropdown" aria-expanded="false"
+                              title="Private PaaS (PIF)">
+                        <i class="bi bi-code-square"></i><span *ngIf="!userOptions.onlyIcons">&nbsp;Private PaaS (PIF)</span>
+                      </button>
+                      <ul class="dropdown-menu" [attr.aria-labelledby]="'btnPIF' + env.env + env.type">
+                        <li *ngIf="env.urls.pif.publisher.internal">
+                          <a class="dropdown-item">Publisher<span *ngIf="userOptions.externalLinks">&nbsp;(internal only)</span></a>
+                        </li>
+                        <li *ngIf="env.urls.pif.store.internal">
+                          <a class="dropdown-item">Store<span *ngIf="userOptions.externalLinks">&nbsp;(internal only)</span></a>
+                        </li>
+                      </ul>
+                    </div>
+                    <!-- / PIF -->
 
-<!--                    {{#userOptions.display.pef}}-->
-<!--                    {{#urls.pef.hasUrls}}-->
-<!--                    <div class="btn-group" role="group">-->
-<!--                      <button id="btnPIF{{env.env}}{{env.type}}" type="button"-->
-<!--                              class="btn btn-outline-primary dropdown-toggle"-->
-<!--                              data-bs-toggle="dropdown" aria-expanded="false"-->
-<!--                              title="Public PaaS (PEF)">-->
-<!--                        <i class="bi bi-code"></i>{{^userOptions.onlyIcons}}-->
-<!--                        &nbsp;Public PaaS (PEF){{/userOptions.onlyIcons}}-->
-<!--                      </button>-->
-<!--                      <ul class="dropdown-menu" aria-labelledby="btnPIF{{env.env}}{{env.type}}">-->
-<!--                        {{#urls.pef.publisher.internal}}-->
-<!--                        <li>-->
-<!--                          <a class="dropdown-item" href="#"-->
-<!--                             id="{{env.env}}{{env.type}}-pef-pub-internal">Publisher</a>-->
-<!--                        </li>-->
-<!--                        {{/urls.pef.publisher.internal}}-->
-<!--                        {{^urls.pef.store.hasStoreExternalUrl}}-->
-<!--                        <li>-->
-<!--                          <a class="dropdown-item" href="#"-->
-<!--                             id="{{env.env}}{{env.type}}-pef-store-internal">Store</a>-->
-<!--                        </li>-->
-<!--                        {{/urls.pef.store.hasStoreExternalUrl}}-->
-<!--                        {{#urls.pef.store.hasStoreExternalUrl}}-->
-<!--                        <li class="dropdown-submenu">-->
-<!--                          <a tabindex="-1" href="#">Store</a>-->
-<!--                          <ul class="dropdown-menu">-->
-<!--                            <li>-->
-<!--                              <a class="dropdown-item" href="#"-->
-<!--                                 id="{{env.env}}{{env.type}}-pef-store-internal">Internal</a>-->
-<!--                            </li>-->
-<!--                            <li>-->
-<!--                              <a class="dropdown-item" href="#"-->
-<!--                                 id="{{env.env}}{{env.type}}-pef-store-external">External</a>-->
-<!--                            </li>-->
-<!--                          </ul>-->
-<!--                        </li>-->
-<!--                        {{/urls.pef.store.hasStoreExternalUrl}}-->
-<!--                      </ul>-->
-<!--                    </div>-->
-<!--                    {{/urls.pef.hasUrls}}-->
-<!--                    {{/userOptions.display.pef}}-->
+                    <!-- PEF -->
+                    <div class="btn-group" role="group" *ngIf="env.urls.pef">
+                      <button type="button"
+                              class="btn btn-outline-primary dropdown-toggle"
+                              data-bs-toggle="dropdown" aria-expanded="false"
+                              title="Public PaaS (PEF)">
+                        <i class="bi bi-code"></i><span *ngIf="!userOptions.onlyIcons">&nbsp;Public PaaS (PEF)</span>
+                      </button>
+                      <ul class="dropdown-menu" [attr.aria-labelledby]="'btnPEF' + env.env + env.type">
+                        <li *ngIf="env.urls.pef.publisher.internal">
+                          <a class="dropdown-item">Publisher</a>
+                        </li>
+                        <li *ngIf="env.urls.pef.store.internal && !env.urls.pef.store.showExternal">
+                          <a class="dropdown-item">Store</a>
+                        </li>
+                        <li class="dropdown-submenu" *ngIf="env.urls.pef.store.showExternal">
+                          <a tabindex="-1" href="#">Store</a>
+                          <ul class="dropdown-menu">
+                            <li *ngIf="env.urls.pef.publisher.internal">
+                              <a class="dropdown-item">Internal</a>
+                            </li>
+                            <li *ngIf="env.urls.pef.store.external">
+                              <a class="dropdown-item">External</a>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </div>
+                    <!-- / PEF -->
 
-<!--                    {{#userOptions.display.routing}}-->
-<!--                    {{^urls.routing.hasExternalUrl}}-->
-<!--                    <button type="button" class="btn btn-outline-primary"-->
-<!--                            id="{{env.env}}{{env.type}}-routing-internal"-->
-<!--                            title="Routing">-->
-<!--                      <i class="bi bi-arrow-left-right"></i>{{^userOptions.onlyIcons}}-->
-<!--                      &nbsp;Routing{{/userOptions.onlyIcons}}-->
-<!--                    </button>-->
-<!--                    {{/urls.routing.hasExternalUrl}}-->
-<!--                    {{#urls.routing.hasExternalUrl}}-->
-<!--                    <div class="btn-group" role="group">-->
-<!--                      <button id="btnRouting{{env.env}}{{env.type}}" type="button"-->
-<!--                              class="btn btn-outline-primary dropdown-toggle"-->
-<!--                              data-bs-toggle="dropdown" aria-expanded="false"-->
-<!--                              title="Routing">-->
-<!--                        <i class="bi bi-arrow-left-right"></i>{{^userOptions.onlyIcons}}-->
-<!--                        &nbsp;Routing{{/userOptions.onlyIcons}}-->
-<!--                      </button>-->
-<!--                      <ul class="dropdown-menu" aria-labelledby="btnRouting{{env.env}}{{env.type}}">-->
-<!--                        <li>-->
-<!--                          <a class="dropdown-item" href="#"-->
-<!--                             id="{{env.env}}{{env.type}}-routing-internal">Internal</a>-->
-<!--                        </li>-->
-<!--                        <li>-->
-<!--                          <a class="dropdown-item" href="#"-->
-<!--                             id="{{env.env}}{{env.type}}-routing-external">External</a>-->
-<!--                        </li>-->
-<!--                      </ul>-->
-<!--                    </div>-->
-<!--                    {{/urls.routing.hasExternalUrl}}-->
-<!--                    {{/userOptions.display.routing}}-->
-<!--                  </div>-->
-<!--                  <div class="btn-group{{^userOptions.onlyIcons}}-vertical group-technical{{/userOptions.onlyIcons}}"-->
-<!--                       role="group" aria-label="{{env.env}}{{env.type}}">-->
-<!--                    {{#userOptions.display.cmdb}}-->
-<!--                    {{#urls.cmdb.hasUrls}}-->
-<!--                    <div class="btn-group" role="group">-->
-<!--                      <button id="btnCMDB{{env.env}}{{env.type}}" type="button"-->
-<!--                              class="btn btn-outline-primary dropdown-toggle"-->
-<!--                              data-bs-toggle="dropdown" aria-expanded="false"-->
-<!--                              title="Configuration (CMDB)">-->
-<!--                        <i class="bi bi-gear-fill"></i>{{^userOptions.onlyIcons}}-->
-<!--                        &nbsp;Configuration (CMDB){{/userOptions.onlyIcons}}-->
-<!--                      </button>-->
-<!--                      <ul class="dropdown-menu" aria-labelledby="btn-cmdb-{{env.env}}{{env.type}}">-->
-<!--                        {{#urls.cmdb.master}}-->
-<!--                        <li>-->
-<!--                          <a class="dropdown-item" href="#"-->
-<!--                             id="{{env.env}}{{env.type}}-cmdb-master">Master</a>-->
-<!--                        </li>-->
-<!--                        {{/urls.cmdb.master}}-->
-<!--                        {{#urls.cmdb.slave}}-->
-<!--                        <li>-->
-<!--                          <a class="dropdown-item" href="#" id="{{env.env}}{{env.type}}-cmdb-slave">Slave</a>-->
-<!--                        </li>-->
-<!--                        {{/urls.cmdb.slave}}-->
-<!--                      </ul>-->
-<!--                    </div>-->
-<!--                    {{/urls.cmdb.hasUrls}}-->
-<!--                    {{/userOptions.display.cmdb}}-->
-<!--                    {{#userOptions.display.ssh}}-->
-<!--                    {{#urls.ssh.hasUrls}}-->
-<!--                    <div class="btn-group" role="group">-->
-<!--                      <button id="btnSSH{{env.env}}{{env.type}}" type="button"-->
-<!--                              class="btn btn-outline-primary dropdown-toggle"-->
-<!--                              data-bs-toggle="dropdown" aria-expanded="false"-->
-<!--                              title="SSH">-->
-<!--                        <i class="bi bi-terminal-fill"></i>{{^userOptions.onlyIcons}}-->
-<!--                        &nbsp;SSH{{/userOptions.onlyIcons}}-->
-<!--                      </button>-->
-<!--                      <ul class="dropdown-menu" aria-labelledby="btn-ssh-{{env.env}}{{env.type}}">-->
-<!--                        {{#urls.ssh.master}}-->
-<!--                        <li>-->
-<!--                          <a class="dropdown-item" href="#" id="{{env.env}}{{env.type}}-ssh-master">Master</a>-->
-<!--                        </li>-->
-<!--                        {{/urls.ssh.master}}-->
-<!--                        {{#urls.ssh.slave}}-->
-<!--                        <li>-->
-<!--                          <a class="dropdown-item" href="#" id="{{env.env}}{{env.type}}-ssh-slave">Slave</a>-->
-<!--                        </li>-->
-<!--                        {{/urls.ssh.slave}}-->
-<!--                      </ul>-->
-<!--                    </div>-->
-<!--                    {{/urls.ssh.hasUrls}}-->
-<!--                    {{/userOptions.display.ssh}}-->
-<!--                    <button type="button" class="btn btn-outline-primary"-->
-<!--                            id="{{env.env}}{{env.type}}-aws-console"-->
-<!--                            title="AWS Console" [attr.disabled]="!isCurrentTabAws ? 'disabled' : ''"-->
-<!--                            *ngIf="(env.provider === 'AWS') && userOptions.aws">-->
-<!--                    <img src="{{awsLogoImageUrl}}" alt="AWS" class="aws-logo"/>-->
-<!--                      <span *ngIf="!userOptions.onlyIcons">&nbsp;AWS Console</span>-->
-<!--                    </button>-->
-<!--                  </div>-->
-<!--                </div>-->
+                    <!-- ROUTING -->
+                    <button type="button" class="btn btn-outline-primary"
+                            title="Routing" *ngIf="env.urls.routing.display && !env.urls.routing.showExternal">
+                      <i class="bi bi-arrow-left-right"></i><span *ngIf="!userOptions.onlyIcons">&nbsp;Routing</span>
+                    </button>
+                    <div class="btn-group" role="group" *ngIf="env.urls.routing.display && env.urls.routing.showExternal">
+                      <button type="button"
+                              class="btn btn-outline-primary dropdown-toggle"
+                              data-bs-toggle="dropdown"
+                              aria-expanded="false"
+                              title="Routing">
+                        <i class="bi bi-arrow-left-right"></i><span *ngIf="!userOptions.onlyIcons">&nbsp;Routing</span>
+                      </button>
+                      <ul class="dropdown-menu" [attr.aria-labelledby]="'btnPortal' + env.env + env.type">
+                        <li *ngIf="env.urls.routing.internal">
+                          <a class="dropdown-item">Internal</a>
+                        </li>
+                        <li *ngIf="env.urls.routing.external">
+                          <a class="dropdown-item">External</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <!-- / ROUTING -->
+
+                    <!-- ROUTING -->
+                    <button type="button" class="btn btn-outline-primary"
+                            title="Routing" *ngIf="env.urls.routing.display && !env.urls.routing.showExternal">
+                      <i class="bi bi-arrow-left-right"></i><span *ngIf="!userOptions.onlyIcons">&nbsp;Routing</span>
+                    </button>
+                    <div class="btn-group" role="group" *ngIf="env.urls.routing.display && env.urls.routing.showExternal">
+                      <button type="button"
+                              class="btn btn-outline-primary dropdown-toggle"
+                              data-bs-toggle="dropdown"
+                              aria-expanded="false"
+                              title="Routing">
+                        <i class="bi bi-arrow-left-right"></i><span *ngIf="!userOptions.onlyIcons">&nbsp;Routing</span>
+                      </button>
+                      <ul class="dropdown-menu" [attr.aria-labelledby]="'btnPortal' + env.env + env.type">
+                        <li *ngIf="env.urls.routing.internal">
+                          <a class="dropdown-item">Internal</a>
+                        </li>
+                        <li *ngIf="env.urls.routing.external">
+                          <a class="dropdown-item">External</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <!-- / ROUTING -->
+                  </div>
+                  <!-- / MODULES -->
+
+                  <!-- TECHNICALS LINKS -->
+
+                  <div [ngClass]="userOptions.onlyIcons ? 'btn-group' : 'btn-group-vertical group-technical'"
+                        class="m-auto" role="group" [attr.aria-label]="env.env" >
+                    <div class="btn-group" role="group" *ngIf="env.urls.cmdb && env.urls.cmdb.display">
+                      <button type="button"
+                              class="btn btn-outline-primary dropdown-toggle"
+                              data-bs-toggle="dropdown" aria-expanded="false"
+                              title="Configuration (CMDB)">
+                        <i class="bi bi-gear-fill"></i><span *ngIf="!userOptions.onlyIcons">&nbsp;Configuration (CMDB)</span>
+                      </button>
+                      <ul class="dropdown-menu" [attr.aria-labelledby]="'btnCMDB' + env.env + env.type">
+                        <li *ngIf="env.urls.cmdb.master">
+                          <a class="dropdown-item">Master</a>
+                        </li>
+                        <li *ngIf="env.urls.cmdb.slave">
+                          <a class="dropdown-item">Slave</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="btn-group" role="group" *ngIf="env.urls.ssh.display">
+                      <button id="btnSSH{{env.env}}{{env.type}}" type="button"
+                              class="btn btn-outline-primary dropdown-toggle"
+                              data-bs-toggle="dropdown" aria-expanded="false"
+                              title="SSH">
+                        <i class="bi bi-terminal-fill"></i><span *ngIf="!userOptions.onlyIcons">&nbsp;SSH</span>
+                      </button>
+                      <ul class="dropdown-menu" [attr.aria-labelledby]="'btn-ssh-' + env.env + env.type">
+                        <li *ngIf="env.urls.ssh.master">
+                          <a class="dropdown-item">Master</a>
+                        </li>
+                        <li *ngIf="env.urls.ssh.slave">
+                          <a class="dropdown-item">Slave</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <button type="button" class="btn btn-outline-primary"
+                            title="AWS Console" [disabled]="!env.aws.enabled"
+                            *ngIf="env.aws.display">
+                      <img src="{{awsLogoImageUrl}}" alt="AWS" class="aws-logo"/>
+                      <span *ngIf="!userOptions.onlyIcons">&nbsp;AWS Console</span>
+                    </button>
+                  </div>
+                  <!-- TECHNICALS LINKS -->
+                </div>
+              <div>
             </div>
           </div>
         </div>
@@ -315,4 +267,3 @@
     </div>
   </div>
 </div>
-

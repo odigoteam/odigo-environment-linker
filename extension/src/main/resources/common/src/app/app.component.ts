@@ -2,9 +2,11 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {CONFIGURATION_VIEW, ENV_VIEW, LOADER_VIEW} from "./app.routes";
 import {ConfigurationService} from "./services/configuration/configuration.service";
-import {Environments} from "./models/Environments.class";
+import {Environments} from "./models/environments.class";
 import {EnvironmentsService} from "./services/environment/environments.service";
 import {DOCUMENT} from "@angular/common";
+import {BrowserService} from "./services/browser/browser.service";
+import {AwsRoleSwitcherService} from "./services/aws-role-switcher/aws-role-switcher.service";
 
 @Component({
   selector: 'app',
@@ -17,11 +19,14 @@ export class AppComponent implements OnInit {
   constructor(private _router: Router,
               private _configurationService: ConfigurationService,
               private _environmentsService: EnvironmentsService,
+              private _awsRoleSwitcherService: AwsRoleSwitcherService,
               @Inject(DOCUMENT) private _document: Document) {
   }
 
   ngOnInit(): void {
     this._configurationService.loadConfiguration(() => {
+
+      this._awsRoleSwitcherService.initializeSwitcher();
 
       if(this._configurationService.configuration.config.options.darkTheme) {
         this._document.body.classList.add('theme-dark');
@@ -34,6 +39,7 @@ export class AppComponent implements OnInit {
       if(this._configurationService.configuration.config.confURL) {
         this._configurationService.loadEnvironments().subscribe((envs: Environments)=> {
           this._environmentsService.environments = envs;
+          console.log("envs loaded")
           this._router.navigate([ENV_VIEW]);
         });
       } else {
@@ -54,5 +60,4 @@ export class AppComponent implements OnInit {
       this.icon = "x-lg";
     }
   }
-
 }

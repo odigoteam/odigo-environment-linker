@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {EnvironmentsService} from "../../../../services/environment/environments.service";
-import {Environment} from "../../../../models/Environment.class";
-import {EnvDisplayOptions} from "../../../../models/env-display-options.class";
 import {ConfigurationService} from "../../../../services/configuration/configuration.service";
 import {UserOptions} from "../../../../models/settings.class";
+import {AwsEnv, Environment, EnvUrls, Module, PaaSUrls} from '../../../../models/environments.class';
 
 @Component({
   selector: 'env-list',
@@ -16,7 +15,7 @@ export class EnvListComponent implements OnInit {
   environments: Environment[] = [];
   userOptions: UserOptions = new UserOptions();
   isCurrentTabAws: boolean = false;
-  awsLogoImageUrl: string = "images/logo-aws-dark.png";
+  awsLogoImageUrl: string = "assets/images/logo-aws-dark.png";
 
 
   constructor(private _environmentsService: EnvironmentsService,
@@ -24,11 +23,6 @@ export class EnvListComponent implements OnInit {
     if(this._configurationService.configuration.config && this._configurationService.configuration.config?.options)
       this.userOptions = this._configurationService.configuration.config.options;
     this.isCurrentTabAws = this._configurationService.configuration.isCurrentTabAws;
-    if (this._environmentsService.environments) {
-      this._environmentsService.environments?.environments.forEach(env => {
-        this.environments.push(this.configureEnvironment(env));
-      });
-    }
   }
 
   ngOnInit(): void {
@@ -37,32 +31,34 @@ export class EnvListComponent implements OnInit {
       this.totalEnvs = this._environmentsService.environments.environments.length;
     }
     if (this.userOptions.darkTheme) {
-      this.awsLogoImageUrl = "images/logo-aws-white.png";
+      this.awsLogoImageUrl = "assets/images/logo-aws-white.png";
+    }
+    if (this._environmentsService.environments) {
+      this._environmentsService.environments?.environments.forEach(env => {
+        this.environments.push(this.configureEnvironment(env));
+      });
     }
   }
 
   configureEnvironment(env: Environment) {
-    if(!env.displayOptions) {
-      env.displayOptions = new EnvDisplayOptions();
-    }
     switch(env.type) {
       case "PROD":
-        env.displayOptions.badgeType = "bg-danger";
+        env.badgeType = "bg-danger";
         break;
       case "PREPROD":
-        env.displayOptions.badgeType = "bg-warning text-dark";
+        env.badgeType = "bg-warning text-dark";
         break;
       case "QA":
-        env.displayOptions.badgeType = "bg-info";
+        env.badgeType = "bg-info";
         break;
       case "INT":
-        env.displayOptions.badgeType = "bg-success";
+        env.badgeType = "bg-success";
         break;
       case "DEV":
-        env.displayOptions.badgeType = "bg-dark";
+        env.badgeType = "bg-dark";
         break;
       default:
-        env.displayOptions.badgeType = "bg-secondary text-dark";
+        env.badgeType = "bg-secondary text-dark";
         break;
     }
 
@@ -75,78 +71,56 @@ export class EnvListComponent implements OnInit {
       env.logo = "odigo-white.png";
     }
 
-    // if(!env.urls?.console) {
-    //   env.urls.console.hasUrls = (!env.urls?.console?.internal || !env.urls?.console?.external);
-    //   env.urls.console.hasExternalUrl = (!_.isNil(env.urls?.console.external) && this.userOptions.externalLinks);
-    // } else {
-    //   env.urls.console = {
-    //     hasUrls: false,
-    //     hasStoreExternalUrl: false
-    //   };
-    // }
-    //
-    // if(!_.isNil(env.urls.healthCheck)) {
-    //   env.urls.healthCheck.hasUrls = (!_.isNil(env.urls.healthCheck.internal) || !_.isNil(env.urls.healthCheck.external));
-    //   env.urls.healthCheck.hasExternalUrl = (!_.isNil(env.urls.healthCheck.external) && configuration.getUserOption("externalLinks"));
-    // }
-    //
-    // if(!_.isNil(env.urls.portal)) {
-    //   env.urls.portal.hasUrls = (!_.isNil(env.urls.portal.internal) || !_.isNil(env.urls.portal.external));
-    //   env.urls.portal.hasExternalUrl = (!_.isNil(env.urls.portal.external) && configuration.getUserOption("externalLinks"));
-    // } else {
-    //   env.urls.portal = {
-    //     hasUrls: false,
-    //     hasStoreExternalUrl: false
-    //   };
-    // }
-    //
-    // if(!_.isNil(env.urls.routing)) {
-    //   env.urls.routing.hasUrls = (!_.isNil(env.urls.routing.internal) || !_.isNil(env.urls.routing.external));
-    //   env.urls.routing.hasExternalUrl = (!_.isNil(env.urls.routing.external) && configuration.getUserOption("externalLinks"));
-    // } else {
-    //   env.urls.routing = {
-    //     hasUrls: false,
-    //     hasStoreExternalUrl: false
-    //   };
-    // }
-    //
-    // if(!_.isNil(env.urls.pef)) {
-    //   env.urls.pef.hasUrls = !_.isNil(env.urls.pef) && ((!_.isNil(env.urls.pef.publisher) && !_.isNil(env.urls.pef.publisher.internal)) || (!_.isNil(env.urls.pef.store) && !_.isNil(env.urls.pef.store.internal)));
-    //   env.urls.pef.hasStoreExternalUrl = !_.isNil(env.urls.pef) && !_.isNil(env.urls.pef.store) && !_.isNil(env.urls.pef.store.external) && configuration.getUserOption("externalLinks");
-    // } else {
-    //   env.urls.pef = {
-    //     hasUrls: false,
-    //     hasStoreExternalUrl: false
-    //   };
-    // }
-    //
-    // if(!_.isNil(env.urls.pif)) {
-    //   env.urls.pif.hasUrls = !_.isNil(env.urls.pif) && ((!_.isNil(env.urls.pif.publisher) && !_.isNil(env.urls.pif.publisher.internal)) || (!_.isNil(env.urls.pif.store) && !_.isNil(env.urls.pif.store.internal)));
-    // } else {
-    //   env.urls.pif = {
-    //     hasUrls: false
-    //   };
-    // }
-    //
-    // if(!_.isNil(env.urls.cmdb)) {
-    //   env.urls.cmdb.hasUrls = (!_.isNil(env.urls.cmdb.master) || !_.isNil(env.urls.cmdb.slave));
-    // } else {
-    //   env.urls.cmdb = {
-    //     hasUrls: false
-    //   };
-    // }
-    //
-    // if(!_.isNil(env.urls.ssh)) {
-    //   env.urls.ssh.hasUrls = (!_.isNil(env.urls.ssh.master) || !_.isNil(env.urls.ssh.slave));
-    // } else {
-    //   env.urls.ssh = {
-    //     hasUrls: false
-    //   };
-    // }
-    //
-    // env.displayAWSConsoleLink = (env.provider === "AWS") && configuration.getDisplayOption("aws");
-    // env.isAWSConsoleLinkEnabled = configuration.isCurrentTabAws;
-    // env.userOptions = configuration.options;
+    Object.entries(env.urls).forEach(([key, value]) => {
+      let displayOption: boolean = false;
+      switch (key) {
+        case 'console':
+          displayOption = this.userOptions.display.console;
+          break;
+        case 'healthCheck':
+          displayOption = this.userOptions.display.healthCheck;
+          break;
+        case 'portal':
+          displayOption = this.userOptions.display.portal;
+          break;
+        case 'pif':
+          displayOption = this.userOptions.display.pif;
+          break;
+        case 'pef':
+          displayOption = this.userOptions.display.pef;
+          break;
+        case 'routing':
+          displayOption = this.userOptions.display.routing;
+          break;
+        case 'cmdb':
+          displayOption = this.userOptions.display.cmdb;
+          break;
+        case 'ssh':
+          displayOption = this.userOptions.display.ssh;
+          break;
+      }
+
+      if(!key.match("(pif|pef)")) {
+        if (key.match("(cmdb|ssh)")) {
+          value.display = (!!value.master || !!value.slave) && displayOption;
+        } else {
+          value.display = (!!value.internal || !!value.external) && displayOption;
+          value.showExternal = !!value.external && this.userOptions.externalLinks;
+        }
+      } else {
+        value.publisher.display = (!!value.publisher.internal || !!value.publisher.external) && displayOption;
+        value.store.display = (!!value.internal || !!value.external) && displayOption;
+        if (key === "pef") {
+          value.store.showExternal = !!value.store.external && this.userOptions.externalLinks;
+        }
+      }
+    });
+
+    if(!env.aws) {
+      env.aws = new AwsEnv();
+    }
+    env.aws.display = (env.provider === "AWS") && this.userOptions.display.aws;
+    env.aws.enabled = this._configurationService.configuration.isCurrentTabAws;
 
     return env;
   }

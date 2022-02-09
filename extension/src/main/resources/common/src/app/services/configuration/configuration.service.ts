@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {Settings} from "../../models/settings.class";
 import {StorageService} from "../storage/storage.service";
 import {HttpClient} from "@angular/common/http";
-import {Environments} from "../../models/Environments.class";
+import {Environments} from "../../models/environments.class";
 import {Observable} from "rxjs";
 
 @Injectable({

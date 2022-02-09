@@ -1,6 +1,5 @@
 export class BrowserTab {
   id: number = -1;
-  url: string ="";
 }
 
 export class AWSOptions {
