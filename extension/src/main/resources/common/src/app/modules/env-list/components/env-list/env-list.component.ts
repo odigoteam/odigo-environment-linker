@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {EnvironmentsService} from "../../../../services/environment/environments.service";
-import {ConfigurationService} from "../../../../services/configuration/configuration.service";
+import {EnvironmentsService} from "../../../../services/environments.service";
+import {ConfigurationService} from "../../../../services/configuration.service";
 import {UserOptions} from "../../../../models/settings.class";
 import {AwsEnv, Environment, EnvUrls, Module, PaaSUrls} from '../../../../models/environments.class';
-import {BrowserService} from "../../../../services/browser/browser.service";
-import {AwsRoleSwitcherService} from "../../../../services/aws-role-switcher/aws-role-switcher.service";
+import {BrowserService} from "../../../../services/browser.service";
+import {AwsRoleSwitcherService} from "../../../../services/aws-role-switcher.service";
 
 @Component({
   selector: 'env-list',

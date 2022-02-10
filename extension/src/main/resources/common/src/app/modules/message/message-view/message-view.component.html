@@ -1,0 +1,28 @@
+<div class="alert alert-{{data.type}} mt-5" role="alert">
+ <div class="container">
+   <div class="row">
+     <div class="col-4 message-pict" style="background-image: url('{{data.pict}}')" *ngIf="!!data.pict">
+     </div>
+     <div class="col-8">
+       <div class="container">
+         <div class="row mb-5" *ngIf="data.title">
+           <div class="col-12">
+             <h4 class="alert-heading" [innerHTML]="data.title"></h4>
+           </div>
+         </div>
+         <div class="row">
+           <div class="col-12">
+             <p [innerHTML]="data.message"></p>
+           </div>
+         </div>
+         <div class="row mt-5" *ngIf="data.redirect">
+           <div class="col-12">
+             <hr>
+             <button type="button" class="btn btn-primary mb-0 end-0" [routerLink]="data.goto">{{data.btnTitle}}</button>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>

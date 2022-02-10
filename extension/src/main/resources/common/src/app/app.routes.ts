@@ -3,11 +3,13 @@ import {LoaderViewComponent} from "./modules/loader/components/loader-view/loade
 import {EnvViewComponent} from "./modules/env-list/components/env-view/env-view.component";
 import { ReleaseNoteViewComponent } from "./modules/release-note/components/release-note-view/release-note-view.component";
 import {ConfViewComponent} from "./modules/configuration/components/conf-view/conf-view.component";
+import {MessageViewComponent} from "./modules/message/message-view/message-view.component";
 
 export const ENV_VIEW = "environments";
 export const RELEASE_NOTE_VIEW = "release-note";
 export const CONFIGURATION_VIEW = "configuration";
 export const LOADER_VIEW = "loader";
+export const MESSAGE_VIEW = "message";
 
 export const appRoutes: Routes = [
   {
@@ -34,5 +36,10 @@ export const appRoutes: Routes = [
     path: CONFIGURATION_VIEW,
     pathMatch: 'full',
     component: ConfViewComponent
+  },
+  {
+    path: MESSAGE_VIEW,
+    pathMatch: 'full',
+    component: MessageViewComponent
   }
 ];

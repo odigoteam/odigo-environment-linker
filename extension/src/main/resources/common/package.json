@@ -1,6 +1,6 @@
 {
   "name": "odigo-environment-linker",
-  "version": "3.12.0",
+  "version": "4.0.0",
   "scripts": {
     "start": "ng serve",
     "build-prod": "ng build --configuration development",

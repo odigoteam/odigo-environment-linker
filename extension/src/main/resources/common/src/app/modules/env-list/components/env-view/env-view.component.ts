@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ConfigurationService} from "../../../../services/configuration/configuration.service";
+import {ConfigurationService} from "../../../../services/configuration.service";
 import {UserConfiguration} from "../../../../models/settings.class";
-import {EnvironmentsService} from "../../../../services/environment/environments.service";
+import {EnvironmentsService} from "../../../../services/environments.service";
 
 @Component({
   selector: 'env-view',

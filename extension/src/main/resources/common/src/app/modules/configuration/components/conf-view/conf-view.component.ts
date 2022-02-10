@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import packageJson from '../../../../../../package.json';
-import {ConfigurationService} from "../../../../services/configuration/configuration.service";
+import {ConfigurationService} from "../../../../services/configuration.service";
 import {UserConfiguration} from "../../../../models/settings.class";
 import {DOCUMENT} from "@angular/common";
 
@@ -11,12 +11,16 @@ import {DOCUMENT} from "@angular/common";
 })
 export class ConfViewComponent implements OnInit {
   public appVersion: string = packageJson.version;
+  configUrl: string = "";
+  errorMessage: string = "&nbsp;";
   userConfiguration: UserConfiguration = new UserConfiguration();
 
   constructor(private _configurationService: ConfigurationService,
               @Inject(DOCUMENT) private _document: Document) {
-    if (this._configurationService.configuration.config)
+    if (this._configurationService.configuration.config) {
       this.userConfiguration = this._configurationService.configuration.config;
+      this.configUrl = this._configurationService.configuration.config.confURL;
+    }
   }
 
   ngOnInit(): void {
@@ -35,5 +39,13 @@ export class ConfViewComponent implements OnInit {
       this._document.body.classList.remove('theme-dark');
     }
     this.saveConfig();
+  }
+
+  checkConfigUrl() {
+    let validation = this._configurationService.validateConfigURL(this.configUrl);
+    this.errorMessage = validation.message;
+    if(!validation.hasError) {
+      this.saveConfig();
+    }
   }
 }

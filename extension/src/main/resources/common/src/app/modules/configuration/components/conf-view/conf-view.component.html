@@ -5,8 +5,8 @@
         <div class="form-group">
           <h4><label for="configURL" class="form-label">Configuration URL</label></h4>
           <input type="text" class="form-control" name="configURL" id="configURL" aria-describedby="configURL"
-                 placeholder="Enter the configuration URL" (keyup)="saveConfig()" [(ngModel)]="this.userConfiguration.confURL">
-          <small id="configURLError" class="form-text text-danger">&nbsp;</small>
+                 placeholder="Enter the configuration URL" (keyup)="checkConfigUrl()" [(ngModel)]="configUrl">
+          <small class="form-text text-danger" [innerHTML]="errorMessage"></small>
         </div>
       </div>
     </div>
@@ -193,7 +193,7 @@
       </div>
     </div>
     <div class="float-end small-info">
-      v{{appVersion}}
+      {{appVersion}}
     </div>
   </form>
 </div>
