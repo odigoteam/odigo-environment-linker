@@ -30,6 +30,7 @@ export class AwsEnv {
 }
 
 export class Environment {
+  displayed: boolean = true;
   env: string = "";
   type: string = "";
   name: string = "";

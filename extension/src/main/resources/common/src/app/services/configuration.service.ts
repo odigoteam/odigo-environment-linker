@@ -4,6 +4,7 @@ import {StorageService} from "./storage.service";
 import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Environments} from "../models/environments.class";
 import {Observable} from "rxjs";
+import packageJson from "../../../package.json";
 
 @Injectable({
   providedIn: 'root'
@@ -11,15 +12,17 @@ import {Observable} from "rxjs";
 export class ConfigurationService {
   readonly storeKey: string = 'odigoEnvLinker';
   private _configuration: Settings;
+  public appVersion: string = packageJson.version;
 
   constructor(private _storage: StorageService,
               private http: HttpClient) {
     this._configuration = new Settings();
+    this._configuration.currentExtensionVersion = this.appVersion;
   }
 
   loadConfiguration(callback: any): void {
     this._storage.get(this.storeKey).then((data: any) => {
-      this.configuration = { ...this._configuration, ...data.odigoEnvLinker };
+      this._configuration = { ...this._configuration, ...data.odigoEnvLinker };
       callback();
     });
   }
@@ -29,7 +32,8 @@ export class ConfigurationService {
   }
 
   save(): void {
-    this._storage.set({odigoEnvLinker : this.configuration});
+    this._configuration.config.latestExtensionVersionUsed = this.appVersion;
+    this._storage.set({odigoEnvLinker : this._configuration});
   }
 
   validateConfigURL(value: string): any {
@@ -42,7 +46,7 @@ export class ConfigurationService {
           hasError = true;
           message = "The URL must end with '/raw/master/configuration.json'.";
         } else {
-          this.configuration.config.confURL = confURL;
+          this._configuration.config.confURL = confURL;
         }
       } else {
         hasError = true;

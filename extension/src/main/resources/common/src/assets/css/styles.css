@@ -1,14 +1,14 @@
 @font-face {
-    font-family: "Nexa Regular";
-    src: url("../fonts/NexaRegular.woff2") format("woff2"), url("../fonts/NexaRegular.woff") format("woff");
+  font-family: "Nexa Regular";
+  src: url("../fonts/NexaRegular.woff2") format("woff2"), url("../fonts/NexaRegular.woff") format("woff");
 }
 
 .small-info {
-    text-align: right;
-    width: 100%;
-    font-size: small;
-    font-style: italic;
-    color: var(--small-info-color);
+  text-align: right;
+  width: 100%;
+  font-size: small;
+  font-style: italic;
+  color: var(--small-info-color);
 }
 
 .badge-light {
@@ -33,16 +33,19 @@
 
 /*********** Scrollbar ************/
 .scrollbar {
-    overflow-y: scroll;
-    scrollbar-color: var(--color-accent) #F5F5F5;
-    scrollbar-width: thin;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  scrollbar-color: var(--color-accent) #F5F5F5;
+  scrollbar-width: thin;
 }
+
 .scrollbar::-webkit-scrollbar {
-    width: 8px;
-    background-color: #F5F5F5;
+  width: 8px;
+  background-color: #F5F5F5;
 }
+
 .scrollbar::-webkit-scrollbar-thumb {
-    border-radius: 8px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-    background-color: var(--color-accent);
+  border-radius: 8px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: var(--color-accent);
 }

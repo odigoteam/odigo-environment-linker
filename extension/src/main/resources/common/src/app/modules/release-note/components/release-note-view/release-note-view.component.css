@@ -1,4 +1,4 @@
-#update-top-img {
+.card-img-top {
   background: url("../../../../../assets/images/update.png") center no-repeat;
   background-size: cover;
   height: 200px;

@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col">
       <div class="float-start" id="logo">environments</div>
-      <button type="button" class="btn btn-link btn-outline-primary configOpenBtn float-end" aria-label="Configure" (click)="goToConfiguration()">
+      <button type="button" class="btn btn-primary float-end" aria-label="Configure" (click)="goToConfiguration()" *ngIf="!!icon">
         <i class="bi bi-{{icon}}"></i>
       </button>
     </div>

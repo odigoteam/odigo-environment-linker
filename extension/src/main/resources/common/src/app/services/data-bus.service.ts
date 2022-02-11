@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
-
-export enum MessageType {
-  INFO,
-  ERROR
-}
+import {Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
-export class MessageService {
+export class DataBusService {
   readonly _dataMap: any;
+
+  confBtnIcon = new Subject<string>();
 
   constructor() {
     this._dataMap = new Map();

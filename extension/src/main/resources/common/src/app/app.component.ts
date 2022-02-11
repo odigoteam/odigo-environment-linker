@@ -1,11 +1,11 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {CONFIGURATION_VIEW, ENV_VIEW, LOADER_VIEW, MESSAGE_VIEW} from "./app.routes";
+import {CONFIGURATION_VIEW, ENV_VIEW, LOADER_VIEW, MESSAGE_VIEW, RELEASE_NOTE_VIEW} from "./app.routes";
 import {ConfigurationService} from "./services/configuration.service";
 import {EnvironmentsService} from "./services/environments.service";
 import {DOCUMENT} from "@angular/common";
 import {AwsRoleSwitcherService} from "./services/aws-role-switcher.service";
-import {MessageService} from "./services/message.service";
+import {DataBusService} from "./services/data-bus.service";
 import {MessageViewContent} from "./modules/message/message-view/message-view.component";
 
 @Component({
@@ -14,14 +14,15 @@ import {MessageViewContent} from "./modules/message/message-view/message-view.co
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  icon: string = "toggles";
+  icon: string = "";
 
   constructor(private _router: Router,
               private _configurationService: ConfigurationService,
               private _environmentsService: EnvironmentsService,
               private _awsRoleSwitcherService: AwsRoleSwitcherService,
-              private _messageService: MessageService,
+              private _dataBusService: DataBusService,
               @Inject(DOCUMENT) private _document: Document) {
+    _dataBusService.confBtnIcon.subscribe(value => this.icon = value);
   }
 
   ngOnInit(): void {
@@ -46,7 +47,7 @@ export class AppComponent implements OnInit {
         messageViewContent.type = "light";
         messageViewContent.redirect = true;
         messageViewContent.goto = "/" + CONFIGURATION_VIEW;
-        this._messageService.put(MESSAGE_VIEW, messageViewContent);
+        this._dataBusService.put(MESSAGE_VIEW, messageViewContent);
         this._router.navigate([MESSAGE_VIEW]);
         return;
       }
@@ -56,33 +57,39 @@ export class AppComponent implements OnInit {
       let validation = this._configurationService.validateConfigURL(this._configurationService.configuration.config.confURL);
       if (validation.hasError) {
         let messageViewContent = new MessageViewContent();
-        messageViewContent.title = "<i class=\"bi bi-emoji-frown-fill\"></i> Oups, something went wrong...";
+        messageViewContent.title = "Oups, something went wrong...";
+        messageViewContent.pict = "assets/images/bot-error.png";
         messageViewContent.message = validation.message;
         messageViewContent.btnTitle = "Check configuration";
         messageViewContent.type = "danger";
         messageViewContent.redirect = true;
         messageViewContent.goto = "/" + CONFIGURATION_VIEW;
-        this._messageService.put(MESSAGE_VIEW, messageViewContent);
+        this._dataBusService.put(MESSAGE_VIEW, messageViewContent);
         this._router.navigate([MESSAGE_VIEW]);
         return;
-      } else {
-        this.loadEns();
       }
+
+      if(this._configurationService.configuration.config.latestExtensionVersionUsed ||
+        this._configurationService.configuration.config.latestExtensionVersionUsed !== this._configurationService.configuration.currentExtensionVersion) {
+        this._router.navigate([RELEASE_NOTE_VIEW]);
+        return;
+      }
+
+      this.loadEnvs();
     });
   }
 
   goToConfiguration() {
+    this._dataBusService.confBtnIcon.next("");
     if (this._router.url.endsWith(CONFIGURATION_VIEW)) {
-      this.icon = "toggles";
       this._router.navigate([LOADER_VIEW]);
-      this.loadEns();
+      this.loadEnvs();
     } else {
       this._router.navigate([CONFIGURATION_VIEW]);
-      this.icon = "x-lg";
     }
   }
 
-  loadEns() {
+  loadEnvs() {
     if(!this._configurationService.configuration.config.confURL ||
       this._configurationService.configuration.config.confURL=== "" ||
       this._configurationService.configuration.config.confURL.indexOf("https://") < 0) {
@@ -94,29 +101,36 @@ export class AppComponent implements OnInit {
       messageViewContent.type = "light";
       messageViewContent.redirect = true;
       messageViewContent.goto = "/" + CONFIGURATION_VIEW;
-      this._messageService.put(MESSAGE_VIEW, messageViewContent);
+      this._dataBusService.put(MESSAGE_VIEW, messageViewContent);
       this._router.navigate([MESSAGE_VIEW]);
       return;
     }
 
-    this._configurationService.loadEnvironments().subscribe(
-      response => {
+    this._configurationService.loadEnvironments().subscribe({
+      next: (response) => {
         if(response.body) {
           this._environmentsService.environments = response.body;
         }
         this._router.navigate([ENV_VIEW]);
       },
-      error => {
+      error: (error) => {
         let messageViewContent = new MessageViewContent();
-        messageViewContent.title = "<i class=\"bi bi-emoji-frown-fill\"></i> Oups, something went wrong...";
-        messageViewContent.message = "Please check your configuration URL or VPN connection.";
-        messageViewContent.btnTitle = "Check configuration URL";
         messageViewContent.type = "danger";
-        messageViewContent.redirect = true;
-        messageViewContent.goto = "/" + CONFIGURATION_VIEW;
-        this._messageService.put(MESSAGE_VIEW, messageViewContent);
-        console.log(error);
+        if(error.status === 404) {
+          messageViewContent.pict = "assets/images/404.png";
+          messageViewContent.title = "404 ?! Hum, that's not the configuration link...";
+          messageViewContent.message = "Something is missing in your configuration URL, but I don't know what...<br/><br/>Can you check it please for me ?";
+          messageViewContent.btnTitle = "Check configuration URL";
+          messageViewContent.redirect = true;
+          messageViewContent.goto = "/" + CONFIGURATION_VIEW;
+        } else {
+          messageViewContent.pict = "assets/images/no-vpn.png";
+          messageViewContent.title = "Damn... Where is it ?";
+          messageViewContent.message = "Your VPN seems gone away. Can you help me find it !?<br/><br/>Please check your VPN connectivity.";
+        }
+        this._dataBusService.put(MESSAGE_VIEW, messageViewContent);
+        console.error(error);
         this._router.navigate([MESSAGE_VIEW]);
-      });
+      }});
   }
 }

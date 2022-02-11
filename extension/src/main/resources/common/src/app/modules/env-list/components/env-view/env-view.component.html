@@ -6,7 +6,7 @@
       </a>
       <div class="form-group">
         <input tabindex="1" type="text" class="form-control" aria-describedby="search"
-               name="search" id="search" [(ngModel)]="this.userConf.search" (change)="saveConf()" placeholder="Enter the client ID or name">
+               name="search" id="search" [(ngModel)]="this.userConf.search" (keyup)="updateResults()" placeholder="Enter the client ID or name">
       </div>
     </div>
   </div>
@@ -14,36 +14,36 @@
     <div class="row" id="filter-section">
       <div class="col-12">
         <span class="badge bg-dark">
-          <input class="form-check-input" type="checkbox" name="filterDEV" id="filterDEV" (change)="saveConf()" [(ngModel)]="this.userConf.filters.dev">
+          <input class="form-check-input" type="checkbox" name="filterDEV" id="filterDEV" (change)="updateResults()" [(ngModel)]="this.userConf.filters.dev">
           <label class="form-check-label" for="filterDEV">DEV</label>
         </span>
         <span class="badge bg-success">
-          <input class="form-check-input" type="checkbox" name="filterINT" id="filterINT" (change)="saveConf()" [(ngModel)]="this.userConf.filters.int">
+          <input class="form-check-input" type="checkbox" name="filterINT" id="filterINT" (change)="updateResults()" [(ngModel)]="this.userConf.filters.int">
           <label class="form-check-label" for="filterINT">INT</label>
         </span>
         <span class="badge bg-info">
-          <input class="form-check-input" type="checkbox" name="filterQUA" id="filterQUA" (change)="saveConf()" [(ngModel)]="this.userConf.filters.qa">
+          <input class="form-check-input" type="checkbox" name="filterQUA" id="filterQUA" (change)="updateResults()" [(ngModel)]="this.userConf.filters.qa">
           <label class="form-check-label" for="filterQUA">QA</label>
         </span>
         <span class="badge bg-warning text-dark">
-          <input class="form-check-input" type="checkbox" name="filterPREPROD" id="filterPREPROD" (change)="saveConf()" [(ngModel)]="this.userConf.filters.preprod">
+          <input class="form-check-input" type="checkbox" name="filterPREPROD" id="filterPREPROD" (change)="updateResults()" [(ngModel)]="this.userConf.filters.preprod">
           <label class="form-check-label" for="filterPREPROD">PREPROD</label>
         </span>
         <span class="badge bg-danger">
-          <input class="form-check-input" type="checkbox" name="filterPROD" id="filterPROD" (change)="saveConf()" [(ngModel)]="this.userConf.filters.prod">
+          <input class="form-check-input" type="checkbox" name="filterPROD" id="filterPROD" (change)="updateResults()" [(ngModel)]="this.userConf.filters.prod">
           <label class="form-check-label" for="filterPROD">PROD</label>
         </span>
         <span class="badge bg-aws text-dark">
-          <input class="form-check-input" type="checkbox" name="filterAWS" id="filterAWS" (change)="saveConf()" [(ngModel)]="this.userConf.filters.aws">
+          <input class="form-check-input" type="checkbox" name="filterAWS" id="filterAWS" (change)="updateResults()" [(ngModel)]="this.userConf.filters.aws">
           <label class="form-check-label" for="filterAWS">AWS</label>
         </span>
         <span class="badge bg-secondary text-dark">
-          <input class="form-check-input" type="checkbox" name="filterOthers" id="filterOthers" (change)="saveConf()" [(ngModel)]="this.userConf.filters.others">
+          <input class="form-check-input" type="checkbox" name="filterOthers" id="filterOthers" (change)="updateResults()" [(ngModel)]="this.userConf.filters.others">
           <label class="form-check-label" for="filterOthers">Others</label>
         </span>
         <div class="btn-group">
           <button class="badge bg-secondary text-dark btn btn-sm dropdown-toggle form-select-oel" type="button"
-                  id="versionFilterDropdown" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
+                  id="versionFilterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
             Versions
           </button>
           <ul class="dropdown-menu">

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {EnvironmentsService} from "../../../../services/environments.service";
 import {ConfigurationService} from "../../../../services/configuration.service";
 import {UserOptions} from "../../../../models/settings.class";
-import {AwsEnv, Environment, EnvUrls, Module, PaaSUrls} from '../../../../models/environments.class';
+import {AwsEnv, Environment } from '../../../../models/environments.class';
 import {BrowserService} from "../../../../services/browser.service";
 import {AwsRoleSwitcherService} from "../../../../services/aws-role-switcher.service";
 
@@ -24,14 +24,15 @@ export class EnvListComponent implements OnInit {
               private _configurationService: ConfigurationService,
               private _browser: BrowserService,
               private _awsRoleSwitcherService: AwsRoleSwitcherService) {
-    if(this._configurationService.configuration.config && this._configurationService.configuration.config?.options)
-      this.userOptions = this._configurationService.configuration.config.options;
+    this.userOptions = this._configurationService.configuration.config.options;
     this.isCurrentTabAws = this._configurationService.configuration.isCurrentTabAws;
+    this._environmentsService.numberOfResult.subscribe(value => {
+      this.nbResults = value;
+    });
   }
 
   ngOnInit(): void {
     if (this._environmentsService.environments) {
-      this.nbResults = this._environmentsService.environments.environments.length;
       this.totalEnvs = this._environmentsService.environments.environments.length;
     }
     if (this.userOptions.darkTheme) {

@@ -1,29 +1,28 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject } from '@angular/core';
 import packageJson from '../../../../../../package.json';
 import {ConfigurationService} from "../../../../services/configuration.service";
 import {UserConfiguration} from "../../../../models/settings.class";
 import {DOCUMENT} from "@angular/common";
+import {DataBusService} from "../../../../services/data-bus.service";
 
 @Component({
   selector: 'conf-view',
   templateUrl: './conf-view.component.html',
   styleUrls: ['./conf-view.component.css']
 })
-export class ConfViewComponent implements OnInit {
+export class ConfViewComponent {
   public appVersion: string = packageJson.version;
+  activeTab: string = "behaviour";
   configUrl: string = "";
   errorMessage: string = "&nbsp;";
   userConfiguration: UserConfiguration = new UserConfiguration();
 
   constructor(private _configurationService: ConfigurationService,
+              private _dataBusService: DataBusService,
               @Inject(DOCUMENT) private _document: Document) {
-    if (this._configurationService.configuration.config) {
-      this.userConfiguration = this._configurationService.configuration.config;
-      this.configUrl = this._configurationService.configuration.config.confURL;
-    }
-  }
-
-  ngOnInit(): void {
+    this.userConfiguration = this._configurationService.configuration.config;
+    this.configUrl = this._configurationService.configuration.config.confURL;
+    this._dataBusService.confBtnIcon.next("x-lg");
   }
 
   saveConfig(): void {
@@ -47,5 +46,9 @@ export class ConfViewComponent implements OnInit {
     if(!validation.hasError) {
       this.saveConfig();
     }
+  }
+
+  navTab(tabName: string) {
+    this.activeTab = tabName;
   }
 }

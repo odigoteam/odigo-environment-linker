@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {MessageService} from "../../../services/message.service";
+import { Component } from '@angular/core';
+import {DataBusService} from "../../../services/data-bus.service";
 import {ENV_VIEW, MESSAGE_VIEW} from "../../../app.routes";
 
 export class MessageViewContent {
@@ -8,8 +8,8 @@ export class MessageViewContent {
   btnTitle: string = "Continue";
   type: string = "info";
   redirect: boolean = false;
-  goto: string = ENV_VIEW;
   pict: string = "";
+  goto: string = ENV_VIEW;
 }
 
 @Component({
@@ -17,13 +17,11 @@ export class MessageViewContent {
   templateUrl: './message-view.component.html',
   styleUrls: ['./message-view.component.css']
 })
-export class MessageViewComponent implements OnInit {
+export class MessageViewComponent {
   data: MessageViewContent = new MessageViewContent();
 
-  constructor(private _messageService: MessageService) { }
-
-  ngOnInit(): void {
-    this.data = this._messageService.pop(MESSAGE_VIEW);
+  constructor(private _dataBusService: DataBusService) {
+    this.data = this._dataBusService.pop(MESSAGE_VIEW);
+    this._dataBusService.confBtnIcon.next("");
   }
-
 }

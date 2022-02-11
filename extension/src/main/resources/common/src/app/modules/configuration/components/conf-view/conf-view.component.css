@@ -1,38 +1,113 @@
 .config-subpart {
-  height: 390px;
+  height: 387px;
   overflow-x: hidden;
   border: 1px solid var(--color-primary);
   background-color: var(--card-bg-color);
   border-radius: 0.25rem;
-  padding: 10px;
 }
 
-.config-subpart select {
-  background-color: var(--input-bg-color-focus) !important;
-  color: var(--font-color) !important;
-}
 .config-subpart .form-check-label {
   line-height: 24px;
   vertical-align: middle;
 }
-.config-subpart select {
-  background-image: var(--select-arrow) !important;
-}
 
 .form-switch .form-check-input {
+  margin-top: 7px;
   background-image: var(--form-switch-background-image);
 }
+
 .form-switch .form-check-input:focus {
   background-image: var(--form-switch-background-image-focus);
 }
+
 .form-switch .form-check-input:checked {
   background-image: var(--form-switch-background-image-checked);
 }
+
 .form-check-input:checked {
   background-color: var(--color-accent);
   border-color: var(--color-accent);
 }
+
 .form-check-input:focus {
   border-color: var(--color-accent);
-  box-shadow: 0 0 5px 2px var(--color-secondary);
- }
+  box-shadow: none;
+}
+
+/*  conf tab */
+div.conf-tab-container {
+  z-index: 10;
+  background-color: rgba(255,255,255,0.7);
+  border: 1px solid #ddd;
+  background-clip: padding-box;
+  opacity: 0.97;
+  filter: alpha(opacity=97);
+}
+
+div.conf-tab-menu {
+  padding-right: 0;
+  padding-left: 0;
+  padding-bottom: 0;
+}
+
+div.conf-tab-menu div.list-group {
+  height: 385px;
+}
+
+div.conf-tab-menu div.list-group > a {
+  margin-bottom: 0;
+}
+
+div.conf-tab-menu div.list-group div.list-group-item {
+  border-bottom: 1px solid rgba(0, 0, 0, .125);
+  margin-bottom: 0;
+}
+
+div.conf-tab-menu div.list-group > a.active {
+  background-color: #3d4662;
+  color: #ffffff;
+  border-color: transparent;
+}
+
+div.conf-tab-menu div.list-group > a:not(.active) {
+  cursor: pointer;
+}
+
+div.conf-tab-menu div.list-group > a:not(.active):hover {
+  color: var(--color-accent);
+}
+
+div.conf-tab-menu div.list-group > a.active:after {
+  content: '';
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  margin-top: -13px;
+  border-left: 0;
+  border-bottom: 13px solid transparent;
+  border-top: 13px solid transparent;
+  border-left: 10px solid #3d4662;
+}
+
+.list-group {
+  border-radius: 0;
+}
+
+.list-group-item {
+  border: none;
+  background-color: transparent;
+}
+
+div.conf-tab-content {
+  height: 385px;
+  padding-left: 20px;
+  padding-top: 10px;
+  color: #2a3045;
+}
+
+div.conf-tab {
+  border-left: 1px solid rgba(0, 0, 0, .125);
+}
+div.conf-tab div.conf-tab-content:not(.active) {
+  display: none;
+}
