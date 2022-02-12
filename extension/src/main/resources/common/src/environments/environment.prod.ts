@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   releaseNote: {
-    title: "Time to power up ! <i class=\"bi bi-lightning-charge-fill\"></i>\n",
+    title: "I got the power ! <i class=\"bi bi-lightning-charge-fill\"></i>\n",
     features: [
       {
         shortDesc: "Rewrite plugin in Angular 13",
@@ -9,7 +9,7 @@ export const environment = {
       },
       {
         shortDesc: "New design",
-        longDesc: "For this major improvement, I hope you'll like that new design!"
+        longDesc: "For this major improvement, I hope you will like that new design!"
       },
       {
         shortDesc: "Configuration screen design reworked",
@@ -22,6 +22,12 @@ export const environment = {
       },
       {
         desc: "AWS switch button : close extension popup after clicking on AWS switch button."
+      },
+      {
+        desc: "Wrong url error message : got VPN error message if configuration url was wrong."
+      },
+      {
+        desc: "'All' version : 'All' option is not checked at first launch in version filters dropdown."
       }
     ]
   }

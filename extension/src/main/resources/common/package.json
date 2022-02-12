@@ -3,7 +3,7 @@
   "version": "4.0.0",
   "scripts": {
     "start": "ng serve",
-    "build-prod": "ng build --configuration development",
+    "build-prod": "ng build --configuration production",
     "build-dev": "ng build --configuration development",
     "clean": "rmdir /s /q dist",
     "test": "ng test"

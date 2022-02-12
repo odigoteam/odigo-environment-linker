@@ -133,6 +133,7 @@ export class EnvListComponent implements OnInit {
 
   openLink(url: string | undefined ) {
     this._browser.tabs.create({url});
+    window.close();
   }
 
   switchAWSRole(env: Environment) {
