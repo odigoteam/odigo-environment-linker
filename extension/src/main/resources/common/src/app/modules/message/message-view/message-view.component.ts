@@ -7,6 +7,7 @@ export class MessageViewContent {
   message: string = "";
   btnTitle: string = "Continue";
   type: string = "info";
+  size: string = "normal";
   redirect: boolean = false;
   pict: string = "";
   goto: string = ENV_VIEW;
@@ -18,10 +19,10 @@ export class MessageViewContent {
   styleUrls: ['./message-view.component.css']
 })
 export class MessageViewComponent {
-  data: MessageViewContent = new MessageViewContent();
+  message: MessageViewContent = new MessageViewContent();
 
   constructor(private _dataBusService: DataBusService) {
-    this.data = this._dataBusService.pop(MESSAGE_VIEW);
+    this.message = this._dataBusService.pop(MESSAGE_VIEW);
     this._dataBusService.confBtnIcon.next("");
   }
 }

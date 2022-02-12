@@ -1,23 +1,23 @@
-<div class="container alert alert-{{data.type}} mt-5 p-5" role="alert">
+<div class="alert alert-{{message.type}} mt-5 p-5" [ngClass]="message.size === 'normal' ? 'container' : ''"  role="alert">
  <div class="row">
-   <div class="col-4 message-pict" style="background-image: url('{{data.pict}}')" *ngIf="!!data.pict">
+   <div class="col-4 message-pict" style="background-image: url('{{message.pict}}')" *ngIf="!!message.pict">
    </div>
-   <div [ngClass]="!!data.pict ? 'col-8' : 'col-12'">
+   <div [ngClass]="!!message.pict ? 'col-8' : 'col-12'">
      <div class="container">
-       <div class="row mb-5" *ngIf="data.title">
+       <div class="row mb-3" [ngClass]="message.size === 'normal' ? 'mt-05' : 'mt-03'" *ngIf="message.title">
          <div class="col-12">
-           <h4 class="alert-heading" [innerHTML]="data.title"></h4>
+           <h4 class="alert-heading" [innerHTML]="message.title"></h4>
          </div>
        </div>
        <div class="row">
          <div class="col-12">
-           <p [innerHTML]="data.message"></p>
+           <p [innerHTML]="message.message" style="text-align: justify;"></p>
          </div>
        </div>
-       <div class="row mt-5" *ngIf="data.redirect">
+       <div class="row mt-1" [ngClass]="message.size === 'normal' ? 'mt-05' : 'mt-1'" *ngIf="message.redirect">
          <div class="col-12">
            <hr>
-           <button type="button" class="btn btn-primary mb-0 end-0" [routerLink]="data.goto">{{data.btnTitle}}</button>
+           <button type="button" class="btn btn-primary mb-0 end-0" [routerLink]="message.goto">{{message.btnTitle}}</button>
          </div>
        </div>
      </div>

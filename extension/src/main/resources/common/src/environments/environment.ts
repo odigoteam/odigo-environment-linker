@@ -13,7 +13,7 @@ export const environment = {
       },
       {
         shortDesc: "New design",
-        longDesc: "For this major improvement, I hope you'll like that new design!"
+        longDesc: "For this major improvement, I hope you will like that new design!"
       },
       {
         shortDesc: "Configuration screen design reworked",

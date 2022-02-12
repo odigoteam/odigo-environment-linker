@@ -113,21 +113,29 @@ export class AppComponent implements OnInit {
         this._router.navigate([ENV_VIEW]);
       },
       error: (error) => {
-        let messageViewContent = new MessageViewContent();
-        messageViewContent.type = "danger";
+        let message = new MessageViewContent();
+        message.type = "danger";
         if(error.status === 404) {
-          messageViewContent.pict = "assets/images/404.png";
-          messageViewContent.title = "404 ?! Hum, that's not the configuration link...";
-          messageViewContent.message = "Something is missing in your configuration URL, but I don't know what...<br/><br/>Can you check it please for me ?";
-          messageViewContent.btnTitle = "Check configuration URL";
-          messageViewContent.redirect = true;
-          messageViewContent.goto = "/" + CONFIGURATION_VIEW;
+          message.pict = "assets/images/404.png";
+          message.title = "404 ?! Hum, I think I'm lost...";
+          message.message = "Something is wrong with the provided configuration URL, but I don't know what...<br/><br/>Can you check it please for me ?";
+          message.btnTitle = "Check configuration URL";
+          message.redirect = true;
+          message.goto = "/" + CONFIGURATION_VIEW;
+        } if(error.status === 0) {
+          message.pict = "assets/images/no-vpn.png";
+          message.title = "Damn... Where is it ?";
+          message.message = "Your VPN seems gone away. Can you help me find it !?<br/><br/>Please check your VPN connectivity.";
         } else {
-          messageViewContent.pict = "assets/images/no-vpn.png";
-          messageViewContent.title = "Damn... Where is it ?";
-          messageViewContent.message = "Your VPN seems gone away. Can you help me find it !?<br/><br/>Please check your VPN connectivity.";
+          message.pict = "assets/images/404.png";
+          message.title = "It's so close, but so far...";
+          message.message = "Something went wrong when I've tried to get the configuration, but I don't know what...<br/><br/>Can you check your <strong>configuration URL</strong> please ?<br/><br/><small><i><u>Tips</u> : You can try to copy past it in your browser, you should land on an awesome incomprehensible JSON page. If not, you have much serious problem...</i></small>";
+          message.btnTitle = "Check configuration URL";
+          message.size = "large";
+          message.redirect = true;
+          message.goto = "/" + CONFIGURATION_VIEW;
         }
-        this._dataBusService.put(MESSAGE_VIEW, messageViewContent);
+        this._dataBusService.put(MESSAGE_VIEW, message);
         console.error(error);
         this._router.navigate([MESSAGE_VIEW]);
       }});
