@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {ConfigurationService} from "../../../../services/configuration.service";
 import {UserConfiguration} from "../../../../models/settings.class";
 import {EnvironmentsService} from "../../../../services/environments.service";
@@ -9,7 +9,7 @@ import {DataBusService} from "../../../../services/data-bus.service";
   templateUrl: './env-view.component.html',
   styleUrls: ['./env-view.component.css']
 })
-export class EnvViewComponent {
+export class EnvViewComponent implements OnInit {
   supportedVersions: any[] = [];
   userConf: UserConfiguration = new UserConfiguration();
 
@@ -24,6 +24,9 @@ export class EnvViewComponent {
         checked: this.userConf.filters.versions.includes(version)
       });
     });
+  }
+
+  ngOnInit(): void {
     this._environmentsService.runSearch();
   }
 
@@ -52,8 +55,15 @@ export class EnvViewComponent {
       }
     }
 
+    this.updateFilters();
     this._configurationService.save();
     this._environmentsService.runSearch();
+  }
+
+  private updateFilters() {
+    this.supportedVersions.forEach(item => {
+      item.checked = this.userConf.filters.versions.includes(item.version);
+    });
   }
 
   updateResults() {

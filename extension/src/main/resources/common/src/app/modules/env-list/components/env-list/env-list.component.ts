@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterContentInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {EnvironmentsService} from "../../../../services/environments.service";
 import {ConfigurationService} from "../../../../services/configuration.service";
 import {UserOptions} from "../../../../models/settings.class";
@@ -26,6 +26,7 @@ export class EnvListComponent implements OnInit {
               private _awsRoleSwitcherService: AwsRoleSwitcherService) {
     this.userOptions = this._configurationService.configuration.config.options;
     this.isCurrentTabAws = this._configurationService.configuration.isCurrentTabAws;
+
     this._environmentsService.numberOfResult.subscribe(value => {
       this.nbResults = value;
     });

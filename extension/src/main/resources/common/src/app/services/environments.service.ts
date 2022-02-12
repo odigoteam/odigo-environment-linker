@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
 import {Environment, Environments} from "../models/environments.class";
 import {ConfigurationService} from "./configuration.service";
-import {Subject} from "rxjs";
+import {BehaviorSubject, Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class EnvironmentsService {
   environments: Environments = new Environments();
-  numberOfResult: Subject<number> = new Subject<number>();
+  numberOfResult: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
   constructor(private _configuration: ConfigurationService) {
-    this.numberOfResult.next(0);
   }
 
   runSearch() {

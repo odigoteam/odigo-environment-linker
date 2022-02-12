@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {Router} from "@angular/router";
-import {CONFIGURATION_VIEW, ENV_VIEW, MESSAGE_VIEW} from "../../../../app.routes";
+import {CONFIGURATION_VIEW, ENV_VIEW, LOADER_VIEW, MESSAGE_VIEW} from "../../../../app.routes";
 import packageJson from "../../../../../../package.json";
 import {DataBusService} from "../../../../services/data-bus.service";
 import {ConfigurationService} from "../../../../services/configuration.service";
@@ -25,10 +25,11 @@ export class ReleaseNoteViewComponent {
   }
 
   close(): void {
+    this._router.navigate([LOADER_VIEW]);
     this._configurationService.configuration.config.latestExtensionVersionUsed = this._configurationService.configuration.currentExtensionVersion;
     this._configurationService.save();
     if(!this._configurationService.configuration.config.confURL ||
-      this._configurationService.configuration.config.confURL=== "" ||
+      this._configurationService.configuration.config.confURL === "" ||
       this._configurationService.configuration.config.confURL.indexOf("https://") < 0) {
       let messageViewContent = new MessageViewContent();
       messageViewContent.title = "<strong>Welcome</strong> and thanks to use Odigo environment linker !";

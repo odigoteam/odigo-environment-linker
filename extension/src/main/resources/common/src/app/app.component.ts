@@ -27,7 +27,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this._configurationService.loadConfiguration(() => {
-
       if (this._configurationService.configuration.config.options.darkTheme) {
         this._document.body.classList.add('theme-dark');
         this._document.body.classList.remove('theme-light');
@@ -69,7 +68,7 @@ export class AppComponent implements OnInit {
         return;
       }
 
-      if(this._configurationService.configuration.config.latestExtensionVersionUsed ||
+      if(!this._configurationService.configuration.config.latestExtensionVersionUsed ||
         this._configurationService.configuration.config.latestExtensionVersionUsed !== this._configurationService.configuration.currentExtensionVersion) {
         this._router.navigate([RELEASE_NOTE_VIEW]);
         return;
@@ -80,9 +79,9 @@ export class AppComponent implements OnInit {
   }
 
   goToConfiguration() {
+    this._router.navigate([LOADER_VIEW]);
     this._dataBusService.confBtnIcon.next("");
     if (this._router.url.endsWith(CONFIGURATION_VIEW)) {
-      this._router.navigate([LOADER_VIEW]);
       this.loadEnvs();
     } else {
       this._router.navigate([CONFIGURATION_VIEW]);

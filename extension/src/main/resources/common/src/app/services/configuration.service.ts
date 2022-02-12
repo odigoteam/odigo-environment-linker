@@ -12,17 +12,17 @@ import packageJson from "../../../package.json";
 export class ConfigurationService {
   readonly storeKey: string = 'odigoEnvLinker';
   private _configuration: Settings;
-  public appVersion: string = packageJson.version;
 
   constructor(private _storage: StorageService,
               private http: HttpClient) {
     this._configuration = new Settings();
-    this._configuration.currentExtensionVersion = this.appVersion;
+    this._configuration.currentExtensionVersion = packageJson.version;
   }
 
   loadConfiguration(callback: any): void {
     this._storage.get(this.storeKey).then((data: any) => {
       this._configuration = { ...this._configuration, ...data.odigoEnvLinker };
+      this._configuration.currentExtensionVersion = packageJson.version;
       callback();
     });
   }
@@ -32,7 +32,7 @@ export class ConfigurationService {
   }
 
   save(): void {
-    this._configuration.config.latestExtensionVersionUsed = this.appVersion;
+    this._configuration.config.latestExtensionVersionUsed = packageJson.version;
     this._storage.set({odigoEnvLinker : this._configuration});
   }
 
