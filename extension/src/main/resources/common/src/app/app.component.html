@@ -1,10 +1,17 @@
 <div class="container-flex mb-3">
   <div class="row">
-    <div class="col">
+    <div class="col-6">
       <div class="float-start" id="logo">environments</div>
-      <button type="button" class="btn btn-primary float-end" aria-label="Configure" (click)="goToConfiguration()" *ngIf="!!icon">
-        <i class="bi bi-{{icon}}"></i>
-      </button>
+    </div>
+    <div class="col-6" *ngIf="!!icon">
+      <div class="float-end">
+        <button type="button" class="btn btn-link-primary" style="margin-right: 5px" aria-label="About" (click)="goToAbout()">
+          <i class="bi bi-question-circle"></i>
+        </button>
+        <button type="button" class="btn btn-primary" aria-label="Configure" (click)="goToConfiguration()">
+          <i class="bi bi-{{icon}}"></i>
+        </button>
+      </div>
     </div>
   </div>
 </div>

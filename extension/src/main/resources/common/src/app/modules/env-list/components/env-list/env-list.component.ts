@@ -68,13 +68,12 @@ export class EnvListComponent implements OnInit {
         break;
     }
 
-    if(env.logo.endsWith("roROhcV3Mjv+RWlIxJHHfX/DnyPH4+X9PYAAAAASUVORK5CYII=") &&
-      this.userOptions.darkTheme) {
-      env.logo = "odigo-white.png";
-    } else if(env.logo === "images/odigo-white.png" && !this.userOptions.darkTheme) {
-      env.logo = "odigo-dark.png";
-    } else if(env.logo === "images/odigo-dark.png" && this.userOptions.darkTheme) {
-      env.logo = "odigo-white.png";
+    if(env.logo.indexOf("oROhcV3Mjv+RWlIxJHHfX/DnyPH4+X9PYAAAAASUVORK5CYII=") > 0 && this.userOptions.darkTheme) {
+      env.logo = "assets/images/odigo-white.png";
+    } else if(env.logo === "assets/images/odigo-white.png" && !this.userOptions.darkTheme) {
+      env.logo = "assets/images/odigo-dark.png";
+    } else if(env.logo === "assets/images/odigo-dark.png" && this.userOptions.darkTheme) {
+      env.logo = "assets/images/odigo-white.png";
     }
 
     Object.entries(env.urls).forEach(([key, value]) => {

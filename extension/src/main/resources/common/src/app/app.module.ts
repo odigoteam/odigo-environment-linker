@@ -11,11 +11,13 @@ import {EnvListModule} from "./modules/env-list/env-list.module";
 import {LoaderModule} from "./modules/loader/loader.module";
 import {ReleaseNoteModule} from "./modules/release-note/release-note.module";
 import { MessageViewComponent } from './modules/message/message-view/message-view.component';
+import { AboutViewComponent } from './modules/about/about-view/about-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MessageViewComponent
+    MessageViewComponent,
+    AboutViewComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

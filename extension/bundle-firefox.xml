@@ -3,7 +3,7 @@
         <echo message="BUILD FIREFOX EXTENSION"/>
         <echo message="Copy resources"/>
         <copy todir="${project.build.directory}/firefox" encoding="UTF-8" outputencoding="UTF-8">
-            <fileset dir="src/main/resources/common/dist/odigo-environment-linker"/>
+            <fileset dir="src/main/resources/common/dist"/>
         </copy>
 
         <echo message="Copy manifest"/>

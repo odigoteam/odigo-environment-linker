@@ -73,7 +73,7 @@
 							<executable>npm</executable>
 							<arguments>
 								<argument>run</argument>
-								<argument>build-prod</argument>
+								<argument>build-${build.profile}</argument>
 							</arguments>
 						</configuration>
 					</execution>
