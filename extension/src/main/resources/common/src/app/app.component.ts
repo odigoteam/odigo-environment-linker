@@ -63,8 +63,18 @@ export class AppComponent implements OnInit {
   }
 
   goToAbout() {
-    this._router.navigate([ABOUT_VIEW]);
     this._dataBusService.confBtnIcon.next("toggles");
+    if (this._router.url !== "/" + ABOUT_VIEW) {
+      this._dataBusService.put(ABOUT_VIEW, this._router.url);
+      this._router.navigate([ABOUT_VIEW]);
+    } else {
+      let route = this._dataBusService.pop(ABOUT_VIEW);
+      if(route) {
+        this._router.navigateByUrl(route);
+      } else {
+        this._router.navigateByUrl(ENV_VIEW);
+      }
+    }
   }
 
   goToConfiguration() {

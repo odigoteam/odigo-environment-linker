@@ -1,33 +1,20 @@
 export const environment = {
   production: false,
+  githubUrl: "https://github.com/guitaro/odigo-environment-linker/tree/master",
+  issueUrl: "https://github.com/guitaro/odigo-environment-linker/issues",
+  slackUrl: "https://odigo.slack.com/team/UHQ0QQSBT",
   releaseNote: {
     title: "I got the power ! <i class=\"bi bi-lightning-charge-fill\"></i>\n",
     features: [
       {
-        shortDesc: "Rewrite plugin in Angular 13",
-        longDesc: "Improve structure and architecture for a better project adaptability, Angular will boost the future releases developments and minimize bugs creation with a collection of well-integrated libraries that cover a wide variety of functionality including routing, form handling, client-server communication, and more"
-      },
-      {
-        shortDesc: "New design",
-        longDesc: "For this major improvement, I hope you will like that new design!"
-      },
-      {
-        shortDesc: "Configuration screen design reworked",
-        longDesc: "As we have more and more customisable options, the configuration screen was rework to be clearer and more organised by introducing tabs."
+        shortDesc: "Add Credit view",
+        longDesc: "All information about this extension all sumed up in one view ! You'll find in it : <br/><ul><li>the extension version</li><li>build number</li>" +
+          "<li>the used technologies and their versions</li><li>link to sources</li><li>Issue reporting link</li></ul>"
       }
     ],
     bugfixes: [
       {
-        desc: "SSH slave link: fixed issue on configuration file generation side",
-      },
-      {
-        desc: "AWS switch button : close extension popup after clicking on AWS switch button."
-      },
-      {
-        desc: "Wrong url error message : got VPN error message if configuration url was wrong."
-      },
-      {
-        desc: "'All' version : 'All' option is not checked at first launch in version filters dropdown."
+        desc: "None"
       }
     ]
   }

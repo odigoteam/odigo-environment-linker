@@ -1,0 +1,17 @@
+.about-part-top {
+  height: 150px;
+}
+
+.about-part-bottom .btn {
+  font-size: inherit;
+}
+
+.angular-logo {
+  height: 25px;
+  width: 25px;
+}
+
+.bootstrap-version-number {
+  line-height: 37px;
+  vertical-align: top;
+}

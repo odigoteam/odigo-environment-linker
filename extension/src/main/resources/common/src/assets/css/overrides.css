@@ -113,6 +113,11 @@ h1, h2, h3, h4, h5 {
   color: white;
 }
 
+.btn-link {
+  color: var(--color-accent);
+  text-decoration: dotted;
+}
+
 .dropdown-item {
   padding: 0 1rem;
 }

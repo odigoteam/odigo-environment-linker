@@ -1,4 +1,5 @@
 .idea
 *.iml
 configuration.json
+**/git-version.json
 target/

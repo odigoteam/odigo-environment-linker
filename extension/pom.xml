@@ -44,6 +44,20 @@
 							</arguments>
 						</configuration>
 					</execution>
+					<execution>
+						<id>Generate git-version.json</id>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<phase>initialize</phase>
+						<configuration>
+							<executable>npm</executable>
+							<arguments>
+								<argument>run</argument>
+								<argument>git-info</argument>
+							</arguments>
+						</configuration>
+					</execution>
 					<!-- Required: The following will ensure `npm install` is called
 						 before anything else during the 'Clean Lifecycle' -->
 					<execution>

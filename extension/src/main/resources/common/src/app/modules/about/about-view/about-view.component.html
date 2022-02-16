@@ -1,5 +1,44 @@
 <div class="container">
+  <div class="row align-items-end about-part-top">
+    <div class="col text-center">
+      <span class="h1">Odigo Environment Linker</span>
+    </div>
+  </div>
+  <div class="row align-items-end mt-5">
+    <div class="col">
+      <span class="h2">Version {{appVersion}}</span>
+    </div>
+    <div class="col text-end small text-muted fst-italic">
+      <small>Developed with <i class="bi bi-heart-fill"></i> by <a class="btn btn-link" (click)="openSlackLink()" title="Slack profile" style="padding: 0; font-size: .875em;">L&eacute;vent&eacute; NAGY</a></small>
+    </div>
+  </div>
   <div class="row">
-    <div class="col">Version:</div>
+    <div class="col">
+      <hr/>
+    </div>
+  </div>
+  <div class="row about-part-bottom">
+    <div class="col">
+      <span class="h3">Build </span> {{gitVersion}}
+    </div>
+    <div class="col">
+      <span class="h3"><img src="assets/images/angular.png" alt="Angular" class="angular-logo"></span> {{angularVersion}}
+    </div>
+    <div class="col">
+      <span class="h2"><i class="bi bi-bootstrap"></i></span><span class="bootstrap-version-number"> {{bootstrapVersion}}</span>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col text-end">
+      <span class="h2 small"><a (click)="openGithubLink()" class="btn btn-link" title="View sources">View sources <i class="bi bi-github"></i></a></span>
+    </div>
+    <div class="col text-start">
+      <span class="h2 small"><a (click)="openIssueLink()" class="btn btn-link" title="View sources"><i class="bi bi-bug"></i> Report issue</a></span>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col text-center">
+      <button class="btn btn-primary" title="View sources" (click)="closeAboutView()">OK</button>
+    </div>
   </div>
 </div>
