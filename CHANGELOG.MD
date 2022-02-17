@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - About view
 - CHANGELOG.md
+### Changed
+- Rewording : external links -> public links
+- Redesign configuration view
+- replace X icon on configuration view by Save icon
 
 ## [4.0.0] <font size="2">*- 2022-02-14*</font>
 ### Changed

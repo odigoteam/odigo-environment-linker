@@ -1,5 +1,5 @@
 .config-subpart {
-  height: 387px;
+  height: 497px;
   overflow-x: hidden;
   border: 1px solid var(--color-primary);
   background-color: var(--card-bg-color);
@@ -99,7 +99,7 @@ div.conf-tab-menu div.list-group > a.active:after {
 }
 
 div.conf-tab-content {
-  height: 385px;
+  height: 495px;
   padding-left: 20px;
   padding-top: 10px;
   color: #2a3045;
@@ -110,4 +110,9 @@ div.conf-tab {
 }
 div.conf-tab div.conf-tab-content:not(.active) {
   display: none;
+}
+
+/************ OVERRIDING *************/
+.bi {
+  font-size: 1.5em;
 }

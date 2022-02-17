@@ -8,8 +8,9 @@
         <button type="button" class="btn btn-link-primary" style="margin-right: 5px" aria-label="About" (click)="goToAbout()">
           <i class="bi bi-question-circle"></i>
         </button>
-        <button type="button" class="btn btn-primary" aria-label="Configure" (click)="goToConfiguration()">
-          <i class="bi bi-{{icon}}"></i>
+        <button type="button" class="btn btn-primary confButton" aria-label="Configure" (click)="goToConfiguration()">
+          <i class="bi bi-save2" *ngIf="icon === 'save'"></i>
+          <i class="bi bi-toggles" *ngIf="icon === 'configuration' || icon === ''"></i>
         </button>
       </div>
     </div>

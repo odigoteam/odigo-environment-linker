@@ -14,7 +14,7 @@ import {MessageViewContent} from "./modules/message/message-view/message-view.co
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  icon: string = "";
+  icon: string = "configuration";
 
   constructor(private _router: Router,
               private _configurationService: ConfigurationService,
@@ -63,7 +63,7 @@ export class AppComponent implements OnInit {
   }
 
   goToAbout() {
-    this._dataBusService.confBtnIcon.next("toggles");
+    this._dataBusService.confBtnIcon.next("configuration");
     if (this._router.url !== "/" + ABOUT_VIEW) {
       this._dataBusService.put(ABOUT_VIEW, this._router.url);
       this._router.navigate([ABOUT_VIEW]);

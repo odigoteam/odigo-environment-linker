@@ -12,7 +12,7 @@ import {DataBusService} from "../../../../services/data-bus.service";
 })
 export class ConfViewComponent {
   public appVersion: string = packageJson.version;
-  activeTab: string = "behaviour";
+  activeTab: string = "configuration";
   configUrl: string = "";
   errorMessage: string = "&nbsp;";
   userConfiguration: UserConfiguration = new UserConfiguration();
@@ -22,7 +22,7 @@ export class ConfViewComponent {
               @Inject(DOCUMENT) private _document: Document) {
     this.userConfiguration = this._configurationService.configuration.config;
     this.configUrl = this._configurationService.configuration.config.confURL;
-    this._dataBusService.confBtnIcon.next("x-lg");
+    this._dataBusService.confBtnIcon.next("save");
   }
 
   saveConfig(): void {

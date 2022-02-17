@@ -17,7 +17,7 @@ export class EnvViewComponent implements OnInit {
               private _environmentsService: EnvironmentsService,
               private _dataBusService: DataBusService) {
     this.userConf = this._configurationService.configuration.config;
-    this._dataBusService.confBtnIcon.next("toggles");
+    this._dataBusService.confBtnIcon.next("configuration");
     this._configurationService.configuration.supportedOccVersions.forEach(version => {
       this.supportedVersions.push({
         version: version,

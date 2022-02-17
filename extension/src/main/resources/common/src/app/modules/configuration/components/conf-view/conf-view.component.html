@@ -2,31 +2,44 @@
   <form>
     <div class="row">
       <div class="col">
-        <div class="form-group">
-          <h4><label for="configURL" class="form-label">Configuration URL</label></h4>
-          <input type="text" class="form-control" name="configURL" id="configURL" aria-describedby="configURL"
-                 placeholder="Enter the configuration URL" (keyup)="checkConfigUrl()" [(ngModel)]="configUrl">
-          <small class="form-text text-danger" [innerHTML]="errorMessage"></small>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
         <div class="config-subpart conf-tab-container">
           <div class="row">
             <div class="col-3 conf-tab-menu">
               <div class="list-group">
+                <a class="list-group-item text-center" [ngClass]="activeTab === 'configuration' ? 'active' : ''" (click)="navTab('configuration')">
+                  <i class="bi bi-gear"></i><br/>General
+                </a>
                 <a class="list-group-item text-center" [ngClass]="activeTab === 'behaviour' ? 'active' : ''" (click)="navTab('behaviour')">
-                  <i class="bi bi-boxes" style="font-size: 1.5em"></i><br/>Behaviour
+                  <i class="bi bi-boxes"></i><br/>Behaviour
                 </a>
                 <a class="list-group-item text-center" [ngClass]="activeTab === 'appearance' ? 'active' : ''" (click)="navTab('appearance')">
-                  <i class="bi bi-palette-fill" style="font-size: 1.5em"></i><br/>Appearance
+                  <i class="bi bi-palette-fill"></i><br/>Appearance
                 </a>
               </div>
             </div>
             <div class="col-9 conf-tab">
-              <!-- Behaviour section -->
-              <div class="conf-tab-content scrollbar" [ngClass]="activeTab === 'behaviour' ? 'active' : ''">
+              <!-- Configuration section -->
+              <div class="conf-tab-content scrollbar" [ngClass]="activeTab === 'configuration' ? 'active' : ''">
+                <div class="row mt-2">
+                  <div class="col-12">
+                    <h5>Configuration URL</h5>
+                  </div>
+                  <div class="col-2 offset-1">
+                    <label class="form-check-label"
+                           style="line-height: 38px; vertical-align: middle;" for="awsRole"
+                           data-toggle="tooltip"
+                           title="Enter the role which will be used to open the AWS Console.">
+                      URL :
+                    </label>
+                  </div>
+                  <div class="col-8">
+                    <div class="form-group">
+                      <input type="text" class="form-control" name="configURL" id="configURL" aria-describedby="configURL"
+                             placeholder="Enter the configuration URL" (keyup)="checkConfigUrl()" [(ngModel)]="configUrl">
+                      <small class="form-text text-danger" [innerHTML]="errorMessage"></small>
+                    </div>
+                  </div>
+                </div>
                 <div class="row">
                   <div class="col-12">
                     <h5>AWS</h5>
@@ -39,11 +52,14 @@
                       Role :
                     </label>
                   </div>
-                  <div class="col-7">
+                  <div class="col-8">
                     <input class="form-control" name="awsRole" id="awsRole" type="text" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.aws.role">
                     <small id="awsRoleError" class="form-text text-danger">&nbsp;</small>
                   </div>
                 </div>
+              </div>
+              <!-- Behaviour section -->
+              <div class="conf-tab-content scrollbar" [ngClass]="activeTab === 'behaviour' ? 'active' : ''">
                 <div class="row mt-2">
                   <div class="col-12">
                     <h5>Links</h5>
@@ -68,13 +84,13 @@
                     </select>
                   </div>
                 </div>
-                <div class="row">
+                <div class="row mt-3">
                   <div class="col-4 offset-1">
                       <label class="form-check-label"
                              data-toggle-second="tooltip"
                              data-toggle="tooltip"
                              title="If disabled, only internal links are displayed.">
-                        External links
+                        Public links
                       </label>
                   </div>
                   <div class="col-6">
@@ -204,7 +220,7 @@
                     <h5>Theme</h5>
                   </div>
                 </div>
-                <div class="row mb-5">
+                <div class="row">
                   <div class="col-11 offset-1">
                     <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" name="themeSelector" id="themeSelector" (change)="applyTheme()" [(ngModel)]="this.userConfiguration.options.darkTheme">
@@ -220,9 +236,6 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="float-end small-info">
-      {{appVersion}}
     </div>
   </form>
 </div>
