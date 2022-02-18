@@ -15,6 +15,7 @@ import {MessageViewContent} from "./modules/message/message-view/message-view.co
 })
 export class AppComponent implements OnInit {
   icon: string = "configuration";
+  confButtonDisabled: boolean = false;
 
   constructor(private _router: Router,
               private _configurationService: ConfigurationService,
@@ -23,6 +24,7 @@ export class AppComponent implements OnInit {
               private _dataBusService: DataBusService,
               @Inject(DOCUMENT) private _document: Document) {
     _dataBusService.confBtnIcon.subscribe(value => this.icon = value);
+    _dataBusService.confBtnDisabled.subscribe(value => this.confButtonDisabled = value);
   }
 
   ngOnInit(): void {
@@ -45,20 +47,29 @@ export class AppComponent implements OnInit {
 
       this._awsRoleSwitcherService.initializeSwitcher();
 
-      let validation = this._configurationService.validateConfigURL(this._configurationService.configuration.config.confURL);
-      if (validation.hasError) {
-        this._dataBusService.put(MESSAGE_VIEW, this.buildWrongConfUrlMessage(validation.message));
-        this._router.navigate([MESSAGE_VIEW]);
-        return;
-      }
+      this._configurationService.validateConfigURL(this._configurationService.configuration.config.confURL).subscribe(
+        next => {
+          if (next.hasError) {
+            this._dataBusService.put(MESSAGE_VIEW, this.buildWrongConfUrlMessage(next.message));
+            this._router.navigate([MESSAGE_VIEW]);
+            return;
+          }
 
-      if(!this._configurationService.configuration.config.latestExtensionVersionUsed ||
-        this._configurationService.configuration.config.latestExtensionVersionUsed !== this._configurationService.configuration.currentExtensionVersion) {
-        this._router.navigate([RELEASE_NOTE_VIEW]);
-        return;
-      }
+          if(!this._configurationService.configuration.config.latestExtensionVersionUsed ||
+            this._configurationService.configuration.config.latestExtensionVersionUsed !== this._configurationService.configuration.currentExtensionVersion) {
+            this._router.navigate([RELEASE_NOTE_VIEW]);
+            return;
+          }
 
-      this.loadEnvs();
+          this.loadEnvs();
+        },
+        error => {
+          if (error.hasError) {
+            this._dataBusService.put(MESSAGE_VIEW, this.buildWrongConfUrlMessage(error.message));
+            this._router.navigate([MESSAGE_VIEW]);
+            return;
+          }
+        });
     });
   }
 

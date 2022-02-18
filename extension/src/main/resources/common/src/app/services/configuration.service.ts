@@ -3,7 +3,7 @@ import {Settings} from "../models/settings.class";
 import {StorageService} from "./storage.service";
 import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Environments} from "../models/environments.class";
-import {Observable} from "rxjs";
+import {catchError, Observable, tap} from "rxjs";
 import packageJson from "../../../package.json";
 
 @Injectable({
@@ -36,30 +36,53 @@ export class ConfigurationService {
     this._storage.set({odigoEnvLinker : this._configuration});
   }
 
-  validateConfigURL(value: string): any {
-    let hasError = false;
-    let message = "";
-    let confURL = value;
-    if (confURL && confURL !== "" ) {
-      if (confURL.indexOf("https://") === 0) {
-        if (!confURL.match("https:\/\/.+\/raw\/(master|develop)\/configuration\.json")) {
-          hasError = true;
-          message = "The URL must end with '/raw/master/configuration.json'.";
+  validateConfigURL(value: string): Observable<any> {
+    return new Observable<any>( observer => {
+      let hasError = false;
+      let message = "";
+      let confURL = value;
+      if (confURL && confURL !== "" ) {
+        if (confURL.indexOf("https://") === 0) {
+          if (!confURL.match("https:\/\/.+\/raw\/(master|develop)\/configuration\.json")) {
+            hasError = true;
+            message = "The URL must end with '/raw/master/configuration.json'.";
+          } else {
+            this._configuration.config.confURL = confURL;
+          }
         } else {
-          this._configuration.config.confURL = confURL;
+          hasError = true;
+          message = "The URL must start by 'https://'.";
         }
       } else {
         hasError = true;
-        message = "The URL must start by 'https://'.";
+        message = "URL cannot be empty.";
       }
-    } else {
-      hasError = true;
-      message = "URL cannot be empty.";
-    }
-    return {
-      hasError,
-      message
-    };
+      if(hasError) {
+        observer.error({
+          hasError,
+          message
+        });
+      } else {
+        this.http.get<Environments>(value, {observe: 'response', responseType: 'json'}).subscribe(
+          (response) => {
+            observer.next({
+              hasError: false,
+              message: response.statusText
+            });                       //Next callback
+          },
+          (error) => {
+            console.error(error);
+            observer.error({
+              hasError: true,
+              message: "Oops... Your URL is invalid. Please check it."
+            });                   //Error callback
+          },
+          () => {
+            observer.complete();
+          }
+        );
+      }
+    });
   }
 
   public get configuration() {

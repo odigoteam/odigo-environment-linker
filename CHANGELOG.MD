@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rewording : external links -> public links
 - Redesign configuration view
 - replace X icon on configuration view by Save icon
+- Small infos on configuration options to explain each options
+### Fixed
+- Control on URL validity by send a GET request with it
 
 ## [4.0.0] <font size="2">*- 2022-02-14*</font>
 ### Changed

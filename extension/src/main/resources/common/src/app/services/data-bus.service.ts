@@ -8,6 +8,7 @@ export class DataBusService {
   readonly _dataMap: any;
 
   confBtnIcon = new Subject<string>();
+  confBtnDisabled = new Subject<boolean>();
 
   constructor() {
     this._dataMap = new Map();

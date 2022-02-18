@@ -4,6 +4,7 @@ import {ConfigurationService} from "../../../../services/configuration.service";
 import {UserConfiguration} from "../../../../models/settings.class";
 import {DOCUMENT} from "@angular/common";
 import {DataBusService} from "../../../../services/data-bus.service";
+import {catchError, tap} from "rxjs";
 
 @Component({
   selector: 'conf-view',
@@ -24,6 +25,7 @@ export class ConfViewComponent {
     this.userConfiguration = this._configurationService.configuration.config;
     this.configUrl = this._configurationService.configuration.config.confURL;
     this._dataBusService.confBtnIcon.next("save");
+    this._dataBusService.confBtnDisabled.next(false);
   }
 
   saveConfig(): void {
@@ -42,11 +44,21 @@ export class ConfViewComponent {
   }
 
   checkConfigUrl() {
-    let validation = this._configurationService.validateConfigURL(this.configUrl);
-    this.confUrlErrorMessage = validation.message;
-    if(!validation.hasError) {
-      this.saveConfig();
-    }
+    this.confUrlErrorMessage = "";
+    this._configurationService.validateConfigURL(this.configUrl).subscribe(
+      next => {
+        if (next.hasError) {
+          this._dataBusService.confBtnDisabled.next(true);
+          this.confUrlErrorMessage = next.message;
+        } else {
+          this._dataBusService.confBtnDisabled.next(false);
+          this.saveConfig();
+        }
+      },
+      error => {
+        this._dataBusService.confBtnDisabled.next(true);
+        this.confUrlErrorMessage = error.message;
+      });
   }
 
   checkAwsRole() {
@@ -60,6 +72,7 @@ export class ConfViewComponent {
     }
     this.awsRoleErrorMessage = validation.message;
     if(!validation.hasError) {
+      this.awsRoleErrorMessage = "";
       this.saveConfig();
     }
   }
