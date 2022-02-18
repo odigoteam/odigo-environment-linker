@@ -38,7 +38,7 @@ export class ConfigurationService {
 
   validateConfigURL(value: string): any {
     let hasError = false;
-    let message = "&nbsp;";
+    let message = "";
     let confURL = value;
     if (confURL && confURL !== "" ) {
       if (confURL.indexOf("https://") === 0) {

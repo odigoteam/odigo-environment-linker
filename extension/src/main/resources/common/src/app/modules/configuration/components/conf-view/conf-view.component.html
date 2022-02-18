@@ -26,17 +26,18 @@
                   </div>
                   <div class="col-2 offset-1">
                     <label class="form-check-label"
-                           style="line-height: 38px; vertical-align: middle;" for="awsRole"
-                           data-toggle="tooltip"
-                           title="Enter the role which will be used to open the AWS Console.">
+                           style="line-height: 38px; vertical-align: middle;">
                       URL :
                     </label>
                   </div>
                   <div class="col-8">
                     <div class="form-group">
+                      <div>
                       <input type="text" class="form-control" name="configURL" id="configURL" aria-describedby="configURL"
                              placeholder="Enter the configuration URL" (keyup)="checkConfigUrl()" [(ngModel)]="configUrl">
-                      <small class="form-text text-danger" [innerHTML]="errorMessage"></small>
+                      <small class="form-text text-danger" [innerHTML]="confUrlErrorMessage" *ngIf="confUrlErrorMessage"></small>
+                      </div>
+                      <div class="conf-tips-info">This URL will provide the environments configuration and list.</div>
                     </div>
                   </div>
                 </div>
@@ -46,15 +47,16 @@
                   </div>
                   <div class="col-2 offset-1">
                     <label class="form-check-label"
-                           style="line-height: 38px; vertical-align: middle;" for="awsRole"
-                           data-toggle="tooltip"
-                           title="Enter the role which will be used to open the AWS Console.">
+                           style="line-height: 38px; vertical-align: middle;" for="awsRole">
                       Role :
                     </label>
                   </div>
                   <div class="col-8">
-                    <input class="form-control" name="awsRole" id="awsRole" type="text" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.aws.role">
-                    <small id="awsRoleError" class="form-text text-danger">&nbsp;</small>
+                    <div>
+                      <input class="form-control" name="awsRole" id="awsRole" type="text" (keyup)="checkAwsRole()" [(ngModel)]="this.userConfiguration.options.aws.role">
+                      <small class="form-text text-danger" [innerHTML]="awsRoleErrorMessage" *ngIf="awsRoleErrorMessage"></small>
+                    </div>
+                    <div class="conf-tips-info">This role will be used to switch on the AWS Console for an environment.</div>
                   </div>
                 </div>
               </div>
@@ -68,50 +70,51 @@
                 <div class="row">
                   <div class="col-4 offset-1">
                     <label class="form-check-label"
-                           style="line-height: 38px; vertical-align: middle;" for="cmdbFileType"
-                           data-toggle="tooltip"
-                           title="Select the file type to open with configuration links (CMDB).">
+                           style="line-height: 38px; vertical-align: middle;" for="cmdbFileType">
                       CMDB file type :
                     </label>
                   </div>
-                  <div class="col-4">
-                    <select class="form-select" aria-label="Type file type" name="cmdbFileType" id="cmdbFileType" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.cmdbFileType">
-                      <option value=".env" selected>.env</option>
-                      <option value=".properties">.properties</option>
-                      <option value=".sh">.sh</option>
-                      <option value=".yml">.yml</option>
-                      <option value=".xml">.xml</option>
-                    </select>
+                  <div class="col-6">
+                    <div>
+                      <select class="form-select" aria-label="Type file type" name="cmdbFileType" id="cmdbFileType" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.cmdbFileType">
+                        <option value=".env" selected>.env</option>
+                        <option value=".properties">.properties</option>
+                        <option value=".sh">.sh</option>
+                        <option value=".yml">.yml</option>
+                        <option value=".xml">.xml</option>
+                      </select>
+                    </div>
+                    <div class="conf-tips-info">Choose your preferred file type associated with CMDB links.</div>
                   </div>
                 </div>
                 <div class="row mt-3">
                   <div class="col-4 offset-1">
-                      <label class="form-check-label"
-                             data-toggle-second="tooltip"
-                             data-toggle="tooltip"
-                             title="If disabled, only internal links are displayed.">
+                      <label class="form-check-label">
                         Public links
                       </label>
                   </div>
                   <div class="col-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" name="showExternalLinks" id="showExternalLinks" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.externalLinks">
+                    <div>
+                      <div  class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" name="showExternalLinks" id="showExternalLinks" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.externalLinks">
+                      </div>
                     </div>
+                    <div class="conf-tips-info">Display internal and public links or only internal links.</div>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-4 offset-1">
-                    <label class="form-check-label"
-                           style="line-height: 38px; vertical-align: middle;"
-                           data-toggle="tooltip"
-                           title="Turn on links which will be displayed per environments.">
-                      Displayed links :
-                    </label>
+                    <div>
+                      <label class="form-check-label"
+                             style="line-height: 38px; vertical-align: middle;">
+                        Displayed links :
+                      </label>
+                    </div>
+                    <div class="conf-tips-info">Choose which links you wish to show per environments.</div>
                   </div>
                   <div class="col-6 mt-2">
                     <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" name="displayAWSConsole" id="displayAWSConsole" data-toggle="tooltip" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.aws"
-                             title="You  have to be logged in your AWS account to use this feature. Else, the AWS button will be disabled.">
+                      <input class="form-check-input" type="checkbox" name="displayAWSConsole" id="displayAWSConsole" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.aws">
                       <label class="form-check-label" for="displayAWSConsole">AWS Console</label>
                     </div>
                     <div class="form-check form-switch">
@@ -155,15 +158,18 @@
                 </div>
                 <div class="row mb-5">
                   <div class="col-4 offset-1">
-                    <label class="form-check-label"
-                           data-toggle="tooltip"
-                           title="Extended search will match all environments by matching the nearest results with input sequence by keeping characters order.<br/><br/>For example:<br/>input : ABC<br/>match : LBP01 (l<u>a</u> <u>b</u>anque postale finan<u>c</u>ement)">
+                    <label class="form-check-label">
                       Extended search
                     </label>
                   </div>
                   <div class="col-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" name="useExtendedSearch" id="useExtendedSearch" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.extendedSearch">
+                    <div>
+                      <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" name="useExtendedSearch" id="useExtendedSearch" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.extendedSearch">
+                      </div>
+                    </div>
+                    <div class="conf-tips-info">
+                      Extended search will match all environments by matching the nearest results with input sequence by keeping characters order ("ABC" will match "l<b><u>a</u></b> <b><u>b</u></b>anque postale finan<b><u>c</u></b>ement")
                     </div>
                   </div>
                 </div>
@@ -172,14 +178,14 @@
               <div class="conf-tab-content scrollbar" [ngClass]="activeTab === 'appearance' ? 'active' : ''">
                 <div class="row mt-2">
                   <div class="col-12">
-                    <h5>Environments list</h5>
+                    <h5>Environment</h5>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-11 offset-1">
                     <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" name="displayLogo" id="displayLogo" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.logo">
-                      <label class="form-check-label" for="displayLogo">Logo</label>
+                      <label class="form-check-label" for="displayLogo">Client logo</label>
                     </div>
                     <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" name="displayClientName" id="displayClientName" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.clientName">
@@ -206,13 +212,15 @@
                 </div>
                 <div class="row">
                   <div class="col-11 offset-1">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" name="showOnlyLinksIcons" id="showOnlyLinksIcons" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.onlyIcons">
-                      <label class="form-check-label" for="showOnlyLinksIcons" data-toggle="tooltip"
-                             title="If enabled, only icons are displayed.">
-                        Only icons
-                      </label>
+                    <div>
+                      <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" name="showOnlyLinksIcons" id="showOnlyLinksIcons" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.onlyIcons">
+                        <label class="form-check-label" for="showOnlyLinksIcons">
+                          Horizontal icon bar
+                        </label>
+                      </div>
                     </div>
+                    <div class="conf-tips-info">Only icons will be displayed for each links.</div>
                   </div>
                 </div>
                 <div class="row">
@@ -222,13 +230,15 @@
                 </div>
                 <div class="row">
                   <div class="col-11 offset-1">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" name="themeSelector" id="themeSelector" (change)="applyTheme()" [(ngModel)]="this.userConfiguration.options.darkTheme">
-                      <label class="form-check-label" for="themeSelector" data-toggle="tooltip"
-                             title="Switch between light theme and dark theme.">
-                        Dark theme
-                      </label>
+                    <div>
+                      <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" name="themeSelector" id="themeSelector" (change)="applyTheme()" [(ngModel)]="this.userConfiguration.options.darkTheme">
+                        <label class="form-check-label" for="themeSelector">
+                          Dark theme
+                        </label>
+                      </div>
                     </div>
+                    <div class="conf-tips-info">A dark theme from the dark side. <img alt="" src="assets/images/dark-vador.png" class="dark-vador-img"></div>
                   </div>
                 </div>
               </div>

@@ -37,7 +37,7 @@
 /*  conf tab */
 div.conf-tab-container {
   z-index: 10;
-  background-color: rgba(255,255,255,0.7);
+  background-color: rgba(255,255,255,0.9);
   border: 1px solid #ddd;
   background-clip: padding-box;
   opacity: 0.97;
@@ -110,6 +110,18 @@ div.conf-tab {
 }
 div.conf-tab div.conf-tab-content:not(.active) {
   display: none;
+}
+
+.conf-tips-info {
+  width: 100%;
+  font-size: smaller;
+  font-style: italic;
+  color: rgba(155, 155, 155, 1);
+}
+
+.dark-vador-img {
+  width: 30px;
+  height: 30px;
 }
 
 /************ OVERRIDING *************/

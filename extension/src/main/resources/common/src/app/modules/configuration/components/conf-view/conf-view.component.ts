@@ -14,7 +14,8 @@ export class ConfViewComponent {
   public appVersion: string = packageJson.version;
   activeTab: string = "configuration";
   configUrl: string = "";
-  errorMessage: string = "&nbsp;";
+  confUrlErrorMessage: string = "";
+  awsRoleErrorMessage: string = "";
   userConfiguration: UserConfiguration = new UserConfiguration();
 
   constructor(private _configurationService: ConfigurationService,
@@ -42,7 +43,22 @@ export class ConfViewComponent {
 
   checkConfigUrl() {
     let validation = this._configurationService.validateConfigURL(this.configUrl);
-    this.errorMessage = validation.message;
+    this.confUrlErrorMessage = validation.message;
+    if(!validation.hasError) {
+      this.saveConfig();
+    }
+  }
+
+  checkAwsRole() {
+    let validation = {
+      hasError: false,
+      message: ""
+    };
+    if(!this.userConfiguration.options.aws.role) {
+      validation.hasError = true;
+      validation.message = "Role cannot be empty."
+    }
+    this.awsRoleErrorMessage = validation.message;
     if(!validation.hasError) {
       this.saveConfig();
     }
