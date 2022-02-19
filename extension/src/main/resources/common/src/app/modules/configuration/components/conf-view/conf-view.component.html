@@ -25,19 +25,29 @@
                     <h5>Configuration URL</h5>
                   </div>
                   <div class="col-2 offset-1">
-                    <label class="form-check-label"
-                           style="line-height: 38px; vertical-align: middle;">
+                    <label class="form-check-label" style="line-height: 38px; vertical-align: middle;">
                       URL :
                     </label>
                   </div>
                   <div class="col-8">
                     <div class="form-group">
                       <div>
-                      <input type="text" class="form-control" name="configURL" id="configURL" aria-describedby="configURL"
-                             placeholder="Enter the configuration URL" (keyup)="checkConfigUrl()" [(ngModel)]="configUrl">
-                      <small class="form-text text-danger" [innerHTML]="confUrlErrorMessage" *ngIf="confUrlErrorMessage"></small>
+                        <div class="input-group">
+                          <input type="text" class="form-control" name="configURL" id="configURL" aria-label="configuration url" aria-describedby="configuration-url"
+                                 placeholder="https://..." (keyup)="checkConfigUrl()" [(ngModel)]="configUrl">
+                          <div class="input-group-append">
+                            <span class="input-group-text" id="configuration-url">
+                              <i class="bi bi-circle" *ngIf="urlCheckState === ''"></i>
+                              <img src="assets/images/loader.gif" alt="Wait..." style="height: 36px; width: 36px" *ngIf="urlCheckState === 'pending'">
+                              <i class="bi bi-check-circle text-success" *ngIf="urlCheckState === 'success'"></i>
+                              <i class="bi bi-exclamation-circle text-warning" *ngIf="urlCheckState === 'warning'"></i>
+                              <i class="bi bi-x-circle text-danger" *ngIf="urlCheckState === 'error'"></i>
+                            </span>
+                          </div>
+                        </div>
+                        <small class="form-text text-danger" [innerHTML]="confUrlErrorMessage" *ngIf="confUrlErrorMessage"></small>
                       </div>
-                      <div class="conf-tips-info">This URL will provide the environments configuration and list.</div>
+                      <div class="conf-tips-info">This URL will provide the environments configuration and list. Without that, this extension is useless!</div>
                     </div>
                   </div>
                 </div>
@@ -100,55 +110,6 @@
                       </div>
                     </div>
                     <div class="conf-tips-info">Display internal and public links or only internal links.</div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-4 offset-1">
-                    <div>
-                      <label class="form-check-label"
-                             style="line-height: 38px; vertical-align: middle;">
-                        Displayed links :
-                      </label>
-                    </div>
-                    <div class="conf-tips-info">Choose which links you wish to show per environments.</div>
-                  </div>
-                  <div class="col-6 mt-2">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" name="displayAWSConsole" id="displayAWSConsole" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.aws">
-                      <label class="form-check-label" for="displayAWSConsole">AWS Console</label>
-                    </div>
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" name="displayConfiguration" id="displayConfiguration" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.cmdb">
-                      <label class="form-check-label" for="displayConfiguration">Configuration (CMDB)</label>
-                    </div>
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" name="displayConsole" id="displayConsole" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.console">
-                      <label class="form-check-label" for="displayConsole">Console</label>
-                    </div>
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" name="displayHealthCheck" id="displayHealthCheck" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.healthCheck">
-                      <label class="form-check-label" for="displayHealthCheck">Health check</label>
-                    </div>
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" name="displayPortal" id="displayPortal" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.portal">
-                      <label class="form-check-label" for="displayPortal">Portal</label>
-                    </div>
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" name="displayPIF" id="displayPIF" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.pif">
-                      <label class="form-check-label" for="displayPIF">Private PaaS (PIF)</label>
-                    </div>
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" name="displayPEF" id="displayPEF" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.pef">
-                      <label class="form-check-label" for="displayPEF">Public PaaS (PEF)</label>
-                    </div>
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" name="displayRouting" id="displayRouting" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.routing">
-                      <label class="form-check-label" for="displayRouting">Routing</label>
-                    </div>
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" name="displaySsh" id="displaySsh" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.ssh">
-                      <label class="form-check-label" for="displaySsh">SSH</label>
-                    </div>
                   </div>
                 </div>
                 <div class="row mt-2">
@@ -221,6 +182,55 @@
                       </div>
                     </div>
                     <div class="conf-tips-info">Only icons will be displayed for each links.</div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-4 offset-1">
+                    <div>
+                      <label class="form-check-label"
+                             style="line-height: 38px; vertical-align: middle;">
+                        Show components :
+                      </label>
+                    </div>
+                    <div class="conf-tips-info">Choose which components you wish to show per environments.</div>
+                  </div>
+                  <div class="col-6 mt-2">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" name="displayAWSConsole" id="displayAWSConsole" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.aws">
+                      <label class="form-check-label" for="displayAWSConsole">AWS Console</label>
+                    </div>
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" name="displayConfiguration" id="displayConfiguration" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.cmdb">
+                      <label class="form-check-label" for="displayConfiguration">Configuration (CMDB)</label>
+                    </div>
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" name="displayConsole" id="displayConsole" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.console">
+                      <label class="form-check-label" for="displayConsole">Console</label>
+                    </div>
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" name="displayHealthCheck" id="displayHealthCheck" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.healthCheck">
+                      <label class="form-check-label" for="displayHealthCheck">Health check</label>
+                    </div>
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" name="displayPortal" id="displayPortal" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.portal">
+                      <label class="form-check-label" for="displayPortal">Portal</label>
+                    </div>
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" name="displayPIF" id="displayPIF" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.pif">
+                      <label class="form-check-label" for="displayPIF">Private PaaS (PIF)</label>
+                    </div>
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" name="displayPEF" id="displayPEF" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.pef">
+                      <label class="form-check-label" for="displayPEF">Public PaaS (PEF)</label>
+                    </div>
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" name="displayRouting" id="displayRouting" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.routing">
+                      <label class="form-check-label" for="displayRouting">Routing</label>
+                    </div>
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" name="displaySsh" id="displaySsh" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.ssh">
+                      <label class="form-check-label" for="displaySsh">SSH</label>
+                    </div>
                   </div>
                 </div>
                 <div class="row">

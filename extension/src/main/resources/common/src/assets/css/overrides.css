@@ -29,7 +29,6 @@ h1, h2, h3, h4, h5 {
 .form-control, .form-select {
     color: var(--font-color);
     background-color: var(--input-bg-color);
-    border: 1px solid var(--color-primary);
 }
 
 .form-control:focus, .form-select:focus {
@@ -39,6 +38,11 @@ h1, h2, h3, h4, h5 {
 
 .form-select, .form-select:focus {
   background-image: var(--select-arrow);
+}
+
+.input-group-text {
+  border-radius: 0 .25rem .25rem 0;
+  padding: 0 0.5rem;
 }
 
 .btn-group-vertical {

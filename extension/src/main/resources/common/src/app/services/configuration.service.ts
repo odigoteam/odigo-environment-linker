@@ -21,9 +21,10 @@ export class ConfigurationService {
 
   loadConfiguration(callback: any): void {
     this._storage.get(this.storeKey).then((data: any) => {
+      console.log(!!data.odigoEnvLinker)
       this._configuration = { ...this._configuration, ...data.odigoEnvLinker };
       this._configuration.currentExtensionVersion = packageJson.version;
-      callback();
+      callback(!!data.odigoEnvLinker);
     });
   }
 
@@ -74,7 +75,7 @@ export class ConfigurationService {
             console.error(error);
             observer.error({
               hasError: true,
-              message: "Oops... Your URL is invalid. Please check it."
+              message: "Oops... Your URL is invalid or your are disconnected from your VPN."
             });                   //Error callback
           },
           () => {

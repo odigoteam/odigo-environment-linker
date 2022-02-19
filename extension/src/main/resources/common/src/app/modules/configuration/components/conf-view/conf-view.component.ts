@@ -1,4 +1,4 @@
-import {Component, Inject } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import packageJson from '../../../../../../package.json';
 import {ConfigurationService} from "../../../../services/configuration.service";
 import {UserConfiguration} from "../../../../models/settings.class";
@@ -11,10 +11,11 @@ import {catchError, tap} from "rxjs";
   templateUrl: './conf-view.component.html',
   styleUrls: ['./conf-view.component.css']
 })
-export class ConfViewComponent {
+export class ConfViewComponent implements OnInit {
   public appVersion: string = packageJson.version;
   activeTab: string = "configuration";
   configUrl: string = "";
+  urlCheckState: string = "";
   confUrlErrorMessage: string = "";
   awsRoleErrorMessage: string = "";
   userConfiguration: UserConfiguration = new UserConfiguration();
@@ -26,6 +27,21 @@ export class ConfViewComponent {
     this.configUrl = this._configurationService.configuration.config.confURL;
     this._dataBusService.confBtnIcon.next("save");
     this._dataBusService.confBtnDisabled.next(false);
+  }
+
+  ngOnInit(): void {
+    this.urlCheckState = 'pending';
+    this._configurationService.validateConfigURL(this.configUrl).subscribe(
+      next => {
+        if (next.hasError) {
+          this.urlCheckState = 'warning';
+        } else {
+          this.urlCheckState = 'success';
+        }
+      },
+      error => {
+        this.urlCheckState = 'error';
+      });
   }
 
   saveConfig(): void {
@@ -45,17 +61,21 @@ export class ConfViewComponent {
 
   checkConfigUrl() {
     this.confUrlErrorMessage = "";
+    this.urlCheckState = 'pending';
     this._configurationService.validateConfigURL(this.configUrl).subscribe(
       next => {
         if (next.hasError) {
           this._dataBusService.confBtnDisabled.next(true);
           this.confUrlErrorMessage = next.message;
+          this.urlCheckState = 'warning';
         } else {
           this._dataBusService.confBtnDisabled.next(false);
+          this.urlCheckState = 'success';
           this.saveConfig();
         }
       },
       error => {
+        this.urlCheckState = 'error';
         this._dataBusService.confBtnDisabled.next(true);
         this.confUrlErrorMessage = error.message;
       });
@@ -66,11 +86,13 @@ export class ConfViewComponent {
       hasError: false,
       message: ""
     };
+    this._dataBusService.confBtnDisabled.next(true);
     if(!this.userConfiguration.options.aws.role) {
       validation.hasError = true;
       validation.message = "Role cannot be empty."
     }
     this.awsRoleErrorMessage = validation.message;
+    this._dataBusService.confBtnDisabled.next(validation.hasError);
     if(!validation.hasError) {
       this.awsRoleErrorMessage = "";
       this.saveConfig();

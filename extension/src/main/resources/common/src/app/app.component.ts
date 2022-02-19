@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._configurationService.loadConfiguration(() => {
+    this._configurationService.loadConfiguration((dataWasPresent: boolean) => {
       if (this._configurationService.configuration.config.options.darkTheme) {
         this._document.body.classList.add('theme-dark');
         this._document.body.classList.remove('theme-light');
@@ -37,11 +37,9 @@ export class AppComponent implements OnInit {
         this._document.body.classList.remove('theme-dark');
       }
 
-      if(!this._configurationService.configuration.config.confURL ||
-        this._configurationService.configuration.config.confURL=== "" ||
-        this._configurationService.configuration.config.confURL.indexOf("https://") < 0) {
+      if(!dataWasPresent) {
         this._dataBusService.put(MESSAGE_VIEW, this.buildFirstUsageMessage());
-        this._router.navigate([MESSAGE_VIEW]);
+        this._router.navigate([MESSAGE_VIEW]).then(_ => {});
         return;
       }
 
@@ -51,13 +49,13 @@ export class AppComponent implements OnInit {
         next => {
           if (next.hasError) {
             this._dataBusService.put(MESSAGE_VIEW, this.buildWrongConfUrlMessage(next.message));
-            this._router.navigate([MESSAGE_VIEW]);
+            this._router.navigate([MESSAGE_VIEW]).then(_ => {});
             return;
           }
 
           if(!this._configurationService.configuration.config.latestExtensionVersionUsed ||
             this._configurationService.configuration.config.latestExtensionVersionUsed !== this._configurationService.configuration.currentExtensionVersion) {
-            this._router.navigate([RELEASE_NOTE_VIEW]);
+            this._router.navigate([RELEASE_NOTE_VIEW]).then(_ => {});
             return;
           }
 
@@ -66,7 +64,7 @@ export class AppComponent implements OnInit {
         error => {
           if (error.hasError) {
             this._dataBusService.put(MESSAGE_VIEW, this.buildWrongConfUrlMessage(error.message));
-            this._router.navigate([MESSAGE_VIEW]);
+            this._router.navigate([MESSAGE_VIEW]).then(_ => {});
             return;
           }
         });
@@ -77,24 +75,24 @@ export class AppComponent implements OnInit {
     this._dataBusService.confBtnIcon.next("configuration");
     if (this._router.url !== "/" + ABOUT_VIEW) {
       this._dataBusService.put(ABOUT_VIEW, this._router.url);
-      this._router.navigate([ABOUT_VIEW]);
+      this._router.navigate([ABOUT_VIEW]).then(_ => {});
     } else {
       let route = this._dataBusService.pop(ABOUT_VIEW);
       if(route) {
-        this._router.navigateByUrl(route);
+        this._router.navigateByUrl(route).then(_ => {});
       } else {
-        this._router.navigateByUrl(ENV_VIEW);
+        this._router.navigateByUrl(ENV_VIEW).then(_ => {});
       }
     }
   }
 
   goToConfiguration() {
-    this._router.navigate([LOADER_VIEW]);
+    this._router.navigate([LOADER_VIEW]).then(_ => {});
     this._dataBusService.confBtnIcon.next("");
     if (this._router.url.endsWith(CONFIGURATION_VIEW)) {
       this.loadEnvs();
     } else {
-      this._router.navigate([CONFIGURATION_VIEW]);
+      this._router.navigate([CONFIGURATION_VIEW]).then(_ => {});
     }
   }
 
@@ -103,7 +101,7 @@ export class AppComponent implements OnInit {
       this._configurationService.configuration.config.confURL === "" ||
       this._configurationService.configuration.config.confURL.indexOf("https://") < 0) {
       this._dataBusService.put(MESSAGE_VIEW, this.buildFirstUsageMessage());
-      this._router.navigate([MESSAGE_VIEW]);
+      this._router.navigate([MESSAGE_VIEW]).then(_ => {});
       return;
     }
 
@@ -112,7 +110,7 @@ export class AppComponent implements OnInit {
         if(response.body) {
           this._environmentsService.environments = response.body;
         }
-        this._router.navigate([ENV_VIEW]);
+        this._router.navigate([ENV_VIEW]).then(_ => {});
       },
       error: (error) => {
         let message = new MessageViewContent();
@@ -125,7 +123,7 @@ export class AppComponent implements OnInit {
           this._dataBusService.put(MESSAGE_VIEW, this.buildGetConfGenericMessage());
         }
         console.error(error);
-        this._router.navigate([MESSAGE_VIEW]);
+        this._router.navigate([MESSAGE_VIEW]).then(_ => {});
       }});
   }
 
@@ -158,7 +156,7 @@ export class AppComponent implements OnInit {
     let message = new MessageViewContent();
     message.type = "danger";
     message.title = "Oups, something went wrong...";
-    message.pict = "assets/images/bot-error.png";
+    message.pict = "assets/images/404.png";
     message.message = text;
     message.btnTitle = "Check configuration";
     message.redirect = true;
@@ -170,7 +168,7 @@ export class AppComponent implements OnInit {
     let message = new MessageViewContent();
     message.title = "<strong>Welcome</strong> and thanks to use Odigo environment linker !";
     message.pict = "assets/images/bot.png";
-    message.message = "To begin, you have to provide the configuration URL.<br/><br/><small><i><u>Help</u> : if you haven't this URL, you can ask it to L&eacute;vent&eacute; NAGY on Slack, by mail of teams</small>";
+    message.message = "To begin, you have to provide the configuration URL.<br/><br/><small><i><u>Help</u> : if you haven't this URL, you can ask it to L&eacute;vent&eacute; NAGY on Slack.</small>";
     message.btnTitle = "Configure now";
     message.type = "light";
     message.redirect = true;
