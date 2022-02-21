@@ -69,14 +69,14 @@ export class ConfigurationService {
             observer.next({
               hasError: false,
               message: response.statusText
-            });                       //Next callback
+            });
           },
           (error) => {
             console.error(error);
             observer.error({
               hasError: true,
-              message: "Oops... Your URL is invalid or your are disconnected from your VPN."
-            });                   //Error callback
+              message: "Your URL is invalid or your are disconnected from your VPN."
+            });
           },
           () => {
             observer.complete();

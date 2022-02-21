@@ -155,7 +155,7 @@ export class AppComponent implements OnInit {
   buildWrongConfUrlMessage(text: string): MessageViewContent {
     let message = new MessageViewContent();
     message.type = "danger";
-    message.title = "Oups, something went wrong...";
+    message.title = "Oops, something went wrong...";
     message.pict = "assets/images/404.png";
     message.message = text;
     message.btnTitle = "Check configuration";

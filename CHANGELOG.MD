@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CHANGELOG.md
 - Configuration URL checker (by http request)
 ### Changed
-- Rewording : external links -> public links
+- Rewording
 - Redesign configuration view
 - replace X icon on configuration view by Save icon
 - Small infos on configuration options to explain each options
