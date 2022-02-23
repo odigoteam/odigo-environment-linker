@@ -2,6 +2,6 @@
     <target name="main">
         <echo message="ZIP SOURCES"/>
         <zip destfile="${project.build.directory}/sources.zip"
-             basedir="src/main/resources" excludes="src/main/resources/chrome src/main/resources/common/node_modules src/main/resources/.angular src/main/resources/common/.dist" />
+             basedir="src/main/resources" excludes="chrome/**,common/node_modules/**,common/.angular/**,common/dist/**" />
     </target>
 </project>
