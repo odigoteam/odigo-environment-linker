@@ -37,6 +37,12 @@ export class AboutViewComponent implements OnInit {
     }
   }
 
+  openChangeLogLink() {
+    this._browser.tabs.create({url: environment.changelogUrl});
+    window.close();
+  }
+
+
   openIssueLink() {
     this._browser.tabs.create({url: environment.githubUrl});
     window.close();

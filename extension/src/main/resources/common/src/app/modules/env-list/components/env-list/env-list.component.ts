@@ -1,10 +1,11 @@
-import {AfterContentInit, Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {EnvironmentsService} from "../../../../services/environments.service";
 import {ConfigurationService} from "../../../../services/configuration.service";
 import {UserOptions} from "../../../../models/settings.class";
-import {AwsEnv, Environment } from '../../../../models/environments.class';
+import {AwsEnv, Client, Environment} from '../../../../models/environments.class';
 import {BrowserService} from "../../../../services/browser.service";
 import {AwsRoleSwitcherService} from "../../../../services/aws-role-switcher.service";
+import {Router, UrlSerializer} from "@angular/router";
 
 @Component({
   selector: 'env-list',
@@ -23,7 +24,9 @@ export class EnvListComponent implements OnInit {
   constructor(private _environmentsService: EnvironmentsService,
               private _configurationService: ConfigurationService,
               private _browser: BrowserService,
-              private _awsRoleSwitcherService: AwsRoleSwitcherService) {
+              private _awsRoleSwitcherService: AwsRoleSwitcherService,
+              private _router: Router,
+              private _serializer: UrlSerializer) {
     this.userOptions = this._configurationService.configuration.config.options;
     this.isCurrentTabAws = this._configurationService.configuration.isCurrentTabAws;
 
@@ -47,6 +50,8 @@ export class EnvListComponent implements OnInit {
   }
 
   configureEnvironment(env: Environment) {
+    env.env = env.env.toUpperCase();
+    env.type = env.type.toUpperCase();
     switch(env.type) {
       case "PROD":
         env.badgeType = "bg-danger";
@@ -140,7 +145,7 @@ export class EnvListComponent implements OnInit {
     let data = {
       profile: env.env,
       account: env.aws.accountId,
-      color: "ff3466",
+      color: this.computeColorForAWS(env.type),
       roleName: this._configurationService.configuration.config.options.aws.role,
       displayName: env.env + " (" + env.name + ")",
       redirectUri: this._awsRoleSwitcherService.createRedirectUri(url, region, this._configurationService.configuration.config.options.aws.region),
@@ -151,5 +156,61 @@ export class EnvListComponent implements OnInit {
       data.actionSubdomain = region;
     }
     this._awsRoleSwitcherService.sendSwitchRole(this._configurationService.configuration.currentTab.id,  data);
+  }
+
+  openJenkinsLink(env: Environment, jobName: string) {
+    let url = this._environmentsService.environments.jenkins.baseUrl;
+    if(jobName === "updateCMDB") {
+      let params = this.buildParameters(env.client, this._environmentsService.environments.jenkins.updateCmdbJob);
+      url = url.concat(params);
+    }
+    console.log(url);
+    this.openLink(url);
+  }
+
+  private computeColorForAWS(type: string) : string {
+    let color;
+    switch(type.toUpperCase()) {
+      case "PROD":
+        color = "db284f";
+        break;
+      case "PREPROD":
+        color = "ffb200";
+        break;
+      case "QA":
+        color = "009cde";
+        break;
+      case "INT":
+        color = "14d9b5";
+        break;
+      case "DEV":
+        color = "212529";
+        break;
+      default:
+        color = "e6e7e8";
+        break;
+    }
+    return color;
+  }
+
+  private buildParameters(client: Client, endpoint: string): string {
+    let params = "";
+    if(this._environmentsService.environments.jenkins.parameters) {
+      let queryParams: {
+        [key: string]: any
+      } = {};
+      for (let param in this._environmentsService.environments.jenkins.parameters) {
+        if (this._environmentsService.environments.jenkins.parameters.hasOwnProperty(param)) {
+          if(client.hasOwnProperty(this._environmentsService.environments.jenkins.parameters[param])) {
+            queryParams[param] = encodeURIComponent(client[this._environmentsService.environments.jenkins.parameters[param] as keyof Client]);
+          } else {
+            queryParams[param] = encodeURIComponent(this._environmentsService.environments.jenkins.parameters[param]);
+          }
+        }
+      }
+      const tree = this._router.createUrlTree([endpoint], { queryParams });
+      params = this._serializer.serialize(tree);
+    }
+    return params;
   }
 }

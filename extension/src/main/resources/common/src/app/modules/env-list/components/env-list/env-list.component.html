@@ -40,12 +40,12 @@
                  [attr.aria-labelledby]="'heading' + env.env + env.type"
                  data-bs-parent="#accordion">
               <div class="accordion-body">
-                <div class="row">
+                <div class="row" *ngIf="userOptions.display.version || userOptions.tShirtSizes">
                   <div class="col-12">
-                    <p class='small-info' *ngIf="userOptions.display.version"><cite>Version : {{env.occVersion}}</cite>
-                    </p>
+                    <span class="badge badge-env-info float-end" *ngIf="userOptions.display.version && env.occVersion">Version : {{env.occVersion}}</span>
+                    <span class="badge badge-env-info float-end" *ngIf="userOptions.tShirtSizes && env.tshirtSize">T-Shirt size : {{env.tshirtSize}}</span>
                   </div>
-                  <div class="col-12 text-center">
+                  <div class="col-12 text-center mt-3">
                     <!-- MODULES -->
                     <div [ngClass]="userOptions.onlyIcons ? 'btn-group' : 'btn-group-vertical'" role="group"
                          [attr.aria-label]="env.env">
@@ -230,6 +230,12 @@
                           </li>
                           <li *ngIf="env.urls.cmdb.slave">
                             <a class="dropdown-item" (click)="openLink(env.urls.cmdb.slave + userOptions.cmdbFileType)">Slave</a>
+                          </li>
+                          <li *ngIf="userOptions.jenkinsLinks"><hr class="dropdown-divider"></li>
+                          <li *ngIf="userOptions.jenkinsLinks">
+                            <a class="dropdown-item" (click)="openJenkinsLink(env, 'updateCMDB')">
+                              Update CMDB <img src="assets/images/jenkins.png" alt="[Jenkins]" class="jenkins-logo" />
+                            </a>
                           </li>
                         </ul>
                       </div>

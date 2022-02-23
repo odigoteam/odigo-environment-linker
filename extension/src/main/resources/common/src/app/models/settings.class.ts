@@ -32,6 +32,8 @@ export class UserOptions {
   onlyIcons: boolean = false;
   darkTheme: boolean = false;
   aws: AWSOptions = new AWSOptions();
+  jenkinsLinks: boolean = false;
+  tShirtSizes: boolean = false;
 }
 
 export class FiltersOptions {

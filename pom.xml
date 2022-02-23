@@ -3,7 +3,7 @@
 
 	<groupId>com.odigo</groupId>
 	<artifactId>odigo-environment-linker</artifactId>
-	<version>4.0.1</version>
+	<version>4.1.0</version>
 	<packaging>pom</packaging>
 
 	<modules>
@@ -12,6 +12,7 @@
 
 	<properties>
 		<build.profile/>
+		<skip.source.bundling>true</skip.source.bundling>
 	</properties>
 
 	<build>
@@ -50,6 +51,7 @@
 			<id>release</id>
 			<properties>
 				<build.profile>prod</build.profile>
+				<skip.source.bundling>false</skip.source.bundling>
 			</properties>
 		</profile>
 	</profiles>

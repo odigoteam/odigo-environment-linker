@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ConfigurationService} from "../../../../services/configuration.service";
 import {UserConfiguration} from "../../../../models/settings.class";
 import {EnvironmentsService} from "../../../../services/environments.service";
@@ -74,5 +74,23 @@ export class EnvViewComponent implements OnInit {
   clearSearch() {
     this.userConf.search = "";
     this.updateResults();
+  }
+
+  resetFilters() {
+    this.userConf.filters.versions = [...this._configurationService.configuration.supportedOccVersions];
+    this.supportedVersions.forEach(version => {
+      version.checked = this.userConf.filters.versions.includes(version);
+    });
+    this.userConf.filters.aws = false;
+    this.userConf.filters.dev = true;
+    this.userConf.filters.int = true;
+    this.userConf.filters.qa = true;
+    this.userConf.filters.prod = true;
+    this.userConf.filters.preprod = true;
+    this.userConf.filters.aws = false;
+    this.userConf.filters.others = true;
+    this._configurationService.save();
+    this.updateFilters();
+    this._environmentsService.runSearch();
   }
 }

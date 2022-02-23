@@ -5,23 +5,36 @@
         <div class="card-img-top"></div>
         <div class="card-body scrollbar">
           <h5 class="card-title" [innerHTML]="content.title"></h5>
-          <div class="card-text">
+          <div class="card-text mt-3">
             <b>v{{appVersion}}</b>
-            <br/>
-            <i class="bi bi-star"></i> New features :
-            <ul>
-              <li *ngFor="let feature of content.features">
-                <span [innerHTML]="feature.shortDesc"></span>
-                <br/>
-                <p [innerHTML]="feature.longDesc"></p>
-              </li>
-            </ul>
-            <i class="bi bi-bug"></i> Bug fix :
-            <ul>
-              <li *ngFor="let bugfix of content.bugfixes">
-                <span [innerHTML]="bugfix.desc"></span>
-              </li>
-            </ul>
+            <div *ngIf="content.features && content.features.length > 0" class="mt-2">
+              <i class="bi bi-star"></i> New features :
+              <ul>
+                <li *ngFor="let feature of content.features">
+                  <span [innerHTML]="feature.shortDesc"></span>
+                  <br/>
+                  <p [innerHTML]="feature.longDesc" *ngIf="feature.longDesc"></p>
+                </li>
+              </ul>
+            </div>
+            <div *ngIf="content.changes && content.changes.length > 0" class="mt-2">
+              <i class="bi bi-arrow-left-right"></i> Changes :
+              <ul>
+                <li *ngFor="let change of content.changes">
+                  <span [innerHTML]="change.shortDesc"></span>
+                  <br/>
+                  <p [innerHTML]="change.longDesc" *ngIf="change.longDesc"></p>
+                </li>
+              </ul>
+            </div>
+            <div *ngIf="content.bugfixes && content.bugfixes.length > 0" class="mt-2">
+              <i class="bi bi-bug"></i> Bug fix :
+              <ul>
+                <li *ngFor="let bugfix of content.bugfixes">
+                  <span [innerHTML]="bugfix.desc"></span>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
         <div class="card-footer text-center">

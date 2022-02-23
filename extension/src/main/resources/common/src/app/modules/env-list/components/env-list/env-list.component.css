@@ -39,6 +39,11 @@
   width: 35px;
 }
 
+.jenkins-logo {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 5px;
+}
 /* ------------------ Overrides ---------------*/
 .dropdown-item input {
   margin-right: 10px;

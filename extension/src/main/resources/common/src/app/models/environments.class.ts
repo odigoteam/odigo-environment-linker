@@ -29,6 +29,13 @@ export class AwsEnv {
   enabled: boolean = false;
 }
 
+export class Client {
+  id: string = "";
+  site: string = "";
+  env: string = "";
+  clusterId: string = "";
+}
+
 export class Environment {
   displayed: boolean = true;
   env: string = "";
@@ -36,15 +43,25 @@ export class Environment {
   name: string = "";
   logo: string = "odigo-dark.png";
   provider: string = "";
+  client: Client = new Client();
   aws: AwsEnv = new AwsEnv();
   occVersion: string = "";
   domain: string = "";
   urls: EnvUrls = new EnvUrls();
   badgeType: string = "";
+  tshirtSize: string = "";
 }
+
+export class Jenkins {
+  baseUrl: string = "";
+  updateCmdbJob : string = "";
+  parameters : Record<string,any> = {};
+}
+
 
 export class Environments {
   environmentsVersion: number = 0;
   latestExtensionVersion: string = "";
+  jenkins: Jenkins = new Jenkins();
   environments: Environment[] = [];
 }

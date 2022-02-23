@@ -6,7 +6,7 @@
   </div>
   <div class="row align-items-end mt-5">
     <div class="col">
-      <span class="h2">Version {{appVersion}}</span>
+      <span class="h2">v{{appVersion}} <small class="small text-muted fst-italic"><a [routerLink]="'/release-note'" class="btn btn-link"  style="padding: 0; font-size: .5em;" title="Release note">View release note</a></small></span>
     </div>
     <div class="col text-end small text-muted fst-italic">
       <small>Developed with <i class="bi bi-heart-fill"></i> by <a class="btn btn-link" (click)="openSlackLink()" title="Slack profile" style="padding: 0; font-size: .875em;">L&eacute;vent&eacute; NAGY</a></small>
@@ -33,6 +33,11 @@
       <span class="h2 small"><a (click)="openGithubLink()" class="btn btn-link" title="View sources">View sources <i class="bi bi-github"></i></a></span>
     </div>
     <div class="col text-start">
+      <span class="h2 small"><a (click)="openChangeLogLink()" class="btn btn-link" title="Change log"><i class="bi bi-journal-code"></i> Change log</a></span>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col text-center">
       <span class="h2 small"><a (click)="openIssueLink()" class="btn btn-link" title="View sources"><i class="bi bi-bug"></i> Report issue</a></span>
     </div>
   </div>

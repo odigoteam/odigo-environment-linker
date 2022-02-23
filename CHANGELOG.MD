@@ -5,17 +5,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [4.1.0] <font size="2">*- 2022-02-23*</font>
 ### Added
 - About view
 - CHANGELOG.md
 - Configuration URL checker (by http request)
+- T-Shirt size info per environments
+- Update CMDB link to Jenkins OAM Job (/JenkinsOAM/job/01-CreateUpdateCustomCMDB-Step1/build) pre-filled with CLIENT_ID, CLIENT_SITE, CLIENT_CLUSTERID and CLIENT_ENV vars
+- Reset filters button
 ### Changed
 - Rewording
 - Redesign configuration view
 - replace X icon on configuration view by Save icon
 - Small infos on configuration options to explain each options
+- AWS role switch : the color of environment type (DEV, INT, QUA, PREPROD, PROD, Other) is reported in AWS console
 ### Fixed
-- Control on URL validity by send a GET request with it
+- Control configuration URL validity by send a GET request with it
 
 ## [4.0.0] <font size="2">*- 2022-02-14*</font>
 ### Changed
@@ -200,6 +205,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Fix Markdown links to tag comparison URL with footnote-style links.
 
-[Unreleased]: https://github.com/guitaro/odigo-environment-linker/compare/v4.0.0...HEAD
+[Unreleased]: https://github.com/guitaro/odigo-environment-linker/compare/v4.1.0...HEAD
+[4.1.0]: https://github.com/guitaro/odigo-environment-linker/releases/tag/v4.1.0
 [4.0.0]: https://github.com/guitaro/odigo-environment-linker/releases/tag/v4.0.0
 What is a changelog?

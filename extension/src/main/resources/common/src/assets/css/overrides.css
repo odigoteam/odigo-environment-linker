@@ -25,6 +25,10 @@ h1, h2, h3, h4, h5 {
   font-family: "Nexa Regular", serif;
 }
 
+a {
+  cursor: pointer;
+}
+
 /******** Bootstrap ***********/
 .form-control, .form-select {
     color: var(--font-color);
