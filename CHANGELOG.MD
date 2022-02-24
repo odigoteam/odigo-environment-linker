@@ -5,9 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-## [4.1.0] <font size="2">*- 2022-02-23*</font>
 ### Changed
 - Centralize all messages in one `messages.ts` file
+### Fixed
+- Fix grammatical errors in messages
+## [4.1.0] <font size="2">*- 2022-02-23*</font>
 ### Added
 - About view
 - CHANGELOG.md
