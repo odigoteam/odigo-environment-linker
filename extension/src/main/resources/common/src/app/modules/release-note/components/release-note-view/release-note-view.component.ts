@@ -7,6 +7,7 @@ import {ConfigurationService} from "../../../../services/configuration.service";
 import {environment} from "../../../../../environments/environment";
 import {MessageViewContent} from "../../../message/message-view/message-view.component";
 import {EnvironmentsService} from "../../../../services/environments.service";
+import {messages} from "../../../../../environments/messages";
 
 @Component({
   selector: 'release-note-view',
@@ -32,10 +33,10 @@ export class ReleaseNoteViewComponent {
       this._configurationService.configuration.config.confURL === "" ||
       this._configurationService.configuration.config.confURL.indexOf("https://") < 0) {
       let messageViewContent = new MessageViewContent();
-      messageViewContent.title = "<strong>Welcome</strong> and thanks to use Odigo environment linker !";
+      messageViewContent.title = messages.welcome.title;
       messageViewContent.pict = "assets/images/bot.png";
-      messageViewContent.message = "To use this extension, you have to provide the configuration URL.";
-      messageViewContent.btnTitle = "Configure now";
+      messageViewContent.message = messages.welcome.text;
+      messageViewContent.btnTitle = messages.welcome.button;
       messageViewContent.type = "light";
       messageViewContent.redirect = true;
       messageViewContent.goto = "/" + CONFIGURATION_VIEW;
@@ -56,15 +57,15 @@ export class ReleaseNoteViewComponent {
         messageViewContent.type = "danger";
         if(error.status === 404) {
           messageViewContent.pict = "assets/images/404.png";
-          messageViewContent.title = "404 ?! Hum, that's not the configuration link...";
-          messageViewContent.message = "Something is missing in your configuration URL, but I don't know what...<br/><br/>Can you check it please for me ?";
-          messageViewContent.btnTitle = "Check configuration URL";
+          messageViewContent.title = messages.confUrl.http404.title;
+          messageViewContent.message = messages.confUrl.http404.text;
+          messageViewContent.btnTitle = messages.confUrl.http404.button;
           messageViewContent.redirect = true;
           messageViewContent.goto = "/" + CONFIGURATION_VIEW;
         } else {
           messageViewContent.pict = "assets/images/no-vpn.png";
-          messageViewContent.title = "Damn... Where is it ?";
-          messageViewContent.message = "Your VPN seems gone away. Can you help me find it !?<br/><br/>Please check your VPN connectivity.";
+          messageViewContent.title = messages.vpn.title;
+          messageViewContent.message = messages.vpn.text;
         }
         this._dataBusService.put(MESSAGE_VIEW, messageViewContent);
         console.error(error);

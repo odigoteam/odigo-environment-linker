@@ -5,6 +5,7 @@ import {UserConfiguration} from "../../../../models/settings.class";
 import {DOCUMENT} from "@angular/common";
 import {DataBusService} from "../../../../services/data-bus.service";
 import {catchError, tap} from "rxjs";
+import {messages} from "../../../../../environments/messages";
 
 @Component({
   selector: 'conf-view',
@@ -89,7 +90,7 @@ export class ConfViewComponent implements OnInit {
     this._dataBusService.confBtnDisabled.next(true);
     if(!this.userConfiguration.options.aws.role) {
       validation.hasError = true;
-      validation.message = "Role cannot be empty."
+      validation.message = messages.aws.roleEmpty;
     }
     this.awsRoleErrorMessage = validation.message;
     this._dataBusService.confBtnDisabled.next(validation.hasError);

@@ -3,8 +3,10 @@ import {Settings} from "../models/settings.class";
 import {StorageService} from "./storage.service";
 import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Environments} from "../models/environments.class";
-import {catchError, Observable, tap} from "rxjs";
+import {Observable} from "rxjs";
 import packageJson from "../../../package.json";
+import {environment} from "../../environments/environment";
+import {messages} from "../../environments/messages";
 
 @Injectable({
   providedIn: 'root'
@@ -43,19 +45,19 @@ export class ConfigurationService {
       let confURL = value;
       if (confURL && confURL !== "" ) {
         if (confURL.indexOf("https://") === 0) {
-          if (!confURL.match("https:\/\/.+\/raw\/(master|develop)\/configuration\.json")) {
+          if (!confURL.match(environment.configurationUrlPattern)) {
             hasError = true;
-            message = "The URL must end with '/raw/master/configuration.json'.";
+            message = messages.confUrl.urlPattern;
           } else {
             this._configuration.config.confURL = confURL;
           }
         } else {
           hasError = true;
-          message = "The URL must start by 'https://'.";
+          message = messages.confUrl.httpsMissing;
         }
       } else {
         hasError = true;
-        message = "URL cannot be empty.";
+        message = messages.confUrl.empty;
       }
       if(hasError) {
         observer.error({
@@ -74,7 +76,7 @@ export class ConfigurationService {
             console.error(error);
             observer.error({
               hasError: true,
-              message: "Your URL is invalid or your are disconnected from your VPN."
+              message: messages.confUrl.invalid
             });
           },
           () => {
