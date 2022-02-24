@@ -1,0 +1,158 @@
+<div class="conf-tab-content scrollbar">
+  <div class="row mt-2">
+    <div class="col-12">
+      <h5>Environment</h5>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-11 offset-1">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" name="displayLogo" id="displayLogo" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.logo">
+        <label class="form-check-label" for="displayLogo">Client logo</label>
+      </div>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" name="displayClientName" id="displayClientName" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.clientName">
+        <label class="form-check-label" for="displayClientName">(Name)</label>
+      </div>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" name="displayClientDomain" id="displayClientDomain" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.clientDomain">
+        <label class="form-check-label" for="displayClientDomain">
+          <span class="badge badge-pill badge-light">Domain</span>
+        </label>
+      </div>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" name="displayVersion" id="displayVersion" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.version">
+        <label class="form-check-label" for="displayVersion">
+          <span class="badge badge-env-info">Odigo version</span>
+        </label>
+      </div>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" name="displayTShirtSizes" id="displayTShirtSizes" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.tShirtSizes">
+        <label class="form-check-label" for="displayTShirtSizes">
+          <span class="badge badge-env-info">T-Shirt size</span>
+        </label>
+      </div>
+    </div>
+  </div>
+  <hr/>
+  <div class="row mt-3">
+    <div class="col-12">
+      <h5>Links</h5>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-11 offset-1">
+      <div>
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" name="showOnlyLinksIcons" id="showOnlyLinksIcons" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.onlyIcons">
+          <label class="form-check-label" for="showOnlyLinksIcons">
+            Horizontal icon bar
+          </label>
+        </div>
+      </div>
+      <div class="conf-tips-info">Only icons will be displayed for each links.</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4 offset-1">
+      <div>
+        <label class="form-check-label"
+               style="line-height: 38px; vertical-align: middle;">
+          Show components :
+        </label>
+      </div>
+      <div class="conf-tips-info">Choose which components you wish to show per environments.</div>
+    </div>
+    <div class="col-6 mt-2">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" name="displayAWSConsole" id="displayAWSConsole" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.aws">
+        <label class="form-check-label" for="displayAWSConsole">AWS Console</label>
+      </div>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" name="displayConfiguration" id="displayConfiguration" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.cmdb">
+        <label class="form-check-label" for="displayConfiguration">Configuration (CMDB)</label>
+      </div>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" name="displayConsole" id="displayConsole" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.console">
+        <label class="form-check-label" for="displayConsole">Console</label>
+      </div>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" name="displayHealthCheck" id="displayHealthCheck" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.healthCheck">
+        <label class="form-check-label" for="displayHealthCheck">Health check</label>
+      </div>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" name="displayPortal" id="displayPortal" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.portal">
+        <label class="form-check-label" for="displayPortal">Portal</label>
+      </div>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" name="displayPIF" id="displayPIF" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.pif">
+        <label class="form-check-label" for="displayPIF">Private PaaS (PIF)</label>
+      </div>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" name="displayPEF" id="displayPEF" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.pef">
+        <label class="form-check-label" for="displayPEF">Public PaaS (PEF)</label>
+      </div>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" name="displayRouting" id="displayRouting" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.routing">
+        <label class="form-check-label" for="displayRouting">Routing</label>
+      </div>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" name="displaySsh" id="displaySsh" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.display.ssh">
+        <label class="form-check-label" for="displaySsh">SSH</label>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4 offset-1">
+      <label class="form-check-label">
+        Public links
+      </label>
+    </div>
+    <div class="col-6">
+      <div>
+        <div  class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" name="showExternalLinks" id="showExternalLinks" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.externalLinks">
+        </div>
+      </div>
+      <div class="conf-tips-info">Display internal (https://*.internal.odigo.cx/*) and public (https://*.odigo.cx/*) links.</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4 offset-1">
+      <label class="form-check-label">
+        CMDB Jenkins links
+      </label>
+    </div>
+    <div class="col-6">
+      <div>
+        <div  class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" name="showJenkinsLinks" id="showJenkinsLinks" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.jenkinsLinks">
+        </div>
+      </div>
+      <div class="conf-tips-info">
+        Display link to go to CMDB Create/Update Jenkins OAM job.<br/>
+        <i class="bi bi-exclamation-triangle"></i> You have to show the Configuration (CMDB) component to access to those links.
+      </div>
+    </div>
+  </div>
+  <hr/>
+  <div class="row mt-3">
+    <div class="col-12">
+      <h5>Theme</h5>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-11 offset-1">
+      <div>
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" name="themeSelector" id="themeSelector" (change)="applyTheme()" [(ngModel)]="this.userConfiguration.options.darkTheme">
+          <label class="form-check-label" for="themeSelector">
+            Dark theme
+          </label>
+        </div>
+      </div>
+      <div class="conf-tips-info">A dark theme from the dark side. <img alt="" src="assets/images/dark-vador.png" class="dark-vador-img"></div>
+    </div>
+  </div>
+  <div class="mt-3"></div>
+</div>

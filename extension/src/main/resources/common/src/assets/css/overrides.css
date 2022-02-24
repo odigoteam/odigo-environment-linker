@@ -30,7 +30,7 @@ a {
 }
 
 /******** Bootstrap ***********/
-.form-control, .form-select {
+.form-control, .form-select, .input-group-text {
     color: var(--font-color);
     background-color: var(--input-bg-color);
 }

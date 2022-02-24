@@ -7,8 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Changed
 - Centralize all messages in one `messages.ts` file
+- Usage of nested router for configuration view
 ### Fixed
 - Fix grammatical errors in messages
+- Fix CSS background issue with url checker icon
 ## [4.1.0] <font size="2">*- 2022-02-23*</font>
 ### Added
 - About view

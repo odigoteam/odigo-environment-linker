@@ -3,12 +3,12 @@
     <div class="col-6">
       <div class="float-start" id="logo">environments</div>
     </div>
-    <div class="col-6" *ngIf="!!icon">
+    <div class="col-6">
       <div class="float-end">
         <button type="button" class="btn btn-link-primary" style="margin-right: 5px" aria-label="About" (click)="goToAbout()">
           <i class="bi bi-question-circle"></i>
         </button>
-        <button type="button" class="btn btn-primary confButton" aria-label="Configure" (click)="goToConfiguration()" [disabled]="confButtonDisabled" [title]="icon">
+        <button type="button" class="btn btn-primary confButton" aria-label="Configure" (click)="goToConfiguration()" [disabled]="confButtonDisabled" [title]="icon" *ngIf="!!icon">
           <i class="bi bi-save2" *ngIf="icon === 'save'"></i>
           <i class="bi bi-tools" *ngIf="icon === 'configuration' || icon === ''"></i>
         </button>

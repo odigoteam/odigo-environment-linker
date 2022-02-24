@@ -90,7 +90,7 @@ export class AppComponent implements OnInit {
   goToConfiguration() {
     this._router.navigate([LOADER_VIEW]).then(_ => {});
     this._dataBusService.confBtnIcon.next("");
-    if (this._router.url.endsWith(CONFIGURATION_VIEW)) {
+    if (this._router.url.indexOf(CONFIGURATION_VIEW) >= 0) {
       this.loadEnvs();
     } else {
       this._router.navigate([CONFIGURATION_VIEW]).then(_ => {});

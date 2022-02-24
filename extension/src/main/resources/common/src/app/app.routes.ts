@@ -5,6 +5,9 @@ import { ReleaseNoteViewComponent } from "./modules/release-note/components/rele
 import {ConfViewComponent} from "./modules/configuration/components/conf-view/conf-view.component";
 import {MessageViewComponent} from "./modules/message/message-view/message-view.component";
 import {AboutViewComponent} from "./modules/about/about-view/about-view.component";
+import {BehaviourComponent} from "./modules/configuration/components/behaviour/behaviour.component";
+import {GeneralComponent} from "./modules/configuration/components/general/general.component";
+import {AppearanceComponent} from "./modules/configuration/components/appearance/appearance.component";
 
 export const ENV_VIEW = "environments";
 export const RELEASE_NOTE_VIEW = "release-note";
@@ -36,8 +39,13 @@ export const appRoutes: Routes = [
   },
   {
     path: CONFIGURATION_VIEW,
-    pathMatch: 'full',
-    component: ConfViewComponent
+    component: ConfViewComponent,
+    children: [
+      { path: "", redirectTo: "general", pathMatch: "full"},
+      { path: "general", component: GeneralComponent },
+      { path: "behaviour", component: BehaviourComponent },
+      { path: "appearance", component: AppearanceComponent }
+    ]
   },
   {
     path: MESSAGE_VIEW,

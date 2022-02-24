@@ -1,5 +1,4 @@
 <project default="main">
-
     <target name="main">
         <echo message="BUILD CHROME EXTENSION"/>
         <echo message="Copy resources"/>
@@ -19,5 +18,4 @@
         <zip destfile="${project.build.directory}/chrome.zip"
              basedir="${project.build.directory}/chrome"/>
     </target>
-
 </project>

@@ -17,7 +17,7 @@ import { AboutViewComponent } from './modules/about/about-view/about-view.compon
   declarations: [
     AppComponent,
     MessageViewComponent,
-    AboutViewComponent
+    AboutViewComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
