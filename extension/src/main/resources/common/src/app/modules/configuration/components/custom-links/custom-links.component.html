@@ -1,0 +1,109 @@
+<div class="conf-tab-content scrollbar">
+  <div class="row mt-2">
+    <div class="col-12">
+      <h5>Custom Links</h5>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <div class="col-12">
+      <div class="conf-tips-info justify-content-center">Let's place for your imagination ! Create your own links for each environments. Some variables related to each environments are available. You can insert them in your URL.
+        <a class="btn-link" data-bs-toggle="collapse" data-bs-target="#collapseVars" aria-expanded="false" aria-controls="collapseVars">Click here</a> to open documentation.
+      </div>
+    </div>
+  </div>
+  <div class="row mb-2 collapse" id="collapseVars">
+    <div class="col">
+      <div class="card card-body small">
+        <p>
+          The variables are enclosed in <code>[...]</code> string. They are case sensitive so be careful when you build your URL. For example: <code>https://jenkins/job/build?CLIENT_ID=<b>[clientId]</b></code>.
+        </p>
+        <ul>
+          <li><code>[aws-account-id]</code> : the Amazon Web Services account ID (12 digits string)</li>
+          <li><code>[client-id]</code> : the client ID (AWQ01, SMS01, VKW01, ...)</li>
+          <li><code>[client-name]</code> : the complete client name (Air France, Auchan, AESIO, ...)</li>
+          <li><code>[client-domain]</code> : the client domain name</li>
+          <li><code>[cluster-id]</code> : the cluster ID (1, 2, 3, ...)</li>
+          <li><code>[cloud-provider]</code> : the cloud provider (AWS, ODIGO)</li>
+          <li><code>[env-type]</code> : the type of environment (dev, int, qa, prod, preprod, prod, odf, ...)</li>
+          <li><code>[occ-version]</code> : the odigo CC version (5.4.29, 5.3.38, 5.6.33.1, ...)</li>
+          <li><code>[site]</code> : the client site (a...z)</li>
+          <li><code>[t-shirt-size]</code> : T-Shirt size of environment (small, medium, large)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="row" *ngIf="currentLink">
+        <div class="col">
+          <div class="row mb-3">
+            <div class="col">
+              <div class="row">
+                <div class="col-9">
+                  <div class="input-group mb-2">
+                    <icon-dropdown (newIconEvent)="changeIcon($event)" [selectedIcon]="currentLink.icon"></icon-dropdown>
+                    <input type="text" placeholder="The title" class="form-control" aria-label="Icon selector" [(ngModel)]="currentLink.title" (keyup)="saveChanges()" #currentLinkTitle>
+                  </div>
+                </div>
+                <div class="col-3" style="padding-top: 5px;">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="displayed" name="displayed" [(ngModel)]="currentLink.displayed" (change)="saveChanges()">
+                    <label class="form-check-label" for="displayed">
+                      Displayed
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="input-group">
+                    <input type="text" placeholder="http://..." class="form-control" aria-describedby="url" [(ngModel)]="currentLink.url" (keyup)="saveChanges()">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <a class="badge badge-pill bg-success text-black float-end" (click)="addNewLink()"><i class="bi bi-plus-circle"></i> Add a new link</a>
+          <table class="table table-sm table-hover">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col" class="text-center">Displayed</th>
+              <th scope="col" class="text-center">Icon</th>
+              <th scope="col">Title</th>
+              <th scope="col" class="text-end">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngIf="links.length === 0">
+              <td colspan="5" class="text-center">No links</td>
+            </tr>
+            <tr *ngFor="let link of links; let index = index;">
+              <th scope="row" class="title-number">{{index + 1}}</th>
+              <td class="action-enabled text-center">
+                <input class="form-check-input" type="checkbox" value="" [checked]="link.displayed" disabled>
+              </td>
+              <td class="title-icon text-center"><i class="bi bi-{{link.icon}}"></i></td>
+              <td class="title-col">
+                <div class="title-wrapper">
+                  {{link.title}}
+                </div>
+              </td>
+              <td class="action-col">
+                <div class="btn-group" role="group">
+                  <button type="button" class="btn rounded-pill btn-info" (click)="edit(index)"><i class="bi bi-pencil"></i></button>&nbsp;
+                  <button type="button" class="btn rounded-pill btn-danger" (click)="delete(index)"><i class="bi bi-trash"></i></button>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

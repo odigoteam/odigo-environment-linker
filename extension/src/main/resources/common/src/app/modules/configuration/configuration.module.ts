@@ -7,6 +7,8 @@ import { GeneralComponent } from './components/general/general.component';
 import { BehaviourComponent } from './components/behaviour/behaviour.component';
 import { AppearanceComponent } from './components/appearance/appearance.component';
 import {RouterModule} from "@angular/router";
+import {CustomLinksComponent} from "./components/custom-links/custom-links.component";
+import { IconDropdownComponent } from './components/custom-links/components/icon-dropdown/icon-dropdown.component';
 
 
 @NgModule({
@@ -14,7 +16,9 @@ import {RouterModule} from "@angular/router";
     ConfViewComponent,
     GeneralComponent,
     BehaviourComponent,
-    AppearanceComponent
+    AppearanceComponent,
+    CustomLinksComponent,
+    IconDropdownComponent
   ],
     imports: [
         CommonModule,

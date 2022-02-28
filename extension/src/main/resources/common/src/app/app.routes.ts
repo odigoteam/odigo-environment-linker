@@ -8,6 +8,7 @@ import {AboutViewComponent} from "./modules/about/about-view/about-view.componen
 import {BehaviourComponent} from "./modules/configuration/components/behaviour/behaviour.component";
 import {GeneralComponent} from "./modules/configuration/components/general/general.component";
 import {AppearanceComponent} from "./modules/configuration/components/appearance/appearance.component";
+import {CustomLinksComponent} from "./modules/configuration/components/custom-links/custom-links.component";
 
 export const ENV_VIEW = "environments";
 export const RELEASE_NOTE_VIEW = "release-note";
@@ -44,7 +45,8 @@ export const appRoutes: Routes = [
       { path: "", redirectTo: "general", pathMatch: "full"},
       { path: "general", component: GeneralComponent },
       { path: "behaviour", component: BehaviourComponent },
-      { path: "appearance", component: AppearanceComponent }
+      { path: "appearance", component: AppearanceComponent },
+      { path: "custom-links", component: CustomLinksComponent }
     ]
   },
   {

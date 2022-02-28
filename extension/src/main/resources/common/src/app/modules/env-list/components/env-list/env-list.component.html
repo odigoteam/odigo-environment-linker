@@ -40,19 +40,21 @@
                  [attr.aria-labelledby]="'heading' + env.env + env.type"
                  data-bs-parent="#accordion">
               <div class="accordion-body">
-                <div class="row" *ngIf="userOptions.display.version || userOptions.tShirtSizes">
-                  <div class="col-12">
+                <div class="row">
+                  <div class="col" *ngIf="userOptions.display.version || userOptions.tShirtSizes">
                     <span class="badge badge-env-info float-end" *ngIf="userOptions.display.version && env.occVersion">Version : {{env.occVersion}}</span>
                     <span class="badge badge-env-info float-end" *ngIf="userOptions.tShirtSizes && env.tshirtSize">T-Shirt size : {{env.tshirtSize}}</span>
                   </div>
-                  <div class="col-12 text-center mt-3">
+                </div>
+                <div class="row">
+                  <div class="col text-center mt-3">
                     <!-- MODULES -->
                     <div [ngClass]="userOptions.onlyIcons ? 'btn-group' : 'btn-group-vertical'" role="group"
                          [attr.aria-label]="env.env">
                       <!-- CONSOLE -->
                       <button type="button" class="btn btn-outline-primary"
                               title="Console" *ngIf="env.urls.console.display && !env.urls.console.showExternal"
-                              (click)="openLink(env.urls.console.internal)">
+                              (click)="openLink(env.urls.console.internal,true,env)">
                         <i class="bi bi-display"></i><span *ngIf="!userOptions.onlyIcons">&nbsp;Console</span>
                       </button>
                       <div class="btn-group" role="group"
@@ -66,10 +68,10 @@
                         </button>
                         <ul class="dropdown-menu" [attr.aria-labelledby]="'btnConsole' + env.env + env.type">
                           <li *ngIf="env.urls.console.internal">
-                            <a class="dropdown-item" (click)="openLink(env.urls.console.internal)">Internal</a>
+                            <a class="dropdown-item" (click)="openLink(env.urls.console.internal,true,env)">Internal</a>
                           </li>
                           <li *ngIf="env.urls.console.external">
-                            <a class="dropdown-item" (click)="openLink(env.urls.console.external)">Public</a>
+                            <a class="dropdown-item" (click)="openLink(env.urls.console.external,true,env)">Public</a>
                           </li>
                         </ul>
                       </div>
@@ -79,7 +81,7 @@
                       <button type="button" class="btn btn-outline-primary"
                               title="Health check"
                               *ngIf="env.urls.healthCheck && env.urls.healthCheck.display && !env.urls.healthCheck.showExternal"
-                              (click)="openLink(env.urls.healthCheck.internal)">
+                              (click)="openLink(env.urls.healthCheck.internal,true,env)">
                         <i class="bi bi-activity"></i><span *ngIf="!userOptions.onlyIcons">&nbsp;Health Check</span>
                       </button>
                       <div class="btn-group" role="group"
@@ -93,10 +95,10 @@
                         </button>
                         <ul class="dropdown-menu" [attr.aria-labelledby]="'btnHealthCheck' + env.env + env.type">
                           <li *ngIf="env.urls.healthCheck.internal">
-                            <a class="dropdown-item" (click)="openLink(env.urls.healthCheck.internal)">Internal</a>
+                            <a class="dropdown-item" (click)="openLink(env.urls.healthCheck.internal,true,env)">Internal</a>
                           </li>
                           <li *ngIf="env.urls.healthCheck.external">
-                            <a class="dropdown-item" (click)="openLink(env.urls.healthCheck.external)">Public</a>
+                            <a class="dropdown-item" (click)="openLink(env.urls.healthCheck.external,true,env)">Public</a>
                           </li>
                         </ul>
                       </div>
@@ -105,7 +107,7 @@
                       <!-- PORTAL -->
                       <button type="button" class="btn btn-outline-primary"
                               title="Portal" *ngIf="env.urls.portal.display && !env.urls.portal.showExternal"
-                              (click)="openLink(env.urls.portal.internal)">
+                              (click)="openLink(env.urls.portal.internal,true,env)">
                         <i class="bi bi-house-fill"></i><span *ngIf="!userOptions.onlyIcons">&nbsp;Portal</span>
                       </button>
                       <div class="btn-group" role="group"
@@ -119,10 +121,10 @@
                         </button>
                         <ul class="dropdown-menu" [attr.aria-labelledby]="'btnPortal' + env.env + env.type">
                           <li *ngIf="env.urls.portal.internal">
-                            <a class="dropdown-item" (click)="openLink(env.urls.portal.internal)">Internal</a>
+                            <a class="dropdown-item" (click)="openLink(env.urls.portal.internal,true,env)">Internal</a>
                           </li>
                           <li *ngIf="env.urls.portal.external">
-                            <a class="dropdown-item" (click)="openLink(env.urls.portal.external)">Public</a>
+                            <a class="dropdown-item" (click)="openLink(env.urls.portal.external,true,env)">Public</a>
                           </li>
                         </ul>
                       </div>
@@ -139,12 +141,12 @@
                         </button>
                         <ul class="dropdown-menu" [attr.aria-labelledby]="'btnPIF' + env.env + env.type">
                           <li *ngIf="env.urls.pif.publisher.internal">
-                            <a class="dropdown-item" (click)="openLink(env.urls.pif.publisher.internal)">
+                            <a class="dropdown-item" (click)="openLink(env.urls.pif.publisher.internal,true,env)">
                               Publisher<span *ngIf="userOptions.externalLinks">&nbsp;(internal only)</span>
                             </a>
                           </li>
                           <li *ngIf="env.urls.pif.store.internal">
-                            <a class="dropdown-item" (click)="openLink(env.urls.pif.store.internal)">
+                            <a class="dropdown-item" (click)="openLink(env.urls.pif.store.internal,true,env)">
                               Store<span *ngIf="userOptions.externalLinks">&nbsp;(internal only)</span>
                             </a>
                           </li>
@@ -162,19 +164,19 @@
                         </button>
                         <ul class="dropdown-menu" [attr.aria-labelledby]="'btnPEF' + env.env + env.type">
                           <li *ngIf="env.urls.pef.publisher.internal">
-                            <a class="dropdown-item" (click)="openLink(env.urls.pef.publisher.internal)">Publisher</a>
+                            <a class="dropdown-item" (click)="openLink(env.urls.pef.publisher.internal,true,env)">Publisher</a>
                           </li>
                           <li *ngIf="env.urls.pef.store.internal && !env.urls.pef.store.showExternal">
-                            <a class="dropdown-item" (click)="openLink(env.urls.pef.store.internal)">Store</a>
+                            <a class="dropdown-item" (click)="openLink(env.urls.pef.store.internal,true,env)">Store</a>
                           </li>
                           <li class="dropdown-submenu" *ngIf="env.urls.pef.store.showExternal">
                             <a tabindex="-1" href="#">Store</a>
                             <ul class="dropdown-menu">
                               <li *ngIf="env.urls.pef.publisher.internal">
-                                <a class="dropdown-item" (click)="openLink(env.urls.pef.store.internal)">Internal</a>
+                                <a class="dropdown-item" (click)="openLink(env.urls.pef.store.internal,true,env)">Internal</a>
                               </li>
                               <li *ngIf="env.urls.pef.store.external">
-                                <a class="dropdown-item" (click)="openLink(env.urls.pef.store.external)">Public</a>
+                                <a class="dropdown-item" (click)="openLink(env.urls.pef.store.external,true,env)">Public</a>
                               </li>
                             </ul>
                           </li>
@@ -185,7 +187,7 @@
                       <!-- ROUTING -->
                       <button type="button" class="btn btn-outline-primary"
                               title="Routing" *ngIf="env.urls.routing.display && !env.urls.routing.showExternal"
-                              (click)="openLink(env.urls.routing.internal)">
+                              (click)="openLink(env.urls.routing.internal,true,env)">
                         <i class="bi bi-arrow-left-right"></i><span *ngIf="!userOptions.onlyIcons">&nbsp;Routing</span>
                       </button>
                       <div class="btn-group" role="group"
@@ -200,10 +202,10 @@
                         </button>
                         <ul class="dropdown-menu" [attr.aria-labelledby]="'btnPortal' + env.env + env.type">
                           <li *ngIf="env.urls.routing.internal">
-                            <a class="dropdown-item" (click)="openLink(env.urls.routing.internal)">Internal</a>
+                            <a class="dropdown-item" (click)="openLink(env.urls.routing.internal,true,env)">Internal</a>
                           </li>
                           <li *ngIf="env.urls.routing.external">
-                            <a class="dropdown-item" (click)="openLink(env.urls.routing.external)">Public</a>
+                            <a class="dropdown-item" (click)="openLink(env.urls.routing.external,true,env)">Public</a>
                           </li>
                         </ul>
                       </div>
@@ -226,10 +228,10 @@
                         <ul class="dropdown-menu" [attr.aria-labelledby]="'btnCMDB' + env.env + env.type">
                           <li *ngIf="env.urls.cmdb.master">
                             <a class="dropdown-item"
-                               (click)="openLink(env.urls.cmdb.master + userOptions.cmdbFileType)">Master</a>
+                               (click)="openLink(env.urls.cmdb.master + userOptions.cmdbFileType,true,env)">Master</a>
                           </li>
                           <li *ngIf="env.urls.cmdb.slave">
-                            <a class="dropdown-item" (click)="openLink(env.urls.cmdb.slave + userOptions.cmdbFileType)">Slave</a>
+                            <a class="dropdown-item" (click)="openLink(env.urls.cmdb.slave + userOptions.cmdbFileType,true,env)">Slave</a>
                           </li>
                           <li *ngIf="userOptions.jenkinsLinks"><hr class="dropdown-divider"></li>
                           <li *ngIf="userOptions.jenkinsLinks">
@@ -248,10 +250,10 @@
                         </button>
                         <ul class="dropdown-menu" [attr.aria-labelledby]="'btn-ssh-' + env.env + env.type">
                           <li *ngIf="env.urls.ssh.master">
-                            <a class="dropdown-item" (click)="openLink(env.urls.ssh.master)">Master</a>
+                            <a class="dropdown-item" (click)="openLink(env.urls.ssh.master,true,env)">Master</a>
                           </li>
                           <li *ngIf="env.urls.ssh.slave">
-                            <a class="dropdown-item" (click)="openLink(env.urls.ssh.slave)">Slave</a>
+                            <a class="dropdown-item" (click)="openLink(env.urls.ssh.slave,true,env)">Slave</a>
                           </li>
                         </ul>
                       </div>
@@ -265,7 +267,18 @@
                     </div>
                     <!-- TECHNICALS LINKS -->
                   </div>
-                  <div>
+                </div>
+                <div class="row" *ngFor="let group of customLinks">
+                  <div class="col text-center mt-3">
+                    <!-- CUSTOM LINKS -->
+                    <div [ngClass]="userOptions.onlyIcons ? 'btn-group' : 'btn-group-vertical'" role="group"
+                         [attr.aria-label]="env.env">
+                      <button type="button" class="btn btn-outline-primary"
+                              title="{{link.title}}" (click)="openLink(link.url, true, env)" *ngFor="let link of group">
+                        <i class="bi bi-{{link.icon}}"></i><span *ngIf="!userOptions.onlyIcons">&nbsp;{{link.title}}</span>
+                      </button>
+                    </div>
+                    <!-- / CUSTOM LINKS -->
                   </div>
                 </div>
               </div>

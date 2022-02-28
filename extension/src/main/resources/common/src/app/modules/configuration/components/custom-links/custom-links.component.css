@@ -1,0 +1,51 @@
+.conf-tab-content {
+  padding-right: 20px;
+}
+
+.table-content-wrapper {
+  height: 198px;
+}
+
+.table {
+  line-height: 38px;
+  width: 484px;
+}
+
+.table .title-number {
+  width: 25px;
+}
+
+.table .action-enabled {
+  width: 75px;
+}
+
+.table .action-enabled input {
+  margin-top: 12px;
+}
+
+.table .title-icon {
+  width: 60px;
+}
+
+.table .title-col .title-wrapper {
+  width: 240px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap
+}
+
+.table .action-col {
+  width: 90px;
+}
+
+.save-button {
+  height: 84px;
+}
+
+#collapseVars {
+  font-size: 0.8em;
+}
+
+.bi {
+  font-size: 1em;
+}

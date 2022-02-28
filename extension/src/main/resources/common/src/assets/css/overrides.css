@@ -30,14 +30,19 @@ a {
 }
 
 /******** Bootstrap ***********/
-.form-control, .form-select, .input-group-text {
-    color: var(--font-color);
-    background-color: var(--input-bg-color);
+.form-control, .form-select {
+  color: var(--font-color);
+  background-color: var(--input-bg-color);
+}
+
+.form-control::placeholder {
+  color: var(--font-color-placeholder);
+  font-style: italic;
 }
 
 .form-control:focus, .form-select:focus {
-    color: var(--font-color);
-    background-color: var(--input-bg-color-focus);
+  color: var(--font-color);
+  background-color: var(--input-bg-color-focus);
 }
 
 .form-select, .form-select:focus {
@@ -73,6 +78,7 @@ a {
   border-color: var(--color-accent);
   background-color: transparent;
 }
+
 .btn-outline-primary:hover {
   color: var(--color-primary);
   border-color: var(--color-accent);
@@ -143,4 +149,23 @@ a {
   border: none;
   position: relative;
   top: -1px;
+}
+
+.btn-check:focus+.btn-outline-secondary, .btn-outline-secondary:focus {
+  box-shadow: none;
+}
+
+.btn-check:active + .btn-outline-secondary:focus, .btn-check:checked + .btn-outline-secondary:focus, .btn-outline-secondary.active:focus, .btn-outline-secondary.dropdown-toggle.show:focus, .btn-outline-secondary:active:focus {
+  box-shadow: 0 0 3px var(--color-accent);
+}
+
+.btn-outline-secondary.dropdown-toggle {
+  color: var(--font-color);
+  background-color: var(--input-bg-color);
+}
+
+.btn-check:active + .btn-outline-secondary, .btn-check:checked + .btn-outline-secondary, .btn-outline-secondary.active, .btn-outline-secondary.dropdown-toggle.show, .btn-outline-secondary:active {
+  color: var(--font-color);
+  background-color: var(--input-bg-color-focus);
+  border-color: var(--color-accent);
 }

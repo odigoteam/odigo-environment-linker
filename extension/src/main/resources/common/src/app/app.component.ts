@@ -8,6 +8,7 @@ import {AwsRoleSwitcherService} from "./services/aws-role-switcher.service";
 import {DataBusService} from "./services/data-bus.service";
 import {MessageViewContent} from "./modules/message/message-view/message-view.component";
 import {messages} from "../environments/messages";
+import {CustomLinksService} from "./services/custom-links.service";
 
 @Component({
   selector: 'app',
@@ -20,6 +21,7 @@ export class AppComponent implements OnInit {
 
   constructor(private _router: Router,
               private _configurationService: ConfigurationService,
+              private _customLinksService: CustomLinksService,
               private _environmentsService: EnvironmentsService,
               private _awsRoleSwitcherService: AwsRoleSwitcherService,
               private _dataBusService: DataBusService,
@@ -30,6 +32,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this._configurationService.loadConfiguration((dataWasPresent: boolean) => {
+      this._customLinksService.load((dataWasPresent: boolean) => {
+        if(!dataWasPresent) {
+          console.error("Custom links was not loaded. An error occurred during retrieving from Storage.");
+        }
+      });
       if (this._configurationService.configuration.config.options.darkTheme) {
         this._document.body.classList.add('theme-dark');
         this._document.body.classList.remove('theme-light');

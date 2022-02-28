@@ -1,0 +1,22 @@
+.dropdown-button {
+  border-radius: 0.25rem 0 0 0.25rem;
+  height: 38px;
+  border-color: #ced4da;
+}
+
+.input-search {
+  height: 30px;
+  font-size: 0.55em;
+  width: 100%;
+}
+
+/************** OVERRIDE *************/
+.dropdown-menu {
+  padding: 0.5em;
+  font-size: 1.5em;
+  max-height: 320px;
+  width: 360px;
+}
+.dropdown-menu a {
+  color: #2a3045;
+}

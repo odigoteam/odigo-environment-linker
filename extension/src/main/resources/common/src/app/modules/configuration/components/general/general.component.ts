@@ -38,7 +38,7 @@ export class GeneralComponent implements OnInit {
   }
 
   saveConfig(): void {
-    this._configurationService.save();
+    this._configurationService.saveConfiguration();
   }
 
   checkConfigUrl() {

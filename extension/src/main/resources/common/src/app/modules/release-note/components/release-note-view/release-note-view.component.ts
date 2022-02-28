@@ -28,7 +28,7 @@ export class ReleaseNoteViewComponent {
   close(): void {
     this._router.navigate([LOADER_VIEW]);
     this._configurationService.configuration.config.latestExtensionVersionUsed = this._configurationService.configuration.currentExtensionVersion;
-    this._configurationService.save();
+    this._configurationService.saveConfiguration();
     if(!this._configurationService.configuration.config.confURL ||
       this._configurationService.configuration.config.confURL === "" ||
       this._configurationService.configuration.config.confURL.indexOf("https://") < 0) {

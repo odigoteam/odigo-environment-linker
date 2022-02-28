@@ -6,6 +6,7 @@ import {AwsEnv, Client, Environment} from '../../../../models/environments.class
 import {BrowserService} from "../../../../services/browser.service";
 import {AwsRoleSwitcherService} from "../../../../services/aws-role-switcher.service";
 import {Router, UrlSerializer} from "@angular/router";
+import {CustomLinksService} from "../../../../services/custom-links.service";
 
 @Component({
   selector: 'env-list',
@@ -13,9 +14,12 @@ import {Router, UrlSerializer} from "@angular/router";
   styleUrls: ['./env-list.component.css']
 })
 export class EnvListComponent implements OnInit {
+  private readonly AWS_LOGO_WHITE: string = "assets/images/logo-aws-white.png";
+  private readonly CUSTOM_LINKS_GROUP_SIZE = 15;
   nbResults: number = 0;
   totalEnvs: number = 0;
   environments: Environment[] = [];
+  customLinks: any[] = [];
   userOptions: UserOptions = new UserOptions();
   isCurrentTabAws: boolean = false;
   awsLogoImageUrl: string = "assets/images/logo-aws-dark.png";
@@ -23,12 +27,15 @@ export class EnvListComponent implements OnInit {
 
   constructor(private _environmentsService: EnvironmentsService,
               private _configurationService: ConfigurationService,
+              private _customLinksServices: CustomLinksService,
               private _browser: BrowserService,
               private _awsRoleSwitcherService: AwsRoleSwitcherService,
               private _router: Router,
               private _serializer: UrlSerializer) {
     this.userOptions = this._configurationService.configuration.config.options;
     this.isCurrentTabAws = this._configurationService.configuration.isCurrentTabAws;
+
+    this.customLinks = _customLinksServices.getLinksGrouped(this.CUSTOM_LINKS_GROUP_SIZE);
 
     this._environmentsService.numberOfResult.subscribe(value => {
       this.nbResults = value;
@@ -40,7 +47,7 @@ export class EnvListComponent implements OnInit {
       this.totalEnvs = this._environmentsService.environments.environments.length;
     }
     if (this.userOptions.darkTheme) {
-      this.awsLogoImageUrl = "assets/images/logo-aws-white.png";
+      this.awsLogoImageUrl = this.AWS_LOGO_WHITE;
     }
     if (this._environmentsService.environments) {
       this._environmentsService.environments?.environments.forEach(env => {
@@ -135,8 +142,14 @@ export class EnvListComponent implements OnInit {
     return env;
   }
 
-  openLink(url: string | undefined ) {
-    this._browser.tabs.create({url});
+  openLink(url: string, custom: boolean = false, env: Environment | null = null) {
+    if(url) {
+      if (custom && env) {
+        this._browser.tabs.create({url: this._customLinksServices.parseUrl(url, env)});
+      } else {
+        this._browser.tabs.create({url});
+      }
+    }
     window.close();
   }
 
@@ -164,8 +177,7 @@ export class EnvListComponent implements OnInit {
       let params = this.buildParameters(env.client, this._environmentsService.environments.jenkins.updateCmdbJob);
       url = url.concat(params);
     }
-    console.log(url);
-    this.openLink(url);
+    this.openLink(url, true, env);
   }
 
   private computeColorForAWS(type: string) : string {

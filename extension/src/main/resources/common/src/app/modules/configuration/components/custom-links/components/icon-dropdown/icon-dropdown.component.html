@@ -1,0 +1,13 @@
+<button class="btn btn-outline-secondary dropdown-toggle dropdown-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+  <i class="bi bi-{{selectedIcon}}"></i>
+</button>
+<div class="dropdown-menu">
+  <div class="mb-2">
+    <input type="text" placeholder="Search..." class="input-search" [(ngModel)]="iconSearch" (keyup)="refreshList()" />
+  </div>
+  <div class="scrollbar" style="height: 250px;">
+    <span *ngFor="let icon of iconList; let index = index;" >
+      <a (click)="selectIcon(index)" class="m-2" *ngIf="icon.displayed" [title]="icon.name"><i class="bi bi-{{icon.name}}"></i></a>
+    </span>
+  </div>
+</div>

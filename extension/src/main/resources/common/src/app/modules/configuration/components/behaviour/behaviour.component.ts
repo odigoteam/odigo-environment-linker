@@ -15,7 +15,7 @@ export class BehaviourComponent {
   }
 
   saveConfig(): void {
-    this._configurationService.save();
+    this._configurationService.saveConfiguration();
   }
 
 }

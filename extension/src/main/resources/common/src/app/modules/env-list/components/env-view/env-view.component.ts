@@ -56,7 +56,7 @@ export class EnvViewComponent implements OnInit {
     }
 
     this.updateFilters();
-    this._configurationService.save();
+    this._configurationService.saveConfiguration();
     this._environmentsService.runSearch();
   }
 
@@ -68,7 +68,7 @@ export class EnvViewComponent implements OnInit {
 
   updateResults() {
     this._environmentsService.runSearch();
-    this._configurationService.save();
+    this._configurationService.saveConfiguration();
   }
 
   clearSearch() {
@@ -89,7 +89,7 @@ export class EnvViewComponent implements OnInit {
     this.userConf.filters.preprod = true;
     this.userConf.filters.aws = false;
     this.userConf.filters.others = true;
-    this._configurationService.save();
+    this._configurationService.saveConfiguration();
     this.updateFilters();
     this._environmentsService.runSearch();
   }

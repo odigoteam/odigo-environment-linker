@@ -15,6 +15,9 @@
                 <a class="list-group-item text-center" [ngClass]="activeTab === 'appearance' ? 'active' : ''" (click)="navTab('appearance')" [routerLink]="['appearance']">
                   <i class="bi bi-palette-fill"></i><br/>Appearance
                 </a>
+                <a class="list-group-item text-center" [ngClass]="activeTab === 'custom-links' ? 'active' : ''" (click)="navTab('custom-links')" [routerLink]="['custom-links']">
+                  <i class="bi bi-link-45deg"></i><br/>Custom Links
+                </a>
               </div>
             </div>
             <div class="col-9 conf-tab">
