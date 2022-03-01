@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Fix grammatical errors in messages
 - Fix CSS background issue with url checker icon
+- AWS button is not disabled if tab is not AWS console
 ## [4.1.0] <font size="2">*- 2022-02-23*</font>
 ### Added
 - About view

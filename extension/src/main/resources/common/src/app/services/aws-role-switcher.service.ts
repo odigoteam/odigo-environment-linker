@@ -18,10 +18,13 @@ export class AwsRoleSwitcherService {
       let url: URL = new URL(tabs[0].url);
       this._configurationService.configuration.currentTab.url = url;
       this._configurationService.configuration.currentTab.id = tabs[0].id;
+      console.log(url);
+      console.log(this._configurationService.configuration.isCurrentTabAws);
       if (url.host.endsWith('.aws.amazon.com') || url.host.endsWith('.amazonaws-us-gov.com') || url.host.endsWith('.amazonaws.cn')) {
         this._configurationService.configuration.isCurrentTabAws = true;
         this.executeAction(this._configurationService.configuration.currentTab.id, 'loadInfo', {});
       }
+      console.log(this._configurationService.configuration.isCurrentTabAws);
     });
   }
 

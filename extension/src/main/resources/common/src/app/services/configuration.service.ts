@@ -7,7 +7,6 @@ import {Observable} from "rxjs";
 import packageJson from "../../../package.json";
 import {environment} from "../../environments/environment";
 import {messages} from "../../environments/messages";
-import {CustomLink} from "../models/custom-link.class";
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +23,7 @@ export class ConfigurationService {
 
   loadConfiguration(callback: any): void {
     this._storage.get(this.configurationStoreKey).then((data: any) => {
-      this._configuration = { ...this._configuration, ...data.odigoEnvLinker };
+      this._configuration.config = { ...this._configuration.config, ...data.odigoEnvLinker };
       this._configuration.currentExtensionVersion = packageJson.version;
       callback(!!data.odigoEnvLinker);
     });
@@ -36,7 +35,7 @@ export class ConfigurationService {
 
   saveConfiguration(): void {
     this._configuration.config.latestExtensionVersionUsed = packageJson.version;
-    this._storage.set({odigoEnvLinker : this._configuration});
+    this._storage.set({odigoEnvLinker : this._configuration.config});
   }
 
   validateConfigURL(value: string): Observable<any> {
