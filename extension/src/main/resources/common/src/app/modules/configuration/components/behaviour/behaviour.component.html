@@ -12,14 +12,17 @@
       </label>
     </div>
     <div class="col-6">
-      <div>
-        <select class="form-select" aria-label="Type file type" name="cmdbFileType" id="cmdbFileType" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.cmdbFileType">
-          <option value=".env" selected>.env</option>
-          <option value=".properties">.properties</option>
-          <option value=".sh">.sh</option>
-          <option value=".yml">.yml</option>
-          <option value=".xml">.xml</option>
-        </select>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="cmdbTypeMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+          {{this.userConfiguration.userOptions.cmdbFileType}}
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="cmdbTypeMenuButton">
+          <li><a class="dropdown-item" (click)="updateCMDBFileType('.env')">.env</a></li>
+          <li><a class="dropdown-item" (click)="updateCMDBFileType('.properties')">.properties</a></li>
+          <li><a class="dropdown-item" (click)="updateCMDBFileType('.sh')">.sh</a></li>
+          <li><a class="dropdown-item" (click)="updateCMDBFileType('.yml')">.yml</a></li>
+          <li><a class="dropdown-item" (click)="updateCMDBFileType('.xml')">.xml</a></li>
+        </ul>
       </div>
       <div class="conf-tips-info">Choose your preferred file type associated with CMDB links.</div>
     </div>

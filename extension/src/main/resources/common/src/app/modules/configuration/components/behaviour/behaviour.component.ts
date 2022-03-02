@@ -18,4 +18,8 @@ export class BehaviourComponent {
     this._configurationService.saveConfiguration();
   }
 
+  updateCMDBFileType(type: string) {
+    this.userConfiguration.userOptions.cmdbFileType = type;
+    this.saveConfig();
+  }
 }
