@@ -24,7 +24,7 @@ export class AppearanceComponent implements OnInit {
   }
 
   applyTheme() {
-    if(this.userConfiguration.options.darkTheme) {
+    if(this.userConfiguration.userOptions.darkTheme) {
       this._document.body.classList.add('theme-dark');
       this._document.body.classList.remove('theme-light');
     } else {

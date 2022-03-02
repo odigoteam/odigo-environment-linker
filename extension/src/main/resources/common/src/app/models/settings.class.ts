@@ -47,12 +47,16 @@ export class FiltersOptions {
   versions: string[] = ["all", "5.10", "5.9", "5.8", "5.7", "5.6", "5.4", "5.3", "5.1"];
 }
 
-export class UserConfiguration {
+export class ExtensionConfiguration {
   latestExtensionVersionUsed: string = "";
   confURL : string = "";
   search : string = "";
-  options: UserOptions = new UserOptions();
-  filters : FiltersOptions = new FiltersOptions();
+}
+
+export class UserConfiguration {
+  extensionConfiguration : ExtensionConfiguration = new ExtensionConfiguration();
+  userOptions: UserOptions = new UserOptions();
+  filtersOptions : FiltersOptions = new FiltersOptions();
 }
 
 export class Settings {

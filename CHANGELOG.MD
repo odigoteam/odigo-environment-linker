@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - Custom links
+- Configuration data model migration
 ### Changed
 - Centralize all messages in one `messages.ts` file
 - Usage of nested router for configuration view

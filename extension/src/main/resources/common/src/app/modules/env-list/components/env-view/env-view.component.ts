@@ -21,7 +21,7 @@ export class EnvViewComponent implements OnInit {
     this._configurationService.configuration.supportedOccVersions.forEach(version => {
       this.supportedVersions.push({
         version: version,
-        checked: this.userConf.filters.versions.includes(version)
+        checked: this.userConf.filtersOptions.versions.includes(version)
       });
     });
   }
@@ -33,24 +33,24 @@ export class EnvViewComponent implements OnInit {
   updateVersionFilter(index: number) {
     let version = this.supportedVersions[index];
     if(version.version === "all" && version.checked) {
-      this._configurationService.configuration.config.filters.versions = [...this._configurationService.configuration.supportedOccVersions];
+      this._configurationService.configuration.config.filtersOptions.versions = [...this._configurationService.configuration.supportedOccVersions];
     } else {
       // Remove all option
-      let index = this._configurationService.configuration.config.filters.versions.indexOf("all");
+      let index = this._configurationService.configuration.config.filtersOptions.versions.indexOf("all");
       if (index > -1) {
-        this._configurationService.configuration.config.filters.versions.splice(index, 1);
+        this._configurationService.configuration.config.filtersOptions.versions.splice(index, 1);
       }
       if(version.checked) {
-        if(!this._configurationService.configuration.config.filters.versions.includes(version.version)) {
-          this._configurationService.configuration.config.filters.versions.push(version.version);
+        if(!this._configurationService.configuration.config.filtersOptions.versions.includes(version.version)) {
+          this._configurationService.configuration.config.filtersOptions.versions.push(version.version);
         }
-        if(this._configurationService.configuration.config.filters.versions.length === (this._configurationService.configuration.supportedOccVersions.length -1)) {
-          this._configurationService.configuration.config.filters.versions.push("all");
+        if(this._configurationService.configuration.config.filtersOptions.versions.length === (this._configurationService.configuration.supportedOccVersions.length -1)) {
+          this._configurationService.configuration.config.filtersOptions.versions.push("all");
         }
       } else {
-        index = this._configurationService.configuration.config.filters.versions.indexOf(version.version);
+        index = this._configurationService.configuration.config.filtersOptions.versions.indexOf(version.version);
         if (index > -1) {
-          this._configurationService.configuration.config.filters.versions.splice(index, 1);
+          this._configurationService.configuration.config.filtersOptions.versions.splice(index, 1);
         }
       }
     }
@@ -62,7 +62,7 @@ export class EnvViewComponent implements OnInit {
 
   private updateFilters() {
     this.supportedVersions.forEach(item => {
-      item.checked = this.userConf.filters.versions.includes(item.version);
+      item.checked = this.userConf.filtersOptions.versions.includes(item.version);
     });
   }
 
@@ -72,23 +72,23 @@ export class EnvViewComponent implements OnInit {
   }
 
   clearSearch() {
-    this.userConf.search = "";
+    this.userConf.extensionConfiguration.search = "";
     this.updateResults();
   }
 
   resetFilters() {
-    this.userConf.filters.versions = [...this._configurationService.configuration.supportedOccVersions];
+    this.userConf.filtersOptions.versions = [...this._configurationService.configuration.supportedOccVersions];
     this.supportedVersions.forEach(version => {
-      version.checked = this.userConf.filters.versions.includes(version);
+      version.checked = this.userConf.filtersOptions.versions.includes(version);
     });
-    this.userConf.filters.aws = false;
-    this.userConf.filters.dev = true;
-    this.userConf.filters.int = true;
-    this.userConf.filters.qa = true;
-    this.userConf.filters.prod = true;
-    this.userConf.filters.preprod = true;
-    this.userConf.filters.aws = false;
-    this.userConf.filters.others = true;
+    this.userConf.filtersOptions.aws = false;
+    this.userConf.filtersOptions.dev = true;
+    this.userConf.filtersOptions.int = true;
+    this.userConf.filtersOptions.qa = true;
+    this.userConf.filtersOptions.prod = true;
+    this.userConf.filtersOptions.preprod = true;
+    this.userConf.filtersOptions.aws = false;
+    this.userConf.filtersOptions.others = true;
     this._configurationService.saveConfiguration();
     this.updateFilters();
     this._environmentsService.runSearch();

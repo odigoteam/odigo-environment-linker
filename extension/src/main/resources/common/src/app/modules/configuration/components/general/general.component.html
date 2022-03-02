@@ -43,7 +43,7 @@
     </div>
     <div class="col-8">
       <div>
-        <input class="form-control" name="awsRole" id="awsRole" type="text" (keyup)="checkAwsRole()" [(ngModel)]="this.userConfiguration.options.aws.role">
+        <input class="form-control" name="awsRole" id="awsRole" type="text" (keyup)="checkAwsRole()" [(ngModel)]="this.userConfiguration.userOptions.aws.role">
         <small class="form-text text-danger" [innerHTML]="awsRoleErrorMessage" *ngIf="awsRoleErrorMessage"></small>
       </div>
       <div class="conf-tips-info">This role will be used to switch on the AWS Console for an environment.</div>

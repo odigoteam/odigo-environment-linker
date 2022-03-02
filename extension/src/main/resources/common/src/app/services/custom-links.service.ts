@@ -44,7 +44,6 @@ export class CustomLinksService {
       if (currentGroup.length > 0) {
         groupedLinks.push([...currentGroup]);
       }
-      console.log(groupedLinks)
     }
     return groupedLinks;
   }

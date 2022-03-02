@@ -14,7 +14,7 @@ export class EnvironmentsService {
   }
 
   runSearch() {
-    if(this._configuration.configuration.config.options.extendedSearch) {
+    if(this._configuration.configuration.config.userOptions.extendedSearch) {
       this.searchExtended();
     } else {
       this.searchStrict();
@@ -24,8 +24,8 @@ export class EnvironmentsService {
   private searchStrict() {
     this.environments.environments.forEach((env) => {
       let filter = this.matchWithFilters(env);
-      if(this._configuration.configuration.config.search.length >= 1) {
-        let match = this.matchWithSearch(env, this._configuration.configuration.config.search);
+      if(this._configuration.configuration.config.extensionConfiguration.search.length >= 1) {
+        let match = this.matchWithSearch(env, this._configuration.configuration.config.extensionConfiguration.search);
         env.displayed = match && filter;
       } else {
         env.displayed = filter;
@@ -36,10 +36,10 @@ export class EnvironmentsService {
 
   private searchExtended() {
     let maximumLength = Math.max(...this.environments.environments.map<number>((env) => {
-      return this.lengthOfMatching(env, this._configuration.configuration.config.search);
+      return this.lengthOfMatching(env, this._configuration.configuration.config.extensionConfiguration.search);
     }));
     this.environments.environments.forEach(env => {
-      env.displayed = this.matchWithSearchWithLongestCommonSubsequence(env, this._configuration.configuration.config.search, maximumLength) && this.matchWithFilters(env);
+      env.displayed = this.matchWithSearchWithLongestCommonSubsequence(env, this._configuration.configuration.config.extensionConfiguration.search, maximumLength) && this.matchWithFilters(env);
     });
     this.numberOfResult.next(this.environments.environments.filter(env => env.displayed).length);
   }
@@ -48,30 +48,30 @@ export class EnvironmentsService {
     let match;
     switch (env.type) {
       case "DEV":
-        match = this._configuration.configuration.config.filters.dev;
+        match = this._configuration.configuration.config.filtersOptions.dev;
         break;
       case "INT":
-        match = this._configuration.configuration.config.filters.int;
+        match = this._configuration.configuration.config.filtersOptions.int;
         break;
       case "QA":
-        match = this._configuration.configuration.config.filters.qa;
+        match = this._configuration.configuration.config.filtersOptions.qa;
         break;
       case "PREPROD":
-        match = this._configuration.configuration.config.filters.preprod;
+        match = this._configuration.configuration.config.filtersOptions.preprod;
         break;
       case "PROD":
-        match = this._configuration.configuration.config.filters.prod;
+        match = this._configuration.configuration.config.filtersOptions.prod;
         break;
       default:
-        match = this._configuration.configuration.config.filters.others;
+        match = this._configuration.configuration.config.filtersOptions.others;
         break;
     }
 
-    if(this._configuration.configuration.config.filters.aws) {
+    if(this._configuration.configuration.config.filtersOptions.aws) {
       match = match && (env.provider === "AWS");
     }
 
-    if(!this._configuration.configuration.config.filters.versions.includes("all")) {
+    if(!this._configuration.configuration.config.filtersOptions.versions.includes("all")) {
       let currentVersion;
       if(env.occVersion.match("^[0-9]{1}\.[0-9]{1,2}.*$")) {
         let occVersionParts = env.occVersion.split(".");
@@ -79,7 +79,7 @@ export class EnvironmentsService {
       } else {
         currentVersion = env.occVersion;
       }
-      match = match && this._configuration.configuration.config.filters.versions.includes(currentVersion);
+      match = match && this._configuration.configuration.config.filtersOptions.versions.includes(currentVersion);
     }
 
     return match;

@@ -9,6 +9,7 @@ import {DataBusService} from "./services/data-bus.service";
 import {MessageViewContent} from "./modules/message/message-view/message-view.component";
 import {messages} from "../environments/messages";
 import {CustomLinksService} from "./services/custom-links.service";
+import {DataMigrationService} from "./services/data-migration.service";
 
 @Component({
   selector: 'app',
@@ -25,57 +26,60 @@ export class AppComponent implements OnInit {
               private _environmentsService: EnvironmentsService,
               private _awsRoleSwitcherService: AwsRoleSwitcherService,
               private _dataBusService: DataBusService,
+              private _dataMigrationService: DataMigrationService,
               @Inject(DOCUMENT) private _document: Document) {
     _dataBusService.confBtnIcon.subscribe(value => this.icon = value);
     _dataBusService.confBtnDisabled.subscribe(value => this.confButtonDisabled = value);
   }
 
   ngOnInit(): void {
-    this._configurationService.loadConfiguration((dataWasPresent: boolean) => {
-      this._customLinksService.load((dataWasPresent: boolean) => {
-        if(!dataWasPresent) {
-          console.error("Custom links was not loaded. An error occurred during retrieving from Storage.");
-        }
-      });
-      if (this._configurationService.configuration.config.options.darkTheme) {
-        this._document.body.classList.add('theme-dark');
-        this._document.body.classList.remove('theme-light');
-      } else {
-        this._document.body.classList.add('theme-light');
-        this._document.body.classList.remove('theme-dark');
-      }
-
-      if(!dataWasPresent) {
-        this._dataBusService.put(MESSAGE_VIEW, this.buildFirstUsageMessage());
-        this._router.navigate([MESSAGE_VIEW]).then(_ => {});
-        return;
-      }
-
-      this._awsRoleSwitcherService.initializeSwitcher();
-
-      this._configurationService.validateConfigURL(this._configurationService.configuration.config.confURL).subscribe(
-        next => {
-          if (next.hasError) {
-            this._dataBusService.put(MESSAGE_VIEW, this.buildWrongConfUrlMessage(next.message));
-            this._router.navigate([MESSAGE_VIEW]).then(_ => {});
-            return;
-          }
-
-          if(!this._configurationService.configuration.config.latestExtensionVersionUsed ||
-            this._configurationService.configuration.config.latestExtensionVersionUsed !== this._configurationService.configuration.currentExtensionVersion) {
-            this._router.navigate([RELEASE_NOTE_VIEW]).then(_ => {});
-            return;
-          }
-
-          this.loadEnvs();
-        },
-        error => {
-          if (error.hasError) {
-            this._dataBusService.put(MESSAGE_VIEW, this.buildWrongConfUrlMessage(error.message));
-            this._router.navigate([MESSAGE_VIEW]).then(_ => {});
-            return;
+    this._dataMigrationService.migrateModel(() => {
+      this._configurationService.loadConfiguration((dataWasPresent: boolean) => {
+        this._customLinksService.load((dataWasPresent: boolean) => {
+          if(!dataWasPresent) {
+            console.log("No custom links loaded from storage.");
           }
         });
+        if (this._configurationService.configuration.config.userOptions.darkTheme) {
+          this._document.body.classList.add('theme-dark');
+          this._document.body.classList.remove('theme-light');
+        } else {
+          this._document.body.classList.add('theme-light');
+          this._document.body.classList.remove('theme-dark');
+        }
+
+        if(!dataWasPresent) {
+          this._dataBusService.put(MESSAGE_VIEW, this.buildFirstUsageMessage());
+          this._router.navigate([MESSAGE_VIEW]).then(_ => {});
+          return;
+        }
+
+        this._awsRoleSwitcherService.initializeSwitcher();
+
+        this._configurationService.validateConfigURL(this._configurationService.configuration.config.extensionConfiguration.confURL).subscribe(
+          next => {
+            if (next.hasError) {
+              this._dataBusService.put(MESSAGE_VIEW, this.buildWrongConfUrlMessage(next.message));
+              this._router.navigate([MESSAGE_VIEW]).then(_ => {});
+              return;
+            }
+
+            if(!this._configurationService.configuration.config.extensionConfiguration.latestExtensionVersionUsed ||
+              this._configurationService.configuration.config.extensionConfiguration.latestExtensionVersionUsed !== this._configurationService.configuration.currentExtensionVersion) {
+              this._router.navigate([RELEASE_NOTE_VIEW]).then(_ => {});
+              return;
+            }
+
+            this.loadEnvs();
+          },
+          error => {
+            if (error.hasError) {
+              this._dataBusService.put(MESSAGE_VIEW, this.buildWrongConfUrlMessage(error.message));
+              this._router.navigate([MESSAGE_VIEW]).then(_ => {});
+              return;
+            }
+          });
+      });
     });
   }
 
@@ -105,8 +109,8 @@ export class AppComponent implements OnInit {
   }
 
   loadEnvs() {
-    if (!this._configurationService.configuration.config.confURL ||
-      this._configurationService.configuration.config.confURL === "") {
+    if (!this._configurationService.configuration.config.extensionConfiguration.confURL ||
+      this._configurationService.configuration.config.extensionConfiguration.confURL === "") {
       this._dataBusService.put(MESSAGE_VIEW, this.buildFirstUsageMessage());
       this._router.navigate([MESSAGE_VIEW]).then(_ => {});
       return;

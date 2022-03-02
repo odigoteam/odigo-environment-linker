@@ -18,7 +18,7 @@ export class GeneralComponent implements OnInit {
 
   constructor(private _configurationService: ConfigurationService,
               private _dataBusService: DataBusService) {
-    this.configUrl = this._configurationService.configuration.config.confURL;
+    this.configUrl = this._configurationService.configuration.config.extensionConfiguration.confURL;
     this.userConfiguration = this._configurationService.configuration.config;
   }
 
@@ -69,7 +69,7 @@ export class GeneralComponent implements OnInit {
       message: ""
     };
     this._dataBusService.confBtnDisabled.next(true);
-    if(!this.userConfiguration.options.aws.role) {
+    if(!this.userConfiguration.userOptions.aws.role) {
       validation.hasError = true;
       validation.message = messages.aws.roleEmpty;
     }

@@ -13,7 +13,7 @@
     </div>
     <div class="col-6">
       <div>
-        <select class="form-select" aria-label="Type file type" name="cmdbFileType" id="cmdbFileType" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.cmdbFileType">
+        <select class="form-select" aria-label="Type file type" name="cmdbFileType" id="cmdbFileType" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.cmdbFileType">
           <option value=".env" selected>.env</option>
           <option value=".properties">.properties</option>
           <option value=".sh">.sh</option>
@@ -39,7 +39,7 @@
     <div class="col-6">
       <div>
         <div class="form-check form-switch">
-          <input class="form-check-input" type="checkbox" name="useExtendedSearch" id="useExtendedSearch" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.options.extendedSearch">
+          <input class="form-check-input" type="checkbox" name="useExtendedSearch" id="useExtendedSearch" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.extendedSearch">
         </div>
       </div>
       <div class="conf-tips-info">

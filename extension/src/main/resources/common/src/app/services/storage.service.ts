@@ -9,7 +9,7 @@ export class StorageService {
   constructor(private _browserService: BrowserService) {
   }
 
-  get(key: string): Promise<void> {
+  get(key: string | null): Promise<void> {
     return new Promise(resolve => {
       this._browserService.storage.get(key, resolve)
     })
@@ -17,5 +17,13 @@ export class StorageService {
 
   set(item: any): void {
     this._browserService.storage.set(item);
+  }
+
+  clear(callback: any): void {
+    this._browserService.storage.clear(callback);
+  }
+
+  remove(key: string, callback: any) {
+    this._browserService.storage.remove(key, callback);
   }
 }
