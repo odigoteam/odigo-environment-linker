@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Custom links
 - Configuration data model migration
 ### Changed
-- Centralize all messages in one `messages.ts` file
+- Centralize all messages in `messages.ts` file
 - Usage of nested router for configuration view
 - Change CMDB file type option select to Bootstrap dropdown component
 ### Fixed
