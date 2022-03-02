@@ -90,6 +90,36 @@ export class ConfigurationService {
     });
   }
 
+  checkVPNConnection(): Observable<any> {
+    return new Observable<any>( observer => {
+      this.http.get<Environments>(environment.vpnCheckingUrl, {observe: 'response', responseType: 'json'}).subscribe(
+        (response) => {
+          observer.next({
+            hasError: false,
+            message: response.statusText
+          });
+        },
+        (error) => {
+          if(error.status === 200) {
+            observer.next({
+              hasError: false,
+              message: error.statusText
+            });
+          } else {
+            console.error(error);
+            observer.error({
+              hasError: true,
+              message: error.statusText
+            });
+          }
+        },
+        () => {
+          observer.complete();
+        }
+      );
+    });
+  }
+
   public get configuration() {
     return this._configuration;
   }

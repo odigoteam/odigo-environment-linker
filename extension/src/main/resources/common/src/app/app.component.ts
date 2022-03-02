@@ -34,9 +34,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this._dataMigrationService.migrateModel(() => {
-      this._configurationService.loadConfiguration((dataWasPresent: boolean) => {
-        this._customLinksService.load((dataWasPresent: boolean) => {
-          if(!dataWasPresent) {
+      this._configurationService.loadConfiguration((configurationLoaded: boolean) => {
+        this._customLinksService.load((customLinksLoaded: boolean) => {
+          if(!customLinksLoaded) {
             console.log("No custom links loaded from storage.");
           }
         });
@@ -48,7 +48,7 @@ export class AppComponent implements OnInit {
           this._document.body.classList.remove('theme-dark');
         }
 
-        if(!dataWasPresent) {
+        if(!configurationLoaded) {
           this._dataBusService.put(MESSAGE_VIEW, this.buildFirstUsageMessage());
           this._router.navigate([MESSAGE_VIEW]).then(_ => {});
           return;
@@ -56,10 +56,35 @@ export class AppComponent implements OnInit {
 
         this._awsRoleSwitcherService.initializeSwitcher();
 
-        this._configurationService.validateConfigURL(this._configurationService.configuration.config.extensionConfiguration.confURL).subscribe(
+        this._configurationService.checkVPNConnection().subscribe(
           next => {
-            if (next.hasError) {
-              this._dataBusService.put(MESSAGE_VIEW, this.buildWrongConfUrlMessage(next.message));
+            this._configurationService.validateConfigURL(this._configurationService.configuration.config.extensionConfiguration.confURL).subscribe(
+              next => {
+                if (next.hasError) {
+                  this._dataBusService.put(MESSAGE_VIEW, this.buildWrongConfUrlMessage(next.message));
+                  this._router.navigate([MESSAGE_VIEW]).then(_ => {});
+                  return;
+                }
+
+                if(!this._configurationService.configuration.config.extensionConfiguration.latestExtensionVersionUsed ||
+                  this._configurationService.configuration.config.extensionConfiguration.latestExtensionVersionUsed !== this._configurationService.configuration.currentExtensionVersion) {
+                  this._router.navigate([RELEASE_NOTE_VIEW]).then(_ => {});
+                  return;
+                }
+
+                this.loadEnvs();
+              },
+              error => {
+                if (error.hasError) {
+                  this._dataBusService.put(MESSAGE_VIEW, this.buildWrongConfUrlMessage(error.message));
+                  this._router.navigate([MESSAGE_VIEW]).then(_ => {});
+                  return;
+                }
+              });
+          },
+          error => {
+            if (error.hasError) {
+              this._dataBusService.put(MESSAGE_VIEW, this.buildVPNMessage());
               this._router.navigate([MESSAGE_VIEW]).then(_ => {});
               return;
             }
@@ -71,14 +96,8 @@ export class AppComponent implements OnInit {
             }
 
             this.loadEnvs();
-          },
-          error => {
-            if (error.hasError) {
-              this._dataBusService.put(MESSAGE_VIEW, this.buildWrongConfUrlMessage(error.message));
-              this._router.navigate([MESSAGE_VIEW]).then(_ => {});
-              return;
-            }
-          });
+          }
+        )
       });
     });
   }
