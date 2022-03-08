@@ -223,7 +223,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix Markdown links to tag comparison URL with footnote-style links.
 
 [Unreleased]: https://github.com/guitaro/odigo-environment-linker/compare/v4.2.0...HEAD
-[4.1.0]: https://github.com/guitaro/odigo-environment-linker/releases/tag/v4.2.0
+[4.2.0]: https://github.com/guitaro/odigo-environment-linker/releases/tag/v4.2.0
 [4.1.0]: https://github.com/guitaro/odigo-environment-linker/releases/tag/v4.1.0
 [4.0.0]: https://github.com/guitaro/odigo-environment-linker/releases/tag/v4.0.0
 What is a changelog?
