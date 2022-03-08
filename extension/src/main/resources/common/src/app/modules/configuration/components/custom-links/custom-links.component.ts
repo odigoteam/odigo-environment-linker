@@ -15,13 +15,23 @@ export class CustomLinksComponent {
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object,
               private _customLinksServices: CustomLinksService) {
-    this.links = this._customLinksServices.customLinks;
+    if(this._customLinksServices.customLinks) {
+      this.links = this._customLinksServices.customLinks;
+    }
   }
 
   changeIcon($event: string) {
     if(this.currentLink) {
       this.currentLink.icon = $event;
       this.saveChanges();
+    }
+  }
+
+  addNewLink() {
+    this.links.unshift(new CustomLink());
+    this.currentLink = this.links[0];
+    if (isPlatformBrowser(this.platformId)) {
+      this.currentLinkTitle?.nativeElement.focus();
     }
   }
 
@@ -34,15 +44,6 @@ export class CustomLinksComponent {
       this.currentLink = undefined;
     }
     this.links.splice(index, 1);
-    this.saveChanges();
-  }
-
-  addNewLink() {
-    this.links.unshift(new CustomLink());
-    this.currentLink = this.links[0];
-    if (isPlatformBrowser(this.platformId)) {
-      this.currentLinkTitle?.nativeElement.focus();
-    }
     this.saveChanges();
   }
 

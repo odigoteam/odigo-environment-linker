@@ -13,7 +13,7 @@ export class AppearanceComponent implements OnInit {
 
   constructor(private _configurationService: ConfigurationService,
               @Inject(DOCUMENT) private _document: Document) {
-    this.userConfiguration = this._configurationService.configuration.config;
+    this.userConfiguration = this._configurationService.configuration.userConfiguration;
   }
 
   ngOnInit(): void {

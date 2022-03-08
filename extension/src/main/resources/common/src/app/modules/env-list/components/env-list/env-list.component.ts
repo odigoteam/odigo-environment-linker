@@ -29,7 +29,7 @@ export class EnvListComponent implements OnInit {
               private _awsRoleSwitcherService: AwsRoleSwitcherService,
               private _router: Router,
               private _serializer: UrlSerializer) {
-    this.userOptions = this._configurationService.configuration.config.userOptions;
+    this.userOptions = this._configurationService.configuration.userConfiguration.userOptions;
     this.isCurrentTabAws = this._configurationService.configuration.isCurrentTabAws;
 
     this.customLinks = _customLinksServices.getLinksGrouped(this.CUSTOM_LINKS_GROUP_SIZE);
@@ -160,9 +160,9 @@ export class EnvListComponent implements OnInit {
       profile: env.env,
       account: env.aws.accountId,
       color: this.computeColorForAWS(env.type),
-      roleName: this._configurationService.configuration.config.userOptions.aws.role,
+      roleName: this._configurationService.configuration.userConfiguration.userOptions.aws.role,
       displayName: env.env + " (" + env.name + ")",
-      redirectUri: this._awsRoleSwitcherService.createRedirectUri(url, region, this._configurationService.configuration.config.userOptions.aws.region),
+      redirectUri: this._awsRoleSwitcherService.createRedirectUri(url, region, this._configurationService.configuration.userConfiguration.userOptions.aws.region),
       search: env.env.toLowerCase() + ' ' + env.aws.accountId,
       actionSubdomain: ""
     };

@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Custom links
 - Hub link for env with version >= 6.0
 - Configuration data model migration
+- Add 6.0 to version filter dropdown
 ### Changed
 - Centralize all messages in `messages.ts` file
 - Usage of nested router for configuration view
@@ -19,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix CSS background issue with url checker icon
 - AWS button is not disabled if tab is not AWS console
 - Improve VPN connection checking
+- CSS for version filter badge
 ## [4.1.0] <font size="2">*- 2022-02-23*</font>
 ### Added
 - About view

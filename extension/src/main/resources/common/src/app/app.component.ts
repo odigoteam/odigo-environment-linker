@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
             console.log("No custom links loaded from storage.");
           }
         });
-        if (this._configurationService.configuration.config.userOptions.darkTheme) {
+        if (this._configurationService.configuration.userConfiguration.userOptions.darkTheme) {
           this._document.body.classList.add('theme-dark');
           this._document.body.classList.remove('theme-light');
         } else {
@@ -58,7 +58,7 @@ export class AppComponent implements OnInit {
 
         this._configurationService.checkVPNConnection().subscribe(
           next => {
-            this._configurationService.validateConfigURL(this._configurationService.configuration.config.extensionConfiguration.confURL).subscribe(
+            this._configurationService.validateConfigURL(this._configurationService.configuration.userConfiguration.extensionConfiguration.confURL).subscribe(
               next => {
                 if (next.hasError) {
                   this._dataBusService.put(MESSAGE_VIEW, this.buildWrongConfUrlMessage(next.message));
@@ -66,8 +66,8 @@ export class AppComponent implements OnInit {
                   return;
                 }
 
-                if(!this._configurationService.configuration.config.extensionConfiguration.latestExtensionVersionUsed ||
-                  this._configurationService.configuration.config.extensionConfiguration.latestExtensionVersionUsed !== this._configurationService.configuration.currentExtensionVersion) {
+                if(!this._configurationService.configuration.userConfiguration.extensionConfiguration.latestExtensionVersionUsed ||
+                  this._configurationService.configuration.userConfiguration.extensionConfiguration.latestExtensionVersionUsed !== this._configurationService.configuration.currentExtensionVersion) {
                   this._router.navigate([RELEASE_NOTE_VIEW]).then(_ => {});
                   return;
                 }
@@ -89,8 +89,8 @@ export class AppComponent implements OnInit {
               return;
             }
 
-            if(!this._configurationService.configuration.config.extensionConfiguration.latestExtensionVersionUsed ||
-              this._configurationService.configuration.config.extensionConfiguration.latestExtensionVersionUsed !== this._configurationService.configuration.currentExtensionVersion) {
+            if(!this._configurationService.configuration.userConfiguration.extensionConfiguration.latestExtensionVersionUsed ||
+              this._configurationService.configuration.userConfiguration.extensionConfiguration.latestExtensionVersionUsed !== this._configurationService.configuration.currentExtensionVersion) {
               this._router.navigate([RELEASE_NOTE_VIEW]).then(_ => {});
               return;
             }
@@ -128,8 +128,8 @@ export class AppComponent implements OnInit {
   }
 
   loadEnvs() {
-    if (!this._configurationService.configuration.config.extensionConfiguration.confURL ||
-      this._configurationService.configuration.config.extensionConfiguration.confURL === "") {
+    if (!this._configurationService.configuration.userConfiguration.extensionConfiguration.confURL ||
+      this._configurationService.configuration.userConfiguration.extensionConfiguration.confURL === "") {
       this._dataBusService.put(MESSAGE_VIEW, this.buildFirstUsageMessage());
       this._router.navigate([MESSAGE_VIEW]).then(_ => {});
       return;

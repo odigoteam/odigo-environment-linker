@@ -11,7 +11,7 @@ export class BehaviourComponent {
   userConfiguration: UserConfiguration = new UserConfiguration();
 
   constructor(private _configurationService: ConfigurationService) {
-    this.userConfiguration = this._configurationService.configuration.config;
+    this.userConfiguration = this._configurationService.configuration.userConfiguration;
   }
 
   saveConfig(): void {

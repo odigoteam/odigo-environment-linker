@@ -19,20 +19,17 @@ export class DataMigrationService {
       for (const [key, value] of Object.entries(data)) {
         if(toKeep.indexOf(key) >= 0) {
           // do nothing
-        } else if(toMigrate.indexOf(key) >= 0) {
-          if(key === 'odigoEnvLinker') {
-              this._configuration.configuration.config.userOptions = { ...this._configuration.configuration.config.userOptions, ...data.odigoEnvLinker.config.options };
-              this._configuration.configuration.config.filtersOptions = { ...this._configuration.configuration.config.filtersOptions, ...data.odigoEnvLinker.config.filters };
-              this._configuration.configuration.config.extensionConfiguration.latestExtensionVersionUsed = data.odigoEnvLinker.config.latestExtensionVersionUsed;
-              this._configuration.configuration.config.extensionConfiguration.search = data.odigoEnvLinker.config.search;
-              this._configuration.configuration.config.extensionConfiguration.confURL = data.odigoEnvLinker.config.confURL;
+        } else if(toMigrate.indexOf(key) >= 0 && key === 'odigoEnvLinker') {
+          this._configuration.configuration.userConfiguration.userOptions = { ...this._configuration.configuration.userConfiguration.userOptions, ...data.odigoEnvLinker.config.options };
+          this._configuration.configuration.userConfiguration.filterOptions = { ...this._configuration.configuration.userConfiguration.filterOptions, ...data.odigoEnvLinker.config.filters };
+          this._configuration.configuration.userConfiguration.extensionConfiguration.latestExtensionVersionUsed = data.odigoEnvLinker.config.latestExtensionVersionUsed;
+          this._configuration.configuration.userConfiguration.extensionConfiguration.search = data.odigoEnvLinker.config.search;
+          this._configuration.configuration.userConfiguration.extensionConfiguration.confURL = data.odigoEnvLinker.config.confURL;
 
-              this._storage.set({extensionConfiguration : this._configuration.configuration.config.extensionConfiguration});
-              this._storage.set({userOptions : this._configuration.configuration.config.userOptions});
-              this._storage.set({filtersOptions : this._configuration.configuration.config.filtersOptions});
-              this._storage.remove(key, () => {});
-              console.log("Configuration Model migrated successfully.")
-            }
+          this._storage.set({extensionConfiguration : this._configuration.configuration.userConfiguration.extensionConfiguration});
+          this._storage.set({userOptions : this._configuration.configuration.userConfiguration.userOptions});
+          this._storage.set({filtersOptions : this._configuration.configuration.userConfiguration.filterOptions});
+          this._storage.remove(key, () => {});
         } else {
           this._storage.remove(key, () => {});
         }

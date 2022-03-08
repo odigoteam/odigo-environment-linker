@@ -19,7 +19,9 @@ export class CustomLinksService {
 
   load(callback: any): void {
     this._storage.get(this.customLinksStoreKey).then((data: any) => {
-      this._customLinks = data.customLinks;
+      if(data.customLinks) {
+        this._customLinks = data.customLinks;
+      }
       callback(!!data.customLinks);
     });
   }

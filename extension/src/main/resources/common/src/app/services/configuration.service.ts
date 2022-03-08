@@ -22,23 +22,23 @@ export class ConfigurationService {
 
   loadConfiguration(callback: any): void {
     this._storage.get(null).then((data: any) => {
-      this._configuration.config.extensionConfiguration = { ...this._configuration.config.extensionConfiguration, ...data.extensionConfiguration };
-      this._configuration.config.userOptions = { ...this._configuration.config.userOptions, ...data.userOptions };
-      this._configuration.config.filtersOptions = { ...this._configuration.config.filtersOptions, ...data.filtersOptions };
+      this._configuration.userConfiguration.extensionConfiguration = { ...this._configuration.userConfiguration.extensionConfiguration, ...data.extensionConfiguration };
+      this._configuration.userConfiguration.userOptions = { ...this._configuration.userConfiguration.userOptions, ...data.userOptions };
+      this._configuration.userConfiguration.filterOptions = { ...this._configuration.userConfiguration.filterOptions, ...data.filtersOptions };
       this._configuration.currentExtensionVersion = packageJson.version;
       callback(!!data.extensionConfiguration && !!data.userOptions && !!data.filtersOptions);
     });
   }
 
   loadEnvironments(): Observable<HttpResponse<Environments>> {
-    return this.http.get<Environments>(this._configuration.config.extensionConfiguration.confURL, {observe: 'response', responseType: 'json'});
+    return this.http.get<Environments>(this._configuration.userConfiguration.extensionConfiguration.confURL, {observe: 'response', responseType: 'json'});
   }
 
   saveConfiguration(): void {
-    this._configuration.config.extensionConfiguration.latestExtensionVersionUsed = packageJson.version;
-    this._storage.set({extensionConfiguration : this._configuration.config.extensionConfiguration});
-    this._storage.set({userOptions : this._configuration.config.userOptions});
-    this._storage.set({filtersOptions : this._configuration.config.filtersOptions});
+    this._configuration.userConfiguration.extensionConfiguration.latestExtensionVersionUsed = packageJson.version;
+    this._storage.set({extensionConfiguration : this._configuration.userConfiguration.extensionConfiguration});
+    this._storage.set({userOptions : this._configuration.userConfiguration.userOptions});
+    this._storage.set({filtersOptions : this._configuration.userConfiguration.filterOptions});
   }
 
   validateConfigURL(value: string): Observable<any> {
@@ -52,7 +52,7 @@ export class ConfigurationService {
             hasError = true;
             message = messages.confUrl.urlPattern;
           } else {
-            this._configuration.config.extensionConfiguration.confURL = confURL;
+            this._configuration.userConfiguration.extensionConfiguration.confURL = confURL;
           }
         } else {
           hasError = true;

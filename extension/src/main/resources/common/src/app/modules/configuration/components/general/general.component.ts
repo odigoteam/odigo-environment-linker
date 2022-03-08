@@ -18,8 +18,8 @@ export class GeneralComponent implements OnInit {
 
   constructor(private _configurationService: ConfigurationService,
               private _dataBusService: DataBusService) {
-    this.configUrl = this._configurationService.configuration.config.extensionConfiguration.confURL;
-    this.userConfiguration = this._configurationService.configuration.config;
+    this.configUrl = this._configurationService.configuration.userConfiguration.extensionConfiguration.confURL;
+    this.userConfiguration = this._configurationService.configuration.userConfiguration;
   }
 
   ngOnInit(): void {

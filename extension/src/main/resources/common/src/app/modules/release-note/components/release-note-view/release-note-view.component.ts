@@ -27,11 +27,11 @@ export class ReleaseNoteViewComponent {
 
   close(): void {
     this._router.navigate([LOADER_VIEW]);
-    this._configurationService.configuration.config.extensionConfiguration.latestExtensionVersionUsed = this._configurationService.configuration.currentExtensionVersion;
+    this._configurationService.configuration.userConfiguration.extensionConfiguration.latestExtensionVersionUsed = this._configurationService.configuration.currentExtensionVersion;
     this._configurationService.saveConfiguration();
-    if(!this._configurationService.configuration.config.extensionConfiguration.confURL ||
-      this._configurationService.configuration.config.extensionConfiguration.confURL === "" ||
-      this._configurationService.configuration.config.extensionConfiguration.confURL.indexOf("https://") < 0) {
+    if(!this._configurationService.configuration.userConfiguration.extensionConfiguration.confURL ||
+      this._configurationService.configuration.userConfiguration.extensionConfiguration.confURL === "" ||
+      this._configurationService.configuration.userConfiguration.extensionConfiguration.confURL.indexOf("https://") < 0) {
       let messageViewContent = new MessageViewContent();
       messageViewContent.title = messages.welcome.title;
       messageViewContent.pict = "assets/images/bot.png";

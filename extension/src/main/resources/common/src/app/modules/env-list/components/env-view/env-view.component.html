@@ -14,37 +14,37 @@
     <div class="row" id="filter-section">
       <div class="col-12">
         <span class="badge bg-dark">
-          <input class="form-check-input" type="checkbox" name="filterDEV" id="filterDEV" (change)="updateResults()" [(ngModel)]="this.userConf.filtersOptions.dev">
+          <input class="form-check-input" type="checkbox" name="filterDEV" id="filterDEV" (change)="updateResults()" [(ngModel)]="this.userConf.filterOptions.dev">
           <label class="form-check-label" for="filterDEV">DEV</label>
         </span>
         <span class="badge bg-success">
-          <input class="form-check-input" type="checkbox" name="filterINT" id="filterINT" (change)="updateResults()" [(ngModel)]="this.userConf.filtersOptions.int">
+          <input class="form-check-input" type="checkbox" name="filterINT" id="filterINT" (change)="updateResults()" [(ngModel)]="this.userConf.filterOptions.int">
           <label class="form-check-label" for="filterINT">INT</label>
         </span>
         <span class="badge bg-info">
-          <input class="form-check-input" type="checkbox" name="filterQUA" id="filterQUA" (change)="updateResults()" [(ngModel)]="this.userConf.filtersOptions.qa">
+          <input class="form-check-input" type="checkbox" name="filterQUA" id="filterQUA" (change)="updateResults()" [(ngModel)]="this.userConf.filterOptions.qa">
           <label class="form-check-label" for="filterQUA">QA</label>
         </span>
         <span class="badge bg-warning text-dark">
-          <input class="form-check-input" type="checkbox" name="filterPREPROD" id="filterPREPROD" (change)="updateResults()" [(ngModel)]="this.userConf.filtersOptions.preprod">
+          <input class="form-check-input" type="checkbox" name="filterPREPROD" id="filterPREPROD" (change)="updateResults()" [(ngModel)]="this.userConf.filterOptions.preprod">
           <label class="form-check-label" for="filterPREPROD">PREPROD</label>
         </span>
         <span class="badge bg-danger">
-          <input class="form-check-input" type="checkbox" name="filterPROD" id="filterPROD" (change)="updateResults()" [(ngModel)]="this.userConf.filtersOptions.prod">
+          <input class="form-check-input" type="checkbox" name="filterPROD" id="filterPROD" (change)="updateResults()" [(ngModel)]="this.userConf.filterOptions.prod">
           <label class="form-check-label" for="filterPROD">PROD</label>
         </span>
         <span class="badge bg-aws text-dark">
-          <input class="form-check-input" type="checkbox" name="filterAWS" id="filterAWS" (change)="updateResults()" [(ngModel)]="this.userConf.filtersOptions.aws">
+          <input class="form-check-input" type="checkbox" name="filterAWS" id="filterAWS" (change)="updateResults()" [(ngModel)]="this.userConf.filterOptions.aws">
           <label class="form-check-label" for="filterAWS">AWS</label>
         </span>
         <span class="badge bg-secondary text-dark">
-          <input class="form-check-input" type="checkbox" name="filterOthers" id="filterOthers" (change)="updateResults()" [(ngModel)]="this.userConf.filtersOptions.others">
+          <input class="form-check-input" type="checkbox" name="filterOthers" id="filterOthers" (change)="updateResults()" [(ngModel)]="this.userConf.filterOptions.others">
           <label class="form-check-label" for="filterOthers">Others</label>
         </span>
-        <div class="btn-group">
+        <div class="btn-group" style="margin-top: -2px;">
           <button class="badge bg-secondary text-dark btn btn-sm dropdown-toggle form-select-oel" type="button"
                   id="versionFilterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            Versions
+            Versions ({{numberOfActiveFilters()}})
           </button>
           <ul class="dropdown-menu">
             <li *ngFor="let version of supportedVersions; let i = index;">
@@ -57,7 +57,7 @@
             </li>
           </ul>
         </div>
-        <a class="badge text-dark" (click)="resetFilters()">Reset filters</a>
+        <a class="badge text-dark" (click)="resetFilters()" title="Reset filters"><i class="bi bi-x-circle-fill"></i></a>
       </div>
     </div>
     <env-list></env-list>
