@@ -8,6 +8,8 @@ import {environment} from "../../../../../environments/environment";
 import {MessageViewContent} from "../../../message/message-view/message-view.component";
 import {EnvironmentsService} from "../../../../services/environments.service";
 import {messages} from "../../../../../environments/messages";
+import {Environment} from "../../../../models/environments.class";
+import {BrowserService} from "../../../../services/browser.service";
 
 @Component({
   selector: 'release-note-view',
@@ -21,6 +23,7 @@ export class ReleaseNoteViewComponent {
   constructor(private _router: Router,
               private _dataBusService : DataBusService,
               private _configurationService: ConfigurationService,
+              private _browser: BrowserService,
               private _environmentsService: EnvironmentsService) {
     this._dataBusService.confBtnIcon.next("");
   }
@@ -73,4 +76,8 @@ export class ReleaseNoteViewComponent {
       }});
   }
 
+  openLink(url: string) {
+    this._browser.tabs.create({url});
+    window.close();
+  }
 }

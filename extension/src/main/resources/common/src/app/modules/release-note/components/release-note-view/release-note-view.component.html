@@ -2,9 +2,11 @@
   <div class="row">
     <div class="col-12">
       <div class="card">
-        <div class="card-img-top"></div>
+        <div class="card-img-top"><span style="font-size: 2em; font-weight: bold; text-shadow: 0px 0px 15px rgb(255 255 255 / 78%);-webkit-background-clip: text;-moz-background-clip: text;background-clip: text;">8<sup>th</sup></span> March</div>
         <div class="card-body scrollbar">
           <h5 class="card-title" [innerHTML]="content.title"></h5>
+          <p>The 8th march was the International Women Day (<a (click)="openLink('https://www.internationalwomensday.com/')">#IWD2022</a>) and the time to honor those women visionaries, innovators, entrepreneurs, mentors & advocates across the world driving new ways of thinking & doing. And also, top of all, all
+            Odigo's women employees who help and lead us every day. We're celebrating women forging change and we're working to <a (click)="openLink('https://www.internationalwomensday.com/theme/')">#BreakTheBias</a> !</p>
           <div class="card-text mt-3">
             <b>v{{appVersion}}</b>
             <div *ngIf="content.features && content.features.length > 0" class="mt-2">

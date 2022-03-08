@@ -1,7 +1,14 @@
 .card-img-top {
-  background: url("../../../../../assets/images/update.png") center no-repeat;
-  background-size: cover;
-  height: 400px;
+  height: 500px;
+  background-image: url("../../../../../assets/images/release-banner.jpg");
+  background-size: contain;
+  background-color: #360c4a;
+  font-size: 2em;
+  text-align: right;
+  padding-right: 90px;
+  color: #fff;
+  line-height: 150px;
+  background-repeat: no-repeat;
 }
 
 /*------------------- Overrides ---------------------*/
@@ -21,4 +28,8 @@
 
 .card-footer {
   background-color: var(--input-bg-color-focus);
+}
+
+a {
+  text-decoration: underline !important;
 }
