@@ -21,6 +21,7 @@ export class EnvUrls {
   routing: Module = new Module();
   cmdb: Module = new Module();
   ssh: Module = new Module();
+  hub: Module = new Module();
 }
 
 export class AwsEnv {

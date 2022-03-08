@@ -66,39 +66,43 @@
     <div class="col-6 mt-2">
       <div class="form-check form-switch">
         <input class="form-check-input" type="checkbox" name="displayAWSConsole" id="displayAWSConsole" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.display.aws">
-        <label class="form-check-label" for="displayAWSConsole">AWS Console</label>
+        <label class="form-check-label" for="displayAWSConsole"><img src="assets/images/logo-aws.png" alt="AWS" class="aws-logo"/> AWS Console</label>
       </div>
       <div class="form-check form-switch">
         <input class="form-check-input" type="checkbox" name="displayConfiguration" id="displayConfiguration" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.display.cmdb">
-        <label class="form-check-label" for="displayConfiguration">Configuration (CMDB)</label>
+        <label class="form-check-label" for="displayConfiguration"><i class="bi bi-gear-fill"></i> Configuration (CMDB)</label>
       </div>
       <div class="form-check form-switch">
         <input class="form-check-input" type="checkbox" name="displayConsole" id="displayConsole" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.display.console">
-        <label class="form-check-label" for="displayConsole">Console</label>
+        <label class="form-check-label" for="displayConsole"><i class="bi bi-display"></i> Console</label>
       </div>
       <div class="form-check form-switch">
         <input class="form-check-input" type="checkbox" name="displayHealthCheck" id="displayHealthCheck" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.display.healthCheck">
-        <label class="form-check-label" for="displayHealthCheck">Health check</label>
+        <label class="form-check-label" for="displayHealthCheck"><i class="bi bi-activity"></i> Health check</label>
+      </div>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" name="displayHub" id="displayHub" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.display.hub">
+        <label class="form-check-label" for="displayHub"><i class="bi bi-signpost-split"></i> Hub</label>
       </div>
       <div class="form-check form-switch">
         <input class="form-check-input" type="checkbox" name="displayPortal" id="displayPortal" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.display.portal">
-        <label class="form-check-label" for="displayPortal">Portal</label>
+        <label class="form-check-label" for="displayPortal"><i class="bi bi-house-fill"></i> Portal</label>
       </div>
       <div class="form-check form-switch">
         <input class="form-check-input" type="checkbox" name="displayPIF" id="displayPIF" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.display.pif">
-        <label class="form-check-label" for="displayPIF">Private PaaS (PIF)</label>
+        <label class="form-check-label" for="displayPIF"><i class="bi bi-code-square"></i> Private PaaS (PIF)</label>
       </div>
       <div class="form-check form-switch">
         <input class="form-check-input" type="checkbox" name="displayPEF" id="displayPEF" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.display.pef">
-        <label class="form-check-label" for="displayPEF">Public PaaS (PEF)</label>
+        <label class="form-check-label" for="displayPEF"><i class="bi bi-code"></i> Public PaaS (PEF)</label>
       </div>
       <div class="form-check form-switch">
         <input class="form-check-input" type="checkbox" name="displayRouting" id="displayRouting" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.display.routing">
-        <label class="form-check-label" for="displayRouting">Routing</label>
+        <label class="form-check-label" for="displayRouting"><i class="bi bi-arrow-left-right"></i> Routing</label>
       </div>
       <div class="form-check form-switch">
         <input class="form-check-input" type="checkbox" name="displaySsh" id="displaySsh" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.display.ssh">
-        <label class="form-check-label" for="displaySsh">SSH</label>
+        <label class="form-check-label" for="displaySsh"><i class="bi bi-terminal-fill"></i> SSH</label>
       </div>
     </div>
   </div>

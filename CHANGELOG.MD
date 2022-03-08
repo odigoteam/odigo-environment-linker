@@ -7,11 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - Custom links
+- Hub link for env with version >= 6.0
 - Configuration data model migration
 ### Changed
 - Centralize all messages in `messages.ts` file
 - Usage of nested router for configuration view
 - Change CMDB file type option select to Bootstrap dropdown component
+- Change AWS logo
 ### Fixed
 - Fix grammatical errors in messages
 - Fix CSS background issue with url checker icon

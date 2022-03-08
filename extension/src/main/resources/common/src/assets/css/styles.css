@@ -27,6 +27,11 @@
   color: #2a3045;
 }
 
+.aws-logo {
+  height: 24px;
+  width: 24px;
+}
+
 .badge {
   margin-right: 5px;
 }

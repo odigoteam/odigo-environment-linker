@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {EnvironmentsService} from "../../../../services/environments.service";
 import {ConfigurationService} from "../../../../services/configuration.service";
 import {UserOptions} from "../../../../models/settings.class";
-import {AwsEnv, Client, Environment} from '../../../../models/environments.class';
+import {AwsEnv, Client, Environment, Module} from '../../../../models/environments.class';
 import {BrowserService} from "../../../../services/browser.service";
 import {AwsRoleSwitcherService} from "../../../../services/aws-role-switcher.service";
 import {Router, UrlSerializer} from "@angular/router";
@@ -14,7 +14,6 @@ import {CustomLinksService} from "../../../../services/custom-links.service";
   styleUrls: ['./env-list.component.css']
 })
 export class EnvListComponent implements OnInit {
-  private readonly AWS_LOGO_WHITE: string = "assets/images/logo-aws-white.png";
   private readonly CUSTOM_LINKS_GROUP_SIZE = 15;
   nbResults: number = 0;
   totalEnvs: number = 0;
@@ -22,8 +21,6 @@ export class EnvListComponent implements OnInit {
   customLinks: any[] = [];
   userOptions: UserOptions = new UserOptions();
   isCurrentTabAws: boolean = false;
-  awsLogoImageUrl: string = "assets/images/logo-aws-dark.png";
-
 
   constructor(private _environmentsService: EnvironmentsService,
               private _configurationService: ConfigurationService,
@@ -45,9 +42,6 @@ export class EnvListComponent implements OnInit {
   ngOnInit(): void {
     if (this._environmentsService.environments) {
       this.totalEnvs = this._environmentsService.environments.environments.length;
-    }
-    if (this.userOptions.darkTheme) {
-      this.awsLogoImageUrl = this.AWS_LOGO_WHITE;
     }
     if (this._environmentsService.environments) {
       this._environmentsService.environments?.environments.forEach(env => {
@@ -94,6 +88,9 @@ export class EnvListComponent implements OnInit {
         case 'console':
           displayOption = this.userOptions.display.console;
           break;
+        case 'hub':
+          displayOption = this.userOptions.display.hub;
+          break;
         case 'healthCheck':
           displayOption = this.userOptions.display.healthCheck;
           break;
@@ -115,6 +112,10 @@ export class EnvListComponent implements OnInit {
         case 'ssh':
           displayOption = this.userOptions.display.ssh;
           break;
+      }
+
+      if(key === "hub" && !value) {
+        value = new Module();
       }
 
       if(!key.match("(pif|pef)")) {

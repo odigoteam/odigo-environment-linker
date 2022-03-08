@@ -12,6 +12,7 @@ export class UserDisplayOptions {
   aws: boolean = false;
   console: boolean = true;
   healthCheck: boolean = true;
+  hub: boolean = true;
   portal: boolean = true;
   pif: boolean = true;
   pef: boolean = true;
