@@ -88,6 +88,9 @@ export class EnvListComponent implements OnInit {
         case 'console':
           displayOption = this.userOptions.display.console;
           break;
+        case 'cxStudio':
+          displayOption = this.userOptions.display.cxStudio;
+          break;
         case 'hub':
           displayOption = this.userOptions.display.hub;
           break;
@@ -102,6 +105,9 @@ export class EnvListComponent implements OnInit {
           break;
         case 'pef':
           displayOption = this.userOptions.display.pef;
+          break;
+        case 'qualificationCenter':
+          displayOption = this.userOptions.display.qualificationCenter;
           break;
         case 'routing':
           displayOption = this.userOptions.display.routing;

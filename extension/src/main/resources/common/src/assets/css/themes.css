@@ -8,8 +8,7 @@
   --card-bg-color: rgba(230, 231, 232, 0.7);
   --color-primary: #2a3045;
   --color-secondary: #e79dbc;
-  /*--color-accent: #ff3466;*/
-  --color-accent: purple;
+  --color-accent: #ff3466;
   --font-color: #2a3045;
   --font-color-placeholder: rgb(42, 48, 69, 0.5);
   --input-bg-color: rgba(230, 231, 232, 0.7);
@@ -40,8 +39,7 @@
   --card-bg-color: rgb(46, 66, 82, 0.7);
   --color-primary: #ffffff;
   --color-secondary: #e6e7e8;
-  /*--color-accent: #ff3466;*/
-  --color-accent: purple;
+  --color-accent: #ff3466;
   --font-color: #ffffff;
   --font-color-placeholder: rgb(255, 255, 255, 0.5);
   --input-bg-color: rgb(46, 66, 82, 0.7);

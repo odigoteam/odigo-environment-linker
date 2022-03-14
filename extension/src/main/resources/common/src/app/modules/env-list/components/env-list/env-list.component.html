@@ -77,58 +77,31 @@
                       </div>
                       <!-- / CONSOLE -->
 
-                      <!-- HEALTH CHECK -->
+                      <!-- CX STUDIO -->
                       <button type="button" class="btn btn-outline-primary"
-                              title="Health check"
-                              *ngIf="env.urls.healthCheck && env.urls.healthCheck.display && !env.urls.healthCheck.showExternal"
-                              (click)="openLink(env.urls.healthCheck.internal,true,env)">
-                        <i class="bi bi-activity"></i><span *ngIf="!userOptions.onlyIcons">&nbsp;Health Check</span>
+                              title="CX Studio" *ngIf="env.urls.cxStudio && env.urls.cxStudio.display && !env.urls.cxStudio.showExternal"
+                              (click)="openLink(env.urls.cxStudio.internal,true, env)">
+                        <i class="bi bi-diagram-3-fill"></i><span *ngIf="!userOptions.onlyIcons">&nbsp;CX Studio</span>
                       </button>
                       <div class="btn-group" role="group"
-                           *ngIf="env.urls.healthCheck && env.urls.healthCheck.display && env.urls.healthCheck.showExternal">
+                           *ngIf="env.urls.cxStudio && env.urls.cxStudio.display && env.urls.cxStudio.showExternal">
                         <button type="button"
                                 class="btn btn-outline-primary dropdown-toggle"
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false"
-                                title="Health check">
-                          <i class="bi bi-activity"></i><span *ngIf="!userOptions.onlyIcons">&nbsp;Health Check</span>
+                                title="CX Studio">
+                          <i class="bi bi-diagram-3-fill"></i><span *ngIf="!userOptions.onlyIcons">&nbsp;Hub</span>
                         </button>
-                        <ul class="dropdown-menu" [attr.aria-labelledby]="'btnHealthCheck' + env.env + env.type">
-                          <li *ngIf="env.urls.healthCheck.internal">
-                            <a class="dropdown-item" (click)="openLink(env.urls.healthCheck.internal,true,env)">Internal</a>
+                        <ul class="dropdown-menu" [attr.aria-labelledby]="'btnCxStudio' + env.env + env.type">
+                          <li *ngIf="env.urls.cxStudio && env.urls.cxStudio.internal">
+                            <a class="dropdown-item" (click)="openLink(env.urls.cxStudio.internal,true,env)">Internal</a>
                           </li>
-                          <li *ngIf="env.urls.healthCheck.external">
-                            <a class="dropdown-item" (click)="openLink(env.urls.healthCheck.external,true,env)">Public</a>
+                          <li *ngIf="env.urls.cxStudio && env.urls.cxStudio.external">
+                            <a class="dropdown-item" (click)="openLink(env.urls.cxStudio.external,true,env)">Public</a>
                           </li>
                         </ul>
                       </div>
-                      <!-- / HEALTH CHECK -->
-
-                      <!-- PORTAL -->
-                      <button type="button" class="btn btn-outline-primary"
-                              title="Portal" *ngIf="env.urls.portal.display && !env.urls.portal.showExternal"
-                              (click)="openLink(env.urls.portal.internal,true,env)">
-                        <i class="bi bi-house-fill"></i><span *ngIf="!userOptions.onlyIcons">&nbsp;Portal</span>
-                      </button>
-                      <div class="btn-group" role="group"
-                           *ngIf="env.urls.portal.display && env.urls.portal.showExternal">
-                        <button type="button"
-                                class="btn btn-outline-primary dropdown-toggle"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                                title="Portal">
-                          <i class="bi bi-house-fill"></i><span *ngIf="!userOptions.onlyIcons">&nbsp;Portal</span>
-                        </button>
-                        <ul class="dropdown-menu" [attr.aria-labelledby]="'btnPortal' + env.env + env.type">
-                          <li *ngIf="env.urls.portal.internal">
-                            <a class="dropdown-item" (click)="openLink(env.urls.portal.internal,true,env)">Internal</a>
-                          </li>
-                          <li *ngIf="env.urls.portal.external">
-                            <a class="dropdown-item" (click)="openLink(env.urls.portal.external,true,env)">Public</a>
-                          </li>
-                        </ul>
-                      </div>
-                      <!-- / PORTAL -->
+                      <!-- / CX STUDIO -->
 
                       <!-- HUB -->
                       <button type="button" class="btn btn-outline-primary"
@@ -155,6 +128,32 @@
                         </ul>
                       </div>
                       <!-- / HUB -->
+
+                      <!-- PORTAL -->
+                      <button type="button" class="btn btn-outline-primary"
+                              title="Portal" *ngIf="env.urls.portal.display && !env.urls.portal.showExternal"
+                              (click)="openLink(env.urls.portal.internal,true,env)">
+                        <i class="bi bi-house-door"></i><span *ngIf="!userOptions.onlyIcons">&nbsp;Portal</span>
+                      </button>
+                      <div class="btn-group" role="group"
+                           *ngIf="env.urls.portal.display && env.urls.portal.showExternal">
+                        <button type="button"
+                                class="btn btn-outline-primary dropdown-toggle"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                                title="Portal">
+                          <i class="bi bi-house-door"></i><span *ngIf="!userOptions.onlyIcons">&nbsp;Portal</span>
+                        </button>
+                        <ul class="dropdown-menu" [attr.aria-labelledby]="'btnPortal' + env.env + env.type">
+                          <li *ngIf="env.urls.portal.internal">
+                            <a class="dropdown-item" (click)="openLink(env.urls.portal.internal,true,env)">Internal</a>
+                          </li>
+                          <li *ngIf="env.urls.portal.external">
+                            <a class="dropdown-item" (click)="openLink(env.urls.portal.external,true,env)">Public</a>
+                          </li>
+                        </ul>
+                      </div>
+                      <!-- / PORTAL -->
 
                       <!-- PIF -->
                       <div class="btn-group" role="group" *ngIf="env.urls.pif">
@@ -210,6 +209,32 @@
                       </div>
                       <!-- / PEF -->
 
+                      <!-- QUALIFICATION CENTER -->
+                      <button type="button" class="btn btn-outline-primary"
+                              title="Qualification center" *ngIf="env.urls.qualificationCenter && env.urls.qualificationCenter.display && !env.urls.qualificationCenter.showExternal"
+                              (click)="openLink(env.urls.qualificationCenter.internal,true, env)">
+                        <i class="bi bi-robot"></i><span *ngIf="!userOptions.onlyIcons">&nbsp;Qualification center</span>
+                      </button>
+                      <div class="btn-group" role="group"
+                           *ngIf="env.urls.qualificationCenter && env.urls.qualificationCenter.display && env.urls.qualificationCenter.showExternal">
+                        <button type="button"
+                                class="btn btn-outline-primary dropdown-toggle"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                                title="Qualification center">
+                          <i class="bi bi-robot"></i><span *ngIf="!userOptions.onlyIcons">&nbsp;Qualification center</span>
+                        </button>
+                        <ul class="dropdown-menu" [attr.aria-labelledby]="'btnQalificationCenter' + env.env + env.type">
+                          <li *ngIf="env.urls.qualificationCenter && env.urls.qualificationCenter.internal">
+                            <a class="dropdown-item" (click)="openLink(env.urls.qualificationCenter.internal,true,env)">Internal</a>
+                          </li>
+                          <li *ngIf="env.urls.qualificationCenter && env.urls.qualificationCenter.external">
+                            <a class="dropdown-item" (click)="openLink(env.urls.qualificationCenter.external,true,env)">Public</a>
+                          </li>
+                        </ul>
+                      </div>
+                      <!-- / QUALIFICATION CENTER -->
+
                       <!-- ROUTING -->
                       <button type="button" class="btn btn-outline-primary"
                               title="Routing" *ngIf="env.urls.routing.display && !env.urls.routing.showExternal"
@@ -243,6 +268,44 @@
                     <div
                       [ngClass]="userOptions.onlyIcons ? 'btn-group group-technical' : 'btn-group-vertical group-technical-vertical'"
                       role="group" [attr.aria-label]="env.env">
+                      <!-- AWS Switcher -->
+                      <button type="button" class="btn btn-outline-primary"
+                              title="AWS Console" [disabled]="!env.aws.enabled"
+                              *ngIf="env.aws.display"
+                              (click)="switchAWSRole(env)">
+                        <img src="assets/images/logo-aws.png" alt="AWS" class="aws-logo"/>
+                        <span *ngIf="!userOptions.onlyIcons">&nbsp;AWS Console</span>
+                      </button>
+                      <!-- / AWS Switcher -->
+
+                      <!-- HEALTH CHECK -->
+                      <button type="button" class="btn btn-outline-primary"
+                              title="Health check"
+                              *ngIf="env.urls.healthCheck && env.urls.healthCheck.display && !env.urls.healthCheck.showExternal"
+                              (click)="openLink(env.urls.healthCheck.internal,true,env)">
+                        <i class="bi bi-activity"></i><span *ngIf="!userOptions.onlyIcons">&nbsp;Health Check</span>
+                      </button>
+                      <div class="btn-group" role="group"
+                           *ngIf="env.urls.healthCheck && env.urls.healthCheck.display && env.urls.healthCheck.showExternal">
+                        <button type="button"
+                                class="btn btn-outline-primary dropdown-toggle"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                                title="Health check">
+                          <i class="bi bi-activity"></i><span *ngIf="!userOptions.onlyIcons">&nbsp;Health Check</span>
+                        </button>
+                        <ul class="dropdown-menu" [attr.aria-labelledby]="'btnHealthCheck' + env.env + env.type">
+                          <li *ngIf="env.urls.healthCheck.internal">
+                            <a class="dropdown-item" (click)="openLink(env.urls.healthCheck.internal,true,env)">Internal</a>
+                          </li>
+                          <li *ngIf="env.urls.healthCheck.external">
+                            <a class="dropdown-item" (click)="openLink(env.urls.healthCheck.external,true,env)">Public</a>
+                          </li>
+                        </ul>
+                      </div>
+                      <!-- / HEALTH CHECK -->
+
+                      <!-- CMDB -->
                       <div class="btn-group" role="group" *ngIf="env.urls.cmdb && env.urls.cmdb.display">
                         <button type="button"
                                 class="btn btn-outline-primary dropdown-toggle"
@@ -267,12 +330,15 @@
                           </li>
                         </ul>
                       </div>
+                      <!-- / CMDB -->
+
+                      <!-- SSH -->
                       <div class="btn-group" role="group" *ngIf="env.urls.ssh.display">
                         <button id="btnSSH{{env.env}}{{env.type}}" type="button"
                                 class="btn btn-outline-primary dropdown-toggle"
                                 data-bs-toggle="dropdown" aria-expanded="false"
                                 title="SSH">
-                          <i class="bi bi-terminal-fill"></i><span *ngIf="!userOptions.onlyIcons">&nbsp;SSH</span>
+                          <i class="bi bi-terminal"></i><span *ngIf="!userOptions.onlyIcons">&nbsp;SSH</span>
                         </button>
                         <ul class="dropdown-menu" [attr.aria-labelledby]="'btn-ssh-' + env.env + env.type">
                           <li *ngIf="env.urls.ssh.master">
@@ -283,13 +349,7 @@
                           </li>
                         </ul>
                       </div>
-                      <button type="button" class="btn btn-outline-primary"
-                              title="AWS Console" [disabled]="!env.aws.enabled"
-                              *ngIf="env.aws.display"
-                              (click)="switchAWSRole(env)">
-                        <img src="assets/images/logo-aws.png" alt="AWS" class="aws-logo"/>
-                        <span *ngIf="!userOptions.onlyIcons">&nbsp;AWS Console</span>
-                      </button>
+                      <!-- / SSH -->
                     </div>
                     <!-- TECHNICALS LINKS -->
                   </div>

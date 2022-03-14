@@ -5,9 +5,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-## [4.2.0] <font size="2">*- 2022-03-08*</font>
+## [4.3.0] <font size="2">*- 2022-03-14*</font>
 ### Added
-- Custom links
+- Links for qualification center and CX Studio
+### Changed
+- Purple color (back to Odigo's pink)
+## [4.2.0] <font size="2">*- 2022-03-08*</font>
+**### Added
+- Custom links**
 - Hub link for env with version >= 6.0
 - Configuration data model migration
 - Add 6.0 to version filter dropdown
@@ -222,8 +227,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Fix Markdown links to tag comparison URL with footnote-style links.
 
-[Unreleased]: https://github.com/guitaro/odigo-environment-linker/compare/v4.2.0...HEAD
+[Unreleased]: https://github.com/guitaro/odigo-environment-linker/compare/v4.3.0...HEAD
+[4.3.0]: https://github.com/guitaro/odigo-environment-linker/releases/tag/v4.3.0
 [4.2.0]: https://github.com/guitaro/odigo-environment-linker/releases/tag/v4.2.0
 [4.1.0]: https://github.com/guitaro/odigo-environment-linker/releases/tag/v4.1.0
 [4.0.0]: https://github.com/guitaro/odigo-environment-linker/releases/tag/v4.0.0
-What is a changelog?

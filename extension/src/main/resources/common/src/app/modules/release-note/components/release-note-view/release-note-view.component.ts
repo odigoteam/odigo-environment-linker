@@ -1,14 +1,12 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {CONFIGURATION_VIEW, ENV_VIEW, LOADER_VIEW, MESSAGE_VIEW} from "../../../../app.routes";
 import packageJson from "../../../../../../package.json";
 import {DataBusService} from "../../../../services/data-bus.service";
 import {ConfigurationService} from "../../../../services/configuration.service";
-import {environment} from "../../../../../environments/environment";
 import {MessageViewContent} from "../../../message/message-view/message-view.component";
 import {EnvironmentsService} from "../../../../services/environments.service";
 import {messages} from "../../../../../environments/messages";
-import {Environment} from "../../../../models/environments.class";
 import {BrowserService} from "../../../../services/browser.service";
 
 @Component({
@@ -18,10 +16,25 @@ import {BrowserService} from "../../../../services/browser.service";
 })
 export class ReleaseNoteViewComponent {
   public appVersion: string = packageJson.version;
-  public content: any = environment.releaseNote;
+  public content: any = {
+    title: "Breath ! <i class=\"bi bi-wind\"></i>",
+    subtitle: "Since March 14, France lifted most COVID-19 restrictions on Monday, abolishing the need to wear face masks in most settings like restaurants, sports arenas, business and other venues ! So take a deep breath and enjoy this new version of your favorite extension <i class=\"bi bi-emoji-wink\"></i>",
+    features: [
+      {
+        shortDesc: "Add links for CX Studio and Qualification Center",
+        longDesc: "CX Studio and Qualification Center links are now available for your environments."
+      }
+    ],
+    changes: [
+      {
+        shortDesc: "CSS Improvements",
+      }
+    ],
+    bugfixes: []
+  };
 
   constructor(private _router: Router,
-              private _dataBusService : DataBusService,
+              private _dataBusService: DataBusService,
               private _configurationService: ConfigurationService,
               private _browser: BrowserService,
               private _environmentsService: EnvironmentsService) {
@@ -32,7 +45,7 @@ export class ReleaseNoteViewComponent {
     this._router.navigate([LOADER_VIEW]);
     this._configurationService.configuration.userConfiguration.extensionConfiguration.latestExtensionVersionUsed = this._configurationService.configuration.currentExtensionVersion;
     this._configurationService.saveConfiguration();
-    if(!this._configurationService.configuration.userConfiguration.extensionConfiguration.confURL ||
+    if (!this._configurationService.configuration.userConfiguration.extensionConfiguration.confURL ||
       this._configurationService.configuration.userConfiguration.extensionConfiguration.confURL === "" ||
       this._configurationService.configuration.userConfiguration.extensionConfiguration.confURL.indexOf("https://") < 0) {
       let messageViewContent = new MessageViewContent();
@@ -50,7 +63,7 @@ export class ReleaseNoteViewComponent {
 
     this._configurationService.loadEnvironments().subscribe({
       next: (response) => {
-        if(response.body) {
+        if (response.body) {
           this._environmentsService.environments = response.body;
         }
         this._router.navigate([ENV_VIEW]);
@@ -58,7 +71,7 @@ export class ReleaseNoteViewComponent {
       error: (error) => {
         let messageViewContent = new MessageViewContent();
         messageViewContent.type = "danger";
-        if(error.status === 404) {
+        if (error.status === 404) {
           messageViewContent.pict = "assets/images/404.png";
           messageViewContent.title = messages.confUrl.http404.title;
           messageViewContent.message = messages.confUrl.http404.text;
@@ -73,7 +86,8 @@ export class ReleaseNoteViewComponent {
         this._dataBusService.put(MESSAGE_VIEW, messageViewContent);
         console.error(error);
         this._router.navigate([MESSAGE_VIEW]);
-      }});
+      }
+    });
   }
 
   openLink(url: string) {

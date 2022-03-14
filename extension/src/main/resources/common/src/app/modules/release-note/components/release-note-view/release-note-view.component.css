@@ -1,14 +1,8 @@
 .card-img-top {
-  height: 500px;
-  background-image: url("../../../../../assets/images/release-banner.jpg");
-  background-size: contain;
-  background-color: #360c4a;
-  font-size: 2em;
-  text-align: right;
-  padding-right: 90px;
-  color: #fff;
-  line-height: 150px;
-  background-repeat: no-repeat;
+  background-image: url("../../../../../assets/images/release-banner.gif");
+  height: 136px;
+  background-size: cover;
+  background-position-y: -190px;
 }
 
 /*------------------- Overrides ---------------------*/

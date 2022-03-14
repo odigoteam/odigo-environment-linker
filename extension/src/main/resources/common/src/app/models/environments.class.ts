@@ -14,14 +14,16 @@ export class PaaSUrls {
 
 export class EnvUrls {
   console: Module = new Module();
+  cmdb: Module = new Module();
+  cxStudio: Module = new Module();
   healthCheck: Module = new Module();
+  hub: Module = new Module();
   portal: Module = new Module();
   pif: PaaSUrls = new PaaSUrls();
   pef: PaaSUrls = new PaaSUrls();
+  qualificationCenter: Module = new Module();
   routing: Module = new Module();
-  cmdb: Module = new Module();
   ssh: Module = new Module();
-  hub: Module = new Module();
 }
 
 export class AwsEnv {
