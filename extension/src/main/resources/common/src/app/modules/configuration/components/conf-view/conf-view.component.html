@@ -6,17 +6,17 @@
           <div class="row">
             <div class="col-3 conf-tab-menu">
               <div class="list-group">
-                <a class="list-group-item text-center" [ngClass]="activeTab === 'general' ? 'active' : ''" (click)="navTab('general')" [routerLink]="['general']">
-                  <i class="bi bi-gear"></i><br/>General
+                <a class="list-group-item text-center" [ngClass]="activeTab === 'appearance' ? 'active' : ''" (click)="navTab('appearance')" [routerLink]="['appearance']">
+                  <i class="bi bi-palette-fill"></i><br/>Appearance
                 </a>
                 <a class="list-group-item text-center" [ngClass]="activeTab === 'behaviour' ? 'active' : ''" (click)="navTab('behaviour')" [routerLink]="['behaviour']">
                   <i class="bi bi-boxes"></i><br/>Behaviour
                 </a>
-                <a class="list-group-item text-center" [ngClass]="activeTab === 'appearance' ? 'active' : ''" (click)="navTab('appearance')" [routerLink]="['appearance']">
-                  <i class="bi bi-palette-fill"></i><br/>Appearance
-                </a>
                 <a class="list-group-item text-center" [ngClass]="activeTab === 'custom-links' ? 'active' : ''" (click)="navTab('custom-links')" [routerLink]="['custom-links']">
                   <i class="bi bi-link-45deg"></i><br/>Custom Links
+                </a>
+                <a class="list-group-item text-center" [ngClass]="activeTab === 'general' ? 'active' : ''" (click)="navTab('general')" [routerLink]="['general']">
+                  <i class="bi bi-gear"></i><br/>General
                 </a>
               </div>
             </div>

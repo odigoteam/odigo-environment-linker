@@ -9,7 +9,7 @@ import {DataBusService} from "../../../../services/data-bus.service";
   styleUrls: ['./conf-view.component.css']
 })
 export class ConfViewComponent {
-  activeTab: string = "general";
+  activeTab: string = "appearance";
 
   constructor(private _configurationService: ConfigurationService,
               private _dataBusService: DataBusService,

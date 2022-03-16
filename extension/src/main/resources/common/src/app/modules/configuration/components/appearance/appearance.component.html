@@ -1,7 +1,7 @@
 <div class="conf-tab-content scrollbar">
   <div class="row mt-2">
     <div class="col-12">
-      <h5>Environment</h5>
+      <h5>Environments list</h5>
     </div>
   </div>
   <div class="row">
@@ -41,13 +41,16 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-11 offset-1">
+    <div class="col-4 offset-1">
+      <label class="form-check-label" for="showOnlyLinksIcons">
+        Horizontal icon bar
+      </label>
+    </div>
+    <div class="col-6">
       <div>
         <div class="form-check form-switch">
+
           <input class="form-check-input" type="checkbox" name="showOnlyLinksIcons" id="showOnlyLinksIcons" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.onlyIcons">
-          <label class="form-check-label" for="showOnlyLinksIcons">
-            Horizontal icon bar
-          </label>
         </div>
       </div>
       <div class="conf-tips-info">Only icons will be displayed for each links.</div>
@@ -154,17 +157,18 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-11 offset-1">
+    <div class="col-4 offset-1">
+      <label class="form-check-label" for="themeSelector">
+        Dark theme
+      </label>
+    </div>
+    <div class="col-6 mb-5">
       <div>
         <div class="form-check form-switch">
           <input class="form-check-input" type="checkbox" name="themeSelector" id="themeSelector" (change)="applyTheme()" [(ngModel)]="this.userConfiguration.userOptions.darkTheme">
-          <label class="form-check-label" for="themeSelector">
-            Dark theme
-          </label>
         </div>
       </div>
       <div class="conf-tips-info">A dark theme from the dark side. <img alt="" src="assets/images/dark-vador.png" class="dark-vador-img"></div>
     </div>
   </div>
-  <div class="mt-3"></div>
 </div>
