@@ -5,8 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## Added
+- 3 states AWS filter checkbox
 ### Changed
-- CSS improvement in Appearence tab content
+- CSS improvement in Appearance tab content
 - Reorder (alphabetically) the conf tabs
 ## Fixed
 - Fix CX Studio button text
@@ -17,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Purple color (back to Odigo's pink)
 ## [4.2.0] <font size="2">*- 2022-03-08*</font>
-**### Added
+### Added
 - Custom links**
 - Hub link for env with version >= 6.0
 - Configuration data model migration

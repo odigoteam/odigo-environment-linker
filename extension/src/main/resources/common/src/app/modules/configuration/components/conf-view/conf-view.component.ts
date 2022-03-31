@@ -1,6 +1,5 @@
-import {Component, Inject} from '@angular/core';
+import {Component} from '@angular/core';
 import {ConfigurationService} from "../../../../services/configuration.service";
-import {DOCUMENT} from "@angular/common";
 import {DataBusService} from "../../../../services/data-bus.service";
 
 @Component({
@@ -12,8 +11,7 @@ export class ConfViewComponent {
   activeTab: string = "appearance";
 
   constructor(private _configurationService: ConfigurationService,
-              private _dataBusService: DataBusService,
-              @Inject(DOCUMENT) private _document: Document) {
+              private _dataBusService: DataBusService) {
     this._dataBusService.confBtnIcon.next("save");
     this._dataBusService.confBtnDisabled.next(false);
   }

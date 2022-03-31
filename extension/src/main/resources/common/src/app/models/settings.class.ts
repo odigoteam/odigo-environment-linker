@@ -45,7 +45,7 @@ export class FiltersOptions {
   qa: boolean = true;
   prod: boolean = true;
   preprod: boolean = true;
-  aws: boolean = false;
+  aws: string = "mixed";
   others: boolean = true;
   versions: string[] = ["all", "6.0", "5.10", "5.9", "5.8", "5.7", "5.6", "5.4", "5.3", "5.1"];
 }

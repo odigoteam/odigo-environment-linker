@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ConfigurationService} from "../../../../services/configuration.service";
 import {UserConfiguration} from "../../../../models/settings.class";
 import {EnvironmentsService} from "../../../../services/environments.service";
@@ -81,13 +81,12 @@ export class EnvViewComponent implements OnInit {
     this.supportedVersions.forEach(version => {
       version.checked = this.userConf.filterOptions.versions.includes(version);
     });
-    this.userConf.filterOptions.aws = false;
+    this.userConf.filterOptions.aws = "hide";
     this.userConf.filterOptions.dev = true;
     this.userConf.filterOptions.int = true;
     this.userConf.filterOptions.qa = true;
     this.userConf.filterOptions.prod = true;
     this.userConf.filterOptions.preprod = true;
-    this.userConf.filterOptions.aws = false;
     this.userConf.filterOptions.others = true;
     this._configurationService.saveConfiguration();
     this.updateFilters();
@@ -96,5 +95,23 @@ export class EnvViewComponent implements OnInit {
 
   numberOfActiveFilters() {
     return this.userConf.filterOptions.versions.filter(function(element){return element !== 'all';}).length
+  }
+
+  checkAWSFilter() {
+    switch (this.userConf.filterOptions.aws) {
+      case "strict": {
+        this.userConf.filterOptions.aws = "hide";
+        break;
+      }
+      case "hide": {
+        this.userConf.filterOptions.aws = "mixed";
+        break;
+      }
+      case "mixed": {
+        this.userConf.filterOptions.aws = "strict";
+        break;
+      }
+    }
+    this.updateResults();
   }
 }

@@ -25,6 +25,15 @@ export class ConfigurationService {
       this._configuration.userConfiguration.extensionConfiguration = { ...this._configuration.userConfiguration.extensionConfiguration, ...data.extensionConfiguration };
       this._configuration.userConfiguration.userOptions = { ...this._configuration.userConfiguration.userOptions, ...data.userOptions };
       this._configuration.userConfiguration.filterOptions = { ...this._configuration.userConfiguration.filterOptions, ...data.filtersOptions };
+
+      if((typeof this._configuration.userConfiguration.filterOptions.aws) === "boolean") {
+        if(this._configuration.userConfiguration.filterOptions.aws) {
+          this._configuration.userConfiguration.filterOptions.aws = "strict";
+        } else {
+          this._configuration.userConfiguration.filterOptions.aws = "mixed";
+        }
+      }
+
       this._configuration.currentExtensionVersion = packageJson.version;
       callback(!!data.extensionConfiguration && !!data.userOptions && !!data.filtersOptions);
     });

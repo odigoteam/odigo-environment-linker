@@ -27,6 +27,7 @@
                               *ngIf="userOptions.display.clientDomain">{{env.domain}}</span>
                       </div>
                       <div class="col-3">
+                        <a class="favorite-star-icon" (click)="addToFavorite(env)"><i class="bi bi-star-fill"></i></a>
                         <span class="badge float-end {{env.badgeType}}">{{env.type}}</span>
                         <span class="badge bg-aws badge-pill text-dark float-end" style="margin-right: 5px"
                               *ngIf="env.provider === 'AWS'">AWS</span>

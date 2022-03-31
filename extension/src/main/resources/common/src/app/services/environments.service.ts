@@ -67,8 +67,10 @@ export class EnvironmentsService {
         break;
     }
 
-    if(this._configuration.configuration.userConfiguration.filterOptions.aws) {
+    if(this._configuration.configuration.userConfiguration.filterOptions.aws === "strict") {
       match = match && (env.provider === "AWS");
+    } else if(this._configuration.configuration.userConfiguration.filterOptions.aws === "hide") {
+      match = match && (env.provider !== "AWS");
     }
 
     if(!this._configuration.configuration.userConfiguration.filterOptions.versions.includes("all")) {

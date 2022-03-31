@@ -34,7 +34,10 @@
           <label class="form-check-label" for="filterPROD">PROD</label>
         </span>
         <span class="badge bg-aws text-dark">
-          <input class="form-check-input" type="checkbox" name="filterAWS" id="filterAWS" (change)="updateResults()" [(ngModel)]="this.userConf.filterOptions.aws">
+          <input class="form-check-input" type="checkbox" name="filterAWS" id="filterAWS"
+                 (change)="checkAWSFilter()"
+                 [checked]="this.userConf.filterOptions.aws === 'strict'"
+                 [indeterminate]="this.userConf.filterOptions.aws === 'mixed'">
           <label class="form-check-label" for="filterAWS">AWS</label>
         </span>
         <span class="badge bg-secondary text-dark">
