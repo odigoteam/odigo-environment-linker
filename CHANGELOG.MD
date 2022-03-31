@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - CSS improvement in Appearence tab content
 - Reorder (alphabetically) the conf tabs
+## Fixed
+- Fix CX Studio button text
+- CustomLinkService.parseUrl(url) was called for all links even those not custom
 ## [4.3.0] <font size="2">*- 2022-03-14*</font>
 ### Added
 - Links for qualification center and CX Studio
