@@ -81,7 +81,7 @@ export class EnvViewComponent implements OnInit {
     this.supportedVersions.forEach(version => {
       version.checked = this.userConf.filterOptions.versions.includes(version);
     });
-    this.userConf.filterOptions.aws = "hide";
+    this.userConf.filterOptions.aws = "mixed";
     this.userConf.filterOptions.dev = true;
     this.userConf.filterOptions.int = true;
     this.userConf.filterOptions.qa = true;

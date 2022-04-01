@@ -5,19 +5,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-## Added
+
+## [4.4.0]
+### Added
 - 3 states AWS filter checkbox
 ### Changed
 - CSS improvement in Appearance tab content
 - Reorder (alphabetically) the conf tabs
-## Fixed
+### Fixed
 - Fix CX Studio button text
 - CustomLinkService.parseUrl(url) was called for all links even those not custom
+
 ## [4.3.0] <font size="2">*- 2022-03-14*</font>
 ### Added
 - Links for qualification center and CX Studio
 ### Changed
 - Purple color (back to Odigo's pink)
+
 ## [4.2.0] <font size="2">*- 2022-03-08*</font>
 ### Added
 - Custom links**
@@ -35,6 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - AWS button is not disabled if tab is not AWS console
 - Improve VPN connection checking
 - CSS for version filter badge
+
 ## [4.1.0] <font size="2">*- 2022-02-23*</font>
 ### Added
 - About view
@@ -235,7 +240,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Fix Markdown links to tag comparison URL with footnote-style links.
 
-[Unreleased]: https://github.com/guitaro/odigo-environment-linker/compare/v4.3.0...HEAD
+[Unreleased]: https://github.com/guitaro/odigo-environment-linker/compare/v4.4.0...HEAD
+[4.4.0]: https://github.com/guitaro/odigo-environment-linker/releases/tag/v4.4.0
 [4.3.0]: https://github.com/guitaro/odigo-environment-linker/releases/tag/v4.3.0
 [4.2.0]: https://github.com/guitaro/odigo-environment-linker/releases/tag/v4.2.0
 [4.1.0]: https://github.com/guitaro/odigo-environment-linker/releases/tag/v4.1.0

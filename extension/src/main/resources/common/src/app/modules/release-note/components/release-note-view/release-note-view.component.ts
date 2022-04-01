@@ -17,20 +17,34 @@ import {BrowserService} from "../../../../services/browser.service";
 export class ReleaseNoteViewComponent {
   public appVersion: string = packageJson.version;
   public content: any = {
-    title: "Breath ! <i class=\"bi bi-wind\"></i>",
-    subtitle: "Since March 14, France lifted most COVID-19 restrictions on Monday, abolishing the need to wear face masks in most settings like restaurants, sports arenas, business and other venues ! So take a deep breath and enjoy this new version of your favorite extension <i class=\"bi bi-emoji-wink\"></i>",
+    title: "Happy Spring ! <i class=\"bi bi-flower1\"></i>",
+    subtitle: "Bye bye winter, and say hello spring ! Since March 20, the season for the renewal of nature, the return of migratory birds and the awakening of hibernating animals. It is also the season of love among birds and for everyone, a particularly euphoric period. It is well known that the sun acts as a powerful antidepressant and its return therefore helps to lift our spirits!<br/>So, consume sun without moderation ! <i class=\"bi bi-sun-fill\"></i><i class=\"bi bi-emoji-sunglasses\"></i>",
     features: [
       {
-        shortDesc: "Add links for CX Studio and Qualification Center",
-        longDesc: "CX Studio and Qualification Center links are now available for your environments."
+        shortDesc: "3 states AWS filter checkbox",
+        longDesc: "AWS filter has now 3 states : <ul>" +
+          "<li><img src=\"assets/images/checkunchecked.jpg\" alt=\"\"/> Hide AWS environments</li>" +
+          "<li><img src=\"assets/images/checkIndeterminate.jpg\" alt=\"\"/> Show AWS + All others environments (mixed)</li>" +
+          "<li><img src=\"assets/images/checkchecked.jpg\" alt=\"\"/> Show ONLY AWS environments</li>" +
+          "</ul>"
       }
     ],
     changes: [
       {
-        shortDesc: "CSS Improvements",
+        shortDesc: "CSS improvement in Appearance tab content",
+      },
+      {
+        shortDesc: "Reorder (alphabetically) the conf tabs",
       }
     ],
-    bugfixes: []
+    bugfixes: [
+      {
+        desc: "Fix CX Studio button text"
+      },
+      {
+        desc: "MPA link broken due to incomplete env information"
+      }
+    ]
   };
 
   constructor(private _router: Router,

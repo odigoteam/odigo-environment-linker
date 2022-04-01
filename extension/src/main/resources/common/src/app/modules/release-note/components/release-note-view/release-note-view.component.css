@@ -1,8 +1,8 @@
 .card-img-top {
-  background-image: url("../../../../../assets/images/release-banner.gif");
-  height: 136px;
+  background-image: url("https://i.gifer.com/V5DE.gif");
+  height: 180px;
   background-size: cover;
-  background-position-y: -190px;
+  background-position-y: -150px;
 }
 
 /*------------------- Overrides ---------------------*/
@@ -11,6 +11,7 @@
 }
 
 .card-body {
+  max-height: 260px;
   background-color: var(--input-bg-color-focus);
 }
 
