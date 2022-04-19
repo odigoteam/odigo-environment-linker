@@ -3,6 +3,7 @@ import {ConfigurationService} from "../../../../services/configuration.service";
 import {UserConfiguration} from "../../../../models/settings.class";
 import {EnvironmentsService} from "../../../../services/environments.service";
 import {DataBusService} from "../../../../services/data-bus.service";
+import {EasterEggsService} from "../../../../services/easter-eggs.service";
 
 @Component({
   selector: 'env-view',
@@ -15,7 +16,8 @@ export class EnvViewComponent implements OnInit {
 
   constructor(private _configurationService: ConfigurationService,
               private _environmentsService: EnvironmentsService,
-              private _dataBusService: DataBusService) {
+              private _dataBusService: DataBusService,
+              private _easterEggService: EasterEggsService) {
     this.userConf = this._configurationService.configuration.userConfiguration;
     this._dataBusService.confBtnIcon.next("configuration");
     this._configurationService.configuration.supportedOccVersions.forEach(version => {
@@ -67,12 +69,19 @@ export class EnvViewComponent implements OnInit {
   }
 
   updateResults() {
-    this._environmentsService.runSearch();
-    this._configurationService.saveConfiguration();
+    if(this.userConf.extensionConfiguration.search.startsWith("/")) {
+      if(this._easterEggService.isEaterEgg(this.userConf.extensionConfiguration.search.substring(1))) {
+        this.userConf.extensionConfiguration.search = "";
+      }
+    } else {
+      this._environmentsService.runSearch();
+      this._configurationService.saveConfiguration();
+    }
   }
 
   clearSearch() {
     this.userConf.extensionConfiguration.search = "";
+    this._easterEggService.stopAll();
     this.updateResults();
   }
 

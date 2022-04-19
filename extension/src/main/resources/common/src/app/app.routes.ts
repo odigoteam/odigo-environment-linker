@@ -42,7 +42,7 @@ export const appRoutes: Routes = [
     path: CONFIGURATION_VIEW,
     component: ConfViewComponent,
     children: [
-      { path: "", redirectTo: "general", pathMatch: "full"},
+      { path: "", redirectTo: "appearance", pathMatch: "full"},
       { path: "general", component: GeneralComponent },
       { path: "behaviour", component: BehaviourComponent },
       { path: "appearance", component: AppearanceComponent },

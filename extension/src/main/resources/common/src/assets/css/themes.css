@@ -27,6 +27,10 @@
   --form-switch-background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%2842, 48, 69, 1%29'/%3e%3c/svg%3e");
   --form-switch-background-image-focus: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%2842, 48, 69, 1%29'/%3e%3c/svg%3e");
   --form-switch-background-image-checked: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+  --bg-aws: #ff7300;
+  --bg-badge-env-info: #a6deed;
+  --color-html-code-tag: #d63384;
+  --bg-conf-tab: #3d4662;
 }
 
 .theme-dark {
@@ -58,4 +62,44 @@
   --form-switch-background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%2842, 48, 69, 1%29'/%3e%3c/svg%3e");
   --form-switch-background-image-focus: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%2842, 48, 69, 1%29'/%3e%3c/svg%3e");
   --form-switch-background-image-checked: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+  --bg-aws: #ff7300;
+  --bg-badge-env-info: #a6deed;
+  --color-html-code-tag: #d63384;
+  --bg-conf-tab: #3d4662;
+}
+
+
+.theme-redpill {
+  --backgroud-color: #000;
+  --top-logo-url: url(../images/odigo-white.png);
+  --top-logo-font-color: #fffff;
+  --background-logo-url: url(../images/body-bg-dark.png);
+  --background-logo-pos-x: 20px;
+  --background-logo-pos-y: 20px;
+  --card-bg-color: rgb(46, 66, 82, 0.7);
+  --color-primary: #0f0;
+  --color-secondary: #0f0;
+  --color-accent: #0f0;
+  --font-color: #fff;
+  --font-color-placeholder: rgb(0, 255, 0, 0.5);
+  --input-bg-color: rgb(0, 255, 0, 0.7);
+  --input-bg-color-focus: rgb(0, 55, 0, 1);
+  --small-info-color: #0f0;
+  --bs-success: #fff;
+  --bs-success-rgb: 0, 255, 0;
+  --bs-info: #fff;
+  --bs-info-rgb: 0, 255, 0;
+  --bs-warning: #fff;
+  --bs-warning-rgb: 0, 255, 0;
+  --bs-danger: #fff;
+  --bs-danger-rgb: 0, 255, 0;
+  --bs-secondary: #fff;
+  --bs-secondary-rgb: 0, 255, 0;
+  --form-switch-background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+  --form-switch-background-image-focus: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+  --form-switch-background-image-checked: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+  --bg-aws: #0f0;
+  --bg-badge-env-info: #0f0;
+  --color-html-code-tag: #0f0;
+  --bg-conf-tab: #0f0;
 }

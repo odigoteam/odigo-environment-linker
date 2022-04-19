@@ -17,32 +17,24 @@ import {BrowserService} from "../../../../services/browser.service";
 export class ReleaseNoteViewComponent {
   public appVersion: string = packageJson.version;
   public content: any = {
-    title: "Happy Spring ! <i class=\"bi bi-flower1\"></i>",
-    subtitle: "Bye bye winter, and say hello spring ! Since March 20, the season for the renewal of nature, the return of migratory birds and the awakening of hibernating animals. It is also the season of love among birds and for everyone, a particularly euphoric period. It is well known that the sun acts as a powerful antidepressant and its return therefore helps to lift our spirits!<br/>So, consume sun without moderation ! <i class=\"bi bi-sun-fill\"></i><i class=\"bi bi-emoji-sunglasses\"></i>",
+    title: "More than 200 users !",
+    subtitle: "Many thanks to all the people who use and enjoy the Odigo environment linker. Many of you came to thank me directly on the different channels and did not hesitate to offer me features. It is also thanks to them that this little tool became what it is today!</br>" +
+      "</br>" +
+      "To thank you, I have prepared a little surprise for you. I hid <span class=\"fs-5 fw-bolder text-uppercase\">4 Easter eggs</span> in the tools. To trigger them, nothing could be simpler, you must enter the right keyword(s) in the search bar, starting with the <b>\"/\"</b> character (eg: \"/hello\").</br>" +
+      "</br>" +
+      "To help you find them, here is an enigm valid for all 4:</br>" +
+      "\"You don't have to put your mind upside down to find them or enter the matrix. Have a coffee, and they will reveal themselves to you to finally celebrate the victory!\"",
     features: [
       {
-        shortDesc: "3 states AWS filter checkbox",
-        longDesc: "AWS filter has now 3 states : <ul>" +
-          "<li><img src=\"assets/images/checkunchecked.jpg\" alt=\"\"/> Hide AWS environments</li>" +
-          "<li><img src=\"assets/images/checkIndeterminate.jpg\" alt=\"\"/> Show AWS + All others environments (mixed)</li>" +
-          "<li><img src=\"assets/images/checkchecked.jpg\" alt=\"\"/> Show ONLY AWS environments</li>" +
-          "</ul>"
+        shortDesc: "Command line notion",
+        longDesc: "In the search input, if you start with '/' character, it will be interpreted as a command. For now, the only commands available are those for easter eggs but it's opening a large perspective for amazing features !"
       }
     ],
     changes: [
-      {
-        shortDesc: "CSS improvement in Appearance tab content",
-      },
-      {
-        shortDesc: "Reorder (alphabetically) the conf tabs",
-      }
     ],
     bugfixes: [
       {
-        desc: "Fix CX Studio button text"
-      },
-      {
-        desc: "MPA link broken due to incomplete env information"
+        desc: "Fix vulnerabilities"
       }
     ]
   };

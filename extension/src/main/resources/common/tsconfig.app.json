@@ -6,7 +6,8 @@
   },
   "files": [
     "src/main.ts",
-    "src/polyfills.ts"
+    "src/polyfills.ts",
+    "src/app/services/easter-eggs/easter-egg.interface.ts"
   ],
   "include": [
     "src/**/*.d.ts"

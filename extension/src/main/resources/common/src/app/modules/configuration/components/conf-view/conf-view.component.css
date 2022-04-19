@@ -63,7 +63,7 @@ div.conf-tab-menu div.list-group div.list-group-item {
 }
 
 div.conf-tab-menu div.list-group > a.active {
-  background-color: #3d4662;
+  background-color: var(--bg-conf-tab);
   color: #ffffff;
   border-color: transparent;
 }
@@ -85,7 +85,7 @@ div.conf-tab-menu div.list-group > a.active:after {
   border-left: 0;
   border-bottom: 13px solid transparent;
   border-top: 13px solid transparent;
-  border-left: 10px solid #3d4662;
+  border-left: 10px solid var(--bg-conf-tab);
 }
 
 .list-group {

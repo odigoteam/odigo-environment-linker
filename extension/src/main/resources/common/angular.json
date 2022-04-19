@@ -33,11 +33,13 @@
               "node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "src/assets/css/themes.css",
               "src/assets/css/styles.css",
+              "src/assets/css/easter-eggs.css",
               "src/assets/css/overrides.css"
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
-              "src/assets/js/browser.js"
+              "src/assets/js/browser.js",
+              "src/assets/js/confetti.js"
             ]
           },
           "configurations": {

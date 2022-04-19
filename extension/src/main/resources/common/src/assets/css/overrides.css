@@ -29,6 +29,10 @@ a {
   cursor: pointer;
 }
 
+code {
+  color: var(--color-html-code-tag);
+}
+
 /******** Bootstrap ***********/
 .form-control {
   color: var(--font-color);
@@ -60,8 +64,8 @@ a {
 }
 
 .btn-primary:hover {
-  background-color: #c4335a;
-  border-color: #c4335a;
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
 }
 
 .btn-primary:disabled, .btn-primary.disabled {
