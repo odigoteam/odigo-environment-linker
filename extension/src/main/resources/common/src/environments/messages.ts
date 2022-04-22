@@ -26,7 +26,7 @@ export const messages = {
   },
   vpn: {
     title: "Damn... Where is it ?",
-    text: "Your VPN seems to have drifted away. Could you help me find it ?<br/><br/>Please check your VPN connection."
+    text: "Your network connection seems to have drifted away. Could you help me find it ?<br/><br/>Please check your internet connectivity or your VPN connection."
   },
   aws: {
     roleEmpty: "Role cannot be empty."

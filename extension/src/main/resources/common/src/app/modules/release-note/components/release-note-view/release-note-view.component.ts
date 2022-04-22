@@ -17,24 +17,18 @@ import {BrowserService} from "../../../../services/browser.service";
 export class ReleaseNoteViewComponent {
   public appVersion: string = packageJson.version;
   public content: any = {
-    title: "More than 200 users !",
-    subtitle: "Many thanks to all the people who use and enjoy the Odigo environment linker. Many of you came to thank me directly on the different channels and did not hesitate to offer me features. It is also thanks to them that this little tool became what it is today!</br>" +
-      "</br>" +
-      "To thank you, I have prepared a little surprise for you. I hid <span class=\"fs-5 fw-bolder text-uppercase\">4 Easter eggs</span> in the tools. To trigger them, nothing could be simpler, you must enter the right keyword(s) in the search bar, starting with the <b>\"/\"</b> character (eg: \"/hello\").</br>" +
-      "</br>" +
-      "To help you find them, here is an enigm valid for all 4:</br>" +
-      "\"You don't have to put your mind upside down to find them or enter the matrix. Have a coffee, and they will reveal themselves to you to finally celebrate the victory!\"",
+    title: "Sorry for bugs !",
+    subtitle: "<i class=\"bi bi-quote\"></i>I'm only human, after all, don't put the blame on me<i class=\"bi bi-quote\"></i> - Rag'n'Bone Man <i class=\"bi bi-music-note-beamed\"></i>",
     features: [
-      {
-        shortDesc: "Command line notion",
-        longDesc: "In the search input, if you start with '/' character, it will be interpreted as a command. For now, the only commands available are those for easter eggs but it's opening a large perspective for amazing features !"
-      }
     ],
     changes: [
     ],
     bugfixes: [
       {
-        desc: "Fix vulnerabilities"
+        desc: "Navigation from welcome view to configuration was broken."
+      },
+      {
+        desc: "General tab was disappeared from option view"
       }
     ]
   };

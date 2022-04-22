@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [4.5.2]
+### Fixed
+- Navigation from welcome view to configuration was broken
+- General tab was disappeared
 ## [4.5.0]
 ### Added
 - Introduce Easter Eggs
@@ -245,7 +249,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Fix Markdown links to tag comparison URL with footnote-style links.
 
-[Unreleased]: https://github.com/guitaro/odigo-environment-linker/compare/v4.5.0...HEAD
+[Unreleased]: https://github.com/guitaro/odigo-environment-linker/compare/v4.5.2...HEAD
+[4.5.2]: https://github.com/guitaro/odigo-environment-linker/releases/tag/v4.5.1
 [4.5.0]: https://github.com/guitaro/odigo-environment-linker/releases/tag/v4.5.0
 [4.4.0]: https://github.com/guitaro/odigo-environment-linker/releases/tag/v4.4.0
 [4.3.0]: https://github.com/guitaro/odigo-environment-linker/releases/tag/v4.3.0

@@ -1,6 +1,14 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {ABOUT_VIEW, CONFIGURATION_VIEW, ENV_VIEW, LOADER_VIEW, MESSAGE_VIEW, RELEASE_NOTE_VIEW} from "./app.routes";
+import {
+  ABOUT_VIEW,
+  CONFIGURATION_TAB_GENERAL,
+  CONFIGURATION_VIEW,
+  ENV_VIEW,
+  LOADER_VIEW,
+  MESSAGE_VIEW,
+  RELEASE_NOTE_VIEW
+} from "./app.routes";
 import {ConfigurationService} from "./services/configuration.service";
 import {EnvironmentsService} from "./services/environments.service";
 import {DOCUMENT} from "@angular/common";
@@ -165,7 +173,7 @@ export class AppComponent implements OnInit {
     message.message = messages.confUrl.http404.text;
     message.btnTitle = messages.confUrl.http404.button;
     message.redirect = true;
-    message.goto = "/" + CONFIGURATION_VIEW;
+    message.goto = "/" + CONFIGURATION_VIEW + "/" + CONFIGURATION_TAB_GENERAL;
     return message;
   }
 
@@ -178,7 +186,7 @@ export class AppComponent implements OnInit {
     message.btnTitle = messages.generic.button;
     message.size = "large";
     message.redirect = true;
-    message.goto = "/" + CONFIGURATION_VIEW;
+    message.goto = "/" + CONFIGURATION_VIEW + "/" + CONFIGURATION_TAB_GENERAL;
     return message;
   }
 
@@ -190,7 +198,7 @@ export class AppComponent implements OnInit {
     message.message = text;
     message.btnTitle = messages.confUrl.wrongUrl.button;
     message.redirect = true;
-    message.goto = "/" + CONFIGURATION_VIEW;
+    message.goto = "/" + CONFIGURATION_VIEW + "/" + CONFIGURATION_TAB_GENERAL;
     return message;
   }
 
@@ -202,7 +210,7 @@ export class AppComponent implements OnInit {
     message.btnTitle = messages.welcome.button;
     message.type = "light";
     message.redirect = true;
-    message.goto = "/" + CONFIGURATION_VIEW;
+    message.goto = "/" + CONFIGURATION_VIEW + "/" + CONFIGURATION_TAB_GENERAL;
     return message;
   }
 

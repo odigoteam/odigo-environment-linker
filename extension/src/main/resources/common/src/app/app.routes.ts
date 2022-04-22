@@ -13,6 +13,10 @@ import {CustomLinksComponent} from "./modules/configuration/components/custom-li
 export const ENV_VIEW = "environments";
 export const RELEASE_NOTE_VIEW = "release-note";
 export const CONFIGURATION_VIEW = "configuration";
+export const CONFIGURATION_TAB_APPEARANCE = "appearance";
+export const CONFIGURATION_TAB_BEHAVIOUR = "behaviour";
+export const CONFIGURATION_TAB_CUSTOM_LINKS = "custom-links";
+export const CONFIGURATION_TAB_GENERAL = "general";
 export const LOADER_VIEW = "loader";
 export const MESSAGE_VIEW = "message";
 export const ABOUT_VIEW = "about";
@@ -42,11 +46,11 @@ export const appRoutes: Routes = [
     path: CONFIGURATION_VIEW,
     component: ConfViewComponent,
     children: [
-      { path: "", redirectTo: "appearance", pathMatch: "full"},
-      { path: "general", component: GeneralComponent },
-      { path: "behaviour", component: BehaviourComponent },
-      { path: "appearance", component: AppearanceComponent },
-      { path: "custom-links", component: CustomLinksComponent }
+      { path: "", redirectTo: CONFIGURATION_TAB_APPEARANCE, pathMatch: "full"},
+      { path: CONFIGURATION_TAB_GENERAL, component: GeneralComponent },
+      { path: CONFIGURATION_TAB_BEHAVIOUR, component: BehaviourComponent },
+      { path: CONFIGURATION_TAB_APPEARANCE, component: AppearanceComponent },
+      { path: CONFIGURATION_TAB_CUSTOM_LINKS, component: CustomLinksComponent }
     ]
   },
   {
