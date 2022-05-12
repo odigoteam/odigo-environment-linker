@@ -35,16 +35,4 @@ jobs:
         app-id: ${{ secrets.APP_ID }}
         publish: true
 
-    - name: Upload Chrome artifact inside release
-      uses: JasonEtco/upload-to-release@v0.1.1
-      with:
-        args: ./extension/target/chrome.zip application/zip
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Upload Firefox artifact inside release
-      uses: JasonEtco/upload-to-release@v0.1.1
-      with:
-        args: ./extension/target/firefox.zip application/zip
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+   
