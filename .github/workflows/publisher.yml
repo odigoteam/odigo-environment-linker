@@ -26,7 +26,7 @@ jobs:
       run: mvn clean package -P dev
 
     - name: Publish extension to Chrome Store
-    - uses: Klemensas/chrome-extension-upload-action@$1.4.1
+      uses: Klemensas/chrome-extension-upload-action@$1.4.1
       with:
         refresh-token: ${{ secrets.REFRESH_TOKENT }}
         client-id: ${{ secrets.CLIENT_ID }}
@@ -34,5 +34,3 @@ jobs:
         file-name: './extension/target/chrome.zip '
         app-id: ${{ secrets.APP_ID }}
         publish: true
-
-   
