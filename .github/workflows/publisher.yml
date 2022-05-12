@@ -1,0 +1,33 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: Chrome extension publisher
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: maven
+    - name: Build with Maven
+      run: mvn clean package -P dev
+    - name: Publish to Chrome extension
+    - uses: Klemensas/chrome-extension-upload-action@$1.4.1
+      with:
+        refresh-token: ${{ secrets.REFRESH_TOKENT }}
+        client-id: ${{ secrets.CLIENT_ID }}
+        client-secret: ${{ secrets.CLIENT_SECRET }}
+        file-name: './extension/target/chrome.zip '
+        app-id: ${{ secrets.APP_ID }}
+        publish: true
