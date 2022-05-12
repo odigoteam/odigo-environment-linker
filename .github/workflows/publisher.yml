@@ -36,21 +36,15 @@ jobs:
         publish: true
 
     - name: Upload Chrome artifact inside release
-      uses: actions/upload-release-asset@v1
-      env:
-          GITHUB_TOKEN: ${{ github.token }}
+      uses: JasonEtco/upload-to-release@v0.1.1
       with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./extension/target/chrome.zip
-          asset_name: chrome.zip
-          asset_content_type: application/zip
+        args: ./extension/target/chrome.zip application/zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Upload Firefox artifact inside release
-      uses: actions/upload-release-asset@v1
-      env:
-          GITHUB_TOKEN: ${{ github.token }}
+      uses: JasonEtco/upload-to-release@v0.1.1
       with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./extension/target/firefox.zip
-          asset_name: firefox.zip
-          asset_content_type: application/zip
+        args: ./extension/target/firefox.zip application/zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
