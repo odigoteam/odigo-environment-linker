@@ -6,7 +6,7 @@
     "git-info": "node grab-git-info.js",
     "build-prod": "ng build --configuration production",
     "build-dev": "ng build --configuration development",
-    "clean": "rmdir /s /q dist",
+    "clean": "rimraf dist",
     "test": "ng test"
   },
   "private": true,
