@@ -5,7 +5,6 @@ export class CoffeeEasterEgg implements EasterEgg {
   }
 
   run(): void {
-    console.log("Easter egg: coffee");
     let birdsDiv = this._document.createElement("div");
     birdsDiv.id = "easter-egg-birds"
     birdsDiv.classList.add("birds");

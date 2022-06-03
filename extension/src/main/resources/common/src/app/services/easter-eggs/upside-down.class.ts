@@ -5,7 +5,6 @@ export class UpsideDownEasterEgg implements EasterEgg {
   }
 
   run(): void {
-    console.log("Easter egg: upside-down");
     this._document.getElementsByTagName("html")[0].classList.add('upside-down');
     this.active = true;
   }

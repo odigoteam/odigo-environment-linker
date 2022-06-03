@@ -5,7 +5,6 @@ export class CelebrateEasterEgg implements EasterEgg {
   active: boolean = false;
 
   run(): void {
-    console.log("Easter egg: celebrate");
     startConfetti();
     this.active = true;
   }
