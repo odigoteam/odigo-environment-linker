@@ -5,6 +5,9 @@ import {CelebrateEasterEgg} from "./easter-eggs/celebrate.class";
 import {RedPillEasterEgg} from "./easter-eggs/redpill.class";
 import {UpsideDownEasterEgg} from "./easter-eggs/upside-down.class";
 import {CoffeeEasterEgg} from "./easter-eggs/coffee.class";
+import {WeekEndEasterEgg} from "./easter-eggs/week-end.class";
+import {AperoEasterEgg} from "./easter-eggs/apero.class";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +15,8 @@ import {CoffeeEasterEgg} from "./easter-eggs/coffee.class";
 export class EasterEggsService {
 
   private _easterEggs: Map<string, EasterEgg> = new Map([
+    [ "apéro", new AperoEasterEgg(this._document, this._http) ],
+    [ "weekend", new WeekEndEasterEgg(this._document, this._http) ],
     [ "upside down", new UpsideDownEasterEgg(this._document) ],
     [ "celebrate", new CelebrateEasterEgg() ],
     [ "coffee", new CoffeeEasterEgg(this._document) ],
@@ -19,18 +24,19 @@ export class EasterEggsService {
   ]);
 
   constructor(@Inject(DOCUMENT) private _document: Document,
-              private _configurationService: ConfigurationService) {
+              private _configurationService: ConfigurationService,
+              private _http: HttpClient) {
   }
 
   isEaterEgg(term: string): boolean {
-    let wasEA: boolean = false;
-    if (this._easterEggs.has(term)) {
+    let value: boolean = false;
+    if (this._easterEggs.has(term.toLowerCase())) {
       this.stopAll();
       // @ts-ignore
       this._easterEggs.get(term).run();
-      wasEA = true;
+      value = true;
     }
-    return wasEA;
+    return value;
   }
 
   stopAll() {
