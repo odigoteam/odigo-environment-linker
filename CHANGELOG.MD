@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Fixed
 - Prototype Pollution in async - Upgrade async to version 2.6.4
+- Issue #2 pif+pef displayed even if they are unchecked in configuration
+- Report issue link redirect on wrong URL
 ## [4.5.2]
 ### Fixed
 - Navigation from welcome view to configuration was broken

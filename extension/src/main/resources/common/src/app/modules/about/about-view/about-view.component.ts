@@ -44,7 +44,7 @@ export class AboutViewComponent implements OnInit {
 
 
   openIssueLink() {
-    this._browser.tabs.create({url: environment.githubUrl});
+    this._browser.tabs.create({url: environment.issueUrl});
     window.close();
   }
 

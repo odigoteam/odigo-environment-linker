@@ -83,40 +83,40 @@ export class EnvListComponent implements OnInit {
     }
 
     Object.entries(env.urls).forEach(([key, value]) => {
-      let displayOption: boolean = false;
+      let displayModule: boolean = false;
       switch (key) {
         case 'console':
-          displayOption = this.userOptions.display.console;
+          displayModule = this.userOptions.display.console;
           break;
         case 'cxStudio':
-          displayOption = this.userOptions.display.cxStudio;
+          displayModule = this.userOptions.display.cxStudio;
           break;
         case 'hub':
-          displayOption = this.userOptions.display.hub;
+          displayModule = this.userOptions.display.hub;
           break;
         case 'healthCheck':
-          displayOption = this.userOptions.display.healthCheck;
+          displayModule = this.userOptions.display.healthCheck;
           break;
         case 'portal':
-          displayOption = this.userOptions.display.portal;
+          displayModule = this.userOptions.display.portal;
           break;
         case 'pif':
-          displayOption = this.userOptions.display.pif;
+          displayModule = this.userOptions.display.pif;
           break;
         case 'pef':
-          displayOption = this.userOptions.display.pef;
+          displayModule = this.userOptions.display.pef;
           break;
         case 'qualificationCenter':
-          displayOption = this.userOptions.display.qualificationCenter;
+          displayModule = this.userOptions.display.qualificationCenter;
           break;
         case 'routing':
-          displayOption = this.userOptions.display.routing;
+          displayModule = this.userOptions.display.routing;
           break;
         case 'cmdb':
-          displayOption = this.userOptions.display.cmdb;
+          displayModule = this.userOptions.display.cmdb;
           break;
         case 'ssh':
-          displayOption = this.userOptions.display.ssh;
+          displayModule = this.userOptions.display.ssh;
           break;
       }
 
@@ -124,16 +124,26 @@ export class EnvListComponent implements OnInit {
         value = new Module();
       }
 
+      value.display = displayModule;
       if(!key.match("(pif|pef)")) {
         if (key.match("(cmdb|ssh)")) {
-          value.display = (!!value.master || !!value.slave) && displayOption;
+          if(value.display) {
+            value.display = (!!value.master || !!value.slave);
+          }
         } else {
-          value.display = (!!value.internal || !!value.external) && displayOption;
+          if(value.display) {
+            value.display = (!!value.internal || !!value.external);
+          }
           value.showExternal = !!value.external && this.userOptions.externalLinks;
         }
       } else {
-        value.publisher.display = (!!value.publisher.internal || !!value.publisher.external) && displayOption;
-        value.store.display = (!!value.internal || !!value.external) && displayOption;
+        if(value.display) {
+          value.publisher.display = (!!value.publisher.internal || !!value.publisher.external);
+          value.store.display = (!!value.store.internal || !!value.store.external);
+        } else {
+          value.publisher.display = false;
+          value.store.display = false;
+        }
         if (key === "pef") {
           value.store.showExternal = !!value.store.external && this.userOptions.externalLinks;
         }

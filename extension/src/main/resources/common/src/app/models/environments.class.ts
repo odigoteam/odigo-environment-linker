@@ -8,6 +8,7 @@ export class Module {
 }
 
 export class PaaSUrls {
+  display: boolean = false;
   publisher: Module = new Module();
   store: Module = new Module();
 }
