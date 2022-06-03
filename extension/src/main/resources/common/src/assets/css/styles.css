@@ -56,7 +56,7 @@
 }
 
 .badge-env-info {
-  background-color: var(--bg-bagde-env-info);
+  background-color: var(--bg-badge-env-info);
   color: #2a3045;
   font-style: italic;
   font-weight: initial;

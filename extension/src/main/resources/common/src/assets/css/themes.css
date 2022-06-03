@@ -63,7 +63,7 @@
   --form-switch-background-image-focus: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%2842, 48, 69, 1%29'/%3e%3c/svg%3e");
   --form-switch-background-image-checked: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
   --bg-aws: #ff7300;
-  --bg-badge-env-info: #a6deed;
+  --bg-badge-env-info: #eaeaea;
   --color-html-code-tag: #d63384;
   --bg-conf-tab: #3d4662;
 }
