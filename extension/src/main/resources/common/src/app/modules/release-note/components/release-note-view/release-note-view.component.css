@@ -1,10 +1,9 @@
 .card-img-top {
-  background-image: url("https://media1.giphy.com/media/wpoLqr5FT1sY0/giphy.gif");
+  background-image: url("https://64.media.tumblr.com/6cd0b9bfe2fa86e4e71647b3d726ea72/tumblr_n1b44d6pxC1sj5h4oo1_400.gifv");
   height: 180px;
   background-position-y: -100px;
   background-size: cover;
 }
-
 /*------------------- Overrides ---------------------*/
 .card {
   height: 490px;

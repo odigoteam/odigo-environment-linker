@@ -3,7 +3,7 @@
 
 	<groupId>com.odigo</groupId>
 	<artifactId>odigo-environment-linker</artifactId>
-	<version>4.5.2</version>
+	<version>4.5.3</version>
 	<packaging>pom</packaging>
 
 	<modules>

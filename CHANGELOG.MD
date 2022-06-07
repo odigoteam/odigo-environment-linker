@@ -5,14 +5,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [4.5.3]
 ### Added
-- New commands (apéro and weekend) which tell you if it's time for apéro or for the week-end (french only).
+- New commands (apéro and weekend) which tell you if it's time for apero or for the weekend (french only).
 ### Fixed
 - Prototype Pollution in async - Upgrade async to version 2.6.4
 - Issue #2 pif+pef displayed even if they are unchecked in configuration
 - Report issue link redirect on wrong URL
 - Badges T-shirt size and version with dark mode are not readable
-## [4.5.2]
+- Focus on search input at launch.
+## [4.5.1] / [4.5.2]
 ### Fixed
 - Navigation from welcome view to configuration was broken
 - General tab was disappeared
@@ -256,8 +258,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Fix Markdown links to tag comparison URL with footnote-style links.
 
-[Unreleased]: https://github.com/guitaro/odigo-environment-linker/compare/v4.5.2...HEAD
-[4.5.2]: https://github.com/guitaro/odigo-environment-linker/releases/tag/v4.5.1
+[Unreleased]: https://github.com/guitaro/odigo-environment-linker/compare/v4.5.3...HEAD
+[4.5.3]: https://github.com/guitaro/odigo-environment-linker/releases/tag/v4.5.3
+[4.5.3]: https://github.com/guitaro/odigo-environment-linker/releases/tag/v4.5.3
+[4.5.2]: https://github.com/guitaro/odigo-environment-linker/releases/tag/v4.5.2
+[4.5.1]: https://github.com/guitaro/odigo-environment-linker/releases/tag/v4.5.1
 [4.5.0]: https://github.com/guitaro/odigo-environment-linker/releases/tag/v4.5.0
 [4.4.0]: https://github.com/guitaro/odigo-environment-linker/releases/tag/v4.4.0
 [4.3.0]: https://github.com/guitaro/odigo-environment-linker/releases/tag/v4.3.0

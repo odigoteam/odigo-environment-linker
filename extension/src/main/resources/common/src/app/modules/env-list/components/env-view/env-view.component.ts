@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ConfigurationService} from "../../../../services/configuration.service";
 import {UserConfiguration} from "../../../../models/settings.class";
 import {EnvironmentsService} from "../../../../services/environments.service";
@@ -10,9 +10,10 @@ import {EasterEggsService} from "../../../../services/easter-eggs.service";
   templateUrl: './env-view.component.html',
   styleUrls: ['./env-view.component.css']
 })
-export class EnvViewComponent implements OnInit {
+export class EnvViewComponent implements OnInit, AfterViewInit {
   supportedVersions: any[] = [];
   userConf: UserConfiguration = new UserConfiguration();
+  @ViewChild('searchField') searchField: ElementRef | undefined;
 
   constructor(private _configurationService: ConfigurationService,
               private _environmentsService: EnvironmentsService,
@@ -26,6 +27,10 @@ export class EnvViewComponent implements OnInit {
         checked: this.userConf.filterOptions.versions.includes(version)
       });
     });
+  }
+
+  ngAfterViewInit(): void {
+    this.searchField?.nativeElement.focus();
   }
 
   ngOnInit(): void {
@@ -70,8 +75,8 @@ export class EnvViewComponent implements OnInit {
 
   updateResults() {
     if(this.userConf.extensionConfiguration.search.startsWith("/")) {
-      if(this._easterEggService.isEaterEgg(this.userConf.extensionConfiguration.search.substring(1))) {
-        this.userConf.extensionConfiguration.search = "";
+      if(!this._easterEggService.isEaterEgg(this.userConf.extensionConfiguration.search.substring(1))) {
+        this._easterEggService.stopAll();
       }
     } else {
       this._environmentsService.runSearch();

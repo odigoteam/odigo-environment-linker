@@ -15,7 +15,7 @@ import {HttpClient} from "@angular/common/http";
 export class EasterEggsService {
 
   private _easterEggs: Map<string, EasterEgg> = new Map([
-    [ "apéro", new AperoEasterEgg(this._document, this._http) ],
+    [ "apero", new AperoEasterEgg(this._document, this._http) ],
     [ "weekend", new WeekEndEasterEgg(this._document, this._http) ],
     [ "upside down", new UpsideDownEasterEgg(this._document) ],
     [ "celebrate", new CelebrateEasterEgg() ],
