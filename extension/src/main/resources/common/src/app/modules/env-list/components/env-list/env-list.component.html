@@ -157,7 +157,7 @@
                       <!-- / PORTAL -->
 
                       <!-- PIF -->
-                      <div class="btn-group" role="group" *ngIf="env.urls.pif">
+                      <div class="btn-group" role="group" *ngIf="env.urls.pif && env.urls.pif.display">
                         <button type="button"
                                 class="btn btn-outline-primary dropdown-toggle"
                                 data-bs-toggle="dropdown" aria-expanded="false"
@@ -181,7 +181,7 @@
                       <!-- / PIF -->
 
                       <!-- PEF -->
-                      <div class="btn-group" role="group" *ngIf="env.urls.pef">
+                      <div class="btn-group" role="group" *ngIf="env.urls.pef && env.urls.pef.display">
                         <button type="button"
                                 class="btn btn-outline-primary dropdown-toggle"
                                 data-bs-toggle="dropdown" aria-expanded="false"
