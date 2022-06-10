@@ -20,28 +20,12 @@ export class ReleaseNoteViewComponent {
     title: "Sea, sand and sun ! <i class=\"bi bi-sun\"></i>",
     subtitle: "Let’s go to the beach ! Summer is here (not officially but it feels like) and we can't wait anymore. Good long summer nights, BBQ, cocktails... Perfect ! Summer is really the best season of all.",
     features: [
-      {
-        shortDesc: "New commands /apero and /weekend (french only)",
-        longDesc: "Do you want to know if it's time for aperitif or if it's time to go to weekend ? In this case, just ask it to the extension with those both commands. As this feature is based on an external tool, the responses are only in french... Sorry for non-french people :("
-      }
     ],
     changes: [
     ],
     bugfixes: [
       {
-        desc: "Focus on search at extension launch."
-      },
-      {
-        desc: "Vulnerability fix : Prototype Pollution in async - Upgrade async library to version 2.6.4."
-      },
-      {
-        desc: "Issue #2 pif+pef displayed even if they are unchecked in configuration."
-      },
-      {
-        desc: "Report issue link redirect on wrong URL."
-      },
-      {
-        desc: "Badges T-shirt size and version with dark mode are not readable."
+        desc: "Issue #5 Apero page is not disappearing after closing."
       }
     ]
   };

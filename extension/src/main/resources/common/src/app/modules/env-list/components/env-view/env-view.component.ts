@@ -79,6 +79,7 @@ export class EnvViewComponent implements OnInit, AfterViewInit {
         this._easterEggService.stopAll();
       }
     } else {
+      this._easterEggService.stopAll();
       this._environmentsService.runSearch();
       this._configurationService.saveConfiguration();
     }

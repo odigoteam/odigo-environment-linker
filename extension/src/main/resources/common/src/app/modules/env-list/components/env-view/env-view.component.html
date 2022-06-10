@@ -6,7 +6,7 @@
       </a>
       <div class="form-group">
         <input tabindex="1" type="text" class="form-control" aria-describedby="search"
-               name="search" id="search" [(ngModel)]="this.userConf.extensionConfiguration.search" (keyup)="updateResults()" placeholder="Enter the client ID or name" #searchField>
+               name="search" id="search" [(ngModel)]="this.userConf.extensionConfiguration.search" (ngModelChange)="updateResults()" placeholder="Enter the client ID or name" #searchField>
       </div>
     </div>
   </div>
