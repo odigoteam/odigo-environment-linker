@@ -29,14 +29,14 @@ export class EasterEggsService {
   }
 
   isEaterEgg(term: string): boolean {
-    let value: boolean = false;
-    if (this._easterEggs.has(term.toLowerCase())) {
-      this.stopAll();
+    return this._easterEggs.has(term.toLowerCase());
+  }
+
+  runEaterEgg(term: string): void {
+    if (this.isEaterEgg(term.toLowerCase())) {
       // @ts-ignore
       this._easterEggs.get(term).run();
-      value = true;
     }
-    return value;
   }
 
   stopAll() {

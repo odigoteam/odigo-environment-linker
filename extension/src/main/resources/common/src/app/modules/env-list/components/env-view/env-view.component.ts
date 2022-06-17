@@ -75,8 +75,10 @@ export class EnvViewComponent implements OnInit, AfterViewInit {
 
   updateResults() {
     if(this.userConf.extensionConfiguration.search.startsWith("/")) {
-      if(!this._easterEggService.isEaterEgg(this.userConf.extensionConfiguration.search.substring(1))) {
-        this._easterEggService.stopAll();
+      this._easterEggService.stopAll();
+      if(this._easterEggService.isEaterEgg(this.userConf.extensionConfiguration.search.substring(1))) {
+        this._easterEggService.runEaterEgg(this.userConf.extensionConfiguration.search.substring(1));
+      } else {
       }
     } else {
       this._easterEggService.stopAll();

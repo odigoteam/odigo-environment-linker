@@ -17,8 +17,8 @@ import {BrowserService} from "../../../../services/browser.service";
 export class ReleaseNoteViewComponent {
   public appVersion: string = packageJson.version;
   public content: any = {
-    title: "Sea, sand and sun ! <i class=\"bi bi-sun\"></i>",
-    subtitle: "Let’s go to the beach ! Summer is here (not officially but it feels like) and we can't wait anymore. Good long summer nights, BBQ, cocktails... Perfect ! Summer is really the best season of all.",
+    title: "Reminder !",
+    subtitle: "Reminder",
     features: [
     ],
     changes: [
