@@ -16,14 +16,20 @@ import {BrowserService} from "../../../../services/browser.service";
 })
 export class ReleaseNoteViewComponent {
   public appVersion: string = packageJson.version;
+  // features and changes have 'shortDesc' and 'longDesc' attributes.
+  // bugFixes fas just 'desc' attribute.
   public content: any = {
     title: "Reminder !",
     subtitle: "Reminder",
     features: [
     ],
     changes: [
+      {
+        shortDesc: "Upgrade Angular",
+        longDesc: "Upgrade Angular to the latest version (14.0.3)"
+      }
     ],
-    bugfixes: [
+    bugFixes: [
       {
         desc: "Issue #5 Apero page is not disappearing after closing."
       }
