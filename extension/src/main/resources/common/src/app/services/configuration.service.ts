@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Settings} from "../models/settings.class";
+import {MotionPlanning} from "../models/motion.class";
 import {StorageService} from "./storage.service";
 import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Environments} from "../models/environments.class";
@@ -26,17 +27,19 @@ export class ConfigurationService {
       this._configuration.userConfiguration.userOptions = { ...this._configuration.userConfiguration.userOptions, ...data.userOptions };
       this._configuration.userConfiguration.filterOptions = { ...this._configuration.userConfiguration.filterOptions, ...data.filtersOptions };
 
-      if((typeof this._configuration.userConfiguration.filterOptions.aws) === "boolean") {
-        if(this._configuration.userConfiguration.filterOptions.aws) {
-          this._configuration.userConfiguration.filterOptions.aws = "strict";
-        } else {
-          this._configuration.userConfiguration.filterOptions.aws = "mixed";
-        }
+      if (this._configuration.userConfiguration.filterOptions.aws === null ||
+        this._configuration.userConfiguration.filterOptions.aws === undefined ||
+        this._configuration.userConfiguration.filterOptions.aws === "") {
+        this._configuration.userConfiguration.filterOptions.aws = "mixed";
       }
 
       this._configuration.currentExtensionVersion = packageJson.version;
       callback(!!data.extensionConfiguration && !!data.userOptions && !!data.filtersOptions);
     });
+  }
+
+  loadMotionPlanning(): Observable<HttpResponse<MotionPlanning>> {
+    return this.http.get<MotionPlanning>(this._configuration.userConfiguration.extensionConfiguration.motionURL, {observe: 'response', responseType: 'json'});
   }
 
   loadEnvironments(): Observable<HttpResponse<Environments>> {
@@ -47,6 +50,19 @@ export class ConfigurationService {
     this._configuration.userConfiguration.extensionConfiguration.latestExtensionVersionUsed = packageJson.version;
     this._storage.set({extensionConfiguration : this._configuration.userConfiguration.extensionConfiguration});
     this._storage.set({userOptions : this._configuration.userConfiguration.userOptions});
+    this._storage.set({filtersOptions : this._configuration.userConfiguration.filterOptions});
+  }
+
+  saveExtensionConfiguration(): void {
+    this._configuration.userConfiguration.extensionConfiguration.latestExtensionVersionUsed = packageJson.version;
+    this._storage.set({extensionConfiguration : this._configuration.userConfiguration.extensionConfiguration});
+  }
+
+  saveUserConfiguration(): void {
+    this._storage.set({userOptions : this._configuration.userConfiguration.userOptions});
+  }
+
+  saveFilterConfiguration(): void {
     this._storage.set({filtersOptions : this._configuration.userConfiguration.filterOptions});
   }
 

@@ -7,7 +7,7 @@
   <div class="row">
     <div class="col-4 offset-1">
       <label class="form-check-label"
-             style="line-height: 38px; vertical-align: middle;" for="cmdbFileType">
+             style="line-height: 38px; vertical-align: middle;" for="cmdbTypeMenuButton">
         CMDB file type :
       </label>
     </div>
@@ -42,11 +42,63 @@
     <div class="col-6">
       <div>
         <div class="form-check form-switch">
-          <input class="form-check-input" type="checkbox" name="useExtendedSearch" id="useExtendedSearch" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.extendedSearch">
+          <input class="form-check-input" type="checkbox" name="useExtendedSearch" id="useExtendedSearch" (change)="saveUserConfiguration()" [(ngModel)]="this.userConfiguration.userOptions.extendedSearch">
         </div>
       </div>
       <div class="conf-tips-info">
         Extended search will match all environments by matching the nearest results with input sequence by keeping characters order ("ABC" will match "l<b><u>a</u></b> <b><u>b</u></b>anque postale finan<b><u>c</u></b>ement")
+      </div>
+    </div>
+  </div>
+  <hr/>
+  <div class="row mt-3">
+    <div class="col-12">
+      <h5>Features</h5>
+    </div>
+  </div>
+  <div class="row mb-5">
+    <div class="col-4 offset-1">
+      <label class="form-check-label">
+        Motion
+      </label>
+    </div>
+    <div class="col-6">
+      <div>
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" name="useMotion" id="useMotion" (change)="checkMotionUrl()" [(ngModel)]="this.userConfiguration.userOptions.useMotionTool">
+        </div>
+      </div>
+      <div class="conf-tips-info">
+        Enable Motion tool to facilitate access to the migration's waves planning.<br/>
+        <i class="bi bi-exclamation-triangle-fill"></i> This is not the official planning. To check the official one, please refer to <a href="#" (click)="openLink(motionPlanningURL)">this link</a>.
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-2 offset-3" *ngIf="this.userConfiguration.userOptions.useMotionTool">
+      <label class="form-check-label">
+        URL :
+      </label>
+    </div >
+    <div class="col-6" *ngIf="this.userConfiguration.userOptions.useMotionTool">
+      <div class="form-group">
+        <div>
+          <div class="input-group">
+            <input type="text" class="form-control" name="configURL" id="configURL" aria-label="configuration url" aria-describedby="configuration-url"
+                   placeholder="https://..." (keyup)="checkMotionUrl()" [(ngModel)]="motionUrl">
+            <div class="input-group-append">
+              <span class="input-group-text">
+                <i class="bi bi-circle" *ngIf="urlCheckState === ''"></i>
+                <i class="bi bi-hourglass-split text-info" *ngIf="urlCheckState === 'pending'"></i>
+                <i class="bi bi-check-circle text-success" *ngIf="urlCheckState === 'success'"></i>
+                <i class="bi bi-exclamation-circle text-warning" *ngIf="urlCheckState === 'warning'"></i>
+                <i class="bi bi-x-circle text-danger" *ngIf="urlCheckState === 'error'"></i>
+              </span>
+            </div>
+          </div>
+          <small class="form-text text-danger" [innerHTML]="motionUrlErrorMessage" *ngIf="motionUrlErrorMessage"></small>
+        </div>
+        <div class="conf-tips-info">This URL is for motion planning configuration. Without this, the Motion tool will be useless !</div>
       </div>
     </div>
   </div>

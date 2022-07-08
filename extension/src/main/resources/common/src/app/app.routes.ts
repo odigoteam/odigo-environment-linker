@@ -5,6 +5,7 @@ import { ReleaseNoteViewComponent } from "./modules/release-note/components/rele
 import {ConfViewComponent} from "./modules/configuration/components/conf-view/conf-view.component";
 import {MessageViewComponent} from "./modules/message/message-view/message-view.component";
 import {AboutViewComponent} from "./modules/about/about-view/about-view.component";
+import {MotionViewComponent} from "./modules/motion/motion-view/motion-view.component";
 import {BehaviourComponent} from "./modules/configuration/components/behaviour/behaviour.component";
 import {GeneralComponent} from "./modules/configuration/components/general/general.component";
 import {AppearanceComponent} from "./modules/configuration/components/appearance/appearance.component";
@@ -20,6 +21,7 @@ export const CONFIGURATION_TAB_GENERAL = "general";
 export const LOADER_VIEW = "loader";
 export const MESSAGE_VIEW = "message";
 export const ABOUT_VIEW = "about";
+export const MOTION_VIEW = "motion";
 
 export const appRoutes: Routes = [
   {
@@ -62,5 +64,10 @@ export const appRoutes: Routes = [
     path: ABOUT_VIEW,
     pathMatch: 'full',
     component: AboutViewComponent
+  },
+  {
+    path: MOTION_VIEW,
+    pathMatch: 'full',
+    component: MotionViewComponent
   }
 ];

@@ -9,6 +9,7 @@ export class DataBusService {
 
   confBtnIcon = new Subject<string>();
   confBtnDisabled = new Subject<boolean>();
+  showMotionButton = new Subject<boolean>();
 
   constructor() {
     this._dataMap = new Map();

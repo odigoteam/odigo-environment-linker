@@ -83,7 +83,7 @@ export class EnvViewComponent implements OnInit, AfterViewInit {
     } else {
       this._easterEggService.stopAll();
       this._environmentsService.runSearch();
-      this._configurationService.saveConfiguration();
+      this._configurationService.saveExtensionConfiguration();
     }
   }
 
@@ -105,7 +105,7 @@ export class EnvViewComponent implements OnInit, AfterViewInit {
     this.userConf.filterOptions.prod = true;
     this.userConf.filterOptions.preprod = true;
     this.userConf.filterOptions.others = true;
-    this._configurationService.saveConfiguration();
+    this._configurationService.saveFilterConfiguration();
     this.updateFilters();
     this._environmentsService.runSearch();
   }

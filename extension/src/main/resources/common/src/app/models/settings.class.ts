@@ -37,6 +37,7 @@ export class UserOptions {
   aws: AWSOptions = new AWSOptions();
   jenkinsLinks: boolean = false;
   tShirtSizes: boolean = false;
+  useMotionTool: boolean = false;
 }
 
 export class FiltersOptions {
@@ -53,7 +54,9 @@ export class FiltersOptions {
 export class ExtensionConfiguration {
   latestExtensionVersionUsed: string = "";
   confURL : string = "";
+  motionURL : string = "";
   search : string = "";
+  motionSearch : string = "";
 }
 
 export class UserConfiguration {

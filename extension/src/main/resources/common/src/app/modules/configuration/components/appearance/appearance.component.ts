@@ -19,10 +19,6 @@ export class AppearanceComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  saveConfig(): void {
-    this._configurationService.saveConfiguration();
-  }
-
   applyTheme() {
     if(this.userConfiguration.userOptions.darkTheme) {
       this._document.body.classList.add('theme-dark');
@@ -31,6 +27,10 @@ export class AppearanceComponent implements OnInit {
       this._document.body.classList.add('theme-light');
       this._document.body.classList.remove('theme-dark');
     }
-    this.saveConfig();
+    this._configurationService.saveUserConfiguration();
+  }
+
+  saveUserConfiguration() {
+    this._configurationService.saveUserConfiguration();
   }
 }

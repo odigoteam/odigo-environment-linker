@@ -2,6 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {
   ABOUT_VIEW,
+  MOTION_VIEW,
   CONFIGURATION_TAB_GENERAL,
   CONFIGURATION_VIEW,
   ENV_VIEW,
@@ -11,6 +12,7 @@ import {
 } from "./app.routes";
 import {ConfigurationService} from "./services/configuration.service";
 import {EnvironmentsService} from "./services/environments.service";
+import {MotionService} from "./services/motion.service";
 import {DOCUMENT} from "@angular/common";
 import {AwsRoleSwitcherService} from "./services/aws-role-switcher.service";
 import {DataBusService} from "./services/data-bus.service";
@@ -27,6 +29,7 @@ import {DataMigrationService} from "./services/data-migration.service";
 export class AppComponent implements OnInit {
   icon: string = "configuration";
   confButtonDisabled: boolean = false;
+  showMotionButton: boolean = false;
 
   constructor(private _router: Router,
               private _configurationService: ConfigurationService,
@@ -35,19 +38,25 @@ export class AppComponent implements OnInit {
               private _awsRoleSwitcherService: AwsRoleSwitcherService,
               private _dataBusService: DataBusService,
               private _dataMigrationService: DataMigrationService,
+              private _motionService: MotionService,
               @Inject(DOCUMENT) private _document: Document) {
     _dataBusService.confBtnIcon.subscribe(value => this.icon = value);
     _dataBusService.confBtnDisabled.subscribe(value => this.confButtonDisabled = value);
+    _dataBusService.showMotionButton.subscribe(value => this.showMotionButton = value);
   }
 
   ngOnInit(): void {
     this._dataMigrationService.migrateModel(() => {
       this._configurationService.loadConfiguration((configurationLoaded: boolean) => {
+        debugger;
         this._customLinksService.load((customLinksLoaded: boolean) => {
           if(!customLinksLoaded) {
             console.log("No custom links loaded from storage.");
           }
         });
+
+        this.showMotionButton = this._configurationService.configuration.userConfiguration.userOptions.useMotionTool;
+
         if (this._configurationService.configuration.userConfiguration.userOptions.darkTheme) {
           this._document.body.classList.add('theme-dark');
           this._document.body.classList.remove('theme-light');
@@ -125,6 +134,15 @@ export class AppComponent implements OnInit {
     }
   }
 
+  goToMotion() {
+    this._router.navigate([LOADER_VIEW]).then(_ => {});
+    if (this._router.url.indexOf(MOTION_VIEW) >= 0) {
+      this.loadEnvs();
+    } else {
+      this.loadMotion();
+    }
+  }
+
   goToConfiguration() {
     this._router.navigate([LOADER_VIEW]).then(_ => {});
     this._dataBusService.confBtnIcon.next("");
@@ -163,6 +181,13 @@ export class AppComponent implements OnInit {
         console.error(error);
         this._router.navigate([MESSAGE_VIEW]).then(_ => {});
       }});
+  }
+
+  loadMotion() {
+    this._motionService.loadPlanning().subscribe(_ => {
+      this._dataBusService.confBtnIcon.next(CONFIGURATION_VIEW);
+      this._router.navigate([MOTION_VIEW]).then(_ => {});
+    });
   }
 
   buildNotFoundConfUrlMessage(): MessageViewContent {

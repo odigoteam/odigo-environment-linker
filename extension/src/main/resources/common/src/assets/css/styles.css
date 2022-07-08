@@ -61,3 +61,11 @@
   font-style: italic;
   font-weight: initial;
 }
+
+.table {
+  color: var(--font-color);
+}
+
+.theme-light .table {
+  border-color: grey;
+}

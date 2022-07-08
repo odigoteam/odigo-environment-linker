@@ -7,27 +7,27 @@
   <div class="row">
     <div class="col-11 offset-1">
       <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" name="displayLogo" id="displayLogo" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.display.logo">
+        <input class="form-check-input" type="checkbox" name="displayLogo" id="displayLogo" (change)="saveUserConfiguration()" [(ngModel)]="this.userConfiguration.userOptions.display.logo">
         <label class="form-check-label" for="displayLogo">Client logo</label>
       </div>
       <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" name="displayClientName" id="displayClientName" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.display.clientName">
+        <input class="form-check-input" type="checkbox" name="displayClientName" id="displayClientName" (change)="saveUserConfiguration()" [(ngModel)]="this.userConfiguration.userOptions.display.clientName">
         <label class="form-check-label" for="displayClientName">(Name)</label>
       </div>
       <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" name="displayClientDomain" id="displayClientDomain" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.display.clientDomain">
+        <input class="form-check-input" type="checkbox" name="displayClientDomain" id="displayClientDomain" (change)="saveUserConfiguration()" [(ngModel)]="this.userConfiguration.userOptions.display.clientDomain">
         <label class="form-check-label" for="displayClientDomain">
           <span class="badge badge-pill badge-light">Domain</span>
         </label>
       </div>
       <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" name="displayVersion" id="displayVersion" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.display.version">
+        <input class="form-check-input" type="checkbox" name="displayVersion" id="displayVersion" (change)="saveUserConfiguration()" [(ngModel)]="this.userConfiguration.userOptions.display.version">
         <label class="form-check-label" for="displayVersion">
           <span class="badge badge-env-info">Odigo version</span>
         </label>
       </div>
       <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" name="displayTShirtSizes" id="displayTShirtSizes" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.tShirtSizes">
+        <input class="form-check-input" type="checkbox" name="displayTShirtSizes" id="displayTShirtSizes" (change)="saveUserConfiguration()" [(ngModel)]="this.userConfiguration.userOptions.tShirtSizes">
         <label class="form-check-label" for="displayTShirtSizes">
           <span class="badge badge-env-info">T-Shirt size</span>
         </label>
@@ -50,7 +50,7 @@
       <div>
         <div class="form-check form-switch">
 
-          <input class="form-check-input" type="checkbox" name="showOnlyLinksIcons" id="showOnlyLinksIcons" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.onlyIcons">
+          <input class="form-check-input" type="checkbox" name="showOnlyLinksIcons" id="showOnlyLinksIcons" (change)="saveUserConfiguration()" [(ngModel)]="this.userConfiguration.userOptions.onlyIcons">
         </div>
       </div>
       <div class="conf-tips-info">Only icons will be displayed for each links.</div>
@@ -68,51 +68,51 @@
     </div>
     <div class="col-6 mt-2">
       <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" name="displayAWSConsole" id="displayAWSConsole" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.display.aws">
+        <input class="form-check-input" type="checkbox" name="displayAWSConsole" id="displayAWSConsole" (change)="saveUserConfiguration()" [(ngModel)]="this.userConfiguration.userOptions.display.aws">
         <label class="form-check-label" for="displayAWSConsole"><img src="assets/images/logo-aws.png" alt="AWS" class="aws-logo"/> AWS Console</label>
       </div>
       <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" name="displayConfiguration" id="displayConfiguration" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.display.cmdb">
+        <input class="form-check-input" type="checkbox" name="displayConfiguration" id="displayConfiguration" (change)="saveUserConfiguration()" [(ngModel)]="this.userConfiguration.userOptions.display.cmdb">
         <label class="form-check-label" for="displayConfiguration"><i class="bi bi-gear-fill"></i> Configuration (CMDB)</label>
       </div>
       <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" name="displayConsole" id="displayConsole" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.display.console">
+        <input class="form-check-input" type="checkbox" name="displayConsole" id="displayConsole" (change)="saveUserConfiguration()" [(ngModel)]="this.userConfiguration.userOptions.display.console">
         <label class="form-check-label" for="displayConsole"><i class="bi bi-display"></i> Console</label>
       </div>
       <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" name="displayConsole" id="displayCxStudio" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.display.cxStudio">
+        <input class="form-check-input" type="checkbox" name="displayConsole" id="displayCxStudio" (change)="saveUserConfiguration()" [(ngModel)]="this.userConfiguration.userOptions.display.cxStudio">
         <label class="form-check-label" for="displayCxStudio"><i class="bi bi-diagram-3-fill"></i> CX Studio</label>
       </div>
       <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" name="displayHealthCheck" id="displayHealthCheck" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.display.healthCheck">
+        <input class="form-check-input" type="checkbox" name="displayHealthCheck" id="displayHealthCheck" (change)="saveUserConfiguration()" [(ngModel)]="this.userConfiguration.userOptions.display.healthCheck">
         <label class="form-check-label" for="displayHealthCheck"><i class="bi bi-activity"></i> Health check</label>
       </div>
       <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" name="displayHub" id="displayHub" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.display.hub">
+        <input class="form-check-input" type="checkbox" name="displayHub" id="displayHub" (change)="saveUserConfiguration()" [(ngModel)]="this.userConfiguration.userOptions.display.hub">
         <label class="form-check-label" for="displayHub"><i class="bi bi-signpost-split"></i> Hub</label>
       </div>
       <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" name="displayPortal" id="displayPortal" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.display.portal">
+        <input class="form-check-input" type="checkbox" name="displayPortal" id="displayPortal" (change)="saveUserConfiguration()" [(ngModel)]="this.userConfiguration.userOptions.display.portal">
         <label class="form-check-label" for="displayPortal"><i class="bi bi-house-door"></i> Portal</label>
       </div>
       <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" name="displayPIF" id="displayPIF" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.display.pif">
+        <input class="form-check-input" type="checkbox" name="displayPIF" id="displayPIF" (change)="saveUserConfiguration()" [(ngModel)]="this.userConfiguration.userOptions.display.pif">
         <label class="form-check-label" for="displayPIF"><i class="bi bi-code-square"></i> Private PaaS (PIF)</label>
       </div>
       <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" name="displayPEF" id="displayPEF" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.display.pef">
+        <input class="form-check-input" type="checkbox" name="displayPEF" id="displayPEF" (change)="saveUserConfiguration()" [(ngModel)]="this.userConfiguration.userOptions.display.pef">
         <label class="form-check-label" for="displayPEF"><i class="bi bi-code"></i> Public PaaS (PEF)</label>
       </div>
       <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" name="displayConsole" id="displayQualificationCenter" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.display.qualificationCenter">
+        <input class="form-check-input" type="checkbox" name="displayConsole" id="displayQualificationCenter" (change)="saveUserConfiguration()" [(ngModel)]="this.userConfiguration.userOptions.display.qualificationCenter">
         <label class="form-check-label" for="displayQualificationCenter"><i class="bi bi-robot"></i>&nbsp;Qualification center</label>
       </div>
       <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" name="displayRouting" id="displayRouting" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.display.routing">
+        <input class="form-check-input" type="checkbox" name="displayRouting" id="displayRouting" (change)="saveUserConfiguration()" [(ngModel)]="this.userConfiguration.userOptions.display.routing">
         <label class="form-check-label" for="displayRouting"><i class="bi bi-arrow-left-right"></i> Routing</label>
       </div>
       <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" name="displaySsh" id="displaySsh" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.display.ssh">
+        <input class="form-check-input" type="checkbox" name="displaySsh" id="displaySsh" (change)="saveUserConfiguration()" [(ngModel)]="this.userConfiguration.userOptions.display.ssh">
         <label class="form-check-label" for="displaySsh"><i class="bi bi-terminal"></i> SSH</label>
       </div>
     </div>
@@ -126,7 +126,7 @@
     <div class="col-6">
       <div>
         <div  class="form-check form-switch">
-          <input class="form-check-input" type="checkbox" name="showExternalLinks" id="showExternalLinks" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.externalLinks">
+          <input class="form-check-input" type="checkbox" name="showExternalLinks" id="showExternalLinks" (change)="saveUserConfiguration()" [(ngModel)]="this.userConfiguration.userOptions.externalLinks">
         </div>
       </div>
       <div class="conf-tips-info">Display internal (https://*.internal.odigo.cx/*) and public (https://*.odigo.cx/*) links.</div>
@@ -141,7 +141,7 @@
     <div class="col-6">
       <div>
         <div  class="form-check form-switch">
-          <input class="form-check-input" type="checkbox" name="showJenkinsLinks" id="showJenkinsLinks" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.jenkinsLinks">
+          <input class="form-check-input" type="checkbox" name="showJenkinsLinks" id="showJenkinsLinks" (change)="saveUserConfiguration()" [(ngModel)]="this.userConfiguration.userOptions.jenkinsLinks">
         </div>
       </div>
       <div class="conf-tips-info">

@@ -37,10 +37,6 @@ export class GeneralComponent implements OnInit {
       });
   }
 
-  saveConfig(): void {
-    this._configurationService.saveConfiguration();
-  }
-
   checkConfigUrl() {
     this.confUrlErrorMessage = "";
     this.urlCheckState = 'pending';
@@ -53,7 +49,7 @@ export class GeneralComponent implements OnInit {
         } else {
           this._dataBusService.confBtnDisabled.next(false);
           this.urlCheckState = 'success';
-          this.saveConfig();
+          this._configurationService.saveExtensionConfiguration();
         }
       },
       error => {
@@ -77,7 +73,7 @@ export class GeneralComponent implements OnInit {
     this._dataBusService.confBtnDisabled.next(validation.hasError);
     if(!validation.hasError) {
       this.awsRoleErrorMessage = "";
-      this.saveConfig();
+      this._configurationService.saveUserConfiguration();
     }
   }
 }

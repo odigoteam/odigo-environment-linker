@@ -1,0 +1,76 @@
+<div class="row">
+  <div class="col">
+    <a id="clear-search" (click)="clearSearch()" aria-label="Clear search">
+      <i class="bi bi-x-lg"></i>
+    </a>
+    <div class="form-group">
+      <input tabindex="1" type="text" class="form-control" aria-describedby="search"
+             name="search" id="search" [(ngModel)]="this.userConf.extensionConfiguration.motionSearch" (ngModelChange)="updateResults()" placeholder="Enter the client name" #searchField>
+    </div>
+  </div>
+</div>
+<div class="row mt-2">
+  <div class="col">
+    <div class="scrollbar" id="wave-list" *ngIf="motionPlanning" #waveList>
+      <div class="accordion" id="accordionWaves">
+        <div *ngFor="let wave of motionPlanning.waves">
+          <div class="accordion-item" [ngClass]="wave.displayed ? '' : 'visually-hidden'">
+            <h2 class="accordion-header">
+              <button class="accordion-button" [ngClass]="wave.next_wave || wave.containsResults ? '' : 'collapsed'" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + wave.name" [attr.aria-expanded]="wave.next_wave || wave.containsResults ? 'true' : 'false'" aria-controls="accordionWaves">
+                {{wave.name}} ({{wave.moves.length}})
+              </button>
+            </h2>
+            <div id="collapse{{wave.name}}" class="accordion-collapse collapse" [ngClass]="wave.next_wave || wave.containsResults ? 'show' : ''" aria-labelledby="headingTwo" data-bs-parent="#accordionWaves">
+              <div class="accordion-body">
+                <table class="table table-sm">
+                  <thead>
+                  <tr>
+                    <th scope="col" rowspan='2' style="line-height: 66px;">#</th>
+                    <th scope="col" rowspan='2' style="line-height: 66px;">Name</th>
+                    <th scope="col" colspan='2' class="text-center">Source</th>
+                    <th scope="col" colspan='2' class="text-center">Target</th>
+                  </tr>
+                  <tr>
+                    <th scope="col" class="text-center">Instance</th>
+                    <th scope="col" class="text-center">Version</th>
+                    <th scope="col" class="text-center">Instance</th>
+                    <th scope="col" class="text-center">Version</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let move of wave.moves; let index = index;" [ngClass]="searchField.value.length >=1 && move.highlight ? 'move-highlighting' : ''">
+                    <th scope="row" [ngClass]="move.highlight ? '' : 'text-muted'">{{ index + 1 }}</th>
+                    <td>
+                      <button type="button" class="btn btn-link" [ngClass]="move.highlight ? '' : 'text-muted'" (click)="openLink(move.id_card)" *ngIf="move.name !== '' && move.id_card !== ''" [attr.title]="move.name">{{ (move.name.length > 20) ? (move.name | slice:0:20)+'...' : (move.name) }}</button>
+                      <span [ngClass]="move.highlight ? '' : 'text-muted'" *ngIf="move.name !=='' && move.id_card === ''" [attr.title]="move.name">{{ (move.name.length > 20) ? (move.name | slice:0:20)+'...' : (move.name) }}</span>
+                    </td>
+                    <td class="text-center">
+                      <button type="button" class="btn btn-link" [ngClass]="move.highlight ? '' : 'text-muted'" (click)="goToEnvList(move.src)" *ngIf="move.name !== '' && move.src !== ''">{{move.src | uppercase}}</button>
+                      <span [ngClass]="move.highlight ? '' : 'text-muted'" *ngIf="move.name !== '' && move.src === ''">{{move.src | uppercase}}</span>
+                    </td>
+                    <td class="text-center">
+                      <span [ngClass]="move.highlight ? '' : 'text-muted'" *ngIf="move.name !== '' && move.version_src !== ''">{{move.version_src}}</span>
+                    </td>
+                    <td class="text-center">
+                      <button type="button" class="btn btn-link" [ngClass]="move.highlight ? '' : 'text-muted'" (click)="goToEnvList(move.dest)" *ngIf="move.name !== '' && move.dest !== ''">{{move.dest | uppercase}}</button>
+                      <span [ngClass]="move.highlight ? '' : 'text-muted'" *ngIf="move.name !== '' && move.dest === ''">{{move.dest | uppercase}}</span>
+                    </td>
+                    <td class="text-center">
+                      <span [ngClass]="move.highlight ? '' : 'text-muted'" *ngIf="move.name !== '' && move.version_dest !== ''">{{move.version_dest}}</span>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row mt-1">
+  <div class="col">
+    <p class='small-info' style="margin-bottom: 0"><small>Generated at {{motionPlanning?.generated | date : "fullDate" }}</small></p>
+  </div>
+</div>

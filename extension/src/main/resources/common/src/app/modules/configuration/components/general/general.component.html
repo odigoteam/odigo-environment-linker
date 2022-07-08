@@ -17,7 +17,7 @@
             <div class="input-group-append">
               <span class="input-group-text">
                 <i class="bi bi-circle" *ngIf="urlCheckState === ''"></i>
-                <img src="assets/images/loader.gif" alt="Wait..." style="height: 36px; width: 36px" *ngIf="urlCheckState === 'pending'">
+                <i class="bi bi-hourglass-split text-info" *ngIf="urlCheckState === 'pending'"></i>
                 <i class="bi bi-check-circle text-success" *ngIf="urlCheckState === 'success'"></i>
                 <i class="bi bi-exclamation-circle text-warning" *ngIf="urlCheckState === 'warning'"></i>
                 <i class="bi bi-x-circle text-danger" *ngIf="urlCheckState === 'error'"></i>

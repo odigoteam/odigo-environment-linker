@@ -13,7 +13,7 @@
   --font-color-placeholder: rgb(42, 48, 69, 0.5);
   --input-bg-color: rgba(230, 231, 232, 0.7);
   --input-bg-color-focus: rgba(230, 231, 232, 1);
-  --small-info-color: #2a3045;
+  --small-info-color: grey;
   --bs-success: #14d9b5;
   --bs-success-rgb: 20, 217, 81;
   --bs-info: #009cde;
