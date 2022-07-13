@@ -19,9 +19,16 @@ export class Wave {
   containsResults: boolean = false;
 }
 
+export class Links {
+  type: string = "";
+  title: string = "";
+  url: string = "";
+}
+
 export class MotionPlanning {
   generated: string = "";
   waves: Wave[] = [];
+  links: Links[] = [];
   d1: string = "";
   d2: string = "";
 }

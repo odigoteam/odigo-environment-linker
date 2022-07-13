@@ -96,9 +96,8 @@ export class BehaviourComponent implements OnInit {
         error => {
           this.urlCheckState = 'error';
         });
-    } else {
-      this._configurationService.saveUserConfiguration();
     }
+    this._configurationService.saveUserConfiguration();
   }
 
   // open link in a new tab and close extension

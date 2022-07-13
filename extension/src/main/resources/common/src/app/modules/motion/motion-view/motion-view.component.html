@@ -1,4 +1,18 @@
-<div class="row">
+<div class="row" *ngIf="motionPlanning">
+  <div class="col">
+    <a href="#" *ngFor="let link of motionPlanning.links"
+        class="badge badge-pill"
+        [ngClass]="link.type === 'IDCard' ? 'bg-dark' :
+        link.type === 'planning' ? 'bg-success' :
+        link.type === 'produitWeb' ? 'bg-primary' :
+        link.type === 'custom' ? 'bg-warning' :
+        link.type === 'jenkins' ? 'bg-info' : 'bg-light'"
+        (click)="openLink(link.url)">
+      {{link.title}}
+    </a>
+  </div>
+</div>
+<div class="row mt-2">
   <div class="col">
     <a id="clear-search" (click)="clearSearch()" aria-label="Clear search">
       <i class="bi bi-x-lg"></i>
@@ -25,7 +39,6 @@
                 <table class="table table-sm">
                   <thead>
                   <tr>
-                    <th scope="col" rowspan='2' style="line-height: 66px;">#</th>
                     <th scope="col" rowspan='2' style="line-height: 66px;">Name</th>
                     <th scope="col" colspan='2' class="text-center">Source</th>
                     <th scope="col" colspan='2' class="text-center">Target</th>
@@ -38,11 +51,10 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr *ngFor="let move of wave.moves; let index = index;" [ngClass]="searchField.value.length >=1 && move.highlight ? 'move-highlighting' : ''">
-                    <th scope="row" [ngClass]="move.highlight ? '' : 'text-muted'">{{ index + 1 }}</th>
+                  <tr *ngFor="let move of wave.moves;" [ngClass]="searchField.value.length >=1 && move.highlight ? 'move-highlighting' : ''">
                     <td>
-                      <button type="button" class="btn btn-link" [ngClass]="move.highlight ? '' : 'text-muted'" (click)="openLink(move.id_card)" *ngIf="move.name !== '' && move.id_card !== ''" [attr.title]="move.name">{{ (move.name.length > 20) ? (move.name | slice:0:20)+'...' : (move.name) }}</button>
-                      <span [ngClass]="move.highlight ? '' : 'text-muted'" *ngIf="move.name !=='' && move.id_card === ''" [attr.title]="move.name">{{ (move.name.length > 20) ? (move.name | slice:0:20)+'...' : (move.name) }}</span>
+                      <button type="button" class="btn btn-link" [ngClass]="move.highlight ? '' : 'text-muted'" (click)="openLink(move.id_card)" *ngIf="move.name !== '' && move.id_card !== ''" [attr.title]="move.name">{{ (move.name.length > trimMoveNameSize) ? (move.name | slice:0:trimMoveNameSize)+'...' : (move.name) }}</button>
+                      <span [ngClass]="move.highlight ? '' : 'text-muted'" *ngIf="move.name !=='' && move.id_card === ''" [attr.title]="move.name">{{ (move.name.length > trimMoveNameSize) ? (move.name | slice:0:trimMoveNameSize)+'...' : (move.name) }}</span>
                     </td>
                     <td class="text-center">
                       <button type="button" class="btn btn-link" [ngClass]="move.highlight ? '' : 'text-muted'" (click)="goToEnvList(move.src)" *ngIf="move.name !== '' && move.src !== ''">{{move.src | uppercase}}</button>

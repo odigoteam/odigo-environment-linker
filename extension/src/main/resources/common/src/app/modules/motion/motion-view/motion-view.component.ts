@@ -15,14 +15,13 @@ import {DOCUMENT} from "@angular/common";
   templateUrl: './motion-view.component.html',
   styleUrls: ['./motion-view.component.css']
 })
-
 export class MotionViewComponent implements AfterViewInit {
   userConf: UserConfiguration = new UserConfiguration();
   motionPlanning: MotionPlanning | undefined;
   // @ts-ignore
   @ViewChild('waveList') divToScroll: ElementRef;
   @ViewChild('searchField') searchField: ElementRef | undefined;
-
+  trimMoveNameSize : number = 45;
 
   constructor(private _configurationService: ConfigurationService,
               private _router: Router,
