@@ -1,4 +1,4 @@
-import {Component, ElementRef, Inject, PLATFORM_ID, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Inject, PLATFORM_ID, ViewChild} from '@angular/core';
 import {CustomLink} from "../../../../models/custom-link.class";
 import {isPlatformBrowser} from "@angular/common";
 import {CustomLinksService} from "../../../../services/custom-links.service";
@@ -37,6 +37,9 @@ export class CustomLinksComponent {
 
   edit(index: number) {
     this.currentLink = this.links[index];
+    if (isPlatformBrowser(this.platformId)) {
+      this.currentLinkTitle?.nativeElement.focus();
+    }
   }
 
   delete(index: number) {
