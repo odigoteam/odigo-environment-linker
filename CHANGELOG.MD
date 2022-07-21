@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - Upgrade Angular to latest (14.0.3)
+- Cluster ID badge per environment
 ### Fixed
 - Issue #5 Apero page is not disappearing after closing
 ## [4.5.3]

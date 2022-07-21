@@ -23,6 +23,7 @@ export class UserDisplayOptions {
   version: boolean = true;
   clientName: boolean = true;
   clientDomain: boolean = true;
+  clusterID: boolean = false;
   cxStudio: boolean = false;
   qualificationCenter: boolean = false;
 }

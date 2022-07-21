@@ -15,6 +15,12 @@
         <label class="form-check-label" for="displayClientName">(Name)</label>
       </div>
       <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" name="displayClientDomain" id="displayClusterID" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.display.clusterID">
+        <label class="form-check-label" for="displayClusterID">
+          <span class="badge badge-pill bg-info">Cluster ID</span>
+        </label>
+      </div>
+      <div class="form-check form-switch">
         <input class="form-check-input" type="checkbox" name="displayClientDomain" id="displayClientDomain" (change)="saveConfig()" [(ngModel)]="this.userConfiguration.userOptions.display.clientDomain">
         <label class="form-check-label" for="displayClientDomain">
           <span class="badge badge-pill badge-light">Domain</span>

@@ -19,14 +19,18 @@ export class ReleaseNoteViewComponent {
   // features and changes have 'shortDesc' and 'longDesc' attributes.
   // bugFixes fas just 'desc' attribute.
   public content: any = {
-    title: "Reminder !",
-    subtitle: "Reminder",
+    title: "Summer is hot !",
+    subtitle: "",
     features: [
     ],
     changes: [
       {
         shortDesc: "Upgrade Angular",
         longDesc: "Upgrade Angular to the latest version (14.0.3)"
+      },
+      {
+        shortDesc: "Add cluster ID badge per environment",
+        longDesc: "Display the <span class=\"badge badge-pill bg-info\">cluster ID</span> for each environments by a badge near the client ID. Check the option in Appearance tab in Configuration to display it."
       }
     ],
     bugFixes: [

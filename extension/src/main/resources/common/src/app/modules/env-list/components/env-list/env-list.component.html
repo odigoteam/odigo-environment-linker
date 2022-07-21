@@ -22,9 +22,12 @@
                       <div class="col-1 item-logo" [attr.style]="'background-image: url(' + env.logo + ')'"
                            *ngIf="userOptions.display.logo"></div>
                       <div class="text-truncate" [ngClass]="userOptions.display.logo ? 'col-8':'col-9'">
-                        {{env.env}}<span *ngIf="userOptions.display.clientName">&nbsp;({{env.name}})</span>&nbsp;
+                        {{env.env}}&nbsp;
+                        <span class="badge badge-pill bg-info"
+                              *ngIf="userOptions.display.clusterID" title="Cluster ID">{{env.client.clusterId}}</span>
+                        <span *ngIf="userOptions.display.clientName">({{env.name}})</span>&nbsp;
                         <span class="badge badge-pill badge-light"
-                              *ngIf="userOptions.display.clientDomain">{{env.domain}}</span>
+                              *ngIf="userOptions.display.clientDomain" title="Client domain">{{env.domain}}</span>
                       </div>
                       <div class="col-3">
 <!--                        <a class="favorite-star-icon" (click)="addToFavorite(env)"><i class="bi bi-star-fill"></i></a>-->
