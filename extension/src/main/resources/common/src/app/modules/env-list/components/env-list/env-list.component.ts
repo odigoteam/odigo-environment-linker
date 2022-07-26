@@ -170,13 +170,13 @@ export class EnvListComponent implements OnInit {
     window.close();
   }
 
-  switchAWSRole(env: Environment) {
+  switchAWSRole(env: Environment, role: string) {
     const {url, region, notGlobal} = this._awsRoleSwitcherService.getCurrentUrlAndRegion(this._configurationService.configuration.currentTab.url);
     let data = {
       profile: env.env,
       account: env.aws.accountId,
       color: this.computeColorForAWS(env.type),
-      roleName: this._configurationService.configuration.userConfiguration.userOptions.aws.role,
+      roleName: role,
       displayName: env.env + " (" + env.name + ")",
       redirectUri: this._awsRoleSwitcherService.createRedirectUri(url, region, this._configurationService.configuration.userConfiguration.userOptions.aws.region),
       search: env.env.toLowerCase() + ' ' + env.aws.accountId,
@@ -245,5 +245,9 @@ export class EnvListComponent implements OnInit {
 
   addToFavorite(env: Environment) {
     console.log(env.env);
+  }
+
+  goToAwsConfiguration() {
+
   }
 }

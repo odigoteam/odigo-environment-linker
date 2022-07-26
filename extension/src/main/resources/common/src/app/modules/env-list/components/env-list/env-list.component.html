@@ -228,7 +228,7 @@
                                 title="Qualification center">
                           <i class="bi bi-robot"></i><span *ngIf="!userOptions.onlyIcons">&nbsp;Qualification center</span>
                         </button>
-                        <ul class="dropdown-menu" [attr.aria-labelledby]="'btnQalificationCenter' + env.env + env.type">
+                        <ul class="dropdown-menu" [attr.aria-labelledby]="'btnQualificationCenter' + env.env + env.type">
                           <li *ngIf="env.urls.qualificationCenter && env.urls.qualificationCenter.internal">
                             <a class="dropdown-item" (click)="openLink(env.urls.qualificationCenter.internal,false, env)">Internal</a>
                           </li>
@@ -273,13 +273,23 @@
                       [ngClass]="userOptions.onlyIcons ? 'btn-group group-technical' : 'btn-group-vertical group-technical-vertical'"
                       role="group" [attr.aria-label]="env.env">
                       <!-- AWS Switcher -->
-                      <button type="button" class="btn btn-outline-primary"
-                              title="AWS Console" [disabled]="!env.aws.enabled"
-                              *ngIf="env.aws.display"
-                              (click)="switchAWSRole(env)">
-                        <img src="assets/images/logo-aws.png" alt="AWS" class="aws-logo"/>
-                        <span *ngIf="!userOptions.onlyIcons">&nbsp;AWS Console</span>
-                      </button>
+<!--                      <button type="button"-->
+<!--                              class="btn btn-outline-primary dropdown-toggle"-->
+<!--                              data-bs-toggle="dropdown"-->
+<!--                              aria-expanded="false"-->
+<!--                              title="AWS Console" [disabled]="!env.aws.enabled"-->
+<!--                              *ngIf="env.aws.display">-->
+<!--                        <img src="assets/images/logo-aws.png" alt="AWS" class="aws-logo"/>-->
+<!--                        <span *ngIf="!userOptions.onlyIcons">&nbsp;AWS Console</span>-->
+<!--                      </button>-->
+<!--                      <ul class="dropdown-menu" [attr.aria-labelledby]="'btnAws' + env.env + env.type">-->
+<!--                        <li *ngIf="userOptions.aws.roles.length === 0">-->
+<!--                          <a class="dropdown-item" (click)="goToAwsConfiguration()">No roles - Create first</a>-->
+<!--                        </li>-->
+<!--                        <li *ngFor="let role of userOptions.aws.roles">-->
+<!--                          <a class="dropdown-item" (click)="switchAWSRole(env, role)">role</a>-->
+<!--                        </li>-->
+<!--                      </ul>-->
                       <!-- / AWS Switcher -->
 
                       <!-- HEALTH CHECK -->

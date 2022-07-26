@@ -13,6 +13,7 @@ export class DataMigrationService {
               private _customLinksService: CustomLinksService) { }
 
   migrateModel(callback: any): void {
+    
     callback();
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ConfigurationService} from "../../../../services/configuration.service";
 import {messages} from "../../../../../environments/messages";
 import {DataBusService} from "../../../../services/data-bus.service";
@@ -15,6 +15,7 @@ export class GeneralComponent implements OnInit {
   confUrlErrorMessage: string = "";
   awsRoleErrorMessage: string = "";
   userConfiguration: UserConfiguration = new UserConfiguration();
+  @ViewChild('awsRoleInput') awsRoleInput: ElementRef | undefined;
 
   constructor(private _configurationService: ConfigurationService,
               private _dataBusService: DataBusService) {
@@ -69,7 +70,7 @@ export class GeneralComponent implements OnInit {
       message: ""
     };
     this._dataBusService.confBtnDisabled.next(true);
-    if(!this.userConfiguration.userOptions.aws.role) {
+    if(!this.awsRoleInput?.nativeElement.value) {
       validation.hasError = true;
       validation.message = messages.aws.roleEmpty;
     }
@@ -78,6 +79,18 @@ export class GeneralComponent implements OnInit {
     if(!validation.hasError) {
       this.awsRoleErrorMessage = "";
       this.saveConfig();
+    }
+  }
+
+  deleteAwsRole(index: number) {
+    this.userConfiguration.userOptions.aws.roles.splice(index, 1);
+    this._configurationService.saveConfiguration();
+  }
+
+  addRole() {
+    if(this.awsRoleInput?.nativeElement.value &&  this.awsRoleInput?.nativeElement.value.length > 3) {
+      this.userConfiguration.userOptions.aws.roles.push(this.awsRoleInput?.nativeElement.value);
+      this._configurationService.saveConfiguration();
     }
   }
 }

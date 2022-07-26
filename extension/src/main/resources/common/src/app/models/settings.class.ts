@@ -4,7 +4,7 @@ export class BrowserTab {
 }
 
 export class AWSOptions {
-  role: string = "UserGlobalReadOnlyRole";
+  roles: string[] = ["UserGlobalReadOnlyRole"];
   region: string = "eu-west-3";
 }
 

@@ -37,16 +37,52 @@
     </div>
     <div class="col-2 offset-1">
       <label class="form-check-label"
-             style="line-height: 38px; vertical-align: middle;" for="awsRole">
-        Role :
+             style="line-height: 38px; vertical-align: middle;">
+        Roles :
       </label>
     </div>
     <div class="col-8">
       <div>
-        <input class="form-control" name="awsRole" id="awsRole" type="text" (keyup)="checkAwsRole()" [(ngModel)]="this.userConfiguration.userOptions.aws.role">
-        <small class="form-text text-danger" [innerHTML]="awsRoleErrorMessage" *ngIf="awsRoleErrorMessage"></small>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Role name" aria-label="Role name" aria-describedby="button-AddAwsRole"  [ngClass]="awsRoleErrorMessage ? 'is-invalid' : ''" #awsRoleInput/>
+          <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="addRole()">Button</button>
+        </div>
+        <div class="invalid-feedback" *ngIf="awsRoleErrorMessage">
+          {{awsRoleErrorMessage}}
+        </div>
       </div>
-      <div class="conf-tips-info">This role will be used to switch on the AWS Console for an environment.</div>
+      <div class="conf-tips-info">Those roles will be used to switch on the AWS Console for an environment.</div>
+    </div>
+  </div>
+  <div class="row mt-1">
+    <div class="col">
+      <table class="table table-sm table-hover">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Role name</th>
+          <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngIf="userConfiguration.userOptions.aws.roles.length === 0">
+          <td colspan="3" class="text-center">No roles</td>
+        </tr>
+        <tr *ngFor="let role of userConfiguration.userOptions.aws.roles; let index = index;">
+          <th scope="row" class="title-number">{{index + 1}}</th>
+          <td class="title-col">
+            <div class="title-wrapper">
+              {{role}}
+            </div>
+          </td>
+          <td class="action-col">
+            <div class="btn-group" role="group">
+              <button type="button" class="btn rounded-pill btn-danger" (click)="deleteAwsRole(index)"><i class="bi bi-trash"></i></button>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
