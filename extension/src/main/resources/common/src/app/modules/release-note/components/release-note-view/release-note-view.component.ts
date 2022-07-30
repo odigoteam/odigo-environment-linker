@@ -22,6 +22,10 @@ export class ReleaseNoteViewComponent {
     title: "Summer is hot !",
     subtitle: "",
     features: [
+      {
+        shortDesc: "Manage a list of AWS roles",
+        longDesc: "You can now have a list of AWS roles and choose them which to apply to your AWS Console."
+      }
     ],
     changes: [
       {
@@ -33,8 +37,8 @@ export class ReleaseNoteViewComponent {
         longDesc: "Display the <span class=\"badge badge-pill bg-info\">cluster ID</span> for each environments by a badge near the client ID. Check the option in Appearance tab in Configuration to display it."
       },
       {
-        shortDesc: "Manage a list of AWS roles",
-        longDesc: "You can now have a list of AWS roles and choose them which to apply to your AWS Console."
+        shortDesc: "If uncheck \"All\" option in versions filters, all versions are unchecked",
+        longDesc: "Before, if you checked the All option, all version was checked. But not the reverse... It was STUPID !! So Now when you uncheck All option, all versions will be unchecked too."
       }
     ],
     bugFixes: [

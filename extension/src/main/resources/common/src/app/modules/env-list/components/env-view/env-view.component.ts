@@ -39,8 +39,12 @@ export class EnvViewComponent implements OnInit, AfterViewInit {
 
   updateVersionFilter(index: number) {
     let version = this.supportedVersions[index];
-    if(version.version === "all" && version.checked) {
-      this._configurationService.configuration.userConfiguration.filterOptions.versions = [...this._configurationService.configuration.supportedOccVersions];
+    if(version.version === "all") {
+      if (version.checked) {
+        this._configurationService.configuration.userConfiguration.filterOptions.versions = [...this._configurationService.configuration.supportedOccVersions];
+      } else {
+        this._configurationService.configuration.userConfiguration.filterOptions.versions = [];
+      }
     } else {
       // Remove all option
       let index = this._configurationService.configuration.userConfiguration.filterOptions.versions.indexOf("all");

@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Upgrade Angular to latest (14.0.3)
 - Cluster ID badge per environment
 - Manage a list of AWS roles
+- Uncheck all versions if uncheck All option in versions filter
 ### Fixed
 - Issue #5 Apero page is not disappearing after closing
 ## [4.5.3]
