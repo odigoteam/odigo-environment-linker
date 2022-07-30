@@ -31,6 +31,10 @@ export class ReleaseNoteViewComponent {
       {
         shortDesc: "Add cluster ID badge per environment",
         longDesc: "Display the <span class=\"badge badge-pill bg-info\">cluster ID</span> for each environments by a badge near the client ID. Check the option in Appearance tab in Configuration to display it."
+      },
+      {
+        shortDesc: "Manage a list of AWS roles",
+        longDesc: "You can now have a list of AWS roles and choose them which to apply to your AWS Console."
       }
     ],
     bugFixes: [

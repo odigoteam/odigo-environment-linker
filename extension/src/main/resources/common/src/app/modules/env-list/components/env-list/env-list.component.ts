@@ -243,10 +243,6 @@ export class EnvListComponent implements OnInit {
     return params;
   }
 
-  addToFavorite(env: Environment) {
-    console.log(env.env);
-  }
-
   goToAwsConfiguration() {
 
   }

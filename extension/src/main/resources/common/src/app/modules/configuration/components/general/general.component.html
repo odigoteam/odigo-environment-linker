@@ -33,29 +33,23 @@
   <hr/>
   <div class="row mt-3">
     <div class="col-12">
-      <h5>AWS</h5>
+      <h5>AWS Roles</h5>
     </div>
-    <div class="col-2 offset-1">
-      <label class="form-check-label"
-             style="line-height: 38px; vertical-align: middle;">
-        Roles :
-      </label>
-    </div>
-    <div class="col-8">
+    <div class="conf-tips-info">Those roles will be used to switch on the AWS Console for an environment.</div>
+    <div class="col-10 offset-1 mt-2">
       <div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Role name" aria-label="Role name" aria-describedby="button-AddAwsRole"  [ngClass]="awsRoleErrorMessage ? 'is-invalid' : ''" #awsRoleInput/>
-          <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="addRole()">Button</button>
+          <input type="text" class="form-control" placeholder="New role" aria-label="Add new role" aria-describedby="button-AddAwsRole"  [ngClass]="awsRoleErrorMessage ? 'is-invalid' : ''" #awsRoleInput/>
+          <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="addRole()">Add</button>
         </div>
         <div class="invalid-feedback" *ngIf="awsRoleErrorMessage">
           {{awsRoleErrorMessage}}
         </div>
       </div>
-      <div class="conf-tips-info">Those roles will be used to switch on the AWS Console for an environment.</div>
     </div>
   </div>
   <div class="row mt-1">
-    <div class="col">
+    <div class="col-10 offset-1">
       <table class="table table-sm table-hover">
         <thead>
         <tr>
@@ -68,7 +62,7 @@
         <tr *ngIf="userConfiguration.userOptions.aws.roles.length === 0">
           <td colspan="3" class="text-center">No roles</td>
         </tr>
-        <tr *ngFor="let role of userConfiguration.userOptions.aws.roles; let index = index;">
+        <tr *ngFor="let role of userConfiguration.userOptions.aws.roles; let index = index;" style="line-height: 45px">
           <th scope="row" class="title-number">{{index + 1}}</th>
           <td class="title-col">
             <div class="title-wrapper">
@@ -77,7 +71,7 @@
           </td>
           <td class="action-col">
             <div class="btn-group" role="group">
-              <button type="button" class="btn rounded-pill btn-danger" (click)="deleteAwsRole(index)"><i class="bi bi-trash"></i></button>
+              <button type="button" class="btn btn-link" style="font-size: smaller" (click)="deleteAwsRole(index)"><i class="bi bi-trash"></i></button>
             </div>
           </td>
         </tr>
