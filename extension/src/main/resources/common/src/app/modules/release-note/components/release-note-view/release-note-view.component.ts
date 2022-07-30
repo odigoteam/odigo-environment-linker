@@ -20,7 +20,12 @@ export class ReleaseNoteViewComponent {
   // bugFixes fas just 'desc' attribute.
   public content: any = {
     title: "Summer is hot !",
-    subtitle: "",
+    subtitle: "This start of summer would be the second hottest since 1947. And to survive, remember to : <br/><ul>" +
+      "<li>Drink water (fresh beer is amazing too but sadly not as hydrating)</li>" +
+      "<li>Eat lightly (skip the frits at Burger King and keep only the burger)</li>" +
+      "<li>Don't waste your energy (dirty dishes can wait)</li>" +
+      "<li>The lukewarm shower is healtier (and if you have a hot water tank at home, there will be enougth hot water for everybody after your shower... Thanks for them)</li>" +
+      "</ul>",
     features: [
       {
         shortDesc: "Manage a list of AWS roles",
@@ -37,8 +42,8 @@ export class ReleaseNoteViewComponent {
         longDesc: "Display the <span class=\"badge badge-pill bg-info\">cluster ID</span> for each environments by a badge near the client ID. Check the option in Appearance tab in Configuration to display it."
       },
       {
-        shortDesc: "If uncheck \"All\" option in versions filters, all versions are unchecked",
-        longDesc: "Before, if you checked the All option, all version was checked. But not the reverse... It was STUPID !! So Now when you uncheck All option, all versions will be unchecked too."
+        shortDesc: "If you uncheck \"All\" option in versions filters, all versions will be unchecked",
+        longDesc: "Before, if you checked the All option, all version was checked. But not the opposite... It was STUPID !! So Now when you uncheck All option, all versions will be unchecked too."
       }
     ],
     bugFixes: [

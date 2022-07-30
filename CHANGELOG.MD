@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [4.6.0]
 ### Added
 - Upgrade Angular to latest (14.0.3)
 - Cluster ID badge per environment
@@ -265,7 +266,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Fix Markdown links to tag comparison URL with footnote-style links.
 
-[Unreleased]: https://github.com/guitaro/odigo-environment-linker/compare/v4.5.3...HEAD
+[Unreleased]: https://github.com/guitaro/odigo-environment-linker/compare/v4.6.0...HEAD
 [4.5.3]: https://github.com/guitaro/odigo-environment-linker/releases/tag/v4.5.3
 [4.5.3]: https://github.com/guitaro/odigo-environment-linker/releases/tag/v4.5.3
 [4.5.2]: https://github.com/guitaro/odigo-environment-linker/releases/tag/v4.5.2
